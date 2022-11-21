@@ -1,0 +1,503 @@
+#+STARTUP: show2levels
+#+EXPORT_FILE_NAME: README
+#+OPTIONS: toc:3 
+#+OPTIONS: num:nil
+* Intro                                                            
+This configuration file contains setup my config of emacs
+** Package Manager
+*** ELPA Setup
+set repository to tsinghua
+#+BEGIN_SRC emacs-lisp
+  (require 'package)
+  (setq package-archives '(("gnu"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/gnu/")
+                           ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
+                           ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
+                           ;;("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa-stable/")
+  ;;                         ("melpa-stable" . "http://elpa.emacs-china.org/stable-melpa/")
+                           ))
+  (unless (bound-and-true-p package--initialized)
+    (package-initialize)) 
+
+  (unless package-archive-contents
+    (package-refresh-contents))
+#+END_SRC
+*** Use-Package Setup
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  
+  (setq package-enable-at-startup nil)
+  (setq use-package-always-ensure t)
+#+end_src
+*** COMMENT +Support Install Package Of Not in ELPA+
+#+begin_src emacs-lisp
+   (use-package quelpa-use-package
+     ;; :init
+     ;; (setq quelpa-melpa-recipe-stores (list (expand-file-name "site-lisp" user-emacs-directory)))
+     ;; (setq quelpa-dir (expand-file-name "site-lisp" user-emacs-directory))
+     ;; (setq quelpa-melpa-dir (expand-file-name "melpa" quelpa-dir))
+     ;; (setq quelpa-build-dir (expand-file-name "build" quelpa-dir))
+     ;; (setq quelpa-package-dir (expand-file-name "package" quelpa-dir))
+
+     )
+#+end_src
+** General Settings Setup
+*** Window Settings
+**** Window Maximized
+#+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+#+end_src
+**** Menu-bar Hide
+#+begin_src emacs-lisp
+(menu-bar-mode nil)
+#+end_src
+**** Tool-bar Hide
+#+begin_src emacs-lisp
+(tool-bar-mode nil)
+(tool-bar-mode -1)
+#+end_src
+**** Scroll-bar Hide
+#+begin_src emacs-lisp
+(scroll-bar-mode nil)
+#+end_src
+**** Zoom
+window auto Zoom,current window Larger display
+#+begin_src emacs-lisp
+  (use-package zoom
+    :ensure t
+    :init
+    (setq zoom-size '(0.718 . 0.718))
+    )
+  (global-set-key (kbd "C-c z") 'zoom)
+#+end_src
+*** Character Settings
+#+begin_src emacs-lisp
+  (set-language-environment "UTF-8")
+  ;; (setq locale-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+
+  (set-buffer-file-coding-system 'utf-8)
+  (set-default buffer-file-coding-system 'utf8)
+  (set-default-coding-systems 'utf-8)
+
+  (set-clipboard-coding-system 'utf-8)
+
+  (set-terminal-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (modify-coding-system-alist 'process "*" 'utf-8)
+
+  (setq-default pathname-coding-system 'utf-8)
+  (set-file-name-coding-system 'utf-8)
+#+end_src
+*** BackUp Settings
+donot backup file
+#+begin_src emacs-lisp
+  (setq auto-save-default nil)
+  ;;(setq make-backup-files nil)
+  (setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
+  ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
+#+end_src
+*** Custom-file Settings
+#+begin_src emacs-lisp
+  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+  (when (file-exists-p custom-file)
+    (load custom-file))
+#+end_src
+*** Yes/No Shorthand Settings
+#+begin_src emacs-lisp
+  (fset 'yes-or-no-p 'y-or-n-p)
+#+end_src
+*** Tabs Indentation Settings
+#+begin_src emacs-lisp
+  (use-package smart-tabs-mode)
+  (setq tab-width 4)
+  (setq-default tab-width 4)
+  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
+  (setq c-basic-offset 4)
+  ;; (setq tab-always-indent)
+  (setq-default indent-tabs-mode nil)
+  ;; nxml-mode
+  (setq
+   nxml-child-indent 4
+   nxml-attribute-indent 4
+   nxml-slash-auto-complete-flag t)
+#+end_src
+*** Env Settings
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell
+    :ensure t
+    ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
+    )
+  (when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+  (setq exec-path-from-shell-check-startup-files nil)
+#+end_src
+*** Undo Settings
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :ensure t
+    :init (setq undo-tree-auto-save-history nil)
+    )
+  (global-undo-tree-mode t)
+#+end_src
+*** Show Startup Message
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)
+#+end_src
+** UI Setup
+*** Theme
+#+begin_src emacs-lisp
+  (use-package dracula-theme
+    :ensure t
+    )
+
+  (load-theme 'dracula t)
+#+end_src
+*** Cursor
+#+begin_src emacs-lisp
+  (setq-default cursor-type 'bar)
+  (set-cursor-color "green")
+  (show-paren-mode t)
+  (setq show-paren-style 'expression)
+  (set-face-background 'show-paren-match (face-background 'default))
+  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+
+  (add-hook 'minibuffer-setup-hook 'subword-mode)
+#+end_src
+*** Show Current line HighLight
+#+begin_src emacs-lisp
+  (global-hl-line-mode t)
+#+end_src
+*** Font
+#+begin_src emacs-lisp
+  (set-face-attribute 'default nil :font "DejaVu Sans Mono-18")
+  (global-font-lock-mode t)
+  (setq font-lock-maximum-size 5000000)
+#+end_src
+*** Mode Line
+#+begin_src emacs-lisp
+  (use-package nyan-mode
+    :ensure t
+    :init
+    (setq nyan-animate-nyancat t)
+    (setq nyan-wavy-trail t)
+    (setq nyan-minimum-window-width 80)
+    (setq nyan-bar-length 20)
+    (nyan-mode))
+
+  (use-package doom-modeline
+    :ensure t
+    :init (doom-modeline-mode t)
+    :config
+    (setq doom-modeline-height 5)
+    (custom-set-faces
+     '(mode-line ((t (:family "Ubuntu Mono" :height:50))))
+     '(mode-line-inactive ((t (:family "Ubuntu Mono" :height:50))))
+     )
+    (doom-modeline-def-modeline 'ownml
+      '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
+      '(input-method buffer-encoding process vcs checker))
+    ;; Add to `doom-modeline-mode-hook` or other hooks
+    (defun setup-custom-doom-modeline ()
+      (doom-modeline-set-modeline 'ownml 'default))
+    (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+    )
+
+#+end_src
+*** Icons
+#+begin_src emacs-lisp
+  (use-package all-the-icons)
+  (use-package all-the-icons-dired)
+#+end_src
+
+** Which-Key Setup
+#+begin_src emacs-lisp
+  (use-package which-key
+    :ensure t  
+    :bind ("M-m" . which-key-show-top-level) 
+  )
+  (which-key-mode)
+#+end_src
+** Switch-Window
+easy to jump windows
+#+begin_src emacs-lisp
+  (use-package switch-window
+      :ensure t
+      :config
+      (setq switch-window-shortcut-style 'qwerty)
+    )
+  (global-set-key (kbd "C-x o") 'switch-window)
+#+end_src
+** Delete Setup
+*** Hungry-delete
+delete all whitespace until have character
+#+begin_src emacs-lisp
+  (use-package hungry-delete
+    :ensure t
+    :bind (
+             ("C-c DEL" . hungry-delete-backward)
+             ("C-c d" . hungry-delete-forward))
+  )
+#+end_src
+*** Delete Slection
+#+begin_src emacs-lisp
+  (delete-selection-mode t)
+#+end_src
+** SmartParens
+auto Symbol of completion
+#+begin_src emacs-lisp
+  (use-package smartparens
+    :ensure t
+    :config
+    (smartparens-global-mode t)
+    (require 'smartparens-config)
+    (sp-local-pair 'elisp-mode "'" nil :actions nil)
+    (sp-local-pair 'elisp-mode "`" nil :actions nil)
+   )
+#+end_src
+** Company Setup
+#+begin_src emacs-lisp
+    (use-package company
+      :ensure t
+      :bind (
+             :map company-active-map
+             (("C-n"   . company-select-next)
+              ("C-p"   . company-select-previous)
+              ("C-d"   . company-show-doc-buffer)
+              ("<tab>" . company-complete))
+             )
+      )
+#+end_src
+*** COMMENT +Company-Enghlish-helper+
+#+begin_src emacs-lisp
+  (use-package company-english-helper
+      :after quelpa quelpa-use-packages
+      :quelpa (company-english-helper  :fetcher github :repo "manateelazycat/company-english-helper")
+  ;;    :load-path (lambda () (expand-file-name "site-lisp/package/company-english-helper/" user-emacs-directory))
+      :bind ("C-c C-e" . toggle-company-english-helper)
+      )
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
+** MarkDown Setup
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+    :ensure t
+    :mode (("\\.md\\'" . gfm-mode)
+           ("README" . gfm-mode)
+           )
+    :init (setq markdown-command "multimarkdown"))
+#+end_src
+
+** Projectile Setup
+#+begin_src emacs-lisp
+  (use-package projectile
+    :config
+    (projectile-global-mode)
+    (setq projectile-indexing-method 'native)
+    (setq projectile-enable-caching t)
+    (setq projectile-globally-ignored-directories
+          (append (list
+                   ".pytest_cache"
+                   "__pycache__"
+                   "build"
+                   "elpa"
+                   "node_modules"
+                   "output"
+                   "reveal.js"
+                   "semanticdb"
+                   "target"
+                   "venv"
+                   )
+                  projectile-globally-ignored-directories))
+    )
+#+end_src
+** Language Setup
+*** Web-Mode Setup
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    
+    )
+#+end_src
+** Format Setup
+#+begin_src emacs-lisp
+  (use-package format-all                                                                                                        
+  :ensure t
+  :hook ((elixir-mode . format-all-mode)
+  (prog-mode . format-all-mode))
+  :init
+  (setq formatters '((lsp-mode . "lsp-format-buffer")))
+  :config
+  (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+  )
+#+end_src
+** Selected Setup
+#+begin_src emacs-lisp
+  (use-package expand-region
+    )
+  (global-set-key (kbd "C-=") 'er/expand-region)
+#+end_src
+** Command Completion For MiniBuffer
+Command Interactive Completion ,eg : M-x 
+*** Ivy/Counsel/Swiper Setup
+**** Ivy Setup
+generic completion mechanism
+***** Ivy
+#+begin_src emacs-lisp
+  (use-package ivy
+    :config
+    (setq ivy-use-virtual-buffers t
+          enable-recursive-minibuffers t)
+    :bind(
+          ("C-c C-r" . ivy-resume)
+          )
+    )
+
+#+end_src
+***** Ivy-Rich
+display more infomation in ivy buffer
+#+begin_src emacs-lisp
+  (use-package ivy-rich
+    :init
+    (ivy-rich-mode 1))
+#+end_src
+***** COMMENT Ivy-PosFrame
+show ivy buffer pop up box 
+#+begin_src emacs-lisp
+  (use-package ivy-posframe
+    :init
+    (setq ivy-posframe-display-functions-alist
+           '((complete-symbol . ivy-posframe-display-at-point)
+             (counsel-M-x     . ivy-posframe-display-at-frame-center)
+             (t               . ivy-posframe-display-at-frame-center)))
+    (ivy-posframe-mode 0)
+    )
+#+end_src
+**** Counsel Setup
+command completion use ivy
+#+begin_src emacs-lisp
+  (use-package counsel
+    :bind(
+          ("M-x" . counsel-M-x)
+          ("C-."   . 'counsel-imenu)
+          ("C-c o"   . 'counsel-outline)
+          ("C-x C-f" . counsel-find-file)
+          ("C-c k" . counsel-ag)
+          ("C-c g" . counsel-rg)
+          ("C-h f" . 'counsel-describe-function)
+          ("C-h v" . 'counsel-describe-variable)
+          ("C-x b" . 'counsel-switch-buffer)
+          ("C-c h" . 'counsel-recentf)
+          )
+    :hook (after-init . ivy-mode)
+    )
+  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+#+end_src
+***** Show History Command in Counsel-M-x Minibuffer
+show history command need amx package
+#+begin_src emacs-lisp
+  (use-package amx
+    :ensure t
+    )
+#+end_src
+**** Swiper Setup
+text search use ivy
+#+begin_src emacs-lisp
+  (use-package swiper
+    :bind(
+          ("C-s" . swiper)
+          ("C-'" . swiper-isearch-thing-at-point)
+          )
+    )
+#+end_src
+*** COMMENT +Smex+
+#+begin_src emacs-lisp
+  (use-package smex
+    )
+#+end_src
+*** COMMENT +Helm Setup+
+#+begin_src emacs-lisp
+  (use-package helm
+    :config (helm-mode t)
+    :bind("M-x" . helm-M-x)
+    )
+#+end_src
+** Iedit Setup
+#+begin_src emacs-lisp
+  (use-package iedit)
+#+end_src
+** Org Setup
+*** Org Table Tidy Settings
+#+begin_src emacs-lisp
+  (with-eval-after-load 'org
+    (defun org-buffer-face-mode-variable ()
+      (interactive)
+      (make-face 'width-font-face)
+      (set-face-attribute 'width-font-face nil :font "Ubuntu Mono 20")
+      (setq buffer-face-mode-face 'width-font-face)
+      (buffer-face-mode))
+    (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
+#+end_src
+*** Pretty 
+#+begin_src emacs-lisp
+  (use-package org-bullets
+   :ensure t
+   :hook((org-mode . org-bullets-mode)
+   (org-mode . org-indent-mode))
+  ;;  (add-hook 'org-mode-hook #'org-bullets-mode)
+  ;;  (add-hook 'org-mode-hook #'org-indent-mode)
+    )
+#+end_src
+
+** Org shortcut
+*** Motion in Heading
+**** Next Heading
+C-c C-n (org-next-visible-heading)
+
+**** Previous Heading
+C-c C-p (org-next-visible-heading)
+
+**** Next Same Level
+C-c C-f (org-forward-heading-same-level)
+
+**** Previous Same Heading
+C-c C-b (org-backward-heading-same-level)
+
+**** Previous Higher Heading
+C-c C-u (outline-up-heading)
+*** Editing Heading Level
+**** Insert Previous Same Level Heading
+M-RET (org-meta-return)
+**** Insert Next Same Level Heading
+C-RET (org-insert-heading-respect-contents)
+**** Move Previous Heading
+M-UP (org-move-subtree-up)
+**** Move Next Heading
+M-DOWN (org-move-subtree-down)
+**** Promote Heading
+M-LEFT (org-do-promote)
+**** Demote Heading
+M-RIGHT (org-do-demote)
+**** Promote Heading and subtree
+M-S-LEFT (org-promote-subtree)
+**** Demote Heading and subtree
+M-S-RIGHT (org-demote-subtree)
+*** Insert Org template
+C-c C-, (org-insert-structure-template)
+**** Insert Source Code Block
+Key "s in (org-insert-structure-template) list
+*** Other
+**** StrikeThrough/DeleteLine
+command: (org-emphasize) ,next input character (+)
+**** Disable Source Code
+C-c ; (org-toggle-comment)
+**** Edit Source Code In New Buffer
+C-c ' (org-edit-special)
+
+** Installation
+#+begin_src shell
+  git clone <this repo url> ~/.emacs.d
+#+end_src
+

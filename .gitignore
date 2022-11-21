@@ -1,0 +1,12 @@
+auto-save-list
+elpa
+site-lisp
+*~
+configuration.el
+projectile-bookmarks.eld
+projectile.cache
+custom.el
+projects
+recentf
+smex-items
+amx-items
