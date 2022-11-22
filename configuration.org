@@ -13,7 +13,7 @@ set repository to tsinghua
                            ("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
                            ("org" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
                            ;;("melpa-stable" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa-stable/")
-  ;;                         ("melpa-stable" . "http://elpa.emacs-china.org/stable-melpa/")
+                           ;;("melpa-stable" . "http://elpa.emacs-china.org/stable-melpa/")
                            ))
   (unless (bound-and-true-p package--initialized)
     (package-initialize)) 
@@ -212,6 +212,46 @@ donot backup file
   (use-package all-the-icons-dired)
 #+end_src
 
+*** Tabs Setup
+**** Centaur-Tabs
+#+begin_src emacs-lisp
+  (use-package centaur-tabs
+    :demand
+    :hook
+    (dired-mode . centaur-tabs-local-mode)
+    (dashboard-mode . centaur-tabs-local-mode)
+    (term-mode . centaur-tabs-local-mode)
+    (calendar-mode . centaur-tabs-local-mode)
+    (org-agenda-mode . centaur-tabs-local-mode)
+    (helpful-mode . centaur-tabs-local-mode)
+    :config
+    (setq
+       centaur-tabs-style "bar"
+       centaur-tabs-height 32
+       centaur-tabs-set-icons t
+       centaur-tabs-set-bar 'under
+       x-underline-at-descent-line t
+       centaur-tabs-show-count t
+       centaur-tabs-set-close-button nil
+       centaur-tabs-set-modified-marker t
+       centaur-tabs-show-navigation-buttons t)
+    (centaur-tabs-headline-match)
+    (centaur-tabs-group-by-projectile-project)
+    (centaur-tabs-mode t)
+    :bind(
+          ("s-1" . centaur-tabs-select-visible-tab)
+          ("s-2" . centaur-tabs-select-visible-tab)
+          ("s-3" . centaur-tabs-select-visible-tab)
+          ("s-4" . centaur-tabs-select-visible-tab)
+          ("s-5" . centaur-tabs-select-visible-tab)
+          ("s-6" . centaur-tabs-select-visible-tab)
+          ("s-7" . centaur-tabs-select-visible-tab)
+          ("s-8" . centaur-tabs-select-visible-tab)
+          ("s-9" . centaur-tabs-select-visible-tab)
+          ("s-0" . centaur-tabs-select-visible-tab)
+          )
+    )
+#+end_src
 ** Which-Key Setup
 #+begin_src emacs-lisp
   (use-package which-key
@@ -259,16 +299,18 @@ auto Symbol of completion
 #+end_src
 ** Company Setup
 #+begin_src emacs-lisp
-    (use-package company
-      :ensure t
-      :bind (
-             :map company-active-map
-             (("C-n"   . company-select-next)
-              ("C-p"   . company-select-previous)
-              ("C-d"   . company-show-doc-buffer)
-              ("<tab>" . company-complete))
-             )
-      )
+  (use-package company
+    :ensure t
+    :config
+    (company-mode t)
+    :bind (
+           :map company-active-map
+           (("C-n"   . company-select-next)
+            ("C-p"   . company-select-previous)
+            ("C-d"   . company-show-doc-buffer)
+            ("<tab>" . company-complete))
+           )
+    )
 #+end_src
 *** COMMENT +Company-Enghlish-helper+
 #+begin_src emacs-lisp
@@ -313,14 +355,7 @@ auto Symbol of completion
                   projectile-globally-ignored-directories))
     )
 #+end_src
-** Language Setup
-*** Web-Mode Setup
-#+begin_src emacs-lisp
-  (use-package web-mode
-    :ensure t
-    
-    )
-#+end_src
+
 ** Format Setup
 #+begin_src emacs-lisp
   (use-package format-all                                                                                                        
@@ -427,6 +462,14 @@ text search use ivy
 ** Iedit Setup
 #+begin_src emacs-lisp
   (use-package iedit)
+#+end_src
+** Language Setup
+*** Web-Mode Setup
+#+begin_src emacs-lisp
+  (use-package web-mode
+    :ensure t
+    
+    )
 #+end_src
 ** Org Setup
 *** Org Table Tidy Settings
