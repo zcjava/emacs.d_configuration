@@ -11,4 +11,5 @@ recentf
 smex-items
 amx-items
 .DS_Store
+.backups
 configuration_self*
