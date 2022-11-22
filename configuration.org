@@ -48,19 +48,6 @@ set repository to tsinghua
 #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
-**** Menu-bar Hide
-#+begin_src emacs-lisp
-(menu-bar-mode nil)
-#+end_src
-**** Tool-bar Hide
-#+begin_src emacs-lisp
-(tool-bar-mode nil)
-(tool-bar-mode -1)
-#+end_src
-**** Scroll-bar Hide
-#+begin_src emacs-lisp
-(scroll-bar-mode nil)
-#+end_src
 **** Zoom
 window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
@@ -147,6 +134,19 @@ donot backup file
   (setq inhibit-startup-message t)
 #+end_src
 ** UI Setup
+*** Menu-bar Hide
+#+begin_src emacs-lisp
+(menu-bar-mode nil)
+#+end_src
+*** Tool-bar Hide
+#+begin_src emacs-lisp
+(tool-bar-mode nil)
+(tool-bar-mode -1)
+#+end_src
+*** Scroll-bar Hide
+#+begin_src emacs-lisp
+(scroll-bar-mode nil)
+#+end_src
 *** Theme
 #+begin_src emacs-lisp
   (use-package dracula-theme
@@ -166,7 +166,7 @@ donot backup file
 
   (add-hook 'minibuffer-setup-hook 'subword-mode)
 #+end_src
-*** Show Current line HighLight
+*** HighLight Line
 #+begin_src emacs-lisp
   (global-hl-line-mode t)
 #+end_src

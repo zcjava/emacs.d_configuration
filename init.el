@@ -1,6 +1,5 @@
-
 (org-babel-load-file (expand-file-name "configuration.org" user-emacs-directory))
-
+(if (file-exists-p (expand-file-name "configuration_self.org" user-emacs-directory)) (org-babel-load-file (expand-file-name "configuration_self.org" user-emacs-directory)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
