@@ -129,6 +129,14 @@ donot backup file
     )
   (global-undo-tree-mode t)
 #+end_src
+*** Recentf Settings
+#+begin_src emacs-lisp
+  (setq recentf-max-menu-items 50)
+  (setq-default
+   recentf-max-saved-items 1000
+   recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
+  (recentf-mode t)
+#+end_src
 *** Show Startup Message
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
@@ -260,13 +268,41 @@ donot backup file
 
       )
 #+end_src
+
+*** DashBoard Setup
+#+begin_src emacs-lisp
+  (use-package dashboard
+    :config
+    (dashboard-setup-startup-hook)
+    (dashboard-modify-heading-icons '((recents . "file-text")
+                                      (boomarks . "book")
+                                      ))
+    (setq dashboard-banner-logo-title "Life is happy")
+    (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
+    (setq dashboard-image-banner-max-height 200)
+    (setq dashboard-center-content t)
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-set-navigator t)
+
+    (setq dashboard-items '((recents  . 5)
+                            (bookmarks . 5)
+                            (projects . 5)
+                            (agenda . 5)
+                            ))
+    (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+    (setq dashboard-page-separator "\n\f\n")
+    )
+
+  (use-package page-break-lines)
+#+end_src
 ** Which-Key Setup
 #+begin_src emacs-lisp
   (use-package which-key
-    :ensure t  
+    :ensure t
+    :config (which-key-mode)
     :bind ("M-m" . which-key-show-top-level) 
   )
-  (which-key-mode)
 #+end_src
 ** Switch-Window
 easy to jump windows
@@ -351,7 +387,7 @@ auto Symbol of completion
     (projectile-global-mode)
     (setq
      projectile-indexing-method 'alien
-     projectile-sort-order 'recentf
+     projectile-sort-order 'recentf-active
      projectile-enable-caching t)
     (setq projectile-globally-ignored-directories
           (append (list
@@ -397,7 +433,8 @@ generic completion mechanism
   (use-package ivy
     :config
     (setq ivy-use-virtual-buffers t
-          enable-recursive-minibuffers t)
+          enable-recursive-minibuffers t
+          )
     :bind(
           ("C-c C-r" . ivy-resume)
           )
@@ -474,7 +511,9 @@ text search use ivy
 #+end_src
 ** Iedit Setup
 #+begin_src emacs-lisp
-  (use-package iedit)
+  (use-package iedit
+    :bind("C-c e" . iedit-mode)
+    )
 #+end_src
 ** Language Setup
 *** Web-Mode Setup
@@ -483,6 +522,43 @@ text search use ivy
     :ensure t
     
     )
+#+end_src
+*** FlyCheck Setup
+#+begin_src emacs-lisp
+  (use-package flycheck
+    :init (global-flycheck-mode)
+    :config
+    (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+    )
+#+end_src
+*** Yasnippet Setup
+#+begin_src emacs-lisp
+  (use-package yasnippet
+    :config (yas-global-mode)
+    )
+  (use-package yasnippet-snippets :ensure t)
+#+end_src
+*** Magit Setup
+git tools
+#+begin_src emacs-lisp
+  (use-package magit)
+#+end_src
+*** HideShow Setup
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'hs-minor-mode)
+#+end_src
+** Undo-Tree Setup
+#+begin_src emacs-lisp
+  (use-package undo-tree
+    :init (global-undo-tree-mode t)
+    )
+#+end_src
+** Avy SetUp
+jumping to visible text using a char-based decision tree
+#+begin_src emacs-lisp
+  (use-package avy
+    :bind("C-;" . avy-goto-char)
+  )
 #+end_src
 ** Org Setup
 *** Org Table Tidy Settings
