@@ -1,81 +1,82 @@
 
 # Table of Contents
 
--   [Intro](#org95db8a9)
-    -   [Package Manager](#orgce1727f)
-        -   [ELPA Setup](#orge84a828)
-        -   [Use-Package Setup](#orgff26c1f)
-    -   [General Settings Setup](#org6693cdf)
-        -   [Window Settings](#org557341c)
-        -   [Character Settings](#org9e283b3)
-        -   [BackUp Settings](#org15e242e)
-        -   [Custom-file Settings](#org0b5bdfb)
-        -   [Yes/No Shorthand Settings](#orgd81a3d5)
-        -   [Tabs Indentation Settings](#org9c078df)
-        -   [Env Settings](#orgcd40651)
-        -   [Undo Settings](#org54c3578)
-        -   [Recentf Settings](#org5300d44)
-        -   [Show Startup Message](#org3e85525)
-    -   [UI Setup](#org69e9097)
-        -   [Menu-bar Hide](#orgbf16ff5)
-        -   [Tool-bar Hide](#org9a5895e)
-        -   [Scroll-bar Hide](#org4fa386d)
-        -   [Theme](#orgef1292d)
-        -   [Cursor](#orgeb44b77)
-        -   [HighLight Line](#org92baee6)
-        -   [Font](#org58a981b)
-        -   [Mode Line](#org6989f51)
-        -   [Icons](#org14a39bd)
-        -   [Tabs Setup](#org756b78f)
-        -   [DashBoard Setup](#org860e14e)
-    -   [Which-Key Setup](#org148e634)
-    -   [Switch-Window](#org17f9790)
-    -   [Delete Setup](#org502926e)
-        -   [Hungry-delete](#org40a2fe1)
-        -   [Delete Slection](#org1b773c8)
-    -   [SmartParens](#orgda83d34)
-    -   [Company Setup](#org8c85f94)
-    -   [MarkDown Setup](#org9dab728)
-    -   [Projectile Setup](#org5b75d2c)
-    -   [Format Setup](#org7035099)
-    -   [Selected Setup](#orgfdebe46)
-    -   [Command Completion For MiniBuffer](#org6d3e583)
-        -   [Ivy/Counsel/Swiper Setup](#org1d75a96)
-    -   [Iedit Setup](#org29fc8f3)
-    -   [Language Setup](#orgc40360b)
-        -   [Web-Mode Setup](#org0a58ad6)
-        -   [FlyCheck Setup](#orge7f5735)
-        -   [Yasnippet Setup](#org9dce617)
-        -   [Magit Setup](#org1ddf39d)
-        -   [HideShow Setup](#org791c31f)
-    -   [Undo-Tree Setup](#orge34b56e)
-    -   [Avy SetUp](#org4ec6c0a)
-    -   [Org Setup](#orge676958)
-        -   [Org Table Tidy Settings](#orgfc71149)
-        -   [Pretty](#org8184118)
-    -   [Org shortcut](#orgfdc8170)
-        -   [Motion in Heading](#org9f87189)
-        -   [Editing Heading Level](#org085bf2d)
-        -   [Insert Org template](#org58e8c2f)
-        -   [Other](#org0f0700e)
-    -   [Installation](#org22fa50d)
-    -   [Customize Your Configuration](#org0f10f5a)
+-   [Intro](#org4124be7)
+    -   [Package Manager](#org661fe69)
+        -   [ELPA Setup](#orgc4ad16e)
+        -   [Use-Package Setup](#orgeff9541)
+    -   [General Settings Setup](#org34c224c)
+        -   [Window Settings](#org5722563)
+        -   [Character Settings](#org3ab268b)
+        -   [BackUp Settings](#org3575b1e)
+        -   [Custom-file Settings](#orgb147dcf)
+        -   [Yes/No Shorthand Settings](#orgc7355aa)
+        -   [Tabs Indentation Settings](#orgda83344)
+        -   [Env Settings](#org5a5a221)
+        -   [Undo Settings](#org48fe018)
+        -   [Recentf Settings](#org02cabd6)
+        -   [Show Startup Message](#orgbd5516a)
+    -   [UI Setup](#org281dfc7)
+        -   [Menu-bar Hide](#org2438d87)
+        -   [Tool-bar Hide](#orged6e508)
+        -   [Scroll-bar Hide](#org8b738ca)
+        -   [Theme](#orgee97c84)
+        -   [Cursor](#orgf5bd0ca)
+        -   [HighLight Line](#orgb6f3a8f)
+        -   [Font](#org43aab96)
+        -   [Mode Line](#org6039775)
+        -   [Icons](#orgc3bc6c7)
+        -   [Tabs Setup](#org04950cf)
+        -   [DashBoard Setup](#orgdefb217)
+    -   [Which-Key Setup](#orgf6494cd)
+    -   [Switch-Window](#org053d25a)
+    -   [Delete Setup](#org952089d)
+        -   [Hungry-delete](#org56811ee)
+        -   [Delete Slection](#org707aefa)
+    -   [SmartParens](#org420db6e)
+    -   [Company Setup](#org855a4cb)
+    -   [MarkDown Setup](#orge757a98)
+    -   [Projectile Setup](#org56412f2)
+    -   [Format Setup](#orgcc627c2)
+    -   [Selected Setup](#org2520b9c)
+    -   [Command Completion For MiniBuffer](#orgff20c72)
+        -   [Ivy/Counsel/Swiper Setup](#org0cdf210)
+    -   [Iedit Setup](#org42cc94c)
+    -   [Language Setup](#org21aee85)
+        -   [LSP-Mode Setup](#orgecaf2ab)
+        -   [Web-Mode Setup](#org37108b5)
+        -   [FlyCheck Setup](#org3699e06)
+        -   [Yasnippet Setup](#orgbce8662)
+        -   [Magit Setup](#org630de55)
+        -   [HideShow Setup](#orgcfae75f)
+    -   [Undo-Tree Setup](#org93da14c)
+    -   [Avy SetUp](#org2205206)
+    -   [Org Setup](#org462b3d4)
+        -   [Org Table Tidy Settings](#orgb4a5bcb)
+        -   [Pretty](#org1e3e5f0)
+    -   [Org shortcut](#org70935c5)
+        -   [Motion in Heading](#orge5304b0)
+        -   [Editing Heading Level](#org2b1768a)
+        -   [Insert Org template](#org5507c21)
+        -   [Other](#orgc68464b)
+    -   [Installation](#org148f43d)
+    -   [Customize Your Configuration](#orga188125)
 
 
 
-<a id="org95db8a9"></a>
+<a id="org4124be7"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="orgce1727f"></a>
+<a id="org661fe69"></a>
 
 ## Package Manager
 
 
-<a id="orge84a828"></a>
+<a id="orgc4ad16e"></a>
 
 ### ELPA Setup
 
@@ -95,7 +96,7 @@ set repository to tsinghua
       (package-refresh-contents))
 
 
-<a id="orgff26c1f"></a>
+<a id="orgeff9541"></a>
 
 ### Use-Package Setup
 
@@ -107,12 +108,12 @@ set repository to tsinghua
     (setq use-package-always-ensure t)
 
 
-<a id="org6693cdf"></a>
+<a id="org34c224c"></a>
 
 ## General Settings Setup
 
 
-<a id="org557341c"></a>
+<a id="org5722563"></a>
 
 ### Window Settings
 
@@ -132,7 +133,7 @@ set repository to tsinghua
         (global-set-key (kbd "C-c z") 'zoom)
 
 
-<a id="org9e283b3"></a>
+<a id="org3ab268b"></a>
 
 ### Character Settings
 
@@ -155,7 +156,7 @@ set repository to tsinghua
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="org15e242e"></a>
+<a id="org3575b1e"></a>
 
 ### BackUp Settings
 
@@ -167,7 +168,7 @@ donot backup file
     ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 
 
-<a id="org0b5bdfb"></a>
+<a id="orgb147dcf"></a>
 
 ### Custom-file Settings
 
@@ -176,14 +177,14 @@ donot backup file
       (load custom-file))
 
 
-<a id="orgd81a3d5"></a>
+<a id="orgc7355aa"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="org9c078df"></a>
+<a id="orgda83344"></a>
 
 ### Tabs Indentation Settings
 
@@ -201,7 +202,7 @@ donot backup file
      nxml-slash-auto-complete-flag t)
 
 
-<a id="orgcd40651"></a>
+<a id="org5a5a221"></a>
 
 ### Env Settings
 
@@ -214,7 +215,7 @@ donot backup file
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="org54c3578"></a>
+<a id="org48fe018"></a>
 
 ### Undo Settings
 
@@ -225,7 +226,7 @@ donot backup file
     (global-undo-tree-mode t)
 
 
-<a id="org5300d44"></a>
+<a id="org02cabd6"></a>
 
 ### Recentf Settings
 
@@ -236,26 +237,26 @@ donot backup file
     (recentf-mode t)
 
 
-<a id="org3e85525"></a>
+<a id="orgbd5516a"></a>
 
 ### Show Startup Message
 
     (setq inhibit-startup-message t)
 
 
-<a id="org69e9097"></a>
+<a id="org281dfc7"></a>
 
 ## UI Setup
 
 
-<a id="orgbf16ff5"></a>
+<a id="org2438d87"></a>
 
 ### Menu-bar Hide
 
     (menu-bar-mode nil)
 
 
-<a id="org9a5895e"></a>
+<a id="orged6e508"></a>
 
 ### Tool-bar Hide
 
@@ -263,14 +264,14 @@ donot backup file
     (tool-bar-mode -1)
 
 
-<a id="org4fa386d"></a>
+<a id="org8b738ca"></a>
 
 ### Scroll-bar Hide
 
     (scroll-bar-mode nil)
 
 
-<a id="orgef1292d"></a>
+<a id="orgee97c84"></a>
 
 ### Theme
 
@@ -281,7 +282,7 @@ donot backup file
     (load-theme 'dracula t)
 
 
-<a id="orgeb44b77"></a>
+<a id="orgf5bd0ca"></a>
 
 ### Cursor
 
@@ -295,14 +296,14 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="org92baee6"></a>
+<a id="orgb6f3a8f"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="org58a981b"></a>
+<a id="org43aab96"></a>
 
 ### Font
 
@@ -311,7 +312,7 @@ donot backup file
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="org6989f51"></a>
+<a id="org6039775"></a>
 
 ### Mode Line
 
@@ -343,7 +344,7 @@ donot backup file
       )
 
 
-<a id="org14a39bd"></a>
+<a id="orgc3bc6c7"></a>
 
 ### Icons
 
@@ -353,7 +354,7 @@ donot backup file
       )
 
 
-<a id="org756b78f"></a>
+<a id="org04950cf"></a>
 
 ### Tabs Setup
 
@@ -403,7 +404,7 @@ donot backup file
           )
 
 
-<a id="org860e14e"></a>
+<a id="orgdefb217"></a>
 
 ### DashBoard Setup
 
@@ -415,7 +416,7 @@ donot backup file
                                         ))
       (setq dashboard-banner-logo-title "Life is happy")
       (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
-      (setq dashboard-image-banner-max-height 200)
+      (setq dashboard-image-banner-max-height 100)
       (setq dashboard-center-content t)
       (setq dashboard-set-heading-icons t)
       (setq dashboard-set-file-icons t)
@@ -433,7 +434,7 @@ donot backup file
     (use-package page-break-lines)
 
 
-<a id="org148e634"></a>
+<a id="orgf6494cd"></a>
 
 ## Which-Key Setup
 
@@ -444,7 +445,7 @@ donot backup file
     )
 
 
-<a id="org17f9790"></a>
+<a id="org053d25a"></a>
 
 ## Switch-Window
 
@@ -458,12 +459,12 @@ easy to jump windows
     (global-set-key (kbd "C-x o") 'switch-window)
 
 
-<a id="org502926e"></a>
+<a id="org952089d"></a>
 
 ## Delete Setup
 
 
-<a id="org40a2fe1"></a>
+<a id="org56811ee"></a>
 
 ### Hungry-delete
 
@@ -477,14 +478,14 @@ delete all whitespace until have character
     )
 
 
-<a id="org1b773c8"></a>
+<a id="org707aefa"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="orgda83d34"></a>
+<a id="org420db6e"></a>
 
 ## SmartParens
 
@@ -500,7 +501,7 @@ auto Symbol of completion
      )
 
 
-<a id="org8c85f94"></a>
+<a id="org855a4cb"></a>
 
 ## Company Setup
 
@@ -518,7 +519,7 @@ auto Symbol of completion
       )
 
 
-<a id="org9dab728"></a>
+<a id="orge757a98"></a>
 
 ## MarkDown Setup
 
@@ -530,7 +531,7 @@ auto Symbol of completion
       :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org5b75d2c"></a>
+<a id="org56412f2"></a>
 
 ## Projectile Setup
 
@@ -542,7 +543,12 @@ auto Symbol of completion
       :config
       (projectile-global-mode)
       (setq
-       projectile-indexing-method 'alien
+       projectile-indexing-method 'hybrid
+       ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
+       ;;indexing default 'alien ,only load .gitignore
+       ;;indexing 'native only load .projectile
+       ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
+    
        projectile-sort-order 'recentf-active
        projectile-enable-caching t)
       (setq projectile-globally-ignored-directories
@@ -562,7 +568,7 @@ auto Symbol of completion
       )
 
 
-<a id="org7035099"></a>
+<a id="orgcc627c2"></a>
 
 ## Format Setup
 
@@ -577,7 +583,7 @@ auto Symbol of completion
     )
 
 
-<a id="orgfdebe46"></a>
+<a id="org2520b9c"></a>
 
 ## Selected Setup
 
@@ -586,14 +592,14 @@ auto Symbol of completion
     (global-set-key (kbd "C-=") 'er/expand-region)
 
 
-<a id="org6d3e583"></a>
+<a id="orgff20c72"></a>
 
 ## Command Completion For MiniBuffer
 
 Command Interactive Completion ,eg : M-x 
 
 
-<a id="org1d75a96"></a>
+<a id="org0cdf210"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -612,14 +618,6 @@ Command Interactive Completion ,eg : M-x
                     ("C-c C-r" . ivy-resume)
                     )
               )
-    
-    -   Ivy-Rich
-    
-        display more infomation in ivy buffer
-        
-            (use-package ivy-rich
-              :init
-              (ivy-rich-mode 1))
 
 -   Counsel Setup
 
@@ -662,7 +660,7 @@ Command Interactive Completion ,eg : M-x
           )
 
 
-<a id="org29fc8f3"></a>
+<a id="org42cc94c"></a>
 
 ## Iedit Setup
 
@@ -671,12 +669,53 @@ Command Interactive Completion ,eg : M-x
       )
 
 
-<a id="orgc40360b"></a>
+<a id="org21aee85"></a>
 
 ## Language Setup
 
 
-<a id="org0a58ad6"></a>
+<a id="orgecaf2ab"></a>
+
+### LSP-Mode Setup
+
+    (use-package lsp-mode
+      :ensure t
+      :hook (
+             (lsp-mode . lsp-enable-which-key-integration)
+             (nxml-mode . lsp)     
+             (web-mode . lsp)
+             (lsp-mode-hook . lsp-lens-mode)
+             )
+      :commands lsp
+      :bind
+      (:map lsp-mode-map
+            (("C-M-b" . lsp-find-implementation)
+             ("M-RET" . lsp-execute-code-action)))
+      :init (setq
+             lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+             read-process-output-max (* 1024 1024)  ; 1 mb
+             lsp-completion-provider :capf
+             lsp-idle-delay 0.500
+             lsp-vetur-validation-template nil
+             lsp-vetur-dev-log-level "DEBUG"
+             lsp-vetur-format-default-formatter-css "none"
+             lsp-vetur-format-default-formatter-html "none"
+             lsp-vetur-format-default-formatter-js "none"
+             lsp-headerline-breadcrumb-enable nil
+             )
+      :config
+      (setq lsp-completion-enable-additional-text-edit nil)
+      (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+      (with-eval-after-load 'lsp-intelephense
+        (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+      (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+      (add-hook 'lsp-mode-hook
+                (lambda()
+                  (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
+      )
+
+
+<a id="org37108b5"></a>
 
 ### Web-Mode Setup
 
@@ -686,7 +725,7 @@ Command Interactive Completion ,eg : M-x
       )
 
 
-<a id="orge7f5735"></a>
+<a id="org3699e06"></a>
 
 ### FlyCheck Setup
 
@@ -697,7 +736,7 @@ Command Interactive Completion ,eg : M-x
       )
 
 
-<a id="org9dce617"></a>
+<a id="orgbce8662"></a>
 
 ### Yasnippet Setup
 
@@ -707,7 +746,7 @@ Command Interactive Completion ,eg : M-x
     (use-package yasnippet-snippets :ensure t)
 
 
-<a id="org1ddf39d"></a>
+<a id="org630de55"></a>
 
 ### Magit Setup
 
@@ -716,14 +755,14 @@ git tools
     (use-package magit)
 
 
-<a id="org791c31f"></a>
+<a id="orgcfae75f"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="orge34b56e"></a>
+<a id="org93da14c"></a>
 
 ## Undo-Tree Setup
 
@@ -732,7 +771,7 @@ git tools
       )
 
 
-<a id="org4ec6c0a"></a>
+<a id="org2205206"></a>
 
 ## Avy SetUp
 
@@ -743,12 +782,12 @@ jumping to visible text using a char-based decision tree
     )
 
 
-<a id="orge676958"></a>
+<a id="org462b3d4"></a>
 
 ## Org Setup
 
 
-<a id="orgfc71149"></a>
+<a id="orgb4a5bcb"></a>
 
 ### Org Table Tidy Settings
 
@@ -762,7 +801,7 @@ jumping to visible text using a char-based decision tree
       (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 
 
-<a id="org8184118"></a>
+<a id="org1e3e5f0"></a>
 
 ### Pretty
 
@@ -775,12 +814,12 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="orgfdc8170"></a>
+<a id="org70935c5"></a>
 
 ## Org shortcut
 
 
-<a id="org9f87189"></a>
+<a id="orge5304b0"></a>
 
 ### Motion in Heading
 
@@ -805,7 +844,7 @@ jumping to visible text using a char-based decision tree
     C-c C-u (outline-up-heading)
 
 
-<a id="org085bf2d"></a>
+<a id="org2b1768a"></a>
 
 ### Editing Heading Level
 
@@ -842,7 +881,7 @@ jumping to visible text using a char-based decision tree
     M-S-RIGHT (org-demote-subtree)
 
 
-<a id="org58e8c2f"></a>
+<a id="org5507c21"></a>
 
 ### Insert Org template
 
@@ -853,7 +892,7 @@ C-c C-, (org-insert-structure-template)
     Key "s in (org-insert-structure-template) list
 
 
-<a id="org0f0700e"></a>
+<a id="orgc68464b"></a>
 
 ### Other
 
@@ -870,14 +909,14 @@ C-c C-, (org-insert-structure-template)
     C-c ' (org-edit-special)
 
 
-<a id="org22fa50d"></a>
+<a id="org148f43d"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="org0f10f5a"></a>
+<a id="orga188125"></a>
 
 ## Customize Your Configuration
 

@@ -279,7 +279,7 @@ donot backup file
                                       ))
     (setq dashboard-banner-logo-title "Life is happy")
     (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
-    (setq dashboard-image-banner-max-height 200)
+    (setq dashboard-image-banner-max-height 100)
     (setq dashboard-center-content t)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
@@ -386,7 +386,12 @@ auto Symbol of completion
     :config
     (projectile-global-mode)
     (setq
-     projectile-indexing-method 'alien
+     projectile-indexing-method 'hybrid
+     ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
+     ;;indexing default 'alien ,only load .gitignore
+     ;;indexing 'native only load .projectile
+     ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
+
      projectile-sort-order 'recentf-active
      projectile-enable-caching t)
     (setq projectile-globally-ignored-directories
@@ -441,7 +446,7 @@ generic completion mechanism
     )
 
 #+end_src
-***** Ivy-Rich
+***** COMMENT Ivy-Rich
 display more infomation in ivy buffer
 #+begin_src emacs-lisp
   (use-package ivy-rich
@@ -516,6 +521,45 @@ text search use ivy
     )
 #+end_src
 ** Language Setup
+*** LSP-Mode Setup
+#+begin_src emacs-lisp
+  (use-package lsp-mode
+    :ensure t
+    :hook (
+           (lsp-mode . lsp-enable-which-key-integration)
+           (nxml-mode . lsp)     
+           (web-mode . lsp)
+           (lsp-mode-hook . lsp-lens-mode)
+           )
+    :commands lsp
+    :bind
+    (:map lsp-mode-map
+          (("C-M-b" . lsp-find-implementation)
+           ("M-RET" . lsp-execute-code-action)))
+    :init (setq
+           lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+           read-process-output-max (* 1024 1024)  ; 1 mb
+           lsp-completion-provider :capf
+           lsp-idle-delay 0.500
+           lsp-vetur-validation-template nil
+           lsp-vetur-dev-log-level "DEBUG"
+           lsp-vetur-format-default-formatter-css "none"
+           lsp-vetur-format-default-formatter-html "none"
+           lsp-vetur-format-default-formatter-js "none"
+           lsp-headerline-breadcrumb-enable nil
+           )
+    :config
+    (setq lsp-completion-enable-additional-text-edit nil)
+    (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+    (with-eval-after-load 'lsp-intelephense
+      (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+    (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+    (add-hook 'lsp-mode-hook
+              (lambda()
+                (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
+    )
+
+#+end_src
 *** Web-Mode Setup
 #+begin_src emacs-lisp
   (use-package web-mode
