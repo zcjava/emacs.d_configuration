@@ -55,8 +55,8 @@ window auto Zoom,current window Larger display
     :ensure t
     :init
     (setq zoom-size '(0.718 . 0.718))
+    :bind ("C-c z" . zoom)
     )
-  (global-set-key (kbd "C-c z") 'zoom)
 #+end_src
 *** Character Settings
 #+begin_src emacs-lisp
@@ -110,7 +110,9 @@ donot backup file
    nxml-child-indent 4
    nxml-attribute-indent 4
    nxml-slash-auto-complete-flag t)
+
 #+end_src
+
 *** Env Settings
 #+begin_src emacs-lisp
   (use-package exec-path-from-shell
@@ -124,10 +126,12 @@ donot backup file
 *** Undo Settings
 #+begin_src emacs-lisp
   (use-package undo-tree
+    :init
+    (global-undo-tree-mode)
     :ensure t
     :init (setq undo-tree-auto-save-history nil)
     )
-  (global-undo-tree-mode t)
+
 #+end_src
 *** Recentf Settings
 #+begin_src emacs-lisp
@@ -290,7 +294,7 @@ donot backup file
                             (projects . 5)
                             (agenda . 5)
                             ))
-    (setq dashboard-projects-switch-function 'counsel-projectile-switch-project-by-name)
+    (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
     (setq dashboard-page-separator "\n\f\n")
     )
 
@@ -309,10 +313,10 @@ easy to jump windows
 #+begin_src emacs-lisp
   (use-package switch-window
       :ensure t
+      :bind ("C-x o" . switch-window)
       :config
       (setq switch-window-shortcut-style 'qwerty)
     )
-  (global-set-key (kbd "C-x o") 'switch-window)
 #+end_src
 ** Delete Setup
 *** Hungry-delete
@@ -345,8 +349,8 @@ auto Symbol of completion
 #+begin_src emacs-lisp
   (use-package company
     :ensure t
-    :config
-    (company-mode t)
+    :init
+    (global-company-mode)
     :bind (
            :map company-active-map
            (("C-n"   . company-select-next)
@@ -379,12 +383,13 @@ auto Symbol of completion
 ** Projectile Setup
 #+begin_src emacs-lisp
   (use-package projectile
+    :init
+    (projectile-global-mode)      
     :bind(
           ("C-x p f" . projectile-find-file)
           ("C-x p p" . projectile-switch-project)
           )
     :config
-    (projectile-global-mode)
     (setq
      projectile-indexing-method 'hybrid
      ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
@@ -392,7 +397,7 @@ auto Symbol of completion
      ;;indexing 'native only load .projectile
      ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
 
-     projectile-sort-order 'recentf-active
+     ;;   projectile-sort-order 'recentf-active
      projectile-enable-caching t)
     (setq projectile-globally-ignored-directories
           (append (list
@@ -425,8 +430,8 @@ auto Symbol of completion
 ** Selected Setup
 #+begin_src emacs-lisp
   (use-package expand-region
+    :bind ("C-=" . er/expand-region)
     )
-  (global-set-key (kbd "C-=") 'er/expand-region)
 #+end_src
 ** Command Completion For MiniBuffer
 Command Interactive Completion ,eg : M-x 
@@ -527,9 +532,8 @@ text search use ivy
     :ensure t
     :hook (
            (lsp-mode . lsp-enable-which-key-integration)
-           (nxml-mode . lsp)     
-           (web-mode . lsp)
            (lsp-mode-hook . lsp-lens-mode)
+           (prog-mode . lsp-deferred)
            )
     :commands lsp
     :bind
@@ -559,14 +563,43 @@ text search use ivy
                 (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
     )
 
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-doc-enable nil)
+    (setq lsp-ui-doc-header t)
+    (setq lsp-ui-doc-include-signature t)
+    (setq lsp-ui-doc-border (face-foreground 'default))
+    (setq lsp-ui-sideline-show-code-actions t)
+    (setq lsp-ui-sideline-delay 0.05))
 #+end_src
 *** Web-Mode Setup
 #+begin_src emacs-lisp
   (use-package web-mode
-    :ensure t
-    
+    :config
+    (setq web-mode-markup-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-code-indent-offset 2
+          web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+    )
+
+  (defadvice web-mode-highlight-part (around tweak-jsx activate)
+    (if (equal web-mode-content-type "jsx")
+        (let ((web-mode-enable-part-face nil))
+          ad-do-it)
+      ad-do-it))
+
+  (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
+  
+  (use-package js2-mode
+    )
+  (use-package json-mode
+    )
+  (use-package prettier-js
+    :hook (web-mode . prettier-js-mode)
     )
 #+end_src
+react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
 *** FlyCheck Setup
 #+begin_src emacs-lisp
   (use-package flycheck
@@ -574,6 +607,19 @@ text search use ivy
     :config
     (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
     )
+
+
+  
+  ;; disable jshint since we prefer eslint checking
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(javascript-jshint)))
+  ;; use eslint with web-mode for jsx files
+  (flycheck-add-mode 'javascript-eslint 'web-mode)
+  ;; disable json-jsonlist checking for json files
+  (setq-default flycheck-disabled-checkers
+                (append flycheck-disabled-checkers
+                        '(json-jsonlist)))
 #+end_src
 *** Yasnippet Setup
 #+begin_src emacs-lisp

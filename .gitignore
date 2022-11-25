@@ -16,3 +16,4 @@ configuration_self*
 transient
 .#configuration.org
 .lsp-session*
+.cache
