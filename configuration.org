@@ -431,7 +431,18 @@ auto Symbol of completion
 #+begin_src emacs-lisp
   (use-package expand-region
     :bind ("C-=" . er/expand-region)
-    )
+    :config
+    (defun er/add-html-mode-expansions ()
+      (make-variable-buffer-local 'er/try-expand-list)
+      "Adds HTML-specific expansions for buffers in html-mode"
+      (setq er/try-expand-list (append
+                                er/try-expand-list
+                                '(er/mark-html-attribute
+                                  er/mark-inner-tag
+                                  er/mark-outer-tag))))
+    (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
+    ;;    (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
+    :commands (er/expand-region er/enable-mode-expansions))
 #+end_src
 ** Command Completion For MiniBuffer
 Command Interactive Completion ,eg : M-x 
