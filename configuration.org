@@ -9,18 +9,21 @@ This configuration file contains setup my config of emacs
 *** ELPA Setup
 set repository to tsinghua
 #+BEGIN_SRC emacs-lisp
-(require 'package)
-(defvar package-archives '(
-                          ("gnu" . "https://elpa.gnu.org/packages/")
-                          ("melpa" . "https://melpa.org/packages/")
-                          ("org" . "https://orgmode.org/elpa/")
-                          ("melpa-stable" . "https://stable.melpa.org/packages/")))
-(unless (
-          bound-and-true-p package--initialized)
-  (package-initialize))
+  (require 'package)
+  (if (boundp 'package-archives-spec)
+      (setq package-archives package-archives-spec)
+      (setq package-archives '(
+			    ("gnu" . "https://elpa.gnu.org/packages/")
+			    ("melpa" . "https://melpa.org/packages/")
+			    ("org" . "https://orgmode.org/elpa/")
+			    ("melpa-stable" . "https://stable.melpa.org/packages/")))
+      )
+  (unless (
+	    bound-and-true-p package--initialized)
+    (package-initialize))
 
-(unless package-archive-contents
-  (package-refresh-contents))
+  (unless package-archive-contents
+    (package-refresh-contents))
 #+END_SRC
 
 #+RESULTS:
@@ -101,34 +104,34 @@ donot backup file
 #+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
-*** COMMENT Tabs Indentation Settings
+*** Tabs Indentation Settings
 #+begin_src emacs-lisp
-  (use-package smart-tabs-mode)
-		(setq tab-width 2)
-		(setq-default tab-width 2)
-		(setq-default indent-line-function 2)
-		(setq-default lisp-indent-offset 2)
-		(setq-default sgml-basic-offset 2)
-		(smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
-		(setq c-basic-offset 2)
-		;; (setq tab-always-indent)
-		(setq-default indent-tabs-mode nil)
-		;; nxml-mode
-		(setq
-		 nxml-child-indent 2
-		 nxml-attribute-indent 2
-		 nxml-slash-auto-complete-flag t)
+;;  (use-package smart-tabs-mode)
+  (setq tab-width 2)
+  (setq-default tab-width 2)
+  (setq-default indent-line-function 2)
+  (setq-default lisp-indent-offset 2)
+  (setq-default sgml-basic-offset 2)
+;;  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
+  (setq c-basic-offset 2)
+  ;; (setq tab-always-indent)
+  (setq-default indent-tabs-mode nil)
+  ;; nxml-mode
+  (setq
+   nxml-child-indent 2
+   nxml-attribute-indent 2
+   nxml-slash-auto-complete-flag t)
 #+end_src
 
 *** Env Settings
 #+begin_src emacs-lisp
-(use-package exec-path-from-shell
-  :ensure t
-  ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
-  )
-(when (memq window-system '(mac ns x))
-  (exec-path-from-shell-initialize))
-(setq exec-path-from-shell-check-startup-files nil)
+  (use-package exec-path-from-shell 
+    :ensure t
+    ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
+    )
+   (when (memq window-system '(mac ns x))
+     (exec-path-from-shell-initialize))
+  (setq exec-path-from-shell-check-startup-files nil)
 #+end_src
 *** Undo Settings
 #+begin_src emacs-lisp
