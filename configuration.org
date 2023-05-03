@@ -108,19 +108,19 @@ donot backup file
 *** Tabs Indentation Settings
 #+begin_src emacs-lisp
 ;;  (use-package smart-tabs-mode)
-  (setq tab-width 2)
-  (setq-default tab-width 2)
-  (setq-default indent-line-function 2)
-  (setq-default lisp-indent-offset 2)
-  (setq-default sgml-basic-offset 2)
+  (setq tab-width 4)
+  (setq-default tab-width 4)
+  (setq-default indent-line-function 4)
+  (setq-default lisp-indent-offset 4)
+  (setq-default sgml-basic-offset 4)
   ;;  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
-  (setq c-basic-offset 2)
+  (setq c-basic-offset 4)
   ;; (setq tab-always-indent)
   (setq-default indent-tabs-mode nil)
   ;; nxml-mode
   (setq
-    nxml-child-indent 2
-    nxml-attribute-indent 2
+    nxml-child-indent 4
+    nxml-attribute-indent 4
     nxml-slash-auto-complete-flag t)
 #+end_src
 
@@ -241,13 +241,13 @@ donot backup file
   )
 #+end_src
 
-*** Tabs Setup
+*** COMMENT Tabs Setup
 **** Centaur-Tabs
 #+begin_src emacs-lisp
 (use-package centaur-tabs
   :demand
   :hook
-  (dired-mode . centaur-tabs-local-mode)
+;;  (dired-mode . centaur-tabs-local-mode)
   (dashboard-mode . centaur-tabs-local-mode)
   (term-mode . centaur-tabs-local-mode)
   (calendar-mode . centaur-tabs-local-mode)
@@ -362,21 +362,21 @@ auto Symbol of completion
 #+end_src
 ** Company Setup
 #+begin_src emacs-lisp
-  (use-package company
-    :ensure t
-    :init
-    (global-company-mode)
-    :bind (
-            :map company-active-map
-            (("C-n"   . company-select-next)
-              ("C-p"   . company-select-previous)
-              ("C-d"   . company-show-doc-buffer)
-              ("<tab>" . company-complete))
-            )
-    )
-;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
-  ;; (use-package company-box
-  ;;   :hook (company-mode . company-box-mode))
+    (use-package company
+      :ensure t
+      :init
+      (global-company-mode)
+       :bind (
+               :map company-active-map
+               (("C-n"   . company-select-next)
+                 ("C-p"   . company-select-previous)
+                 ("C-d"   . company-show-doc-buffer)
+                 ("<tab>" . company-complete))
+               )
+      )
+  ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
+    ;; (use-package company-box
+    ;;   :hook (company-mode . company-box-mode))
 
 #+end_src
 *** COMMENT +Company-Enghlish-helper+
@@ -561,168 +561,179 @@ text search use ivy
 ** Language Setup
 *** LSP-Mode Setup
 #+begin_src emacs-lisp
-(use-package lsp-mode
-  :ensure t
-  :hook (
-          (lsp-mode . lsp-enable-which-key-integration)
-          (lsp-mode-hook . lsp-lens-mode)
-          (prog-mode . lsp-deferred)
-          )
-  :commands lsp
-  :bind
-  (:map lsp-mode-map
-    (("C-M-b" . lsp-find-implementation)
-      ("M-RET" . lsp-execute-code-action)))
-  :init (setq
-          lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-          read-process-output-max (* 1024 1024)  ; 1 mb
-          lsp-completion-provider :capf
-          lsp-completion-show-detail t
-          lsp-completion-show-kind t
-          lsp-idle-delay 0.500
-          lsp-vetur-validation-template nil
-          lsp-vetur-dev-log-level "DEBUG"
-          lsp-vetur-format-default-formatter-css "none"
-          lsp-vetur-format-default-formatter-html "none"
-          lsp-vetur-format-default-formatter-js "none"
-          lsp-enable-symbol-highlighting t
-          lsp-lens-enable t
-          lsp-headerline-breadcrumb-enable t
-          lsp-modeline-code-actions-enable t
-          lsp-modeline-diagnostics-enable t
-          lsp-diagnostics-provider :flycheck
-          lsp-eldoc-enable-hover t
+  (use-package lsp-mode
+    :ensure t
+    :hook (
+            (lsp-mode . lsp-enable-which-key-integration)
+            (lsp-mode-hook . lsp-lens-mode)
+            (prog-mode . lsp-deferred)
+            )
+    :commands lsp
+    :bind
+    (:map lsp-mode-map
+      (("C-M-b" . lsp-find-implementation)
+        ("M-RET" . lsp-execute-code-action)))
+    :init (setq
+            lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+            read-process-output-max (* 1024 1024)  ; 1 mb
+            lsp-completion-provider :capf
+            lsp-completion-show-detail t
+            lsp-completion-show-kind t
+            lsp-idle-delay 0.500
+            lsp-vetur-validation-template nil
+            lsp-vetur-dev-log-level "DEBUG"
+            lsp-vetur-format-default-formatter-css "none"
+            lsp-vetur-format-default-formatter-html "none"
+            lsp-vetur-format-default-formatter-js "none"
+            lsp-enable-symbol-highlighting t
+            lsp-lens-enable t
+            lsp-headerline-breadcrumb-enable t
+            lsp-modeline-code-actions-enable t
+            lsp-modeline-diagnostics-enable t
+            lsp-diagnostics-provider :flycheck
+            lsp-eldoc-enable-hover t
 
-          )
-  :config
-  (setq lsp-completion-enable-additional-text-edit nil)
-  (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
-  (with-eval-after-load 'lsp-intelephense
-    (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
-  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-  ;; (add-hook 'lsp-mode-hook
-  ;;           (lambda()
-  ;;             (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
-  )
+            )
+    :config
+    (setq lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
+    (setq lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.11/libexec/")
+    (setq lsp-completion-enable-additional-text-edit nil)
+    (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+    (with-eval-after-load 'lsp-intelephense
+      (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+    (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+    (add-hook 'lsp-mode-hook
+                  (lambda()
+                    (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
+    )
 
-(use-package lsp-ui
-  :commands lsp-ui-mode
-  :config
-  (setq lsp-ui-doc-enable nil)
-  (setq lsp-ui-doc-header t)
-  (setq lsp-ui-doc-include-signature t)
-  (setq lsp-ui-doc-border (face-foreground 'default))
-  (setq lsp-ui-sideline-show-code-actions t)
-  (setq lsp-ui-sideline-delay 0.05))
+  ;; 
+  (use-package lsp-ui
+    :commands lsp-ui-mode
+    :config
+    (setq lsp-ui-doc-enable nil)
+    (setq lsp-ui-doc-header t)
+    (setq lsp-ui-doc-include-signature t)
+    (setq lsp-ui-doc-border (face-foreground 'default))
+    (setq lsp-ui-sideline-show-code-actions t)
+    (setq lsp-ui-sideline-delay 0.05))
 #+end_src
 *** JAVA Setup
 #+begin_src emacs-lisp
-  (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/openjdk-17.jdk/Contents/Home/")
+    (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+    (setenv "JAVA_HOME"  JAVA_HOME_PATH)
+    (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
+    (use-package lsp-java 
+      :init
+  ;;    (setq lsp-java-server-install-dir (expand-file-name "site-lisp/lsp-server/java/" user-emacs-directory))
+      (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))  ;; brew install jdtls
+      (setq lsp-java-java-path my-java-path)
+      (setq lombok-jar-path
+            (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+      (setq lsp-java-vmargs
+            `("-Xmx1G"
+              "-XX:+UseG1GC"
+              "-XX:+UseStringDeduplication"
+              ,(concat "-javaagent:" lombok-jar-path)
+              ))
+      (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+      (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/idea-java-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "IdeaStyle")
+      :config
 
-  (setenv "JAVA_HOME"  JAVA_HOME_PATH)
-  (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
-  (use-package lsp-java 
-    :init
-    (setq lsp-java-server-install-dir (expand-file-name "site-lisp/lsp-server/java/" user-emacs-directory))
-    (setq lsp-java-java-path my-java-path)
-    (setq lombok-jar-path
-          (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
-    (setq lsp-java-vmargs
-          `("-Xmx1G"
-            "-XX:+UseG1GC"
-            "-XX:+UseStringDeduplication"
-            ,(concat "-javaagent:" lombok-jar-path)
-            ))
-    (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-    (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-    (setq lsp-groovy-server-file (expand-file-name "site-lisp/lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
-    :config
-    (setq lsp-java-maven-download-sources t)
-    (setq lsp-java-import-maven-enabled t)
-    (setq lsp-java-import-gradle-enabled nil)
-    (setq lsp-java-import-gradle-wrapper-enabled nil)
-    (setq lsp-java-implementations-code-lens-enabled t)
-    (setq lsp-java-references-code-lens-enabled t)
-    (setq lsp-java-autobuild-enabled t)
-    (setq lsp-java-format-enabled t)
-    (setq lsp-java-format-comments-enabled t)
-    (setq lsp-java-configuration-update-build-configuration t)
-    (setq lsp-java-configuration-check-project-settings-exclusions t)
-    (add-hook 'java-mode-hook 'lsp)
-    ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-    (add-hook 'java-mode-hook
-              (lambda()
-                (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-                ))
-    ;; 只在某些mode下，生效参数配置
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (add-hook 'java-mode-hook                                        ;;
-    ;;           (lambda()                                              ;;
-    ;;             (make-local-variable 'company-minimum-prefix-length) ;;
-    ;;             (setq company-minimum-prefix-length 0)               ;;
-    ;;             ))                                                   ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      (setq lsp-java-maven-download-sources t)
+      (setq lsp-java-import-maven-enabled t)
+      (setq lsp-java-import-gradle-enabled t)
+      (setq lsp-java-import-gradle-wrapper-enabled nil)
+      (setq lsp-java-implementations-code-lens-enabled t)
+      (setq lsp-java-references-code-lens-enabled t)
+      (setq lsp-java-autobuild-enabled t)
+      (setq lsp-java-format-enabled t)
+      (setq lsp-java-format-comments-enabled t)
+      (setq lsp-java-configuration-update-build-configuration t)
+      (setq lsp-java-configuration-check-project-settings-exclusions t)
+      (add-hook 'java-mode-hook 'lsp)
+      ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+      (add-hook 'java-mode-hook
+                (lambda()
+                  (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+                  ))
+      ;; 只在某些mode下，生效参数配置
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;; (add-hook 'java-mode-hook                                        ;;
+      ;;           (lambda()                                              ;;
+      ;;             (make-local-variable 'company-minimum-prefix-length) ;;
+      ;;             (setq company-minimum-prefix-length 0)               ;;
+      ;;             ))                                                   ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-    ;; spring-boot的支持
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (require 'lsp-java-boot)                            ;;
-    ;; (add-hook 'java-mode-hook 'lsp-java-boot-lens-mode) ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;; spring-boot的支持
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;; (require 'lsp-java-boot)                            ;;
+      ;; (add-hook 'java-mode-hook 'lsp-java-boot-lens-mode) ;;
+      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      )
+
+
+    (use-package dap-java
+      :ensure nil
+      :config
+      (dap-register-debug-template
+       "localhost:5005"
+       (list :type "java"
+             :request "attach"
+             :hostName "localhost"
+             :port 5005))
+      (dap-register-debug-template
+       "lxd"
+       (list :type "java"
+             :request "attach"
+             :hostName "127.0.0.1"
+             :port 5005))
+      ;; :config
+      ;; (global-set-key (kbd "<f7>") 'dap-step-in)
+      ;; (global-set-key (kbd "<f8>") 'dap-next)
+      ;; (global-set-key (kbd "<f9>") 'dap-continue)
+      )
+
+     (require 'lsp-java-boot)
+     ;; to enable the lenses
+     (add-hook 'lsp-mode-hook 'lsp-lens-mode)
+     (add-hook 'java-mode-hook 'lsp-java-boot-lens-mode)
+
+    ;;==========java end==========
+
+    ;;========== maven pom==========
+    ;; https://github.com/m0smith/maven-pom-mode.git
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
+    ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
+    ;; (load "maven-pom-mode")                                                                      ;;
+    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    ;;==========maven pom end==========
+
+    (use-package mvn
+      :ensure t
+      )
+
+    (defun mvn-install ()
+      (interactive)
+      (mvn "install"))
+#+end_src
+**** Hot Deployment
+use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
+*** Groovy Setup
+#+begin_src emacs-lisp
+  (use-package groovy-mode
     )
-
-
-  (use-package dap-java
-    :ensure nil
-    :config
-    (dap-register-debug-template
-     "localhost:5005"
-     (list :type "java"
-           :request "attach"
-           :hostName "localhost"
-           :port 5005))
-    (dap-register-debug-template
-     "lxd"
-     (list :type "java"
-           :request "attach"
-           :hostName "127.0.0.1"
-           :port 5005))
-    ;; :config
-    ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-    ;; (global-set-key (kbd "<f8>") 'dap-next)
-    ;; (global-set-key (kbd "<f9>") 'dap-continue)
-    )
-
-  ;; (require 'lsp-java-boot)
-  ;; ;; to enable the lenses
-  ;; (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-  ;; (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-
-  ;;==========java end==========
-
-  ;;========== maven pom==========
-  ;; https://github.com/m0smith/maven-pom-mode.git
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-  ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-  ;; (load "maven-pom-mode")                                                                      ;;
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;==========maven pom end==========
-
-  (use-package mvn
-    :ensure t
-    )
-
-  (defun mvn-install ()
-    (interactive)
-    (mvn "install"))
 #+end_src
 *** Web-Mode Setup
 #+begin_src emacs-lisp
 (use-package web-mode
   :config
-  (setq web-mode-markup-indent-offset 2
-    web-mode-css-indent-offset 2
-    web-mode-code-indent-offset 2
+  (setq web-mode-markup-indent-offset 4
+    web-mode-css-indent-offset 4
+    web-mode-code-indent-offset 4
     )
   )
 
@@ -876,16 +887,24 @@ jumping to visible text using a char-based decision tree
 #+end_src
 ** Format Setup
 #+begin_src emacs-lisp
-(use-package format-all
-  :ensure t
-  :hook ((elixir-mode . format-all-mode)
-          (prog-mode . format-all-mode))
-  ;; :init
-  ;;  (setq formatters '((lsp-mode . "lsp-format-buffer")))
-  :config
-  (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-  (add-hook 'before-save-hook 'format-all-buffer)
-  )
+  (setq +format-with-lsp nil)
+  (use-package format-all
+    :ensure t
+    :hook ((elixir-mode . format-all-mode)
+            ;;              (prog-mode . format-all-mode)
+            )
+    ;; :init
+    ;;  (setq formatters '((lsp-mode . "lsp-format-buffer")))
+    :config
+    (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+    (add-hook 'prog-mode-hook
+      (lambda ()
+        (unless (derived-mode-p 'lsp-mode)
+          (add-hook 'before-save-hook
+            'format-all-buffer t t))))
+    ;;        (add-hook 'before-save-hook 'format-all-buffer)
+
+    )
 #+end_src
 *** Format Default Formatters Setup
 #+begin_src emacs-lisp
