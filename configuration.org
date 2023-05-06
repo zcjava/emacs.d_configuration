@@ -28,7 +28,6 @@ set repository to tsinghua
 #+END_SRC
 
 #+RESULTS:
-: ((gnu . https://elpa.gnu.org/packages/) (melpa . https://melpa.org/packages/) (org . https://orgmode.org/elpa/) (melpa-stable . https://stable.melpa.org/packages/))
 
 *** Use-Package Setup
 #+begin_src emacs-lisp
@@ -39,6 +38,10 @@ set repository to tsinghua
 (setq package-enable-at-startup nil)
 (setq use-package-always-ensure t)
 #+end_src
+
+#+RESULTS:
+: t
+
 *** COMMENT +Support Install Package Of Not in ELPA+
 #+begin_src emacs-lisp
 (use-package quelpa-use-package
@@ -51,6 +54,9 @@ set repository to tsinghua
 
   )
 #+end_src
+
+#+RESULTS:
+
 ** General Settings Setup
 *** Window Settings
 **** Window Maximized
@@ -241,7 +247,7 @@ donot backup file
   )
 #+end_src
 
-*** COMMENT Tabs Setup
+*** Tabs Setup
 **** Centaur-Tabs
 #+begin_src emacs-lisp
 (use-package centaur-tabs
@@ -288,7 +294,7 @@ donot backup file
   )
 #+end_src
 
-*** DashBoard Setup
+*** COMMENT DashBoard Setup
 #+begin_src emacs-lisp
 (use-package dashboard
   :config
@@ -592,7 +598,7 @@ text search use ivy
             lsp-modeline-diagnostics-enable t
             lsp-diagnostics-provider :flycheck
             lsp-eldoc-enable-hover t
-
+            lsp-inhibit-message t
             )
     :config
     (setq lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
@@ -617,6 +623,8 @@ text search use ivy
     (setq lsp-ui-doc-border (face-foreground 'default))
     (setq lsp-ui-sideline-show-code-actions t)
     (setq lsp-ui-sideline-delay 0.05))
+  (use-package lsp-ivy
+      )
 #+end_src
 *** JAVA Setup
 #+begin_src emacs-lisp
@@ -624,101 +632,101 @@ text search use ivy
     (setenv "JAVA_HOME"  JAVA_HOME_PATH)
     (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
     (use-package lsp-java 
-      :init
-  ;;    (setq lsp-java-server-install-dir (expand-file-name "site-lisp/lsp-server/java/" user-emacs-directory))
-      (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))  ;; brew install jdtls
-      (setq lsp-java-java-path my-java-path)
-      (setq lombok-jar-path
+        :init
+        (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+        (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
+        ;; lsp-java-jdt-download-url 
+        (setq lsp-java-java-path my-java-path)
+        (setq lombok-jar-path
             (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
-      (setq lsp-java-vmargs
+        (setq lsp-java-vmargs
             `("-Xmx1G"
-              "-XX:+UseG1GC"
-              "-XX:+UseStringDeduplication"
-              ,(concat "-javaagent:" lombok-jar-path)
-              ))
-      (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-      (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/idea-java-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "IdeaStyle")
-      :config
+                 "-XX:+UseG1GC"
+                 "-XX:+UseStringDeduplication"
+                 ,(concat "-javaagent:" lombok-jar-path)
+                 ))
+        (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+        ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/idea-java-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "IdeaStyle")
+        :config
 
-      (setq lsp-java-maven-download-sources t)
-      (setq lsp-java-import-maven-enabled t)
-      (setq lsp-java-import-gradle-enabled t)
-      (setq lsp-java-import-gradle-wrapper-enabled nil)
-      (setq lsp-java-implementations-code-lens-enabled t)
-      (setq lsp-java-references-code-lens-enabled t)
-      (setq lsp-java-autobuild-enabled t)
-      (setq lsp-java-format-enabled t)
-      (setq lsp-java-format-comments-enabled t)
-      (setq lsp-java-configuration-update-build-configuration t)
-      (setq lsp-java-configuration-check-project-settings-exclusions t)
-      (add-hook 'java-mode-hook 'lsp)
-      ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-      (add-hook 'java-mode-hook
-                (lambda()
-                  (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-                  ))
-      ;; 只在某些mode下，生效参数配置
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-      ;; (add-hook 'java-mode-hook                                        ;;
-      ;;           (lambda()                                              ;;
-      ;;             (make-local-variable 'company-minimum-prefix-length) ;;
-      ;;             (setq company-minimum-prefix-length 0)               ;;
-      ;;             ))                                                   ;;
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        (setq lsp-java-maven-download-sources t)
+        (setq lsp-java-import-maven-enabled t)
+        (setq
+            lsp-java-import-gradle-enabled t
+            lsp-java-import-gradle-wrapper-enabled nil
+            lsp-java-import-gradle-version "8.0.2"
+            lsp-java-import-gradle-java-home JAVA_HOME_PATH
+            lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.0.2/"
+            lsp-java-import-gradle-user-home "/Users/os/.m2/repository/")
 
-      ;; spring-boot的支持
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-      ;; (require 'lsp-java-boot)                            ;;
-      ;; (add-hook 'java-mode-hook 'lsp-java-boot-lens-mode) ;;
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-      )
+        (setq lsp-java-implementations-code-lens-enabled t)
+        (setq lsp-java-references-code-lens-enabled t)
+        (setq lsp-java-autobuild-enabled t)
+        (setq lsp-java-format-enabled t)
+        (setq lsp-java-format-comments-enabled t)
+        (setq lsp-java-configuration-update-build-configuration t)
+        (setq lsp-java-configuration-check-project-settings-exclusions t)
+        (add-hook 'java-mode-hook 'lsp)
+        ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+        (add-hook 'java-mode-hook
+            (lambda()
+                (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+                ))
 
+        ;; 只在某些mode下，生效参数配置
+    ;;     (add-hook 'java-mode-hook                                        
+    ;;                (lambda()                                              
+    ;;                  (make-local-variable 'company-minimum-prefix-length) 
+    ;;                  (setq company-minimum-prefix-length 0)               
+    ;;                    )
+    ;;         )
 
-    (use-package dap-java
-      :ensure nil
-      :config
-      (dap-register-debug-template
-       "localhost:5005"
-       (list :type "java"
-             :request "attach"
-             :hostName "localhost"
-             :port 5005))
-      (dap-register-debug-template
-       "lxd"
-       (list :type "java"
-             :request "attach"
-             :hostName "127.0.0.1"
-             :port 5005))
-      ;; :config
-      ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-      ;; (global-set-key (kbd "<f8>") 'dap-next)
-      ;; (global-set-key (kbd "<f9>") 'dap-continue)
-      )
+    ;;     (require 'lsp-java-boot)
+    ;;     ;; to enable the lenses
+    ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+    ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+         )
 
-     (require 'lsp-java-boot)
-     ;; to enable the lenses
-     (add-hook 'lsp-mode-hook 'lsp-lens-mode)
-     (add-hook 'java-mode-hook 'lsp-java-boot-lens-mode)
+     (use-package dap-java
+        :ensure nil
+        :config
+        (dap-register-debug-template
+            "localhost:5005"
+            (list :type "java"
+                :request "attach"
+                :hostName "localhost"
+                :port 5005))
+        (dap-register-debug-template
+            "lxd"
+            (list :type "java"
+                :request "attach"
+                :hostName "127.0.0.1"
+                :port 5005))
+        ;; :config
+        ;; (global-set-key (kbd "<f7>") 'dap-step-in)
+        ;; (global-set-key (kbd "<f8>") 'dap-next)
+        ;; (global-set-key (kbd "<f9>") 'dap-continue)
+        )
 
     ;;==========java end==========
 
     ;;========== maven pom==========
     ;; https://github.com/m0smith/maven-pom-mode.git
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
     ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
     ;; (load "maven-pom-mode")                                                                      ;;
-    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
     ;;==========maven pom end==========
 
     (use-package mvn
-      :ensure t
-      )
+        :ensure t
+        )
 
     (defun mvn-install ()
-      (interactive)
-      (mvn "install"))
+        (interactive)
+        (mvn "install"))
 #+end_src
 **** Hot Deployment
 use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
@@ -816,13 +824,14 @@ git tools
 ** HttpClient Setup
 #+begin_src emacs-lisp
   (use-package restclient
-  :config
-  (add-to-list 'company-backends 'company-restclient)
-  )
-(use-package company-restclient
-  :after(restclient-mode)
-  )
-(add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
+    :config
+    (add-to-list 'company-backends 'company-restclient)
+    )
+  (use-package company-restclient
+    :after(restclient-mode)
+    )
+  (use-package ob-restclient)
+  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
 
 #+RESULTS:
@@ -844,46 +853,52 @@ jumping to visible text using a char-based decision tree
 ** Org Setup
 *** Org Table Tidy Settings
 #+begin_src emacs-lisp
-(with-eval-after-load 'org
-  (defun org-buffer-face-mode-variable ()
-    (interactive)
-    (make-face 'width-font-face)
-    (set-face-attribute 'width-font-face nil :font "Ubuntu Mono 20")
-    (setq buffer-face-mode-face 'width-font-face)
-    (buffer-face-mode))
-  (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
+  (with-eval-after-load 'org
+    (defun org-buffer-face-mode-variable ()
+      (interactive)
+      (make-face 'width-font-face)
+      (set-face-attribute 'width-font-face nil :font "Ubuntu Mono 20")
+      (setq buffer-face-mode-face 'width-font-face)
+      (buffer-face-mode))
+      (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 #+end_src
 *** Pretty
 #+begin_src emacs-lisp
-(use-package org-bullets
-  :ensure t
-  :hook((org-mode . org-bullets-mode)
-         (org-mode . org-indent-mode))
-  ;;  (add-hook 'org-mode-hook #'org-bullets-mode)
-  ;;  (add-hook 'org-mode-hook #'org-indent-mode)
-  )
+  (use-package org-bullets
+     :ensure t
+     :hook((org-mode . org-bullets-mode)
+            (org-mode . org-indent-mode))
+     ;;  (add-hook 'org-mode-hook #'org-bullets-mode)
+     ;;  (add-hook 'org-mode-hook #'org-indent-mode)
+     )
+  
+  (set-face-attribute 'org-block nil :background
+                    (color-darken-name
+                     (face-attribute 'default :background) 3))
 #+end_src
 *** Org-babel support language
 #+begin_src emacs-lisp
-(require 'ob-js)
-(add-to-list 'org-babel-load-languages '(js . t))
-(org-babel-do-load-languages 'org-babel-load-languages org-babel-load-languages)
-(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
-(defun ob-js-insert-session-header-arg (session)
-  "Insert ob-js `SESSION' header argument.
-- `js-comint'
-- `skewer-mode'
-- `Indium'
-"
-  (interactive (list (completing-read "ob-js session: "
-                       '("js-comint" "skewer-mode" "indium"))))
-  (org-babel-insert-header-arg
-    "session"
-    (pcase session
-      ("js-comint" "\"*Javascript REPL*\"")
-      ("skewer-mode" "\"*skewer-repl*\"")
-      ("indium" "\"*JS REPL*\""))))
-(define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+  (require 'ob-js)
+  (org-babel-do-load-languages 'org-babel-load-languages
+      '((js . t)
+        (restclient . t))
+      )
+  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+  (defun ob-js-insert-session-header-arg (session)
+    "Insert ob-js `SESSION' header argument.
+  - `js-comint'
+  - `skewer-mode'
+  - `Indium'
+  "
+    (interactive (list (completing-read "ob-js session: "
+                         '("js-comint" "skewer-mode" "indium"))))
+    (org-babel-insert-header-arg
+      "session"
+      (pcase session
+        ("js-comint" "\"*Javascript REPL*\"")
+        ("skewer-mode" "\"*skewer-repl*\"")
+        ("indium" "\"*JS REPL*\""))))
+  (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 #+end_src
 ** Format Setup
 #+begin_src emacs-lisp
@@ -1035,6 +1050,10 @@ command: (org-emphasize) ,next input character (+)
 C-c ; (org-toggle-comment)
 **** Edit Source Code In New Buffer
 C-c ' (org-edit-special)
+**** Org Export to Markdown
+#+begin_src emacs-lisp
+  (org-md-export-to-markdown)
+#+end_src
 
 ** Installation
 #+begin_src shell

@@ -1,6 +1,10 @@
 auto-save-list
 elpa
 site-lisp
+workspace
+.dap-breakpoints
+request
+lsp-server
 *~
 configuration.el
 projectile-bookmarks.eld
