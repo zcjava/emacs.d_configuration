@@ -658,7 +658,7 @@ text search use ivy
             lsp-java-import-gradle-version "8.0.2"
             lsp-java-import-gradle-java-home JAVA_HOME_PATH
             lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.0.2/"
-            lsp-java-import-gradle-user-home "/Users/os/.m2/repository/")
+            lsp-java-import-gradle-user-home "~/.m2/repository/")
 
         (setq lsp-java-implementations-code-lens-enabled t)
         (setq lsp-java-references-code-lens-enabled t)
@@ -1054,6 +1054,9 @@ C-c ' (org-edit-special)
 #+begin_src emacs-lisp
   (org-md-export-to-markdown)
 #+end_src
+
+#+RESULTS:
+: README.md
 
 ** Installation
 #+begin_src shell
