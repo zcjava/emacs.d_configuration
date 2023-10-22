@@ -642,7 +642,7 @@ text search use ivy
             )
     :config
     (setq lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
-    (setq lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.11/libexec/")
+    (setq lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.11/libexec/lib/")
     (setq lsp-completion-enable-additional-text-edit nil)
     (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
     (with-eval-after-load 'lsp-intelephense
@@ -671,107 +671,112 @@ text search use ivy
 (lsp-ivy-workspace-symbol)
 *** JAVA Setup
 #+begin_src emacs-lisp
-  (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
-  (setenv "JAVA_HOME"  JAVA_HOME_PATH)
-  (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
-  (use-package lsp-java 
-      :init
-      (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-      (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
-      ;; lsp-java-jdt-download-url 
-      (setq lsp-java-java-path my-java-path)
-      (setq lombok-jar-path
-          (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
-      (setq lsp-java-vmargs
-          `("-Xmx1G"
-               "-XX:+UseG1GC"
-               "-XX:+UseStringDeduplication"
-               ,(concat "-javaagent:" lombok-jar-path)
-               ))
-      (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-      (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-      ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/idea-java-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "IdeaStyle")
-      :config
+        (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+        (setenv "JAVA_HOME"  JAVA_HOME_PATH)
+        (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
+        (use-package lsp-java 
+            :init
+            (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+            (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
+            ;; lsp-java-jdt-download-url 
+            (setq lsp-java-java-path my-java-path)
+            (setq lombok-jar-path
+                (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+            (setq lsp-java-vmargs
+                `("-Xmx1G"
+                     "-XX:+UseG1GC"
+                     "-XX:+UseStringDeduplication"
+                     ,(concat "-javaagent:" lombok-jar-path)
+                     ))
+            (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+    ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+            (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+            :config
 
-      (setq lsp-java-maven-download-sources t)
-      (setq lsp-java-import-maven-enabled t)
-      (setq
-          lsp-java-import-gradle-enabled t
-          lsp-java-import-gradle-wrapper-enabled nil
-          lsp-java-import-gradle-version "8.1.1"
-          lsp-java-import-gradle-java-home JAVA_HOME_PATH
-          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.1.1/"
-          lsp-java-import-gradle-user-home "~/.m2/repository")
+            (setq lsp-java-maven-download-sources t)
+            (setq lsp-java-import-maven-enabled t)
+            (setq
+                lsp-java-import-gradle-enabled t
+                lsp-java-import-gradle-wrapper-enabled nil
+                lsp-java-import-gradle-version "8.0.2"
+                lsp-java-import-gradle-java-home JAVA_HOME_PATH
+                lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.0.2/"
+                lsp-java-import-gradle-user-home "~/.m2/repository")
 
-      (setq lsp-java-implementations-code-lens-enabled t)
-      (setq lsp-java-references-code-lens-enabled t)
-      (setq lsp-java-autobuild-enabled t)
-      (setq lsp-java-format-enabled t)
-      (setq lsp-java-format-comments-enabled t)
-      (setq lsp-java-configuration-update-build-configuration t)
-      (setq lsp-java-configuration-check-project-settings-exclusions t)
-      (setq lsp-java-completion-guess-method-arguments t)
-      (add-hook 'java-mode-hook 'lsp)
-      ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-      (add-hook 'java-mode-hook
-          (lambda()
-              (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-              ))
+            (setq lsp-java-implementations-code-lens-enabled t)
+            (setq lsp-java-references-code-lens-enabled t)
+            (setq lsp-java-autobuild-enabled t)
+            (setq lsp-java-format-enabled t)
+            (setq lsp-java-format-comments-enabled t)
+      ;;      (setq lsp-java-configuration-update-build-configuration t)
+            (setq lsp-java-trace-server t)
+            (setq lsp-java-configuration-check-project-settings-exclusions t)
+            (setq lsp-java-completion-guess-method-arguments t)
+            (add-hook 'java-mode-hook 'lsp)
+            ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+            (add-hook 'java-mode-hook
+                (lambda()
+                    (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+                    ))
 
-      ;; 只在某些mode下，生效参数配置
-  ;;     (add-hook 'java-mode-hook                                        
-  ;;                (lambda()                                              
-  ;;                  (make-local-variable 'company-minimum-prefix-length) 
-  ;;                  (setq company-minimum-prefix-length 0)               
-  ;;                    )
-  ;;         )
+            ;; 只在某些mode下，生效参数配置
+        ;;     (add-hook 'java-mode-hook                                        
+        ;;                (lambda()                                              
+        ;;                  (make-local-variable 'company-minimum-prefix-length) 
+        ;;                  (setq company-minimum-prefix-length 0)               
+        ;;                    )
+        ;;         )
 
-  ;;     (require 'lsp-java-boot)
-  ;;     ;; to enable the lenses
-  ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-  ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-       )
+        ;;     (require 'lsp-java-boot)
+        ;;     ;; to enable the lenses
+        ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+        ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+             )
 
-   (use-package dap-java
-      :ensure nil
-      :config
-      (dap-register-debug-template
-          "localhost:5005"
-          (list :type "java"
-              :request "attach"
-              :hostName "localhost"
-              :port 5005))
-      (dap-register-debug-template
-          "lxd"
-          (list :type "java"
-              :request "attach"
-              :hostName "127.0.0.1"
-              :port 5005))
-      ;; :config
-      ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-      ;; (global-set-key (kbd "<f8>") 'dap-next)
-      ;; (global-set-key (kbd "<f9>") 'dap-continue)
-      )
+         (use-package dap-java
+            :ensure nil
+            :config
+            (dap-register-debug-template
+                "localhost:5005"
+                (list :type "java"
+                    :request "attach"
+                    :hostName "localhost"
+                    :port 5005))
+            (dap-register-debug-template
+                "lxd"
+                (list :type "java"
+                    :request "attach"
+                    :hostName "127.0.0.1"
+                    :port 5005))
+            ;; :config
+            ;; (global-set-key (kbd "<f7>") 'dap-step-in)
+            ;; (global-set-key (kbd "<f8>") 'dap-next)
+            ;; (global-set-key (kbd "<f9>") 'dap-continue)
+            )
 
-  ;;==========java end==========
+        ;;==========java end==========
 
-  ;;========== maven pom==========
-  ;; https://github.com/m0smith/maven-pom-mode.git
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-  ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-  ;; (load "maven-pom-mode")                                                                      ;;
-      ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;==========maven pom end==========
+        ;;========== maven pom==========
+        ;; https://github.com/m0smith/maven-pom-mode.git
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
+        ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
+        ;; (load "maven-pom-mode")                                                                      ;;
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        ;;==========maven pom end==========
 
-  (use-package mvn
-      :ensure t
-      )
+        (use-package mvn
+            :ensure t
+            )
 
-  (defun mvn-install ()
-      (interactive)
-      (mvn "install"))
+        (defun mvn-install ()
+            (interactive)
+            (mvn "install"))
 #+end_src
+
+#+RESULTS:
+: mvn-install
+
 **** Hot Deployment
 use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
 *** Groovy Setup
