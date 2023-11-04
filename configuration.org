@@ -1,5 +1,4 @@
-
-#+STARTUP: show2levels
+#+STARTUP: show3levels
 #+EXPORT_FILE_NAME: README
 #+OPTIONS: toc:3
 #+OPTIONS: num:nil
@@ -986,10 +985,11 @@ jumping to visible text using a char-based decision tree
   (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 #+end_src
 *** Org Agenda Setup
-**** Tag
+**** Config
 #+begin_src emacs-lisp
-  (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                           ("@study" . ?s)))
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (setq org-default-notes-file "~/Desktop/note/gtd/note.org")
   (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d!)")
            (sequence "BUG(b!)" "|" "FIXED(f@/!)")
@@ -1005,10 +1005,12 @@ jumping to visible text using a char-based decision tree
   (setq org-highest-priority 1)
   (setq org-default-priority 5)
   (setq org-lowest-priority 9)
-
-  (use-package org-alert)
   (use-package org-super-agenda)
-  (use-package org-pomodoro)
+#+end_src
+**** Tag
+#+begin_src emacs-lisp
+  (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
+                           ("@study" . ?s)))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1020,27 +1022,31 @@ jumping to visible text using a char-based decision tree
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 #+end_src
-**** Task Remind
+**** Task Reminder
 #+begin_src emacs-lisp
+  (use-package alert)
+  (use-package org-alert
+      :init
+      (setq alert-default-style 'notifier
+               org-alert-interval 300
+               org-alert-notify-cutoff 10
+               org-alert-notify-after-event-cutoff 5))
+  
+  (org-alert-enable)
+  ;; (defun notify-osx (title message)
+  ;;     (call-process "terminal-notifier"
+  ;;         nil 0 nil
+  ;;         "-group" "Emacs"
+  ;;         "-title" title
+  ;;         "-message" message
+  ;;         ;;"-sender" "org.gnu.Emacs"
+  ;;         "-activate" "org.gnu.Emacs"))
+  (use-package osa)
+  (use-package org-notify)
+  (use-package org-pomodoro)
   (setq org-log-done 'time)
-  (require 'appt)
-  (setq appt-time-msg-list nil)    ;; clear existing appt list
-  (setq appt-display-interval '10)  ;; warn every 5 minutes from t - appt-message-warning-time
-  (setq
-      appt-message-warning-time '20  ;; send first warning 15 minutes before appointment
-      appt-display-mode-line nil     ;; don't show in the modeline
-      appt-display-format 'window)   ;; pass warnings to the designated window function
-  (appt-activate 1)                ;; activate appointment notification
-  (display-time)                   ;; activate time display
-
-  (org-agenda-to-appt)             ;; generate the appt list from org agenda files on emacs launch
-  (run-at-time "24:01" 3600 'org-agenda-to-appt)           ;; update appt list hourly
-  (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt) ;; update appt list on agenda view
-  (defun my-appt-display (min-to-app new-time msg)
-      (notify-osx
-          (format "Appointment in %s minutes" min-to-app)    ;; passed to -title in terminal-notifier call
-          (format "%s" msg)))                                ;; passed to -message in terminal-notifier call
-  (setq appt-disp-window-function (function my-appt-display))
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
 #+end_src
 ** Format Setup
 #+begin_src emacs-lisp
@@ -1191,16 +1197,20 @@ Key "s in (org-insert-structure-template) list
 *** Other
 **** StrikeThrough/DeleteLine
 command: (org-emphasize) ,next input character (+)
+**** Insert Date and Time
+C-u C-c .
 **** Disable Source Code
 C-c ; (org-toggle-comment)
 **** Edit Source Code In New Buffer
 C-c ' (org-edit-special)
 **** Org Export to Markdown
 (org-md-export-to-markdown)
+**** Org Config File Reload
+(org-babel-load-file )
 ** Installation
 #+begin_src shell
   git clone <this repo url> ~/.emacs.d
 #+end_src
 
 ** Customize Your Configuration
-write your configuration to ~/.emacs.d/configuration_self.org . emacs autoload the file when emacs startup
+write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup

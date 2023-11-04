@@ -21,3 +21,5 @@ transient
 .#configuration.org
 .lsp-session*
 .cache
+org-clock-save.el
+bookmarks

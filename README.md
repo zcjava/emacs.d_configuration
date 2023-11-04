@@ -1,92 +1,92 @@
 
 # Table of Contents
 
--   [Intro](#org77df20d)
-    -   [Package Manager](#orgdab1f1e)
-        -   [ELPA Setup](#org26beb6e)
-        -   [Use-Package Setup](#org2d78273)
-    -   [General Settings Setup](#orgf8d55f5)
-        -   [Window Settings](#orgd69f810)
-        -   [Character Settings](#org8d569cd)
-        -   [BackUp Settings](#orgb08dd1e)
-        -   [Custom-file Settings](#org15a25be)
-        -   [Yes/No Shorthand Settings](#orgd2cf108)
-        -   [Tabs Indentation Settings](#org1261392)
-        -   [Env Settings](#org216c493)
-        -   [Undo Settings](#org668d1a8)
-        -   [Recentf Settings](#orgdeb9c04)
-        -   [Show Startup Message](#orgafa3d34)
-        -   [GC settings](#orgd203120)
-    -   [UI Setup](#orge18beef)
-        -   [Menu-bar Hide](#org855818b)
-        -   [Tool-bar Hide](#org97aef3a)
-        -   [Scroll-bar Hide](#orge5cd83b)
-        -   [Theme](#org50da509)
-        -   [Cursor](#orgc851286)
-        -   [FillColumn](#org539f6e9)
-        -   [HighLight Line](#org3669e30)
-        -   [Font](#orge877aad)
-        -   [Mode Line](#orga8990ba)
-        -   [Icons](#orgc44656e)
-        -   [Tabs Setup](#org26869c7)
-    -   [Which-Key Setup](#orgbaca713)
-    -   [Switch-Window](#orga448ab8)
-    -   [Delete Setup](#org0d8b53d)
-        -   [Hungry-delete](#org1cf4323)
-        -   [Delete Slection](#orgd8dd7ee)
-    -   [SmartParens](#org3bb423f)
-    -   [Company Setup](#orgd8b649a)
-    -   [Nginx Setup](#org06b8d09)
-    -   [MarkDown Setup](#orgc48d04f)
-    -   [Projectile Setup](#org3899c91)
-    -   [Selected Setup](#orgd4d4402)
-    -   [Command Completion For MiniBuffer](#orgef7a1be)
-        -   [Ivy/Counsel/Swiper Setup](#org93004a1)
-        -   [Helm Setup](#orgaae6e58)
-    -   [Iedit Setup](#org742ffd5)
-    -   [Language Setup](#org40fdd9b)
-        -   [LSP-Mode Setup](#orgdbd58ba)
-        -   [JAVA Setup](#org73ce295)
-        -   [Groovy Setup](#org1197537)
-        -   [Web-Mode Setup](#orgaf9093f)
-        -   [Javascript REPL](#org3cb385d)
-        -   [FlyCheck Setup](#orgcffb491)
-        -   [Yasnippet Setup](#org24eb9fc)
-        -   [Magit Setup](#org1b732f1)
-        -   [HideShow Setup](#org072cce3)
-    -   [HttpClient Setup](#org95e0353)
-    -   [Undo-Tree Setup](#org38fd559)
-    -   [Avy SetUp](#orgbe25e27)
-    -   [Org Setup](#org4c23942)
-        -   [Org Table Tidy Settings](#org766b4ce)
-        -   [Pretty](#org265607e)
-        -   [Org-babel support language](#org3b3a55a)
-        -   [Org Agenda Setup](#org5f14c4e)
-    -   [Format Setup](#orga49a12f)
-        -   [Format Default Formatters Setup](#org6b8af52)
-    -   [Org shortcut](#org3fb4812)
-        -   [Motion in Heading](#orgba8ac7c)
-        -   [Editing Heading Level](#orgc981dd7)
-        -   [Insert Org template](#org37d62e7)
-        -   [Other](#org6dd2cbb)
-    -   [Installation](#org582335b)
-    -   [Customize Your Configuration](#orgd94d6a1)
+-   [Intro](#orgbc87801)
+    -   [Package Manager](#orgc43157c)
+        -   [ELPA Setup](#org289195d)
+        -   [Use-Package Setup](#orge76f388)
+    -   [General Settings Setup](#org0188eb8)
+        -   [Window Settings](#orga4bfe38)
+        -   [Character Settings](#org0dbaf16)
+        -   [BackUp Settings](#orgdd650b8)
+        -   [Custom-file Settings](#org9eff0c0)
+        -   [Yes/No Shorthand Settings](#orga6b9a49)
+        -   [Tabs Indentation Settings](#orge0ff921)
+        -   [Env Settings](#org9f9d347)
+        -   [Undo Settings](#org4d56859)
+        -   [Recentf Settings](#org3de110c)
+        -   [Show Startup Message](#org5bc864b)
+        -   [GC settings](#org436bf50)
+    -   [UI Setup](#orge42bb01)
+        -   [Menu-bar Hide](#org7c53c69)
+        -   [Tool-bar Hide](#org9e50d9e)
+        -   [Scroll-bar Hide](#orgffa74e3)
+        -   [Theme](#org8565c54)
+        -   [Cursor](#org5b28c99)
+        -   [FillColumn](#org3f62c19)
+        -   [HighLight Line](#org0106d73)
+        -   [Font](#org2f32275)
+        -   [Mode Line](#org91a561c)
+        -   [Icons](#org7dbe763)
+        -   [Tabs Setup](#orgfbbbc13)
+    -   [Which-Key Setup](#org24dcaca)
+    -   [Switch-Window](#org0d36c5e)
+    -   [Delete Setup](#org26bc821)
+        -   [Hungry-delete](#org6f5871b)
+        -   [Delete Slection](#org2c1d587)
+    -   [SmartParens](#org7c79841)
+    -   [Company Setup](#org6c2ee8e)
+    -   [Nginx Setup](#orge3ec60c)
+    -   [MarkDown Setup](#org227dcae)
+    -   [Projectile Setup](#org46901f5)
+    -   [Selected Setup](#org3bb4676)
+    -   [Command Completion For MiniBuffer](#orgae315af)
+        -   [Ivy/Counsel/Swiper Setup](#org8ba4196)
+        -   [Helm Setup](#org4801cfa)
+    -   [Iedit Setup](#org4ad2f10)
+    -   [Language Setup](#org7e33786)
+        -   [LSP-Mode Setup](#org7730ddf)
+        -   [JAVA Setup](#org9d1696f)
+        -   [Groovy Setup](#org4287a57)
+        -   [Web-Mode Setup](#org2325bd0)
+        -   [Javascript REPL](#org39d2921)
+        -   [FlyCheck Setup](#org6c8bce1)
+        -   [Yasnippet Setup](#org86f8a92)
+        -   [Magit Setup](#org4429cb4)
+        -   [HideShow Setup](#org2fb8f6e)
+    -   [HttpClient Setup](#org0125620)
+    -   [Undo-Tree Setup](#org69aa1ee)
+    -   [Avy SetUp](#org42fff17)
+    -   [Org Setup](#org61cc130)
+        -   [Org Table Tidy Settings](#org405385c)
+        -   [Pretty](#orgf032410)
+        -   [Org-babel support language](#orgd2a5921)
+        -   [Org Agenda Setup](#org6f1adc8)
+    -   [Format Setup](#org5ef6f50)
+        -   [Format Default Formatters Setup](#orgf33bc12)
+    -   [Org shortcut](#org1da6fd5)
+        -   [Motion in Heading](#orgd485692)
+        -   [Editing Heading Level](#orge3db671)
+        -   [Insert Org template](#org911d326)
+        -   [Other](#orga432593)
+    -   [Installation](#org27e7cb8)
+    -   [Customize Your Configuration](#orge6efcc3)
 
 
 
-<a id="org77df20d"></a>
+<a id="orgbc87801"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="orgdab1f1e"></a>
+<a id="orgc43157c"></a>
 
 ## Package Manager
 
 
-<a id="org26beb6e"></a>
+<a id="org289195d"></a>
 
 ### ELPA Setup
 
@@ -110,7 +110,7 @@ set repository to tsinghua
         (package-refresh-contents))
 
 
-<a id="org2d78273"></a>
+<a id="orge76f388"></a>
 
 ### Use-Package Setup
 
@@ -122,12 +122,12 @@ set repository to tsinghua
     (setq use-package-always-ensure t)
 
 
-<a id="orgf8d55f5"></a>
+<a id="org0188eb8"></a>
 
 ## General Settings Setup
 
 
-<a id="orgd69f810"></a>
+<a id="orga4bfe38"></a>
 
 ### Window Settings
 
@@ -147,7 +147,7 @@ set repository to tsinghua
             )
 
 
-<a id="org8d569cd"></a>
+<a id="org0dbaf16"></a>
 
 ### Character Settings
 
@@ -170,7 +170,7 @@ set repository to tsinghua
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="orgb08dd1e"></a>
+<a id="orgdd650b8"></a>
 
 ### BackUp Settings
 
@@ -182,7 +182,7 @@ donot backup file
     ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 
 
-<a id="org15a25be"></a>
+<a id="org9eff0c0"></a>
 
 ### Custom-file Settings
 
@@ -191,14 +191,14 @@ donot backup file
         (load custom-file))
 
 
-<a id="orgd2cf108"></a>
+<a id="orga6b9a49"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="org1261392"></a>
+<a id="orge0ff921"></a>
 
 ### Tabs Indentation Settings
 
@@ -219,7 +219,7 @@ donot backup file
         nxml-slash-auto-complete-flag t)
 
 
-<a id="org216c493"></a>
+<a id="org9f9d347"></a>
 
 ### Env Settings
 
@@ -232,7 +232,7 @@ donot backup file
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="org668d1a8"></a>
+<a id="org4d56859"></a>
 
 ### Undo Settings
 
@@ -244,7 +244,7 @@ donot backup file
         )
 
 
-<a id="orgdeb9c04"></a>
+<a id="org3de110c"></a>
 
 ### Recentf Settings
 
@@ -255,14 +255,14 @@ donot backup file
     (recentf-mode t)
 
 
-<a id="orgafa3d34"></a>
+<a id="org5bc864b"></a>
 
 ### Show Startup Message
 
     (setq inhibit-startup-message t)
 
 
-<a id="orgd203120"></a>
+<a id="org436bf50"></a>
 
 ### GC settings
 
@@ -270,19 +270,19 @@ donot backup file
     (setq read-process-output-max (* 32 1024 1024))
 
 
-<a id="orge18beef"></a>
+<a id="orge42bb01"></a>
 
 ## UI Setup
 
 
-<a id="org855818b"></a>
+<a id="org7c53c69"></a>
 
 ### Menu-bar Hide
 
     (menu-bar-mode nil)
 
 
-<a id="org97aef3a"></a>
+<a id="org9e50d9e"></a>
 
 ### Tool-bar Hide
 
@@ -290,14 +290,14 @@ donot backup file
     (tool-bar-mode -1)
 
 
-<a id="orge5cd83b"></a>
+<a id="orgffa74e3"></a>
 
 ### Scroll-bar Hide
 
     (scroll-bar-mode nil)
 
 
-<a id="org50da509"></a>
+<a id="org8565c54"></a>
 
 ### Theme
 
@@ -308,7 +308,7 @@ donot backup file
     (load-theme 'dracula t)
 
 
-<a id="orgc851286"></a>
+<a id="org5b28c99"></a>
 
 ### Cursor
 
@@ -322,21 +322,21 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="org539f6e9"></a>
+<a id="org3f62c19"></a>
 
 ### FillColumn
 
     (setq-default fill-column 150)
 
 
-<a id="org3669e30"></a>
+<a id="org0106d73"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="orge877aad"></a>
+<a id="org2f32275"></a>
 
 ### Font
 
@@ -345,7 +345,7 @@ donot backup file
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="orga8990ba"></a>
+<a id="org91a561c"></a>
 
 ### Mode Line
 
@@ -377,7 +377,7 @@ donot backup file
         )
 
 
-<a id="orgc44656e"></a>
+<a id="org7dbe763"></a>
 
 ### Icons
 
@@ -387,7 +387,7 @@ donot backup file
         )
 
 
-<a id="org26869c7"></a>
+<a id="orgfbbbc13"></a>
 
 ### Tabs Setup
 
@@ -437,7 +437,7 @@ donot backup file
             )
 
 
-<a id="orgbaca713"></a>
+<a id="org24dcaca"></a>
 
 ## Which-Key Setup
 
@@ -448,7 +448,7 @@ donot backup file
         )
 
 
-<a id="orga448ab8"></a>
+<a id="org0d36c5e"></a>
 
 ## Switch-Window
 
@@ -462,12 +462,12 @@ easy to jump windows
         )
 
 
-<a id="org0d8b53d"></a>
+<a id="org26bc821"></a>
 
 ## Delete Setup
 
 
-<a id="org1cf4323"></a>
+<a id="org6f5871b"></a>
 
 ### Hungry-delete
 
@@ -481,14 +481,14 @@ delete all whitespace until have character
         )
 
 
-<a id="orgd8dd7ee"></a>
+<a id="org2c1d587"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="org3bb423f"></a>
+<a id="org7c79841"></a>
 
 ## SmartParens
 
@@ -504,7 +504,7 @@ auto Symbol of completion
         )
 
 
-<a id="orgd8b649a"></a>
+<a id="org6c2ee8e"></a>
 
 ## Company Setup
 
@@ -525,7 +525,7 @@ auto Symbol of completion
     ;;   :hook (company-mode . company-box-mode))
 
 
-<a id="org06b8d09"></a>
+<a id="orge3ec60c"></a>
 
 ## Nginx Setup
 
@@ -533,7 +533,7 @@ auto Symbol of completion
     (use-package company-nginx)
 
 
-<a id="orgc48d04f"></a>
+<a id="org227dcae"></a>
 
 ## MarkDown Setup
 
@@ -545,7 +545,7 @@ auto Symbol of completion
         :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org3899c91"></a>
+<a id="org46901f5"></a>
 
 ## Projectile Setup
 
@@ -621,7 +621,7 @@ auto Symbol of completion
         :config (treemacs-set-scope-type 'Tabs))
 
 
-<a id="orgd4d4402"></a>
+<a id="org3bb4676"></a>
 
 ## Selected Setup
 
@@ -642,14 +642,14 @@ auto Symbol of completion
         )
 
 
-<a id="orgef7a1be"></a>
+<a id="orgae315af"></a>
 
 ## Command Completion For MiniBuffer
 
 Command Interactive Completion ,eg : M-x
 
 
-<a id="org93004a1"></a>
+<a id="org8ba4196"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -718,7 +718,7 @@ Command Interactive Completion ,eg : M-x
             )
 
 
-<a id="orgaae6e58"></a>
+<a id="org4801cfa"></a>
 
 ### Helm Setup
 
@@ -728,7 +728,7 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="org742ffd5"></a>
+<a id="org4ad2f10"></a>
 
 ## Iedit Setup
 
@@ -737,12 +737,12 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="org40fdd9b"></a>
+<a id="org7e33786"></a>
 
 ## Language Setup
 
 
-<a id="orgdbd58ba"></a>
+<a id="org7730ddf"></a>
 
 ### LSP-Mode Setup
 
@@ -848,7 +848,7 @@ Command Interactive Completion ,eg : M-x
         (lsp-ivy-workspace-symbol)
 
 
-<a id="org73ce295"></a>
+<a id="org9d1696f"></a>
 
 ### JAVA Setup
 
@@ -959,7 +959,7 @@ Command Interactive Completion ,eg : M-x
     use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
 
 
-<a id="org1197537"></a>
+<a id="org4287a57"></a>
 
 ### Groovy Setup
 
@@ -967,7 +967,7 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="orgaf9093f"></a>
+<a id="org2325bd0"></a>
 
 ### Web-Mode Setup
 
@@ -1005,7 +1005,7 @@ Command Interactive Completion ,eg : M-x
 react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx)
 
 
-<a id="org3cb385d"></a>
+<a id="org39d2921"></a>
 
 ### Javascript REPL
 
@@ -1016,7 +1016,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
         (use-package js-comint)
 
 
-<a id="orgcffb491"></a>
+<a id="org6c8bce1"></a>
 
 ### FlyCheck Setup
 
@@ -1038,7 +1038,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
             '(json-jsonlist)))
 
 
-<a id="org24eb9fc"></a>
+<a id="org86f8a92"></a>
 
 ### Yasnippet Setup
 
@@ -1048,7 +1048,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
     (use-package yasnippet-snippets :ensure t)
 
 
-<a id="org1b732f1"></a>
+<a id="org4429cb4"></a>
 
 ### Magit Setup
 
@@ -1057,14 +1057,14 @@ git tools
     (use-package magit)
 
 
-<a id="org072cce3"></a>
+<a id="org2fb8f6e"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="org95e0353"></a>
+<a id="org0125620"></a>
 
 ## HttpClient Setup
 
@@ -1079,7 +1079,7 @@ git tools
     (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 
 
-<a id="org38fd559"></a>
+<a id="org69aa1ee"></a>
 
 ## Undo-Tree Setup
 
@@ -1088,7 +1088,7 @@ git tools
         )
 
 
-<a id="orgbe25e27"></a>
+<a id="org42fff17"></a>
 
 ## Avy SetUp
 
@@ -1099,12 +1099,12 @@ jumping to visible text using a char-based decision tree
         )
 
 
-<a id="org4c23942"></a>
+<a id="org61cc130"></a>
 
 ## Org Setup
 
 
-<a id="org766b4ce"></a>
+<a id="org405385c"></a>
 
 ### Org Table Tidy Settings
 
@@ -1118,7 +1118,7 @@ jumping to visible text using a char-based decision tree
         (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 
 
-<a id="org265607e"></a>
+<a id="orgf032410"></a>
 
 ### Pretty
 
@@ -1133,7 +1133,7 @@ jumping to visible text using a char-based decision tree
             (face-attribute 'default :background) 3))
 
 
-<a id="org3b3a55a"></a>
+<a id="orgd2a5921"></a>
 
 ### Org-babel support language
 
@@ -1160,14 +1160,15 @@ jumping to visible text using a char-based decision tree
     (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 
 
-<a id="org5f14c4e"></a>
+<a id="org6f1adc8"></a>
 
 ### Org Agenda Setup
 
--   Tag
+-   Config
 
-        (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                                 ("@study" . ?s)))
+        (global-set-key (kbd "C-c a") 'org-agenda)
+        (global-set-key (kbd "C-c c") 'org-capture)
+        (setq org-default-notes-file "~/Desktop/note/gtd/note.org")
         (setq org-todo-keywords
             '((sequence "TODO(t)" "|" "DONE(d!)")
                  (sequence "BUG(b!)" "|" "FIXED(f@/!)")
@@ -1183,10 +1184,12 @@ jumping to visible text using a char-based decision tree
         (setq org-highest-priority 1)
         (setq org-default-priority 5)
         (setq org-lowest-priority 9)
-        
-        (use-package org-alert)
         (use-package org-super-agenda)
-        (use-package org-pomodoro)
+
+-   Tag
+
+        (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
+                                 ("@study" . ?s)))
     
         ;; automatically DONE when all children are DONE
         (defun org-summary-todo (n-done n-not-done)
@@ -1195,30 +1198,34 @@ jumping to visible text using a char-based decision tree
                 (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
         (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
--   Task Remind
+-   Task Reminder
 
-        (setq org-log-done 'time)
-        (require 'appt)
-        (setq appt-time-msg-list nil)    ;; clear existing appt list
-        (setq appt-display-interval '10)  ;; warn every 5 minutes from t - appt-message-warning-time
-        (setq
-            appt-message-warning-time '20  ;; send first warning 15 minutes before appointment
-            appt-display-mode-line nil     ;; don't show in the modeline
-            appt-display-format 'window)   ;; pass warnings to the designated window function
-        (appt-activate 1)                ;; activate appointment notification
-        (display-time)                   ;; activate time display
+        (use-package alert)
+        (use-package org-alert
+            :init
+            (setq alert-default-style 'notifier
+                org-alert-interval 300
+                org-alert-notify-cutoff 10
+                org-alert-notify-after-event-cutoff 5))
         
-        (org-agenda-to-appt)             ;; generate the appt list from org agenda files on emacs launch
-        (run-at-time "24:01" 3600 'org-agenda-to-appt)           ;; update appt list hourly
-        (add-hook 'org-finalize-agenda-hook 'org-agenda-to-appt) ;; update appt list on agenda view
-        (defun my-appt-display (min-to-app new-time msg)
-            (notify-osx
-                (format "Appointment in %s minutes" min-to-app)    ;; passed to -title in terminal-notifier call
-                (format "%s" msg)))                                ;; passed to -message in terminal-notifier call
-        (setq appt-disp-window-function (function my-appt-display))
+        (org-alert-enable)
+        ;; (defun notify-osx (title message)
+        ;;     (call-process "terminal-notifier"
+        ;;         nil 0 nil
+        ;;         "-group" "Emacs"
+        ;;         "-title" title
+        ;;         "-message" message
+        ;;         ;;"-sender" "org.gnu.Emacs"
+        ;;         "-activate" "org.gnu.Emacs"))
+        (use-package osa)
+        (use-package org-notify)
+        (use-package org-pomodoro)
+        (setq org-log-done 'time)
+        (setq org-clock-persist 'history)
+        (org-clock-persistence-insinuate)
 
 
-<a id="orga49a12f"></a>
+<a id="org5ef6f50"></a>
 
 ## Format Setup
 
@@ -1245,7 +1252,7 @@ jumping to visible text using a char-based decision tree
             ))
 
 
-<a id="org6b8af52"></a>
+<a id="orgf33bc12"></a>
 
 ### Format Default Formatters Setup
 
@@ -1333,12 +1340,12 @@ jumping to visible text using a char-based decision tree
         )
 
 
-<a id="org3fb4812"></a>
+<a id="org1da6fd5"></a>
 
 ## Org shortcut
 
 
-<a id="orgba8ac7c"></a>
+<a id="orgd485692"></a>
 
 ### Motion in Heading
 
@@ -1363,7 +1370,7 @@ jumping to visible text using a char-based decision tree
     C-c C-u (outline-up-heading)
 
 
-<a id="orgc981dd7"></a>
+<a id="orge3db671"></a>
 
 ### Editing Heading Level
 
@@ -1400,7 +1407,7 @@ jumping to visible text using a char-based decision tree
     M-S-RIGHT (org-demote-subtree)
 
 
-<a id="org37d62e7"></a>
+<a id="org911d326"></a>
 
 ### Insert Org template
 
@@ -1411,13 +1418,17 @@ C-c C-, (org-insert-structure-template)
     Key "s in (org-insert-structure-template) list
 
 
-<a id="org6dd2cbb"></a>
+<a id="orga432593"></a>
 
 ### Other
 
 -   StrikeThrough/DeleteLine
 
     command: (org-emphasize) ,next input character (+)
+
+-   Insert Date and Time
+
+    C-u C-c .
 
 -   Disable Source Code
 
@@ -1431,17 +1442,21 @@ C-c C-, (org-insert-structure-template)
 
     (org-md-export-to-markdown)
 
+-   Org Config File Reload
 
-<a id="org582335b"></a>
+    (org-babel-load-file )
+
+
+<a id="org27e7cb8"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="orgd94d6a1"></a>
+<a id="orge6efcc3"></a>
 
 ## Customize Your Configuration
 
-write your configuration to ~/.emacs.d/configuration<sub>self.org</sub> . emacs autoload the file when emacs startup
+write your configuration to ~/.emacs.d/configuration\\<sub>self.org</sub> , emacs autoload the file when emacs startup
 
