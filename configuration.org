@@ -351,7 +351,7 @@ delete all whitespace until have character
       :ensure t
       :bind (
                 ("C-c DEL" . hungry-delete-backward)
-                ("C-c d" . hungry-delete-forward))
+                ("C-c d d" . hungry-delete-forward))
       )
 #+end_src
 *** Delete Slection
@@ -989,11 +989,11 @@ jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (setq org-default-notes-file "~/Desktop/note/gtd/note.org")
+;;  (setq org-default-notes-file "~/Desktop/note/gtd/note.org")
   (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d!)")
            (sequence "BUG(b!)" "|" "FIXED(f@/!)")
-           (sequence "|" "CANCELED")))
+           (sequence "|" "CANCELED(c!)")))
   (setq org-todo-keyword-faces
       '(("TODO" . org-warning) ("STARTED" . "yellow")
            ("CANCELED" . (:foreground "blue" :weight bold))))
@@ -1001,11 +1001,30 @@ jumping to visible text using a char-based decision tree
   (setq org-modules
       '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
 
-
-  (setq org-highest-priority 1)
+  (setq org-highest-priority 1) 
   (setq org-default-priority 5)
   (setq org-lowest-priority 9)
   (use-package org-super-agenda)
+#+end_src
+**** Org GTD
+#+begin_src emacs-lisp
+  (use-package org-gtd
+      :after org
+      :init (setq org-gtd-update-ack "3.0.0")
+      :demand t
+      :custom
+      (org-gtd-directory "~/Desktop/note/org-gtd/")
+      (org-edna-use-inheritance t)
+      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
+      :config
+
+      (org-edna-mode)
+      :bind
+      (("C-c d c" . org-gtd-capture)
+          ("C-c d e" . org-gtd-engage)
+          ("C-c d p" . org-gtd-process-inbox)
+          :map org-gtd-clarify-map
+          ("C-c c" . org-gtd-organize)))
 #+end_src
 **** Tag
 #+begin_src emacs-lisp
@@ -1028,10 +1047,11 @@ jumping to visible text using a char-based decision tree
   (use-package org-alert
       :init
       (setq alert-default-style 'notifier
-               org-alert-interval 300
-               org-alert-notify-cutoff 10
-               org-alert-notify-after-event-cutoff 5))
-  
+          org-alert-notification-title "Org Reminder"
+          org-alert-interval 300
+          org-alert-notify-cutoff 5
+          org-alert-notify-after-event-cutoff 5))
+
   (org-alert-enable)
   ;; (defun notify-osx (title message)
   ;;     (call-process "terminal-notifier"
