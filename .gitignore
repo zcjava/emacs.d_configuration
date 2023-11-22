@@ -23,3 +23,6 @@ transient
 .cache
 org-clock-save.el
 bookmarks
+quelpa
+.org-id-locations
+lisp
