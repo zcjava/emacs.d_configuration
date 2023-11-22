@@ -1,4 +1,4 @@
-#+STARTUP: show3levels
+#+STARTUP: show2levels
 #+EXPORT_FILE_NAME: README
 #+OPTIONS: toc:3
 #+OPTIONS: num:nil
@@ -37,24 +37,22 @@ set repository to tsinghua
   (setq package-enable-at-startup nil)
   (setq use-package-always-ensure t)
 #+end_src
-
-#+RESULTS:
-: t
-
-*** COMMENT +Support Install Package Of Not in ELPA+
+*** COMMENT Support Install Package Of Not in ELPA
 #+begin_src emacs-lisp
   (use-package quelpa-use-package
-      ;; :init
+      :ensure t
+      :init
+      (setq quelpa-self-upgrade-p nil
+          quelpa-upgrade-p nil
+          quelpa-upgrade-interval 30
+          )
       ;; (setq quelpa-melpa-recipe-stores (list (expand-file-name "site-lisp" user-emacs-directory)))
       ;; (setq quelpa-dir (expand-file-name "site-lisp" user-emacs-directory))
       ;; (setq quelpa-melpa-dir (expand-file-name "melpa" quelpa-dir))
       ;; (setq quelpa-build-dir (expand-file-name "build" quelpa-dir))
       ;; (setq quelpa-package-dir (expand-file-name "package" quelpa-dir))
-
       )
 #+end_src
-
-#+RESULTS:
 
 ** General Settings Setup
 *** Window Settings
@@ -298,7 +296,7 @@ donot backup file
       )
 #+end_src
 
-*** COMMENT DashBoard Setup
+*** DashBoard Setup
 #+begin_src emacs-lisp
   (use-package dashboard
       :config
@@ -388,16 +386,6 @@ auto Symbol of completion
   ;; (use-package company-box
   ;;   :hook (company-mode . company-box-mode))
 
-#+end_src
-*** COMMENT +Company-Enghlish-helper+
-#+begin_src emacs-lisp
-  (use-package company-english-helper
-      :after quelpa quelpa-use-packages
-      :quelpa (company-english-helper  :fetcher github :repo "manateelazycat/company-english-helper")
-      ;;    :load-path (lambda () (expand-file-name "site-lisp/package/company-english-helper/" user-emacs-directory))
-      :bind ("C-c C-e" . toggle-company-english-helper)
-      )
-  (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 ** Nginx Setup
 #+begin_src emacs-lisp
@@ -989,7 +977,21 @@ jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-;;  (setq org-default-notes-file "~/Desktop/note/gtd/note.org")
+  (setq org-agenda-dir (expand-file-name "~/Desktop/note/gtd/"))
+  (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
+  (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
+  (setq org-agenda-file-gtd (concat org-agenda-dir "gtd.org"))
+  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
+  (setq org-agenda-files (list org-agenda-file-inbox org-agenda-file-gtd org-agenda-file-journal))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-agenda-include-diary t)
+  (setq org-capture-templates `(
+                                   ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
+                                   ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                   ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* %i%?")
+                                   ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                   ("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
+                                   ))
   (setq org-todo-keywords
       '((sequence "TODO(t)" "|" "DONE(d!)")
            (sequence "BUG(b!)" "|" "FIXED(f@/!)")
@@ -1004,16 +1006,45 @@ jumping to visible text using a char-based decision tree
   (setq org-highest-priority 1) 
   (setq org-default-priority 5)
   (setq org-lowest-priority 9)
+
   (use-package org-super-agenda)
+
+
+
+  (defun add-property-with-date-captured ()
+      "Add DATE_CAPTURED property to the current item."
+      (interactive)
+      (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
+      )
+
+  (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+
+  (defun process-gtd-action()
+      (interactive)
+      (find-file org-agenda-file-gtd)
+      )
+  (defun process-gtd-inbox()
+      (interactive)
+      (find-file org-agenda-file-inbox)
+      )
+
+  (defun process-gtd-journal()
+      (interactive)
+      (find-file org-agenda-file-journal)
+      )
+
+  (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
+  (global-set-key (kbd "C-c d a") 'process-gtd-action)
+  (global-set-key (kbd "C-c d j") 'process-gtd-journal)
 #+end_src
-**** Org GTD
+**** COMMENT Org GTD
 #+begin_src emacs-lisp
   (use-package org-gtd
       :after org
       :init (setq org-gtd-update-ack "3.0.0")
       :demand t
       :custom
-      (org-gtd-directory "~/Desktop/note/org-gtd/")
+      (org-gtd-directory "~/Desktop/note/gtd/")
       (org-edna-use-inheritance t)
       (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
       :config
@@ -1029,7 +1060,7 @@ jumping to visible text using a char-based decision tree
 **** Tag
 #+begin_src emacs-lisp
   (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                           ("@study" . ?s)))
+                           ("@study" . ?s) ("@habit" . ?b)))
 #+end_src
 
 #+begin_src emacs-lisp
@@ -1046,28 +1077,24 @@ jumping to visible text using a char-based decision tree
   (use-package alert)
   (use-package org-alert
       :init
-      (setq alert-default-style 'notifier
+      (setq alert-default-style 'message
           org-alert-notification-title "Org Reminder"
           org-alert-interval 300
           org-alert-notify-cutoff 5
           org-alert-notify-after-event-cutoff 5))
 
   (org-alert-enable)
-  ;; (defun notify-osx (title message)
-  ;;     (call-process "terminal-notifier"
-  ;;         nil 0 nil
-  ;;         "-group" "Emacs"
-  ;;         "-title" title
-  ;;         "-message" message
-  ;;         ;;"-sender" "org.gnu.Emacs"
-  ;;         "-activate" "org.gnu.Emacs"))
   (use-package osa)
   (use-package org-notify)
   (use-package org-pomodoro)
   (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
   (setq org-clock-persist 'history)
   (org-clock-persistence-insinuate)
 #+end_src
+**** note
+***** org-todo and note
+C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
 ** Format Setup
 #+begin_src emacs-lisp
   (setq +format-with-lsp nil)
@@ -1076,8 +1103,8 @@ jumping to visible text using a char-based decision tree
       :hook ((elixir-mode . format-all-mode)
                 ;;              (prog-mode . format-all-mode)
                 )
-      ;; :init
-      ;;  (setq formatters '((lsp-mode . "lsp-format-buffer")))
+      ;;      :init
+      ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
       :config
       (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
 
@@ -1177,6 +1204,23 @@ jumping to visible text using a char-based decision tree
                 ("_Snakemake" snakefmt)))
       )
 #+end_src
+** Youdao Translate Setup
+#+begin_src emacs-lisp
+  (use-package youdao-dictionary
+      :init
+      (setq url-automatic-caching t)
+      (setq youdao-dictionary-search-history-file "~/.youdaohistory")
+      )
+  (global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point)
+  (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
+  (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
+#+end_src
+** Undo Tree Setup
+#+begin_src emacs-lisp
+  (use-package undo-tree
+      )
+  (global-undo-tree-mode t)
+#+end_src
 ** Org shortcut
 *** Motion in Heading
 **** Next Heading
@@ -1233,4 +1277,6 @@ C-c ' (org-edit-special)
 #+end_src
 
 ** Customize Your Configuration
-write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup
+write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup. 
+
+
