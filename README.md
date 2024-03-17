@@ -1,95 +1,95 @@
 
 # Table of Contents
 
--   [Intro](#org159081f)
-    -   [Package Manager](#org51076db)
-        -   [ELPA Setup](#orgc7901cd)
-        -   [Use-Package Setup](#org5437582)
-    -   [General Settings Setup](#org8676330)
-        -   [Window Settings](#org4f69b87)
-        -   [Character Settings](#org5e593dc)
-        -   [BackUp Settings](#org2d24dc6)
-        -   [Custom-file Settings](#orgd85c09f)
-        -   [Yes/No Shorthand Settings](#orgaa9d06f)
-        -   [Tabs Indentation Settings](#orgb12b4b9)
-        -   [Env Settings](#org4247e5b)
-        -   [Undo Settings](#org4827368)
-        -   [Recentf Settings](#org2c77612)
-        -   [Show Startup Message](#org7a22545)
-        -   [GC settings](#org31fcb51)
-    -   [UI Setup](#org25a43d5)
-        -   [Menu-bar Hide](#orgd3d9d4d)
-        -   [Tool-bar Hide](#org5424d68)
-        -   [Scroll-bar Hide](#org8185fe7)
-        -   [Theme](#orgd99c9cb)
-        -   [Cursor](#orga3d8bc5)
-        -   [FillColumn](#org927bc5a)
-        -   [HighLight Line](#org0aa69f0)
-        -   [Font](#org2da23cc)
-        -   [Mode Line](#org348180b)
-        -   [Icons](#orgab898f7)
-        -   [Tabs Setup](#org866ce63)
-        -   [DashBoard Setup](#org4d37dbd)
-    -   [Which-Key Setup](#org4e6379a)
-    -   [Switch-Window](#orgae98b1d)
-    -   [Delete Setup](#org3804232)
-        -   [Hungry-delete](#org097e626)
-        -   [Delete Slection](#org917929c)
-    -   [SmartParens](#org318aa3f)
-    -   [Company Setup](#org491bf5c)
-    -   [Nginx Setup](#orgc1020f8)
-    -   [MarkDown Setup](#orge76a312)
-    -   [Projectile Setup](#org173576d)
-    -   [Selected Setup](#orga748e7d)
-    -   [Command Completion For MiniBuffer](#org62f6781)
-        -   [Ivy/Counsel/Swiper Setup](#org83d9b70)
-        -   [Helm Setup](#orga0e7111)
-    -   [Iedit Setup](#orga98a1c5)
-    -   [Language Setup](#org241fa15)
-        -   [LSP-Mode Setup](#org95aaf57)
-        -   [JAVA Setup](#org1a7e329)
-        -   [Groovy Setup](#orga665881)
-        -   [Web-Mode Setup](#orgab31c0d)
-        -   [Javascript REPL](#org155318c)
-        -   [FlyCheck Setup](#org42172ea)
-        -   [Yasnippet Setup](#orga08d77c)
-        -   [Magit Setup](#orgfbad974)
-        -   [HideShow Setup](#orgdee3595)
-    -   [HttpClient Setup](#orga4b7c54)
-    -   [Undo-Tree Setup](#org04fb91a)
-    -   [Avy SetUp](#org9f2bb52)
-    -   [Org Setup](#org328da15)
-        -   [Org Table Tidy Settings](#org670b8d7)
-        -   [Pretty](#org81db0d8)
-        -   [Org-babel support language](#orge0e6c20)
-        -   [Org Agenda Setup](#org76b95f5)
-    -   [Format Setup](#org6bab71a)
-        -   [Format Default Formatters Setup](#org7461873)
-    -   [Youdao Translate Setup](#orge792007)
-    -   [Undo Tree Setup](#orgfdc83c7)
-    -   [Org shortcut](#org8af8949)
-        -   [Motion in Heading](#orgbe55fa3)
-        -   [Editing Heading Level](#org6a8a3fd)
-        -   [Insert Org template](#orgedd5467)
-        -   [Other](#org133d3eb)
-    -   [Installation](#orgecbc25f)
-    -   [Customize Your Configuration](#orgedad675)
+-   [Intro](#orgccdba8a)
+    -   [Package Manager](#orgfaac836)
+        -   [ELPA Setup](#org42beaf4)
+        -   [Use-Package Setup](#orgc5771bf)
+    -   [General Settings Setup](#orgd5ce910)
+        -   [Window Settings](#orgfde556b)
+        -   [Character Settings](#org95cc696)
+        -   [BackUp Settings](#orgdbaa606)
+        -   [Custom-file Settings](#org847b194)
+        -   [Yes/No Shorthand Settings](#orgfc4594c)
+        -   [Tabs Indentation Settings](#orged2f5dc)
+        -   [Env Settings](#org02123dd)
+        -   [Undo Settings](#orgc0226a4)
+        -   [Recentf Settings](#orgef11f5f)
+        -   [Show Startup Message](#org91bc941)
+        -   [GC settings](#org2e4099a)
+    -   [UI Setup](#org0a4fccc)
+        -   [Menu-bar Hide](#org409ade5)
+        -   [Tool-bar Hide](#org6428a05)
+        -   [Scroll-bar Hide](#orgfa2bae8)
+        -   [Theme](#orgac4ec91)
+        -   [Cursor](#org34e5762)
+        -   [FillColumn](#org8f94377)
+        -   [HighLight Line](#org9f6c6af)
+        -   [Font](#orgdd5ea80)
+        -   [Mode Line](#org3e7557a)
+        -   [Icons](#org1eddb14)
+        -   [Tabs Setup](#org9a0352c)
+        -   [DashBoard Setup](#org231c050)
+    -   [Which-Key Setup](#org916b202)
+    -   [Switch-Window](#org85a884b)
+    -   [Delete Setup](#org40fa23f)
+        -   [Hungry-delete](#org5d35b30)
+        -   [Delete Slection](#org572da15)
+    -   [SmartParens](#org59a1773)
+    -   [Company Setup](#org9fd96f9)
+    -   [Nginx Setup](#orgbc21cc8)
+    -   [MarkDown Setup](#orgc882931)
+    -   [Projectile Setup](#org268e5f8)
+    -   [Selected Setup](#org835d6de)
+    -   [Command Completion For MiniBuffer](#org78ca741)
+        -   [Ivy/Counsel/Swiper Setup](#org2ec09bd)
+        -   [Helm Setup](#org39edab0)
+    -   [Iedit Setup](#org92da431)
+    -   [Language Setup](#orgddb2099)
+        -   [LSP-Mode Setup](#org7871095)
+        -   [JAVA Setup](#org2783746)
+        -   [Groovy Setup](#orgc5ce101)
+        -   [Web-Mode Setup](#org123d718)
+        -   [Javascript REPL](#orgedc06e6)
+        -   [FlyCheck Setup](#org6464717)
+        -   [Yasnippet Setup](#org249ede0)
+        -   [Magit Setup](#org6beb060)
+        -   [HideShow Setup](#org54b9b59)
+    -   [HttpClient Setup](#org90ee846)
+    -   [Undo-Tree Setup](#org05ce4f2)
+    -   [Avy SetUp](#orgf545530)
+    -   [Org Setup](#orge2ff385)
+        -   [Org Table Tidy Settings](#orgdd6943d)
+        -   [Pretty](#org4d08fa5)
+        -   [Org-babel support language](#orgc49d9ff)
+        -   [Org Agenda Setup](#org2e1965d)
+    -   [Format Setup](#orge641efa)
+        -   [Format Default Formatters Setup](#orgedb0340)
+    -   [Youdao Translate Setup](#orgc760f8b)
+    -   [Undo Tree Setup](#org1497993)
+    -   [Org shortcut](#orgba9d0ea)
+        -   [Motion in Heading](#org12c05d2)
+        -   [Editing Heading Level](#orgee7c1b0)
+        -   [Insert Org template](#org09430a1)
+        -   [Other](#org75e5667)
+    -   [Installation](#org4fe88b1)
+    -   [Customize Your Configuration](#orgc3c6a50)
 
 
 
-<a id="org159081f"></a>
+<a id="orgccdba8a"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="org51076db"></a>
+<a id="orgfaac836"></a>
 
 ## Package Manager
 
 
-<a id="orgc7901cd"></a>
+<a id="org42beaf4"></a>
 
 ### ELPA Setup
 
@@ -113,7 +113,7 @@ set repository to tsinghua
         (package-refresh-contents))
 
 
-<a id="org5437582"></a>
+<a id="orgc5771bf"></a>
 
 ### Use-Package Setup
 
@@ -125,12 +125,12 @@ set repository to tsinghua
     (setq use-package-always-ensure t)
 
 
-<a id="org8676330"></a>
+<a id="orgd5ce910"></a>
 
 ## General Settings Setup
 
 
-<a id="org4f69b87"></a>
+<a id="orgfde556b"></a>
 
 ### Window Settings
 
@@ -150,7 +150,7 @@ set repository to tsinghua
             )
 
 
-<a id="org5e593dc"></a>
+<a id="org95cc696"></a>
 
 ### Character Settings
 
@@ -173,7 +173,7 @@ set repository to tsinghua
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="org2d24dc6"></a>
+<a id="orgdbaa606"></a>
 
 ### BackUp Settings
 
@@ -185,7 +185,7 @@ donot backup file
     ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 
 
-<a id="orgd85c09f"></a>
+<a id="org847b194"></a>
 
 ### Custom-file Settings
 
@@ -194,14 +194,14 @@ donot backup file
         (load custom-file))
 
 
-<a id="orgaa9d06f"></a>
+<a id="orgfc4594c"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="orgb12b4b9"></a>
+<a id="orged2f5dc"></a>
 
 ### Tabs Indentation Settings
 
@@ -222,7 +222,7 @@ donot backup file
         nxml-slash-auto-complete-flag t)
 
 
-<a id="org4247e5b"></a>
+<a id="org02123dd"></a>
 
 ### Env Settings
 
@@ -235,7 +235,7 @@ donot backup file
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="org4827368"></a>
+<a id="orgc0226a4"></a>
 
 ### Undo Settings
 
@@ -247,7 +247,7 @@ donot backup file
         )
 
 
-<a id="org2c77612"></a>
+<a id="orgef11f5f"></a>
 
 ### Recentf Settings
 
@@ -258,14 +258,14 @@ donot backup file
     (recentf-mode t)
 
 
-<a id="org7a22545"></a>
+<a id="org91bc941"></a>
 
 ### Show Startup Message
 
     (setq inhibit-startup-message t)
 
 
-<a id="org31fcb51"></a>
+<a id="org2e4099a"></a>
 
 ### GC settings
 
@@ -273,19 +273,19 @@ donot backup file
     (setq read-process-output-max (* 32 1024 1024))
 
 
-<a id="org25a43d5"></a>
+<a id="org0a4fccc"></a>
 
 ## UI Setup
 
 
-<a id="orgd3d9d4d"></a>
+<a id="org409ade5"></a>
 
 ### Menu-bar Hide
 
     (menu-bar-mode nil)
 
 
-<a id="org5424d68"></a>
+<a id="org6428a05"></a>
 
 ### Tool-bar Hide
 
@@ -293,14 +293,14 @@ donot backup file
     (tool-bar-mode -1)
 
 
-<a id="org8185fe7"></a>
+<a id="orgfa2bae8"></a>
 
 ### Scroll-bar Hide
 
     (scroll-bar-mode nil)
 
 
-<a id="orgd99c9cb"></a>
+<a id="orgac4ec91"></a>
 
 ### Theme
 
@@ -311,7 +311,7 @@ donot backup file
     (load-theme 'dracula t)
 
 
-<a id="orga3d8bc5"></a>
+<a id="org34e5762"></a>
 
 ### Cursor
 
@@ -325,21 +325,21 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="org927bc5a"></a>
+<a id="org8f94377"></a>
 
 ### FillColumn
 
     (setq-default fill-column 150)
 
 
-<a id="org0aa69f0"></a>
+<a id="org9f6c6af"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="org2da23cc"></a>
+<a id="orgdd5ea80"></a>
 
 ### Font
 
@@ -348,7 +348,7 @@ donot backup file
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="org348180b"></a>
+<a id="org3e7557a"></a>
 
 ### Mode Line
 
@@ -380,7 +380,7 @@ donot backup file
         )
 
 
-<a id="orgab898f7"></a>
+<a id="org1eddb14"></a>
 
 ### Icons
 
@@ -390,7 +390,7 @@ donot backup file
         )
 
 
-<a id="org866ce63"></a>
+<a id="org9a0352c"></a>
 
 ### Tabs Setup
 
@@ -440,7 +440,7 @@ donot backup file
             )
 
 
-<a id="org4d37dbd"></a>
+<a id="org231c050"></a>
 
 ### DashBoard Setup
 
@@ -470,7 +470,7 @@ donot backup file
     (use-package page-break-lines)
 
 
-<a id="org4e6379a"></a>
+<a id="org916b202"></a>
 
 ## Which-Key Setup
 
@@ -481,7 +481,7 @@ donot backup file
         )
 
 
-<a id="orgae98b1d"></a>
+<a id="org85a884b"></a>
 
 ## Switch-Window
 
@@ -495,12 +495,12 @@ easy to jump windows
         )
 
 
-<a id="org3804232"></a>
+<a id="org40fa23f"></a>
 
 ## Delete Setup
 
 
-<a id="org097e626"></a>
+<a id="org5d35b30"></a>
 
 ### Hungry-delete
 
@@ -514,14 +514,14 @@ delete all whitespace until have character
         )
 
 
-<a id="org917929c"></a>
+<a id="org572da15"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="org318aa3f"></a>
+<a id="org59a1773"></a>
 
 ## SmartParens
 
@@ -537,7 +537,7 @@ auto Symbol of completion
         )
 
 
-<a id="org491bf5c"></a>
+<a id="org9fd96f9"></a>
 
 ## Company Setup
 
@@ -558,7 +558,7 @@ auto Symbol of completion
     ;;   :hook (company-mode . company-box-mode))
 
 
-<a id="orgc1020f8"></a>
+<a id="orgbc21cc8"></a>
 
 ## Nginx Setup
 
@@ -566,7 +566,7 @@ auto Symbol of completion
     (use-package company-nginx)
 
 
-<a id="orge76a312"></a>
+<a id="orgc882931"></a>
 
 ## MarkDown Setup
 
@@ -578,7 +578,7 @@ auto Symbol of completion
         :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org173576d"></a>
+<a id="org268e5f8"></a>
 
 ## Projectile Setup
 
@@ -654,7 +654,7 @@ auto Symbol of completion
         :config (treemacs-set-scope-type 'Tabs))
 
 
-<a id="orga748e7d"></a>
+<a id="org835d6de"></a>
 
 ## Selected Setup
 
@@ -675,14 +675,14 @@ auto Symbol of completion
         )
 
 
-<a id="org62f6781"></a>
+<a id="org78ca741"></a>
 
 ## Command Completion For MiniBuffer
 
 Command Interactive Completion ,eg : M-x
 
 
-<a id="org83d9b70"></a>
+<a id="org2ec09bd"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -751,7 +751,7 @@ Command Interactive Completion ,eg : M-x
             )
 
 
-<a id="orga0e7111"></a>
+<a id="org39edab0"></a>
 
 ### Helm Setup
 
@@ -761,7 +761,7 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="orga98a1c5"></a>
+<a id="org92da431"></a>
 
 ## Iedit Setup
 
@@ -770,12 +770,12 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="org241fa15"></a>
+<a id="orgddb2099"></a>
 
 ## Language Setup
 
 
-<a id="org95aaf57"></a>
+<a id="org7871095"></a>
 
 ### LSP-Mode Setup
 
@@ -881,118 +881,118 @@ Command Interactive Completion ,eg : M-x
         (lsp-ivy-workspace-symbol)
 
 
-<a id="org1a7e329"></a>
+<a id="org2783746"></a>
 
 ### JAVA Setup
 
-    (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
-    (setenv "JAVA_HOME"  JAVA_HOME_PATH)
-    (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
-    (use-package lsp-java 
-        :init
-        (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-        (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
-        ;; lsp-java-jdt-download-url 
-        (setq lsp-java-java-path my-java-path)
-        (setq lombok-jar-path
-            (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
-        (setq lsp-java-vmargs
-            `("-Xmx2G"
-                 "-XX:+UseG1GC"
-                 "-XX:+UseStringDeduplication"
-                 ,(concat "-javaagent:" lombok-jar-path)
-                 ))
-        (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-        ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-        (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
-        :config
+      (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+      (setenv "JAVA_HOME"  JAVA_HOME_PATH)
+      (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
+      (use-package lsp-java 
+          :init
+          (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+          (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
+          ;; lsp-java-jdt-download-url 
+          (setq lsp-java-java-path my-java-path)
+          (setq lombok-jar-path
+              (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+          (setq lsp-java-vmargs
+              `("-Xmx2G"
+                   "-XX:+UseG1GC"
+                   "-XX:+UseStringDeduplication"
+                   ,(concat "-javaagent:" lombok-jar-path)
+                   ))
+          (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+          ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+          (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+          :config
     
-        (setq lsp-java-maven-download-sources t)
-        (setq lsp-java-import-maven-enabled t)
-        ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
-        (setq
-            lsp-java-import-gradle-enabled t
-            lsp-java-import-gradle-wrapper-enabled t
-            ;;                lsp-java-import-gradle-version "8.0.2"
-            lsp-java-import-gradle-java-home JAVA_HOME_PATH
-            ;;              lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.0.2/"
-            lsp-java-import-gradle-user-home "~/.m2/repository/")
+          (setq lsp-java-maven-download-sources t)
+          (setq lsp-java-import-maven-enabled t)
+          ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
+          (setq
+              lsp-java-import-gradle-enabled t
+              lsp-java-import-gradle-wrapper-enabled t
+              lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
+      ;;        lsp-java-import-gradle-version "8.4"
+              lsp-java-import-gradle-java-home JAVA_HOME_PATH
+    ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
+              lsp-java-import-gradle-user-home "~/.m2/repository/")
+          (setq lsp-java-implementations-code-lens-enabled t)
+          (setq lsp-java-references-code-lens-enabled t)
+          (setq lsp-java-autobuild-enabled t)
+          (setq lsp-java-format-enabled t)
+          (setq lsp-java-format-comments-enabled t)
+          (setq lsp-java-configuration-update-build-configuration t)
+          (setq lsp-java-trace-server t)
+          (setq lsp-java-configuration-check-project-settings-exclusions t)
+          (setq lsp-java-completion-guess-method-arguments t)
+          (add-hook 'java-mode-hook 'lsp)
+          ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+          ;; (add-hook 'java-mode-hook
+          ;;     (lambda()
+          ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+          ;;         ))
     
-        (setq lsp-java-implementations-code-lens-enabled t)
-        (setq lsp-java-references-code-lens-enabled t)
-        (setq lsp-java-autobuild-enabled t)
-        (setq lsp-java-format-enabled t)
-        (setq lsp-java-format-comments-enabled t)
-        (setq lsp-java-configuration-update-build-configuration t)
-        (setq lsp-java-trace-server t)
-        (setq lsp-java-configuration-check-project-settings-exclusions t)
-        (setq lsp-java-completion-guess-method-arguments t)
-        (add-hook 'java-mode-hook 'lsp)
-        ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-        ;; (add-hook 'java-mode-hook
-        ;;     (lambda()
-        ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-        ;;         ))
+          ;;     (add-hook 'java-mode-hook                                        
+          ;;                (lambda()                                              
+          ;;                  (make-local-variable 'company-minimum-prefix-length) 
+          ;;                  (setq company-minimum-prefix-length 0)               
+          ;;                    )
+          ;;         )
     
-        ;;     (add-hook 'java-mode-hook                                        
-        ;;                (lambda()                                              
-        ;;                  (make-local-variable 'company-minimum-prefix-length) 
-        ;;                  (setq company-minimum-prefix-length 0)               
-        ;;                    )
-        ;;         )
+          ;;     (require 'lsp-java-boot)
+          ;;     ;; to enable the lenses
+          ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+          ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+          )
     
-        ;;     (require 'lsp-java-boot)
-        ;;     ;; to enable the lenses
-        ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-        ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-        )
+      (use-package dap-java
+          :ensure nil
+          :config
+          (dap-register-debug-template
+              "localhost:5005"
+              (list :type "java"
+                  :request "attach"
+                  :hostName "localhost"
+                  :port 5005))
+          (dap-register-debug-template
+              "lxd"
+              (list :type "java"
+                  :request "attach"
+                  :hostName "127.0.0.1"
+                  :port 5005))
+          ;; :config
+          ;; (global-set-key (kbd "<f7>") 'dap-step-in)
+          ;; (global-set-key (kbd "<f8>") 'dap-next)
+          ;; (global-set-key (kbd "<f9>") 'dap-continue)
+          )
     
-    (use-package dap-java
-        :ensure nil
-        :config
-        (dap-register-debug-template
-            "localhost:5005"
-            (list :type "java"
-                :request "attach"
-                :hostName "localhost"
-                :port 5005))
-        (dap-register-debug-template
-            "lxd"
-            (list :type "java"
-                :request "attach"
-                :hostName "127.0.0.1"
-                :port 5005))
-        ;; :config
-        ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-        ;; (global-set-key (kbd "<f8>") 'dap-next)
-        ;; (global-set-key (kbd "<f9>") 'dap-continue)
-        )
+      ;;==========java end==========
     
-    ;;==========java end==========
+      ;;========== maven pom==========
+      ;; https://github.com/m0smith/maven-pom-mode.git
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
+      ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
+      ;; (load "maven-pom-mode")                                                                      ;;
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+      ;;==========maven pom end==========
     
-    ;;========== maven pom==========
-    ;; https://github.com/m0smith/maven-pom-mode.git
-                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-    ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-    ;; (load "maven-pom-mode")                                                                      ;;
-                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;==========maven pom end==========
+      (use-package mvn
+          :ensure t
+          )
     
-    (use-package mvn
-        :ensure t
-        )
-    
-    (defun mvn-install ()
-        (interactive)
-        (mvn "install"))
+      (defun mvn-install ()
+          (interactive)
+          (mvn "install"))
 
 -   Hot Deployment
 
     use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
 
 
-<a id="orga665881"></a>
+<a id="orgc5ce101"></a>
 
 ### Groovy Setup
 
@@ -1000,7 +1000,7 @@ Command Interactive Completion ,eg : M-x
         )
 
 
-<a id="orgab31c0d"></a>
+<a id="org123d718"></a>
 
 ### Web-Mode Setup
 
@@ -1038,7 +1038,7 @@ Command Interactive Completion ,eg : M-x
 react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx)
 
 
-<a id="org155318c"></a>
+<a id="orgedc06e6"></a>
 
 ### Javascript REPL
 
@@ -1049,7 +1049,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
         (use-package js-comint)
 
 
-<a id="org42172ea"></a>
+<a id="org6464717"></a>
 
 ### FlyCheck Setup
 
@@ -1071,7 +1071,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
             '(json-jsonlist)))
 
 
-<a id="orga08d77c"></a>
+<a id="org249ede0"></a>
 
 ### Yasnippet Setup
 
@@ -1081,7 +1081,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
     (use-package yasnippet-snippets :ensure t)
 
 
-<a id="orgfbad974"></a>
+<a id="org6beb060"></a>
 
 ### Magit Setup
 
@@ -1090,14 +1090,14 @@ git tools
     (use-package magit)
 
 
-<a id="orgdee3595"></a>
+<a id="org54b9b59"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="orga4b7c54"></a>
+<a id="org90ee846"></a>
 
 ## HttpClient Setup
 
@@ -1112,7 +1112,7 @@ git tools
     (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 
 
-<a id="org04fb91a"></a>
+<a id="org05ce4f2"></a>
 
 ## Undo-Tree Setup
 
@@ -1121,7 +1121,7 @@ git tools
         )
 
 
-<a id="org9f2bb52"></a>
+<a id="orgf545530"></a>
 
 ## Avy SetUp
 
@@ -1132,12 +1132,12 @@ jumping to visible text using a char-based decision tree
         )
 
 
-<a id="org328da15"></a>
+<a id="orge2ff385"></a>
 
 ## Org Setup
 
 
-<a id="org670b8d7"></a>
+<a id="orgdd6943d"></a>
 
 ### Org Table Tidy Settings
 
@@ -1151,7 +1151,7 @@ jumping to visible text using a char-based decision tree
         (add-hook 'org-mode-hook 'org-buffer-face-mode-variable))
 
 
-<a id="org81db0d8"></a>
+<a id="org4d08fa5"></a>
 
 ### Pretty
 
@@ -1166,7 +1166,7 @@ jumping to visible text using a char-based decision tree
             (face-attribute 'default :background) 3))
 
 
-<a id="orge0e6c20"></a>
+<a id="orgc49d9ff"></a>
 
 ### Org-babel support language
 
@@ -1193,7 +1193,7 @@ jumping to visible text using a char-based decision tree
     (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 
 
-<a id="org76b95f5"></a>
+<a id="org2e1965d"></a>
 
 ### Org Agenda Setup
 
@@ -1201,28 +1201,31 @@ jumping to visible text using a char-based decision tree
 
         (global-set-key (kbd "C-c a") 'org-agenda)
         (global-set-key (kbd "C-c c") 'org-capture)
-        (setq org-agenda-dir (expand-file-name "~/Desktop/note/gtd/"))
+        (setq org-agenda-dir (expand-file-name "~/Desktop/note/"))
         (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
         (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
         (setq org-agenda-file-gtd (concat org-agenda-dir "gtd.org"))
         (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
-        (setq org-agenda-files (list org-agenda-file-inbox org-agenda-file-gtd org-agenda-file-journal))
+        (setq org-agenda-files (list org-agenda-dir))
         (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
         (setq org-agenda-include-diary t)
         (setq org-capture-templates `(
                                          ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
                                          ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                         ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* %i%?")
+                                         ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                         ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
                                          ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
                                          ("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
                                          ))
         (setq org-todo-keywords
-            '((sequence "TODO(t)" "|" "DONE(d!)")
-                 (sequence "BUG(b!)" "|" "FIXED(f@/!)")
-                 (sequence "|" "CANCELED(c!)")))
+            '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
+                 (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
+                 (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
         (setq org-todo-keyword-faces
-            '(("TODO" . org-warning) ("STARTED" . "yellow")
-                 ("CANCELED" . (:foreground "blue" :weight bold))))
+            '(("TODO" . org-warning) ("STED" . "yellow")
+                 ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
+                 ("BUGT" . "red") ("FIXT" . "orange")
+                 ))
         (setq org-enforce-todo-dependencies t)
         (setq org-modules
             '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
@@ -1231,9 +1234,18 @@ jumping to visible text using a char-based decision tree
         (setq org-default-priority 5)
         (setq org-lowest-priority 9)
         
-        (use-package org-super-agenda)
+        (use-package org-super-agenda
+            :ensure t
+            )
         
+        (org-super-agenda-mode t)
         
+        (use-package org-superstar
+            :ensure t
+            :after org
+            :hook (org-mode . org-superstar-mode)
+            :config
+            (setq org-superstar-special-todo-items t))
         
         (defun add-property-with-date-captured ()
             "Add DATE_CAPTURED property to the current item."
@@ -1260,6 +1272,12 @@ jumping to visible text using a char-based decision tree
         (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
         (global-set-key (kbd "C-c d a") 'process-gtd-action)
         (global-set-key (kbd "C-c d j") 'process-gtd-journal)
+        
+        ;; Change task state to STARTED when clocking in
+        (setq org-clock-in-switch-to-state "STED")
+        ;; Save clock data and notes in the LOGBOOK drawer
+        (setq org-clock-into-drawer t)
+        (setq org-clock-out-remove-zero-time-clocks t)
 
 -   Tag
 
@@ -1273,26 +1291,6 @@ jumping to visible text using a char-based decision tree
                 (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
         (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
--   Task Reminder
-
-        (use-package alert)
-        (use-package org-alert
-            :init
-            (setq alert-default-style 'message
-                org-alert-notification-title "Org Reminder"
-                org-alert-interval 300
-                org-alert-notify-cutoff 5
-                org-alert-notify-after-event-cutoff 5))
-        
-        (org-alert-enable)
-        (use-package osa)
-        (use-package org-notify)
-        (use-package org-pomodoro)
-        (setq org-log-done 'time)
-        (setq org-log-into-drawer t)
-        (setq org-clock-persist 'history)
-        (org-clock-persistence-insinuate)
-
 -   note
 
     -   org-todo and note
@@ -1300,7 +1298,7 @@ jumping to visible text using a char-based decision tree
         C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
 
 
-<a id="org6bab71a"></a>
+<a id="orge641efa"></a>
 
 ## Format Setup
 
@@ -1327,7 +1325,7 @@ jumping to visible text using a char-based decision tree
             ))
 
 
-<a id="org7461873"></a>
+<a id="orgedb0340"></a>
 
 ### Format Default Formatters Setup
 
@@ -1415,7 +1413,7 @@ jumping to visible text using a char-based decision tree
         )
 
 
-<a id="orge792007"></a>
+<a id="orgc760f8b"></a>
 
 ## Youdao Translate Setup
 
@@ -1429,7 +1427,7 @@ jumping to visible text using a char-based decision tree
     (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 
 
-<a id="orgfdc83c7"></a>
+<a id="org1497993"></a>
 
 ## Undo Tree Setup
 
@@ -1438,12 +1436,12 @@ jumping to visible text using a char-based decision tree
     (global-undo-tree-mode t)
 
 
-<a id="org8af8949"></a>
+<a id="orgba9d0ea"></a>
 
 ## Org shortcut
 
 
-<a id="orgbe55fa3"></a>
+<a id="org12c05d2"></a>
 
 ### Motion in Heading
 
@@ -1468,7 +1466,7 @@ jumping to visible text using a char-based decision tree
     C-c C-u (outline-up-heading)
 
 
-<a id="org6a8a3fd"></a>
+<a id="orgee7c1b0"></a>
 
 ### Editing Heading Level
 
@@ -1505,7 +1503,7 @@ jumping to visible text using a char-based decision tree
     M-S-RIGHT (org-demote-subtree)
 
 
-<a id="orgedd5467"></a>
+<a id="org09430a1"></a>
 
 ### Insert Org template
 
@@ -1516,7 +1514,7 @@ C-c C-, (org-insert-structure-template)
     Key "s in (org-insert-structure-template) list
 
 
-<a id="org133d3eb"></a>
+<a id="org75e5667"></a>
 
 ### Other
 
@@ -1545,14 +1543,14 @@ C-c C-, (org-insert-structure-template)
     (org-babel-load-file )
 
 
-<a id="orgecbc25f"></a>
+<a id="org4fe88b1"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="orgedad675"></a>
+<a id="orgc3c6a50"></a>
 
 ## Customize Your Configuration
 
