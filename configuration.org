@@ -501,6 +501,7 @@ generic completion mechanism
 ***** Ivy
 #+begin_src emacs-lisp
   (use-package ivy
+      :ensure t
       :config
       (setq ivy-use-virtual-buffers t
           enable-recursive-minibuffers t
@@ -532,7 +533,7 @@ show ivy buffer pop up box
 #+end_src
 **** Counsel Setup
 command completion use ivy
-#+begin_src emacs-lisp
+#+begin_src emacs-lisp  
   (use-package counsel
       :bind(
                ("M-x" . counsel-M-x)
@@ -549,6 +550,7 @@ command completion use ivy
       :hook (after-init . ivy-mode)
       )
   (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+
   (use-package counsel-projectile
       :bind
       ("C-c p f" . 'counsel-projectile-find-file)
@@ -575,16 +577,30 @@ text search use ivy
                )
       )
 #+end_src
-*** COMMENT +Smex+
+*** orderless
+Unordered search  in ivy search
 #+begin_src emacs-lisp
-  (use-package smex
-      )
+  ;; add disorder search
+  (use-package orderless
+      :ensure t
+      :config
+      (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+      :ensure t
+      :custom
+      (completion-styles '(orderless basic))
+      (completion-category-overrides '((file (styles basic partial-completion)))))
+  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 #+end_src
 *** Helm Setup
 #+begin_src emacs-lisp
   (use-package helm
       ;;  :config (helm-mode t)
       ;;  :bind("M-x" . helm-M-x)
+      )
+#+end_src
+*** COMMENT +Smex+
+#+begin_src emacs-lisp
+  (use-package smex
       )
 #+end_src
 ** Iedit Setup
@@ -696,107 +712,107 @@ text search use ivy
 (lsp-ivy-workspace-symbol)
 *** JAVA Setup
 #+begin_src emacs-lisp
-    (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
-    (setenv "JAVA_HOME"  JAVA_HOME_PATH)
-    (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
-    (use-package lsp-java 
-        :init
-        (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-        (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
-        ;; lsp-java-jdt-download-url 
-        (setq lsp-java-java-path my-java-path)
-        (setq lombok-jar-path
-            (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
-        (setq lsp-java-vmargs
-            `("-Xmx2G"
-                 "-XX:+UseG1GC"
-                 "-XX:+UseStringDeduplication"
-                 ,(concat "-javaagent:" lombok-jar-path)
-                 ))
-        (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-        ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-        (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
-        :config
+  (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+  (setenv "JAVA_HOME"  JAVA_HOME_PATH)
+  (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
+  (use-package lsp-java 
+      :init
+      (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+      (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
+      ;; lsp-java-jdt-download-url 
+      (setq lsp-java-java-path my-java-path)
+      (setq lombok-jar-path
+          (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+      (setq lsp-java-vmargs
+          `("-Xmx2G"
+               "-XX:+UseG1GC"
+               "-XX:+UseStringDeduplication"
+               ,(concat "-javaagent:" lombok-jar-path)
+               ))
+      (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+      ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+      :config
 
-        (setq lsp-java-maven-download-sources t)
-        (setq lsp-java-import-maven-enabled t)
-        ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
-        (setq
-            lsp-java-import-gradle-enabled t
-            lsp-java-import-gradle-wrapper-enabled t
-            lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
-    ;;        lsp-java-import-gradle-version "8.4"
-            lsp-java-import-gradle-java-home JAVA_HOME_PATH
-  ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
-            lsp-java-import-gradle-user-home "~/.m2/repository/")
-        (setq lsp-java-implementations-code-lens-enabled t)
-        (setq lsp-java-references-code-lens-enabled t)
-        (setq lsp-java-autobuild-enabled t)
-        (setq lsp-java-format-enabled t)
-        (setq lsp-java-format-comments-enabled t)
-        (setq lsp-java-configuration-update-build-configuration t)
-        (setq lsp-java-trace-server t)
-        (setq lsp-java-configuration-check-project-settings-exclusions t)
-        (setq lsp-java-completion-guess-method-arguments t)
-        (add-hook 'java-mode-hook 'lsp)
-        ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-        ;; (add-hook 'java-mode-hook
-        ;;     (lambda()
-        ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-        ;;         ))
+      (setq lsp-java-maven-download-sources t)
+      (setq lsp-java-import-maven-enabled t)
+      ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
+      (setq
+          lsp-java-import-gradle-enabled t
+          lsp-java-import-gradle-wrapper-enabled t
+          lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
+          ;;        lsp-java-import-gradle-version "8.4"
+          lsp-java-import-gradle-java-home JAVA_HOME_PATH
+          ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
+          lsp-java-import-gradle-user-home "~/.m2/repository/")
+      (setq lsp-java-implementations-code-lens-enabled t)
+      (setq lsp-java-references-code-lens-enabled t)
+      (setq lsp-java-autobuild-enabled t)
+      (setq lsp-java-format-enabled t)
+      (setq lsp-java-format-comments-enabled t)
+      (setq lsp-java-configuration-update-build-configuration t)
+      (setq lsp-java-trace-server t)
+      (setq lsp-java-configuration-check-project-settings-exclusions t)
+      (setq lsp-java-completion-guess-method-arguments t)
+      (add-hook 'java-mode-hook 'lsp)
+      ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+      ;; (add-hook 'java-mode-hook
+      ;;     (lambda()
+      ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+      ;;         ))
 
-        ;;     (add-hook 'java-mode-hook                                        
-        ;;                (lambda()                                              
-        ;;                  (make-local-variable 'company-minimum-prefix-length) 
-        ;;                  (setq company-minimum-prefix-length 0)               
-        ;;                    )
-        ;;         )
+      ;;     (add-hook 'java-mode-hook                                        
+      ;;                (lambda()                                              
+      ;;                  (make-local-variable 'company-minimum-prefix-length) 
+      ;;                  (setq company-minimum-prefix-length 0)               
+      ;;                    )
+      ;;         )
 
-        ;;     (require 'lsp-java-boot)
-        ;;     ;; to enable the lenses
-        ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-        ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-        )
+      ;;     (require 'lsp-java-boot)
+      ;;     ;; to enable the lenses
+      ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+      ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+      )
 
-    (use-package dap-java
-        :ensure nil
-        :config
-        (dap-register-debug-template
-            "localhost:5005"
-            (list :type "java"
-                :request "attach"
-                :hostName "localhost"
-                :port 5005))
-        (dap-register-debug-template
-            "lxd"
-            (list :type "java"
-                :request "attach"
-                :hostName "127.0.0.1"
-                :port 5005))
-        ;; :config
-        ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-        ;; (global-set-key (kbd "<f8>") 'dap-next)
-        ;; (global-set-key (kbd "<f9>") 'dap-continue)
-        )
+  (use-package dap-java
+      :ensure nil
+      :config
+      (dap-register-debug-template
+          "localhost:5005"
+          (list :type "java"
+              :request "attach"
+              :hostName "localhost"
+              :port 5005))
+      (dap-register-debug-template
+          "lxd"
+          (list :type "java"
+              :request "attach"
+              :hostName "127.0.0.1"
+              :port 5005))
+      ;; :config
+      ;; (global-set-key (kbd "<f7>") 'dap-step-in)
+      ;; (global-set-key (kbd "<f8>") 'dap-next)
+      ;; (global-set-key (kbd "<f9>") 'dap-continue)
+      )
 
-    ;;==========java end==========
+  ;;==========java end==========
 
-    ;;========== maven pom==========
-    ;; https://github.com/m0smith/maven-pom-mode.git
+  ;;========== maven pom==========
+  ;; https://github.com/m0smith/maven-pom-mode.git
                 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-    ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-    ;; (load "maven-pom-mode")                                                                      ;;
+  ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
+  ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
+  ;; (load "maven-pom-mode")                                                                      ;;
                 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;==========maven pom end==========
+  ;;==========maven pom end==========
 
-    (use-package mvn
-        :ensure t
-        )
+  (use-package mvn
+      :ensure t
+      )
 
-    (defun mvn-install ()
-        (interactive)
-        (mvn "install"))
+  (defun mvn-install ()
+      (interactive)
+      (mvn "install"))
 #+end_src
 
 #+RESULTS:
@@ -828,6 +844,7 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . web-mode))
   (use-package js2-mode
       )
   (use-package json-mode
@@ -977,10 +994,10 @@ jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (setq org-agenda-dir (expand-file-name "~/Desktop/note/"))
+  (setq org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
   (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
   (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
-  (setq org-agenda-file-gtd (concat org-agenda-dir "gtd.org"))
+  (setq org-agenda-file-gtd (concat org-agenda-dir "task.org"))
   (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
   (setq org-agenda-files (list org-agenda-dir))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
@@ -1054,26 +1071,11 @@ jumping to visible text using a char-based decision tree
   ;; Save clock data and notes in the LOGBOOK drawer
   (setq org-clock-into-drawer t)
   (setq org-clock-out-remove-zero-time-clocks t)
-#+end_src
-**** COMMENT Org GTD
-#+begin_src emacs-lisp
-  (use-package org-gtd
-      :after org
-      :init (setq org-gtd-update-ack "3.0.0")
-      :demand t
-      :custom
-      (org-gtd-directory "~/Desktop/note/gtd/")
-      (org-edna-use-inheritance t)
-      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-      :config
-
-      (org-edna-mode)
-      :bind
-      (("C-c d c" . org-gtd-capture)
-          ("C-c d e" . org-gtd-engage)
-          ("C-c d p" . org-gtd-process-inbox)
-          :map org-gtd-clarify-map
-          ("C-c c" . org-gtd-organize)))
+  (use-package org-pomodoro)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
 #+end_src
 **** Tag
 #+begin_src emacs-lisp
@@ -1090,6 +1092,26 @@ jumping to visible text using a char-based decision tree
   (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 #+end_src
+**** COMMENT Org GTD
+#+begin_src emacs-lisp
+  (use-package org-gtd
+      :after org
+      :init (setq org-gtd-update-ack "3.0.0")
+      :demand t
+      :custom
+      (org-gtd-directory "~/Desktop/gtd/")
+      (org-edna-use-inheritance t)
+      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
+      :config
+
+      (org-edna-mode)
+      :bind
+      (("C-c d c" . org-gtd-capture)
+          ("C-c d e" . org-gtd-engage)
+          ("C-c d p" . org-gtd-process-inbox)
+          :map org-gtd-clarify-map
+          ("C-c c" . org-gtd-organize)))
+#+end_src
 **** COMMENT Task Reminder
 #+begin_src emacs-lisp
   (use-package alert)
@@ -1104,15 +1126,46 @@ jumping to visible text using a char-based decision tree
   (org-alert-enable)
   (use-package osa)
   (use-package org-notify)
-  (use-package org-pomodoro)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
+
 #+end_src
 **** note
-***** org-todo and note
+***** org-todo and record
 C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
+*** Org Roam Setup
+#+begin_src emacs-lisp
+  (use-package org-roam
+      :ensure t
+      :custom
+      (org-roam-directory (file-truename "~/Desktop/note/"))
+      (org-roam-dailies-directory "daily/")
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+                ("C-c n f" . org-roam-node-find)
+                ("C-c n g" . org-roam-graph)
+                ("C-c n i" . org-roam-node-insert)
+                ("C-c n c" . org-roam-capture)
+                ;; Dailies
+                ("C-c n j" . org-roam-dailies-capture-today)
+                )
+      :bind-keymap
+      ("C-c n d" . org-roam-dailies-map)
+      :config
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+      (org-roam-db-autosync-mode)
+      (require 'org-roam-dailies)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol)
+      )
+
+  (use-package org-roam-ui
+      :ensure t
+      :after org-roam
+      :custom
+      (org-roam-ui-sync-theme t)
+      (org-roam-ui-follow t)
+      (org-roam-ui-update-on-save t)
+      )
+#+end_src
 ** Format Setup
 #+begin_src emacs-lisp
   (setq +format-with-lsp nil)
@@ -1229,7 +1282,7 @@ C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
       (setq url-automatic-caching t)
       (setq youdao-dictionary-search-history-file "~/.youdaohistory")
       )
-  (global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point)
+  (global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point+)
   (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
   (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 #+end_src
