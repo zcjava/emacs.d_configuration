@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: tags
+# key: <t
+# --
+- TAGS :: $0
