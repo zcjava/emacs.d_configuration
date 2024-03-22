@@ -14,7 +14,7 @@ set repository to tsinghua
       (setq package-archives '(
                                   ("gnu" . "https://elpa.gnu.org/packages/")
                                   ("melpa" . "https://melpa.org/packages/")
-                                  ("org" . "https://orgmode.org/elpa/")
+                                  ;;  ("org" . "https://orgmode.org/elpa/")
                                   ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
                                   ))
       )
@@ -36,6 +36,12 @@ set repository to tsinghua
 
   (setq package-enable-at-startup nil)
   (setq use-package-always-ensure t)
+#+end_src
+**** vc-use-package
+#+begin_src emacs-lisp
+  (unless (package-installed-p 'vc-use-package)
+      (package-vc-install "https://github.com/slotThe/vc-use-package"))
+  (require 'vc-use-package)
 #+end_src
 *** COMMENT Support Install Package Of Not in ELPA
 #+begin_src emacs-lisp
@@ -223,7 +229,7 @@ donot backup file
       (nyan-mode))
 
   (use-package doom-modeline
-      :ensure t
+      :vc (:fetcher github :repo seagle0128/doom-modeline)
       :init (doom-modeline-mode t)
       :config
       (setq doom-modeline-height 5)
@@ -233,7 +239,7 @@ donot backup file
           )
       (doom-modeline-def-modeline 'ownml
           '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-          '(input-method buffer-encoding process vcs checker))
+          '(input-method buffer-encoding process vcs check))
       ;; Add to `doom-modeline-mode-hook` or other hooks
       (defun setup-custom-doom-modeline ()
           (doom-modeline-set-modeline 'ownml 'default))
@@ -386,6 +392,12 @@ auto Symbol of completion
   ;; (use-package company-box
   ;;   :hook (company-mode . company-box-mode))
 
+#+end_src
+*** Company english helper
+#+begin_src emacs-lisp
+  (use-package company-english-helper
+      :vc (:fetcher github :repo manateelazycat/company-english-helper)
+      )
 #+end_src
 ** Nginx Setup
 #+begin_src emacs-lisp
@@ -901,7 +913,10 @@ javascript developer environment for emacs
   (use-package yasnippet
       :config (yas-global-mode)
       )
-  (use-package yasnippet-snippets :ensure t)
+  (use-package yasnippet-snippets
+      :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
+      )
+  ;; (use-package yasnippet-snippets :ensure t)
 #+end_src
 *** Magit Setup
 git tools
@@ -1134,7 +1149,6 @@ C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
 *** Org Roam Setup
 #+begin_src emacs-lisp
   (use-package org-roam
-      :ensure t
       :custom
       (org-roam-directory (file-truename "~/Desktop/note/"))
       (org-roam-dailies-directory "daily/")
@@ -1158,7 +1172,7 @@ C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
       )
 
   (use-package org-roam-ui
-      :ensure t
+      :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
       :after org-roam
       :custom
       (org-roam-ui-sync-theme t)
