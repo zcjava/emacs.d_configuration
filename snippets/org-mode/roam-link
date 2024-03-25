@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: roam-link
+# key: <l
+# --
+#+link: $0

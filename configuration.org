@@ -41,23 +41,6 @@ set repository to tsinghua
       (package-vc-install "https://github.com/slotThe/vc-use-package"))
   (require 'vc-use-package)
 #+end_src
-*** COMMENT Support Install Package Of Not in ELPA
-#+begin_src emacs-lisp
-  (use-package quelpa-use-package
-      :ensure t
-      :init
-      (setq quelpa-self-upgrade-p nil
-          quelpa-upgrade-p nil
-          quelpa-upgrade-interval 30
-          )
-      ;; (setq quelpa-melpa-recipe-stores (list (expand-file-name "site-lisp" user-emacs-directory)))
-      ;; (setq quelpa-dir (expand-file-name "site-lisp" user-emacs-directory))
-      ;; (setq quelpa-melpa-dir (expand-file-name "melpa" quelpa-dir))
-      ;; (setq quelpa-build-dir (expand-file-name "build" quelpa-dir))
-      ;; (setq quelpa-package-dir (expand-file-name "package" quelpa-dir))
-      )
-#+end_src
-
 ** General Settings Setup
 *** Window Settings
 **** Window Maximized
@@ -335,22 +318,240 @@ donot backup file
 
   (use-package page-break-lines)
 #+end_src
+** Org Setup
+*** Org Table Tidy Settings
+#+begin_src emacs-lisp
+  ;;org-table align  todo hook in package
+  (use-package valign
+      :init
+      (add-hook 'org-mode-hook #'valign-mode)
+      )  
+  #+end_src
+*** org-superstar
+#+begin_src emacs-lisp
+  (use-package org-superstar
+      :ensure t
+      :after org
+      :hook ((org-mode . org-superstar-mode)
+                (org-mode . org-indent-mode))
+      :config
+      (setq org-superstar-special-todo-items t))
+  (set-face-attribute 'org-block nil :background
+      (color-darken-name
+          (face-attribute 'default :background) 3))
+#+end_src
+*** COMMENT Pretty
+#+begin_src emacs-lisp
+  (use-package org-bullets
+      :ensure t
+      :hook((org-mode . org-bullets-mode)
+               (org-mode . org-indent-mode))
+      )
+#+end_src
+*** org ref
+#+begin_src emacs-lisp
+  (use-package org-ref)
+#+end_src
+*** Org-babel support language
+#+begin_src emacs-lisp
+  (require 'ob-js)
+  (org-babel-do-load-languages 'org-babel-load-languages
+      '((js . t)
+           (restclient . t))
+      )
+  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+  (defun ob-js-insert-session-header-arg (session)
+      "Insert ob-js `SESSION' header argument.
+  - `js-comint'
+  - `skewer-mode'
+  - `Indium'
+  "
+      (interactive (list (completing-read "ob-js session: "
+                             '("js-comint" "skewer-mode" "indium"))))
+      (org-babel-insert-header-arg
+          "session"
+          (pcase session
+              ("js-comint" "\"*Javascript REPL*\"")
+              ("skewer-mode" "\"*skewer-repl*\"")
+              ("indium" "\"*JS REPL*\""))))
+  (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+#+end_src
+*** Org Agenda Setup
+**** Config
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (setq org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
+  (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
+  (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
+  (setq org-agenda-file-gtd (concat org-agenda-dir "task.org"))
+  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
+  (setq org-agenda-files (list org-agenda-dir))
+  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+  (setq org-agenda-include-diary t)
+  (setq org-capture-templates `(
+                                   ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
+                                   ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                   ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                   ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
+                                   ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                   ("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
+                                   ))
+  (setq org-todo-keywords
+      '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
+           (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
+           (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
+  (setq org-todo-keyword-faces
+      '(("TODO" . org-warning) ("STED" . "yellow")
+           ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
+           ("BUGT" . "red") ("FIXT" . "orange")
+           ))
+  (setq org-enforce-todo-dependencies t)
+  (setq org-modules
+      '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
+
+  (setq org-highest-priority 1) 
+  (setq org-default-priority 5)
+  (setq org-lowest-priority 9)
+
+  (use-package org-super-agenda
+      :ensure t
+      :after org
+      )
+  ;;  (org-super-agenda-mode t)
+
+  (defun add-property-with-date-captured ()
+      "Add DATE_CAPTURED property to the current item."
+      (interactive)
+      (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
+      )
+  (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+
+  (defun process-gtd-action()
+      (interactive)
+      (find-file org-agenda-file-gtd)
+      )
+  (defun process-gtd-inbox()
+      (interactive)
+      (find-file org-agenda-file-inbox)
+      )
+
+  (defun process-gtd-journal()
+      (interactive)
+      (find-file org-agenda-file-journal)
+      )
+
+  (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
+  (global-set-key (kbd "C-c d a") 'process-gtd-action)
+  (global-set-key (kbd "C-c d j") 'process-gtd-journal)
+
+  ;; Change task state to STARTED when clocking in
+  (setq org-clock-in-switch-to-state "STED")
+  ;; Save clock data and notes in the LOGBOOK drawer
+  (setq org-clock-into-drawer t)
+  (setq org-clock-out-remove-zero-time-clocks t)
+  (use-package org-pomodoro)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+  (setq org-clock-persist 'history)
+  (org-clock-persistence-insinuate)
+#+end_src
+**** Tag
+#+begin_src emacs-lisp
+  (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
+                           ("@study" . ?s) ("@habit" . ?b)))
+#+end_src
+
+#+begin_src emacs-lisp
+  ;; automatically DONE when all children are DONE
+  (defun org-summary-todo (n-done n-not-done)
+      "Switch entry to DONE when all subentries are done, to TODO otherwise."
+      (let (org-log-done org-log-states)   ; turn off logging
+          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+
+#+end_src
+**** COMMENT Org-GTD
+#+begin_src emacs-lisp
+  (use-package org-gtd
+      :after org
+      :init (setq org-gtd-update-ack "3.0.0")
+      :demand t
+      :custom
+      (org-gtd-directory "~/Desktop/gtd/")
+      (org-edna-use-inheritance t)
+      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
+      :config
+
+      (org-edna-mode)
+      :bind
+      (("C-c d c" . org-gtd-capture)
+          ("C-c d e" . org-gtd-engage)
+          ("C-c d p" . org-gtd-process-inbox)
+          :map org-gtd-clarify-map
+          ("C-c c" . org-gtd-organize)))
+#+end_src
+**** COMMENT Task Reminder
+#+begin_src emacs-lisp
+  (use-package alert)
+  (use-package org-alert
+      :init
+      (setq alert-default-style 'message
+          org-alert-notification-title "Org Reminder"
+          org-alert-interval 300
+          org-alert-notify-cutoff 5
+          org-alert-notify-after-event-cutoff 5))
+
+  (org-alert-enable)
+  (use-package osa)
+  (use-package org-notify)
+
+#+end_src
+*** Org Roam Setup
+#+begin_src emacs-lisp
+  (use-package org-roam
+      :custom
+      (org-roam-directory (file-truename "~/Desktop/note/"))
+      (org-roam-dailies-directory "daily/")
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+                ("C-c n f" . org-roam-node-find)
+                ("C-c n g" . org-roam-graph)
+                ("C-c n i" . org-roam-node-insert)
+                ("C-c n c" . org-roam-capture)
+                ("C-c n t" . org-roam-tag-add)
+                ;; Dailies
+                ("C-c n j" . org-roam-dailies-capture-today)
+                )
+      :bind-keymap
+      ("C-c n d" . org-roam-dailies-map)
+      :config
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:20}" 'face 'org-tag)))
+      (setq org-roam-completion-everywhere t)
+      (org-roam-db-autosync-mode)
+      (require 'org-roam-dailies)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol)
+      )
+#+end_src
+*** Org Roam UI SetUp
+#+begin_src emacs-lisp
+  (use-package org-roam-ui
+      :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
+      :after org-roam
+      :custom
+      (org-roam-ui-sync-theme nil)
+      (org-roam-ui-follow t)
+      (org-roam-ui-update-on-save t)
+      (org-roam-ui-open-on-start t)
+      )
+#+end_src
 ** Which-Key Setup
 #+begin_src emacs-lisp
   (use-package which-key
       :ensure t
-      :config (which-key-mode)
+      :init (which-key-mode)
       :bind ("M-m" . which-key-show-top-level)
-      )
-#+end_src
-** Switch-Window
-easy to jump windows
-#+begin_src emacs-lisp
-  (use-package switch-window
-      :ensure t
-      :bind ("C-x o" . switch-window)
-      :config
-      (setq switch-window-shortcut-style 'qwerty)
       )
 #+end_src
 ** Delete Setup
@@ -380,118 +581,21 @@ auto Symbol of completion
       (sp-local-pair 'elisp-mode "`" nil :actions nil)
       )
 #+end_src
-** Company Setup
+** Undo-Tree Setup
 #+begin_src emacs-lisp
-  (use-package company
-      :ensure t
-      :init
-      (global-company-mode)
-      :bind (
-                :map company-active-map
-                (("C-n"   . company-select-next)
-                    ("C-p"   . company-select-previous)
-                    ("C-d"   . company-show-doc-buffer)
-                    ("<tab>" . company-complete))
-                )
-      )
-  ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
-  ;; (use-package company-box
-  ;;   :hook (company-mode . company-box-mode))
-
-#+end_src
-*** Company english helper
-#+begin_src emacs-lisp
-  (use-package company-english-helper
-      :vc (:fetcher github :repo manateelazycat/company-english-helper)
+  (use-package undo-tree
+      :init (global-undo-tree-mode t)
       )
 #+end_src
-** Nginx Setup
+** Switch-Window
+easy to jump windows
 #+begin_src emacs-lisp
-  (use-package nginx-mode)
-  (use-package company-nginx)
-#+end_src
-** MarkDown Setup
-#+begin_src emacs-lisp
-  (use-package markdown-mode
+  (use-package switch-window
       :ensure t
-      :mode (("\\.md\\'" . gfm-mode)
-                ("README" . gfm-mode)
-                )
-      :init (setq markdown-command "multimarkdown"))
-#+end_src
-
-** Projectile Setup
-#+begin_src emacs-lisp
-  (use-package projectile
-      :init
-      (projectile-global-mode)
-      ;; :bind(
-      ;;        ("C-x p f" . projectile-find-file)
-      ;;        ("C-x p p" . projectile-switch-project)
-      ;;        )
+      :bind ("C-x o" . switch-window)
       :config
-      (setq
-          projectile-indexing-method 'hybrid
-          ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
-          ;;indexing default 'alien ,only load .gitignore
-          ;;indexing 'native only load .projectile
-          ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
-
-          ;;   projectile-sort-order 'recentf-active
-          projectile-enable-caching t)
-      (setq projectile-globally-ignored-directories
-          (append (list
-                      ".pytest_cache"
-                      "__pycache__"
-                      "build"
-                      "elpa"
-                      "node_modules"
-                      "output"
-                      "reveal.js"
-                      "semanticdb"
-                      "target"
-                      "venv"
-                      )
-              projectile-globally-ignored-directories))
+      (setq switch-window-shortcut-style 'qwerty)
       )
-
-  (use-package treemacs-projectile
-      :after (treemacs projectile)
-      )
-
-  (use-package treemacs
-      :config
-      (setq
-          treemacs-deferred-git-apply-delay 0.5
-          treemacs-file-follow-delay 0.2
-          treemacs-indentation 2
-          treemacs-indentation-string " "
-          treemacs-show-hidden-files  nil
-          treemacs-hide-gitignored-files-mode t
-          treemacs-hide-dot-git-directory t
-          treemacs-follow-mode t
-          treemacs-filewatch-mode t
-          treemacs-fringe-indicator-mode 'always
-          )
-      )
-
-  (use-package treemacs-icons-dired
-      :hook (dired-mode . treemacs-icons-dired-enable-once)
-      :ensure t)
-
-  (use-package treemacs-magit
-      :after (treemacs magit)
-      :ensure t)
-
-  (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-      :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-      :ensure t
-      :config (treemacs-set-scope-type 'Perspectives))
-
-  (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-      :after (treemacs)
-      :ensure t
-      :config (treemacs-set-scope-type 'Tabs))
 #+end_src
 ** Selected Setup
 #+begin_src emacs-lisp
@@ -511,8 +615,14 @@ auto Symbol of completion
       ;;:commands (er/expand-region er/enable-mode-expansions)
       )
 #+end_src
-** Command Completion For MiniBuffer
-Command Interactive Completion ,eg : M-x
+** Undo Tree Setup
+#+begin_src emacs-lisp
+  (use-package undo-tree
+      )
+  (global-undo-tree-mode t)
+#+end_src
+** Command Completion
+Command Interactive Completion For Minibuffer,eg : M-x
 *** Ivy/Counsel/Swiper Setup
 **** Ivy Setup
 generic completion mechanism
@@ -528,7 +638,6 @@ generic completion mechanism
                ("C-c C-r" . ivy-resume)
                )
       )
-
 #+end_src
 ***** COMMENT Ivy-Rich
 display more infomation in ivy buffer
@@ -621,10 +730,225 @@ Unordered search  in ivy search
   (use-package smex
       )
 #+end_src
+** Format Setup
+#+begin_src emacs-lisp
+  (setq +format-with-lsp nil)
+  (use-package format-all
+      :ensure t
+      :hook ((elixir-mode . format-all-mode)
+                ;;(prog-mode . format-all-mode)
+                )
+      ;;      :init
+      ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
+      :config
+      (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+      ;;        (add-hook 'before-save-hook 'format-all-buffer)
+      )
+
+  (add-hook 'prog-mode-hook
+      (lambda ()
+          (unless (derived-mode-p 'lsp-mode)
+              (add-hook 'before-save-hook 'format-all-buffer t t)
+              )
+          ))
+#+end_src
+*** Format Default Formatters Setup
+#+begin_src emacs-lisp
+  (custom-set-variables
+      '(format-all-default-formatters
+           '(("Assembly" asmfmt)
+                ("ATS" atsfmt)
+                ("Bazel" buildifier)
+                ("BibTeX" emacs-bibtex)
+                ("C" clang-format)
+                ("C#" clang-format)
+                ("C++" clang-format)
+                ("Cabal Config" cabal-fmt)
+                ("Clojure" zprint)
+                ("CMake" cmake-format)
+                ("Crystal" crystal)
+                ("CSS" prettier)
+                ("Cuda" clang-format)
+                ("D" dfmt)
+                ("Dart" dart-format)
+                ("Dhall" dhall)
+                ("Dockerfile" dockfmt)
+                ("Elixir" mix-format)
+                ("Elm" elm-format)
+                ("Emacs Lisp" emacs-lisp)
+                ("Erlang" efmt)
+                ("F#" fantomas)
+                ("Fish" fish-indent)
+                ("Fortran Free Form" fprettify)
+                ("GLSL" clang-format)
+                ("Go" gofmt)
+                ("GraphQL" prettier)
+                ("Haskell" brittany)
+                ("HTML" prettier)
+                ("HTML+EEX" mix-format)
+                ("HTML+ERB" erb-format)
+                ("Java" clang-format)
+                ("JavaScript" prettier)
+                ("JSON" prettier)
+                ("JSON5" prettier)
+                ("Jsonnet" jsonnetfmt)
+                ("JSX" prettier)
+                ("Kotlin" ktlint)
+                ("LaTeX" latexindent)
+                ("Less" prettier)
+                ("Literate Haskell" brittany)
+                ("Lua" lua-fmt)
+                ("Markdown" prettier)
+                ("Nix" nixpkgs-fmt)
+                ("Objective-C" clang-format)
+                ("OCaml" ocp-indent)
+                ("Perl" perltidy)
+                ("PHP" prettier)
+                ("Protocol Buffer" clang-format)
+                ("PureScript" purty)
+                ("Python" black)
+                ("R" styler)
+                ("Reason" bsrefmt)
+                ("ReScript" rescript)
+                ("Ruby" rufo)
+                ("Rust" rustfmt)
+                ("Scala" scalafmt)
+                ("SCSS" prettier)
+                ("Shell" shfmt)
+                ("Solidity" prettier)
+                ("SQL" sqlformat)
+                ("Svelte" prettier)
+                ("Swift" swiftformat)
+                ("Terraform" terraform-fmt)
+                ("TOML" prettier)
+                ("TSX" prettier)
+                ("TypeScript" prettier)
+                ("V" v-fmt)
+                ("Verilog" istyle-verilog)
+                ("Vue" prettier)
+                ("XML" html-tidy)
+                ("YAML" prettier)
+                ("Zig" zig)
+                ("_Angular" prettier)
+                ("_Flow" prettier)
+                ("_Gleam" gleam)
+                ("_Ledger" ledger-mode)
+                ("_Nginx" nginxfmt)
+                ("_Snakemake" snakefmt)))
+      )
+#+end_src
 ** Iedit Setup
 #+begin_src emacs-lisp
   (use-package iedit
       :bind("C-c e" . iedit-mode)
+      )
+#+end_src
+** Avy SetUp
+jumping to visible text using a char-based decision tree
+#+begin_src emacs-lisp
+  (use-package avy
+      :bind("C-;" . avy-goto-char)
+      )
+#+end_src
+** Projectile Setup
+#+begin_src emacs-lisp
+  (use-package projectile
+      :init
+      (projectile-global-mode)
+      ;; :bind(
+      ;;        ("C-x p f" . projectile-find-file)
+      ;;        ("C-x p p" . projectile-switch-project)
+      ;;        )
+      :config
+      (setq
+          projectile-indexing-method 'hybrid
+          ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
+          ;;indexing default 'alien ,only load .gitignore
+          ;;indexing 'native only load .projectile
+          ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
+
+          ;;   projectile-sort-order 'recentf-active
+          projectile-enable-caching t)
+      (setq projectile-globally-ignored-directories
+          (append (list
+                      ".pytest_cache"
+                      "__pycache__"
+                      "build"
+                      "elpa"
+                      "node_modules"
+                      "output"
+                      "reveal.js"
+                      "semanticdb"
+                      "target"
+                      "venv"
+                      )
+              projectile-globally-ignored-directories))
+      )
+
+  (use-package treemacs-projectile
+      :after (treemacs projectile)
+      )
+
+  (use-package treemacs
+      :config
+      (setq
+          treemacs-deferred-git-apply-delay 0.5
+          treemacs-file-follow-delay 0.2
+          treemacs-indentation 2
+          treemacs-indentation-string " "
+          treemacs-show-hidden-files  nil
+          treemacs-hide-gitignored-files-mode t
+          treemacs-hide-dot-git-directory t
+          treemacs-follow-mode t
+          treemacs-filewatch-mode t
+          treemacs-fringe-indicator-mode 'always
+          )
+      )
+
+  (use-package treemacs-icons-dired
+      :hook (dired-mode . treemacs-icons-dired-enable-once)
+      :ensure t)
+
+  (use-package treemacs-magit
+      :after (treemacs magit)
+      :ensure t)
+
+  (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+      :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+      :ensure t
+      :config (treemacs-set-scope-type 'Perspectives))
+
+  (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+      :after (treemacs)
+      :ensure t
+      :config (treemacs-set-scope-type 'Tabs))
+#+end_src
+** Company Setup
+#+begin_src emacs-lisp
+  (use-package company
+      :ensure t
+      :init
+      (global-company-mode)
+      :bind (
+                ("s-/" . company-complete)
+                :map company-active-map
+                (("C-n"   . company-select-next)
+                    ("C-p"   . company-select-previous)
+                    ("C-d"   . company-show-doc-buffer)
+                    ("<tab>" . company-complete)
+                    )
+
+                )
+      )
+  ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
+  ;; (use-package company-box
+  ;;   :hook (company-mode . company-box-mode))
+
+#+end_src
+*** Company english helper
+#+begin_src emacs-lisp
+  (use-package company-english-helper
+      :vc (:fetcher github :repo manateelazycat/company-english-helper)
       )
 #+end_src
 ** Language Setup
@@ -670,9 +994,6 @@ Unordered search  in ivy search
                 lsp-log-io nil
                 ;;        lsp-inhibit-message t
                 )
-      (add-hook 'prog-mode-hook (lambda()
-                                    (unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode t))
-                                    ))
       :config
       (setq lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
       (setq lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
@@ -685,6 +1006,9 @@ Unordered search  in ivy search
       ;;     (lambda()
       ;;         (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
       )
+  (add-hook 'prog-mode-hook (lambda()
+                                ;;(unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode))
+                                (when(derived-mode-p 'java-mode) (lsp-mode t))))
 
   (use-package lsp-ui                                   ;;
       :commands lsp-ui-mode                               ;;
@@ -929,6 +1253,21 @@ git tools
 #+begin_src emacs-lisp
   (add-hook 'prog-mode-hook 'hs-minor-mode)
 #+end_src
+** MarkDown Setup
+#+begin_src emacs-lisp
+  (use-package markdown-mode
+      :ensure t
+      :mode (("\\.md\\'" . gfm-mode)
+                ("README" . gfm-mode)
+                )
+      :init (setq markdown-command "multimarkdown"))
+#+end_src
+
+** Nginx Setup
+#+begin_src emacs-lisp
+  (use-package nginx-mode)
+  (use-package company-nginx)
+#+end_src
 ** HttpClient Setup
 #+begin_src emacs-lisp
   (use-package restclient
@@ -941,350 +1280,6 @@ git tools
   (use-package ob-restclient)
   (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
-** Undo-Tree Setup
-#+begin_src emacs-lisp
-  (use-package undo-tree
-      :init (global-undo-tree-mode t)
-      )
-#+end_src
-** Avy SetUp
-jumping to visible text using a char-based decision tree
-#+begin_src emacs-lisp
-  (use-package avy
-      :bind("C-;" . avy-goto-char)
-      )
-#+end_src
-** Org Setup
-*** Org Table Tidy Settings
-#+begin_src emacs-lisp
-  ;;org-table align  todo hook in package
-  (use-package valign
-      :init
-      (add-hook 'org-mode-hook #'valign-mode)
-      )  
-#+end_src
-*** org-superstar
-#+begin_src emacs-lisp
-  (use-package org-superstar
-      :ensure t
-      :after org
-      :hook ((org-mode . org-superstar-mode)
-                (org-mode . org-indent-mode))
-      :config
-      (setq org-superstar-special-todo-items t))
-  (set-face-attribute 'org-block nil :background
-      (color-darken-name
-          (face-attribute 'default :background) 3))
-#+end_src
-*** COMMENT Pretty
-#+begin_src emacs-lisp
-  (use-package org-bullets
-      :ensure t
-      :hook((org-mode . org-bullets-mode)
-               (org-mode . org-indent-mode))
-      )
-#+end_src
-*** Org-babel support language
-#+begin_src emacs-lisp
-  (require 'ob-js)
-  (org-babel-do-load-languages 'org-babel-load-languages
-      '((js . t)
-           (restclient . t))
-      )
-  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
-  (defun ob-js-insert-session-header-arg (session)
-      "Insert ob-js `SESSION' header argument.
-  - `js-comint'
-  - `skewer-mode'
-  - `Indium'
-  "
-      (interactive (list (completing-read "ob-js session: "
-                             '("js-comint" "skewer-mode" "indium"))))
-      (org-babel-insert-header-arg
-          "session"
-          (pcase session
-              ("js-comint" "\"*Javascript REPL*\"")
-              ("skewer-mode" "\"*skewer-repl*\"")
-              ("indium" "\"*JS REPL*\""))))
-  (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
-#+end_src
-*** Org Agenda Setup
-**** Config
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (setq org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
-  (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
-  (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
-  (setq org-agenda-file-gtd (concat org-agenda-dir "task.org"))
-  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
-  (setq org-agenda-files (list org-agenda-dir))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-  (setq org-agenda-include-diary t)
-  (setq org-capture-templates `(
-                                   ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
-                                   ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                   ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
-                                   ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
-                                   ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
-                                   ("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
-                                   ))
-  (setq org-todo-keywords
-      '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
-           (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
-           (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
-  (setq org-todo-keyword-faces
-      '(("TODO" . org-warning) ("STED" . "yellow")
-           ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
-           ("BUGT" . "red") ("FIXT" . "orange")
-           ))
-  (setq org-enforce-todo-dependencies t)
-  (setq org-modules
-      '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
-
-  (setq org-highest-priority 1) 
-  (setq org-default-priority 5)
-  (setq org-lowest-priority 9)
-
-  (use-package org-super-agenda
-      :ensure t
-      )
-
-  (org-super-agenda-mode t)
-
-
-
-  (defun add-property-with-date-captured ()
-      "Add DATE_CAPTURED property to the current item."
-      (interactive)
-      (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
-      )
-  (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
-
-  (defun process-gtd-action()
-      (interactive)
-      (find-file org-agenda-file-gtd)
-      )
-  (defun process-gtd-inbox()
-      (interactive)
-      (find-file org-agenda-file-inbox)
-      )
-
-  (defun process-gtd-journal()
-      (interactive)
-      (find-file org-agenda-file-journal)
-      )
-
-  (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
-  (global-set-key (kbd "C-c d a") 'process-gtd-action)
-  (global-set-key (kbd "C-c d j") 'process-gtd-journal)
-
-  ;; Change task state to STARTED when clocking in
-  (setq org-clock-in-switch-to-state "STED")
-  ;; Save clock data and notes in the LOGBOOK drawer
-  (setq org-clock-into-drawer t)
-  (setq org-clock-out-remove-zero-time-clocks t)
-  (use-package org-pomodoro)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
-#+end_src
-**** Tag
-#+begin_src emacs-lisp
-  (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                           ("@study" . ?s) ("@habit" . ?b)))
-#+end_src
-
-#+begin_src emacs-lisp
-  ;; automatically DONE when all children are DONE
-  (defun org-summary-todo (n-done n-not-done)
-      "Switch entry to DONE when all subentries are done, to TODO otherwise."
-      (let (org-log-done org-log-states)   ; turn off logging
-          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
-#+end_src
-**** COMMENT Org-GTD
-#+begin_src emacs-lisp
-  (use-package org-gtd
-      :after org
-      :init (setq org-gtd-update-ack "3.0.0")
-      :demand t
-      :custom
-      (org-gtd-directory "~/Desktop/gtd/")
-      (org-edna-use-inheritance t)
-      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-      :config
-
-      (org-edna-mode)
-      :bind
-      (("C-c d c" . org-gtd-capture)
-          ("C-c d e" . org-gtd-engage)
-          ("C-c d p" . org-gtd-process-inbox)
-          :map org-gtd-clarify-map
-          ("C-c c" . org-gtd-organize)))
-#+end_src
-**** COMMENT Task Reminder
-#+begin_src emacs-lisp
-  (use-package alert)
-  (use-package org-alert
-      :init
-      (setq alert-default-style 'message
-          org-alert-notification-title "Org Reminder"
-          org-alert-interval 300
-          org-alert-notify-cutoff 5
-          org-alert-notify-after-event-cutoff 5))
-
-  (org-alert-enable)
-  (use-package osa)
-  (use-package org-notify)
-
-#+end_src
-**** note
-***** org-todo and record
-C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
-*** Org Roam Setup
-#+begin_src emacs-lisp
-  (use-package org-roam
-      :custom
-      (org-roam-directory (file-truename "~/Desktop/note/"))
-      (org-roam-dailies-directory "daily/")
-      :bind (("C-c n l" . org-roam-buffer-toggle)
-                ("C-c n f" . org-roam-node-find)
-                ("C-c n g" . org-roam-graph)
-                ("C-c n i" . org-roam-node-insert)
-                ("C-c n c" . org-roam-capture)
-                ;; Dailies
-                ("C-c n j" . org-roam-dailies-capture-today)
-                )
-      :bind-keymap
-      ("C-c n d" . org-roam-dailies-map)
-      :config
-      ;; If you're using a vertical completion framework, you might want a more informative completion interface
-      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
-      (org-roam-db-autosync-mode)
-      (require 'org-roam-dailies)
-      ;; If using org-roam-protocol
-      (require 'org-roam-protocol)
-      )
-
-  (use-package org-roam-ui
-      :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
-      :after org-roam
-      :custom
-      (org-roam-ui-sync-theme t)
-      (org-roam-ui-follow t)
-      (org-roam-ui-update-on-save t)
-      )
-#+end_src
-** Format Setup
-#+begin_src emacs-lisp
-  (setq +format-with-lsp nil)
-  (use-package format-all
-      :ensure t
-      :hook ((elixir-mode . format-all-mode)
-                ;;(prog-mode . format-all-mode)
-                )
-      ;;      :init
-      ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
-      :config
-      (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-      ;;        (add-hook 'before-save-hook 'format-all-buffer)
-      )
-
-  (add-hook 'prog-mode-hook
-      (lambda ()
-          (unless (derived-mode-p 'lsp-mode)
-              (add-hook 'before-save-hook 'format-all-buffer t t)
-              )
-          ))
-#+end_src
-*** Format Default Formatters Setup
-#+begin_src emacs-lisp
-  (custom-set-variables
-      '(format-all-default-formatters
-           '(("Assembly" asmfmt)
-                ("ATS" atsfmt)
-                ("Bazel" buildifier)
-                ("BibTeX" emacs-bibtex)
-                ("C" clang-format)
-                ("C#" clang-format)
-                ("C++" clang-format)
-                ("Cabal Config" cabal-fmt)
-                ("Clojure" zprint)
-                ("CMake" cmake-format)
-                ("Crystal" crystal)
-                ("CSS" prettier)
-                ("Cuda" clang-format)
-                ("D" dfmt)
-                ("Dart" dart-format)
-                ("Dhall" dhall)
-                ("Dockerfile" dockfmt)
-                ("Elixir" mix-format)
-                ("Elm" elm-format)
-                ("Emacs Lisp" emacs-lisp)
-                ("Erlang" efmt)
-                ("F#" fantomas)
-                ("Fish" fish-indent)
-                ("Fortran Free Form" fprettify)
-                ("GLSL" clang-format)
-                ("Go" gofmt)
-                ("GraphQL" prettier)
-                ("Haskell" brittany)
-                ("HTML" prettier)
-                ("HTML+EEX" mix-format)
-                ("HTML+ERB" erb-format)
-                ("Java" clang-format)
-                ("JavaScript" prettier)
-                ("JSON" prettier)
-                ("JSON5" prettier)
-                ("Jsonnet" jsonnetfmt)
-                ("JSX" prettier)
-                ("Kotlin" ktlint)
-                ("LaTeX" latexindent)
-                ("Less" prettier)
-                ("Literate Haskell" brittany)
-                ("Lua" lua-fmt)
-                ("Markdown" prettier)
-                ("Nix" nixpkgs-fmt)
-                ("Objective-C" clang-format)
-                ("OCaml" ocp-indent)
-                ("Perl" perltidy)
-                ("PHP" prettier)
-                ("Protocol Buffer" clang-format)
-                ("PureScript" purty)
-                ("Python" black)
-                ("R" styler)
-                ("Reason" bsrefmt)
-                ("ReScript" rescript)
-                ("Ruby" rufo)
-                ("Rust" rustfmt)
-                ("Scala" scalafmt)
-                ("SCSS" prettier)
-                ("Shell" shfmt)
-                ("Solidity" prettier)
-                ("SQL" sqlformat)
-                ("Svelte" prettier)
-                ("Swift" swiftformat)
-                ("Terraform" terraform-fmt)
-                ("TOML" prettier)
-                ("TSX" prettier)
-                ("TypeScript" prettier)
-                ("V" v-fmt)
-                ("Verilog" istyle-verilog)
-                ("Vue" prettier)
-                ("XML" html-tidy)
-                ("YAML" prettier)
-                ("Zig" zig)
-                ("_Angular" prettier)
-                ("_Flow" prettier)
-                ("_Gleam" gleam)
-                ("_Ledger" ledger-mode)
-                ("_Nginx" nginxfmt)
-                ("_Snakemake" snakefmt)))
-      )
-#+end_src
 ** Youdao Translate Setup
 #+begin_src emacs-lisp
   (use-package youdao-dictionary
@@ -1296,68 +1291,11 @@ C-u C-c C-t :Prompt for a note and record a the time of the TODO state change
   (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
   (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 #+end_src
-** Undo Tree Setup
-#+begin_src emacs-lisp
-  (use-package undo-tree
-      )
-  (global-undo-tree-mode t)
-#+end_src
-** Org shortcut
-*** Motion in Heading
-**** Next Heading
-C-c C-n (org-next-visible-heading)
-
-**** Previous Heading
-C-c C-p (org-next-visible-heading)
-
-**** Next Same Level
-C-c C-f (org-forward-heading-same-level)
-
-**** Previous Same Heading
-C-c C-b (org-backward-heading-same-level)
-
-**** Previous Higher Heading
-C-c C-u (outline-up-heading)
-*** Editing Heading Level
-**** Insert Previous Same Level Heading
-M-RET (org-meta-return)
-**** Insert Next Same Level Heading
-C-RET (org-insert-heading-respect-contents)
-**** Move Previous Heading
-M-UP (org-move-subtree-up)
-**** Move Next Heading
-M-DOWN (org-move-subtree-down)
-**** Promote Heading
-M-LEFT (org-do-promote)
-**** Demote Heading
-M-RIGHT (org-do-demote)
-**** Promote Heading and subtree
-M-S-LEFT (org-promote-subtree)
-**** Demote Heading and subtree
-M-S-RIGHT (org-demote-subtree)
-*** Insert Org template
-C-c C-, (org-insert-structure-template)
-**** Insert Source Code Block
-Key "s in (org-insert-structure-template) list
-*** Other
-**** StrikeThrough/DeleteLine
-command: (org-emphasize) ,next input character (+)
-**** Insert Date and Time
-C-u C-c .
-**** Disable Source Code
-C-c ; (org-toggle-comment)
-**** Edit Source Code In New Buffer
-C-c ' (org-edit-special)
-**** Org Export to Markdown
-(org-md-export-to-markdown)
-**** Org Config File Reload
-(org-babel-load-file )
 ** Installation
 #+begin_src shell
   git clone <this repo url> ~/.emacs.d
 #+end_src
-
-** Customize Your Configuration
+*** Customize Your Configuration
 write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup. 
 
 
