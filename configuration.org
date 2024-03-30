@@ -319,6 +319,21 @@ donot backup file
   (use-package page-break-lines)
 #+end_src
 ** Org Setup
+*** OrgFile AutoFormat
+#+begin_src emacs-lisp
+  ;; let source code block can be `indent-region` format
+  (setq org-src-tab-acts-natively t)
+  ;; org file before save invoke indent-region
+  (add-hook 'org-mode-hook
+      (lambda()
+          (add-hook 'before-save-hook 'org-format-buffer nil t)))
+
+  (defun org-format-buffer()
+      (interactive)
+      (save-excursion
+          (indent-region (point-min) (point-max) nil)))
+
+#+end_src
 *** Org Table Tidy Settings
 #+begin_src emacs-lisp
   ;;org-table align  todo hook in package
@@ -326,7 +341,7 @@ donot backup file
       :init
       (add-hook 'org-mode-hook #'valign-mode)
       )  
-  #+end_src
+#+end_src
 *** org-superstar
 #+begin_src emacs-lisp
   (use-package org-superstar
@@ -519,6 +534,7 @@ donot backup file
                 ("C-c n i" . org-roam-node-insert)
                 ("C-c n c" . org-roam-capture)
                 ("C-c n t" . org-roam-tag-add)
+                ("C-c M-s" . org-store-link)
                 ;; Dailies
                 ("C-c n j" . org-roam-dailies-capture-today)
                 )
@@ -534,7 +550,7 @@ donot backup file
       (require 'org-roam-protocol)
       )
 #+end_src
-*** Org Roam UI SetUp
+**** Org Roam UI SetUp
 #+begin_src emacs-lisp
   (use-package org-roam-ui
       :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
@@ -600,7 +616,8 @@ easy to jump windows
 ** Selected Setup
 #+begin_src emacs-lisp
   (use-package expand-region
-      :bind ("C-=" . er/expand-region)
+      :bind (("C-=" . er/expand-region)
+                ("C--" . er/contract-region))
       :config
       (defun er/add-html-mode-expansions ()
           (make-variable-buffer-local 'er/try-expand-list)
@@ -937,7 +954,6 @@ jumping to visible text using a char-based decision tree
                     ("C-d"   . company-show-doc-buffer)
                     ("<tab>" . company-complete)
                     )
-
                 )
       )
   ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
@@ -1170,21 +1186,33 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
       (setq web-mode-markup-indent-offset 4
           web-mode-css-indent-offset 4
           web-mode-code-indent-offset 4
+          web-mode-comment-style 2
+          web-mode-enable-auto-pairing t
+          web-mode-enable-css-colorization t
+          web-mode-enable-current-element-highlight t
+          web-mode-enable-current-column-highlight t
           )
       )
 
   (defadvice web-mode-highlight-part (around tweak-jsx activate)
       (if (equal web-mode-content-type "jsx")
-          (let ((web-mode-enable-part-face nil))
-              ad-do-it)
+          (let ((web-mode-enable-part-face nil)) ad-do-it)
           ad-do-it))
 
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . web-mode))
-  (use-package js2-mode
-      )
+  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+
+  ;;  (use-package js2-mode
+  ;;      )
   (use-package json-mode
       )
   (use-package prettier-js
@@ -1196,6 +1224,7 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
       ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
       ;;                          ))
       )
+
 #+end_src
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
 *** Javascript REPL
