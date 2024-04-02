@@ -6,7 +6,6 @@
 This configuration file contains setup my config of emacs
 ** Package Manager
 *** ELPA Setup
-set repository to tsinghua
 #+BEGIN_SRC emacs-lisp
   (require 'package)
   (if (boundp 'package-archives-spec)
@@ -14,6 +13,7 @@ set repository to tsinghua
       (setq package-archives '(
                                   ("gnu" . "https://elpa.gnu.org/packages/")
                                   ("melpa" . "https://melpa.org/packages/")
+                                  ("gnu-devel" . "https://elpa.gnu.org/devel/")
                                   ;;  ("org" . "https://orgmode.org/elpa/")
                                   ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
                                   ))
@@ -25,7 +25,6 @@ set repository to tsinghua
   (unless package-archive-contents
       (package-refresh-contents))
 #+END_SRC
-
 *** Use-Package Setup
 #+begin_src emacs-lisp
   (unless (package-installed-p 'use-package)
@@ -42,20 +41,11 @@ set repository to tsinghua
   (require 'vc-use-package)
 #+end_src
 ** General Settings Setup
-*** Window Settings
-**** Window Maximized
+*** GC settings
+[[file:early-init.el::;; GC settings][look at early-init.el]]
+*** Show Startup Message
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
-#+end_src
-**** Zoom
-window auto Zoom,current window Larger display
-#+begin_src emacs-lisp
-  (use-package zoom
-      :ensure t
-      :init
-      (setq zoom-size '(0.718 . 0.718))
-      :bind ("C-c z" . zoom)
-      )
+  (setq inhibit-startup-message t)
 #+end_src
 *** Character Settings
 #+begin_src emacs-lisp
@@ -84,6 +74,16 @@ donot backup file
   ;;(setq make-backup-files nil)
   (setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
   ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
+#+end_src
+*** Env Settings
+#+begin_src emacs-lisp
+  (use-package exec-path-from-shell 
+      :ensure t
+      ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
+      )
+  (when (memq window-system '(mac ns x))
+      (exec-path-from-shell-initialize))
+  (setq exec-path-from-shell-check-startup-files nil)
 #+end_src
 *** Custom-file Settings
 #+begin_src emacs-lisp
@@ -114,16 +114,6 @@ donot backup file
       nxml-slash-auto-complete-flag t)
 #+end_src
 
-*** Env Settings
-#+begin_src emacs-lisp
-  (use-package exec-path-from-shell 
-      :ensure t
-      ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
-      )
-  (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize))
-  (setq exec-path-from-shell-check-startup-files nil)
-#+end_src
 *** Undo Settings
 #+begin_src emacs-lisp
   (use-package undo-tree
@@ -142,29 +132,28 @@ donot backup file
       recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
   (recentf-mode t)
 #+end_src
-*** Show Startup Message
+*** Window Settings
+**** Window Maximized
 #+begin_src emacs-lisp
-  (setq inhibit-startup-message t)
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
-*** GC settings
+**** Zoom
+window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
-  (setq gc-cons-threshold (* 64 1024 1024))
-  (setq read-process-output-max (* 32 1024 1024))
+  (use-package zoom
+      :ensure t
+      :init
+      (setq zoom-size '(0.718 . 0.718))
+      :bind ("C-c z" . zoom)
+      )
 #+end_src
 ** UI Setup
 *** Menu-bar Hide
-#+begin_src emacs-lisp
-  (menu-bar-mode nil)
-#+end_src
+[[file:early-init.el::;; Menu-bar][Look at early-init.el]]
 *** Tool-bar Hide
-#+begin_src emacs-lisp
-  (tool-bar-mode nil)
-  (tool-bar-mode -1)
-#+end_src
+[[file:early-init.el::tool-bar-mode -1][Look at early-init.el]]
 *** Scroll-bar Hide
-#+begin_src emacs-lisp
-  (scroll-bar-mode nil)
-#+end_src
+[[file:early-init.el::;; scroll-bar][Look at early-init-el]]
 *** Theme
 #+begin_src emacs-lisp
   (use-package dracula-theme
@@ -223,8 +212,8 @@ donot backup file
       :config
       (setq doom-modeline-height 5)
       (custom-set-faces
-          '(mode-line ((t (:family "Ubuntu Mono" :height:50))))
-          '(mode-line-inactive ((t (:family "Ubuntu Mono" :height:50))))
+          '(mode-line ((t (:family "DejaVu Sans Mono" :height:50))))
+          '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height:50))))
           )
       (doom-modeline-def-modeline 'ownml
           '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
@@ -974,7 +963,9 @@ jumping to visible text using a char-based decision tree
       :ensure t
       :hook (
                 (lsp-mode . lsp-enable-which-key-integration)
-                (lsp-mode-hook . lsp-lens-mode)
+                (lsp-mode . lsp-lens-mode)
+                (java-mode . lsp-mode)
+                (web-mode . lsp-mode)
                 ;; (prog-mode . lsp-deferred)
                 ;; (prog-mode . (lambda()
                 ;;                  (unless (derived-mode-p 'emacs-lisp-mode) 'lsp-deferred)  ;; assign some mode in prog-mode not need lsp
@@ -987,7 +978,6 @@ jumping to visible text using a char-based decision tree
               ("M-RET" . lsp-execute-code-action)))
       :init (setq
                 lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-                read-process-output-max (* 1024 1024)  ; 1 mb
                 lsp-completion-provider :capf
                 lsp-completion-show-detail t
                 lsp-completion-show-kind t
@@ -1112,7 +1102,7 @@ jumping to visible text using a char-based decision tree
       (setq lsp-java-trace-server t)
       (setq lsp-java-configuration-check-project-settings-exclusions t)
       (setq lsp-java-completion-guess-method-arguments t)
-      (add-hook 'java-mode-hook 'lsp)
+      ;;      (add-hook 'java-mode-hook 'lsp)
       ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
       ;; (add-hook 'java-mode-hook
       ;;     (lambda()
@@ -1157,11 +1147,11 @@ jumping to visible text using a char-based decision tree
 
   ;;========== maven pom==========
   ;; https://github.com/m0smith/maven-pom-mode.git
-                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
   ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
   ;; (load "maven-pom-mode")                                                                      ;;
-                ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;==========maven pom end==========
 
   (use-package mvn
@@ -1183,9 +1173,9 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
 #+begin_src emacs-lisp
   (use-package web-mode
       :config
-      (setq web-mode-markup-indent-offset 4
-          web-mode-css-indent-offset 4
-          web-mode-code-indent-offset 4
+      (setq web-mode-markup-indent-offset 2
+          web-mode-css-indent-offset 2
+          web-mode-code-indent-offset 2
           web-mode-comment-style 2
           web-mode-enable-auto-pairing t
           web-mode-enable-css-colorization t
@@ -1224,9 +1214,16 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
       ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
       ;;                          ))
       )
-
+  (add-hook 'js2-mode-hook 'prettier-js-mode)
+  (add-hook 'web-mode-hook 'prettier-js-mode)
 #+end_src
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
+**** 
+**** React JSX
+#+begin_src emacs-lisp
+  (use-package rjsx-mode
+      )
+#+end_src
 *** Javascript REPL
 **** js-comint
 javascript REPL
