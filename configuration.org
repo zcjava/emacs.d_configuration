@@ -18,8 +18,7 @@ This configuration file contains setup my config of emacs
                                   ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
                                   ))
       )
-  (unless (
-              bound-and-true-p package--initialized)
+  (unless (bound-and-true-p package--initialized)
       (package-initialize))
 
   (unless package-archive-contents
@@ -31,7 +30,6 @@ This configuration file contains setup my config of emacs
       (package-refresh-contents)
       (package-install 'use-package))
 
-  (setq package-enable-at-startup nil)
   (setq use-package-always-ensure t)
 #+end_src
 **** vc-use-package
@@ -40,6 +38,25 @@ This configuration file contains setup my config of emacs
       (package-vc-install "https://github.com/slotThe/vc-use-package"))
   (require 'vc-use-package)
 #+end_src
+** Custom Need Constant
+*** Font Constant
+#+begin_src emacs-lisp
+  (defconst ctm-font-name-en "DejaVu Sans Mono")
+  (defconst ctm-font-name-zh "Microsoft YaHei")
+  (defconst ctm-font-size "22")
+#+end_src
+*** Org Agenda Constant
+#+begin_src emacs-lisp
+  (defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
+  (defconst ctm-org-agenda-filename-input "inbox.org")
+  (defconst ctm-org-agenda-filename-gtd "gtd.org")
+#+end_src
+*** Org Roam Constant
+#+begin_src emacs-lisp
+  (defconst ctm-org-roam-directory (file-truename "~/Desktop/note/"))
+  (defconst ctm-org-roam-dailies-directory "daily")
+#+end_src
+*** TODO JAVA Constant
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][look at early-init.el]]
@@ -185,12 +202,12 @@ window auto Zoom,current window Larger display
   ;;  (set-face-attribute 'default nil :font "PingFang SC-22")
   ;; english font use Dejavu sans mono; chinese font use microsoft yahei
   (progn
-      (set-face-attribute 'default nil :font "DejaVu Sans Mono-22")
-      (setq face-font-rescale-alist '(("Microsoft YaHei" . 0.9)))
+      (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
+      (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
       (dolist (charset '(kana han symbol cjk-misc bopomofo))
           (set-fontset-font (frame-parameter nil 'font)
               charset
-              (font-spec :family "Microsoft YaHei")
+              (font-spec :family ctm-font-name-zh)
               )))
   (global-font-lock-mode t)
   (setq font-lock-maximum-size 5000000)
@@ -212,8 +229,8 @@ window auto Zoom,current window Larger display
       :config
       (setq doom-modeline-height 5)
       (custom-set-faces
-          '(mode-line ((t (:family "DejaVu Sans Mono" :height:50))))
-          '(mode-line-inactive ((t (:family "DejaVu Sans Mono" :height:50))))
+          `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
+          `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
           )
       (doom-modeline-def-modeline 'ownml
           '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
@@ -271,12 +288,10 @@ window auto Zoom,current window Larger display
                ("s-8" . centaur-tabs-select-visible-tab)
                ("s-9" . centaur-tabs-select-visible-tab)
                ("s-0" . centaur-tabs-select-visible-tab)
-
                ("C-c t s" . centaur-tabs-counsel-switch-group)
                ("C-c t p" . centaur-tabs-group-by-projectile-project)
                ("C-c t g" . centaur-tabs-group-buffer-groups)
                )
-
       )
 #+end_src
 
@@ -295,7 +310,6 @@ window auto Zoom,current window Larger display
       (setq dashboard-set-heading-icons t)
       (setq dashboard-set-file-icons t)
       (setq dashboard-set-navigator t)
-
       (setq dashboard-items '((recents  . 5)
                                  (bookmarks . 5)
                                  (projects . 5)
@@ -340,6 +354,7 @@ window auto Zoom,current window Larger display
                 (org-mode . org-indent-mode))
       :config
       (setq org-superstar-special-todo-items t))
+
   (set-face-attribute 'org-block nil :background
       (color-darken-name
           (face-attribute 'default :background) 3))
@@ -385,12 +400,12 @@ window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (setq org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
-  (setq org-default-notes-file (concat org-agenda-dir "inbox.org"))
-  (setq org-agenda-file-inbox (concat org-agenda-dir "inbox.org"))
-  (setq org-agenda-file-gtd (concat org-agenda-dir "task.org"))
-  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
-  (setq org-agenda-files (list org-agenda-dir))
+
+  (setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
+  (setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
+  (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-gtd))
+  ;;  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
+  (setq org-agenda-files (list ctm-org-agenda-dir))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-agenda-include-diary t)
   (setq org-capture-templates `(
@@ -399,7 +414,7 @@ window auto Zoom,current window Larger display
                                    ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
                                    ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
                                    ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
-                                   ("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
+                                   ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
                                    ))
   (setq org-todo-keywords
       '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
@@ -515,8 +530,8 @@ window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
   (use-package org-roam
       :custom
-      (org-roam-directory (file-truename "~/Desktop/note/"))
-      (org-roam-dailies-directory "daily/")
+      (org-roam-directory ctm-org-roam-directory)
+      (org-roam-dailies-directory ctm-org-roam-dailies-directory)
       :bind (("C-c n l" . org-roam-buffer-toggle)
                 ("C-c n f" . org-roam-node-find)
                 ("C-c n g" . org-roam-graph)
@@ -696,9 +711,7 @@ command completion use ivy
 ***** Show History Command in Counsel-M-x Minibuffer
 show history command need amx package
 #+begin_src emacs-lisp
-  (use-package amx
-      :ensure t
-      )
+  (use-package amx)
 #+end_src
 **** Swiper Setup
 text search use ivy
@@ -1218,7 +1231,6 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
   (add-hook 'web-mode-hook 'prettier-js-mode)
 #+end_src
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
-**** 
 **** React JSX
 #+begin_src emacs-lisp
   (use-package rjsx-mode
