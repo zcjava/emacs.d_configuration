@@ -331,6 +331,18 @@ window auto Zoom,current window Larger display
 
   (use-package page-break-lines)
 #+end_src
+*** Delimiters Highlights Setup
+#+begin_src emacs-lisp
+  (use-package rainbow-delimiters
+      :hook
+      (prog-mode . rainbow-delimiters-mode)
+      )
+#+end_src
+*** Highlight Symbol Setup
+#+begin_src emacs-lisp
+  (use-package auto-highlight-symbol)
+  (global-auto-highlight-symbol-mode t)
+#+end_src
 ** Org Setup
 *** OrgFile AutoFormat
 #+begin_src emacs-lisp
@@ -983,7 +995,12 @@ jumping to visible text using a char-based decision tree
       )
 #+end_src
 ** Language Setup
-*** LSP-Mode Setup
+*** Eglot Setup
+#+begin_src emacs-lisp
+  (use-package eglot
+      :hook (prog-mode . eglot-ensure))
+#+end_src
+*** COMMENT LSP-Mode Setup
 #+begin_src emacs-lisp
   (use-package lsp-mode
       :ensure t
@@ -1103,7 +1120,10 @@ jumping to visible text using a char-based decision tree
                ))
       (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
       ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+
+      ;;TODO
+      ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+
       :config
       (setq lsp-java-maven-download-sources t)
       (setq lsp-java-import-maven-enabled t)
@@ -1170,11 +1190,11 @@ jumping to visible text using a char-based decision tree
 
   ;;========== maven pom==========
   ;; https://github.com/m0smith/maven-pom-mode.git
-                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
   ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
   ;; (load "maven-pom-mode")                                                                      ;;
-                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;==========maven pom end==========
 
   (use-package mvn
