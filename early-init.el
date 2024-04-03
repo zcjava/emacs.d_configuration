@@ -17,5 +17,9 @@
 ;; scroll-bar
 (scroll-bar-mode -1)
 
+;; custom file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+    (load custom-file))
 
 (provide 'early-init)

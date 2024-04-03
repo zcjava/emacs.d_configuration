@@ -59,7 +59,7 @@ This configuration file contains setup my config of emacs
 *** TODO JAVA Constant
 ** General Settings Setup
 *** GC settings
-[[file:early-init.el::;; GC settings][look at early-init.el]]
+[[file:early-init.el::;; GC settings][Look at early-init.el]]
 *** Show Startup Message
 #+begin_src emacs-lisp
   (setq inhibit-startup-message t)
@@ -102,12 +102,8 @@ donot backup file
       (exec-path-from-shell-initialize))
   (setq exec-path-from-shell-check-startup-files nil)
 #+end_src
-*** Custom-file Settings
-#+begin_src emacs-lisp
-  (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-  (when (file-exists-p custom-file)
-      (load custom-file))
-#+end_src
+*** Custom File Settings
+[[file:early-init.el::;; custom file][Look at early-init.el]]
 *** Yes/No Shorthand Settings
 #+begin_src emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
@@ -374,17 +370,17 @@ window auto Zoom,current window Larger display
 *** Org-babel support language
 #+begin_src emacs-lisp
   (require 'ob-js)
-  (org-babel-do-load-languages 'org-babel-load-languages
-      '((js . t)
-           (restclient . t))
-      )
+  ;; (org-babel-do-load-languages 'org-babel-load-languages
+  ;;     '((js . t)
+  ;;          (restclient . t))
+  ;;     )
   (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
   (defun ob-js-insert-session-header-arg (session)
       "Insert ob-js `SESSION' header argument.
-  - `js-comint'
-  - `skewer-mode'
-  - `Indium'
-  "
+   - `js-comint'
+   - `skewer-mode'
+   - `Indium'
+   "
       (interactive (list (completing-read "ob-js session: "
                              '("js-comint" "skewer-mode" "indium"))))
       (org-babel-insert-header-arg
@@ -1308,14 +1304,12 @@ git tools
 #+end_src
 ** HttpClient Setup
 #+begin_src emacs-lisp
-  (use-package restclient
-      :config
-      (add-to-list 'company-backends 'company-restclient)
-      )
+  (use-package restclient)
+  (use-package ob-restclient)
   (use-package company-restclient
       :after(restclient-mode)
       )
-  (use-package ob-restclient)
+
   (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
 ** Youdao Translate Setup
