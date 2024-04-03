@@ -56,7 +56,21 @@ This configuration file contains setup my config of emacs
   (defconst ctm-org-roam-directory (file-truename "~/Desktop/note/"))
   (defconst ctm-org-roam-dailies-directory "daily")
 #+end_src
-*** TODO JAVA Constant
+*** Lsp Constant
+**** Groovy Constant
+#+begin_src emacs-lisp
+  (defconst ctm-lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
+  (defconst ctm-lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
+#+end_src
+**** Java Constant
+#+begin_src emacs-lisp
+  (defconst ctm-java-home-path "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+  (defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+  (defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
+  (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+  (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+  (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
+#+end_src
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][Look at early-init.el]]
@@ -712,6 +726,9 @@ show history command need amx package
 **** Swiper Setup
 text search use ivy
 #+begin_src emacs-lisp
+  ;; bind-key conflict, unbind
+  (define-key org-mode-map (kbd "C-'") nil)
+
   (use-package swiper
       :bind(
                ("C-s" . swiper)
@@ -1010,8 +1027,8 @@ jumping to visible text using a char-based decision tree
                 ;;        lsp-inhibit-message t
                 )
       :config
-      (setq lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
-      (setq lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
+      (setq lsp-groovy-server-file ctm-lsp-groovy-server-file)
+      (setq lsp-groovy-classpath ctm-lsp-groovy-classpath)
       (setq lsp-completion-enable-additional-text-edit nil)
       (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
       (with-eval-after-load 'lsp-intelephense
@@ -1069,28 +1086,25 @@ jumping to visible text using a char-based decision tree
 (lsp-ivy-workspace-symbol)
 *** JAVA Setup
 #+begin_src emacs-lisp
-  (setq JAVA_HOME_PATH "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
-  (setenv "JAVA_HOME"  JAVA_HOME_PATH)
-  (setq my-java-path (concat JAVA_HOME_PATH "bin/java"))
+  (setenv "JAVA_HOME"  ctm-java-home-path)
+  (setq my-java-path (concat ctm-java-home-path "bin/java"))
   (use-package lsp-java 
       :init
-      (setq lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-      (setq dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" lsp-java-server-install-dir))
+      (setq lsp-java-server-install-dir ctm-lsp-java-server-install-dir)
+      (setq dap-java-test-runner ctm-dap-java-test-runner)
       ;; lsp-java-jdt-download-url 
       (setq lsp-java-java-path my-java-path)
-      (setq lombok-jar-path
-          (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+      (setq lombok-jar-path ctm-lombok-jar-path)
       (setq lsp-java-vmargs
           `("-Xmx2G"
                "-XX:+UseG1GC"
                "-XX:+UseStringDeduplication"
                ,(concat "-javaagent:" lombok-jar-path)
                ))
-      (setq lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-      ;;        (setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+      (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
+      ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
       (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
       :config
-
       (setq lsp-java-maven-download-sources t)
       (setq lsp-java-import-maven-enabled t)
       ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
@@ -1099,9 +1113,9 @@ jumping to visible text using a char-based decision tree
           lsp-java-import-gradle-wrapper-enabled t
           lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
           ;;        lsp-java-import-gradle-version "8.4"
-          lsp-java-import-gradle-java-home JAVA_HOME_PATH
+          lsp-java-import-gradle-java-home ctm-java-home-path
           ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
-          lsp-java-import-gradle-user-home "~/.m2/repository/")
+          lsp-java-import-gradle-user-home ctm-lsp-java-import-gradle-user-home)
       (setq lsp-java-implementations-code-lens-enabled t)
       (setq lsp-java-references-code-lens-enabled t)
       (setq lsp-java-autobuild-enabled t)
