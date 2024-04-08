@@ -64,10 +64,10 @@ This configuration file contains setup my config of emacs
 #+end_src
 **** Java Constant
 #+begin_src emacs-lisp
-  (defconst ctm-java-home-path "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+  (defconst ctm-java-home-path (getenv "JAVA_HOME"))
   (defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
   (defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
-  (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+  (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
   (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
   (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 #+end_src
@@ -112,6 +112,8 @@ donot backup file
       :ensure t
       ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
       )
+  (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
+      (add-to-list 'exec-path-from-shell-variables var))
   (when (memq window-system '(mac ns x))
       (exec-path-from-shell-initialize))
   (setq exec-path-from-shell-check-startup-files nil)
@@ -244,7 +246,7 @@ window auto Zoom,current window Larger display
           )
       (doom-modeline-def-modeline 'ownml
           '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-          '(input-method buffer-encoding process vcs check))
+          '(input-method buffer-encoding process check))
       ;; Add to `doom-modeline-mode-hook` or other hooks
       (defun setup-custom-doom-modeline ()
           (doom-modeline-set-modeline 'ownml 'default))
@@ -967,12 +969,32 @@ jumping to visible text using a char-based decision tree
       :ensure t
       :config (treemacs-set-scope-type 'Tabs))
 #+end_src
-** Company Setup
+** Code Completion Setup
+*** Corfu
+#+begin_src emacs-lisp
+  ;; Auto completion example
+  (use-package corfu
+      :custom
+      (corfu-auto t)          ;; Enable auto completion
+      ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+      :bind
+      ;; Another key binding can be used, such as S-SPC.
+      ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
+      :init
+      (global-corfu-mode))
+#+end_src
+*** Corfu English Helper
+#+begin_src emacs-lisp
+  (use-package corfu-english-helper
+      :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
+      )
+#+end_src
+*** COMMENT Company
 #+begin_src emacs-lisp
   (use-package company
       :ensure t
       :init
-      (global-company-mode)
+      ;;      (global-company-mode)
       :bind (
                 ("s-/" . company-complete)
                 :map company-active-map
@@ -988,17 +1010,84 @@ jumping to visible text using a char-based decision tree
   ;;   :hook (company-mode . company-box-mode))
 
 #+end_src
-*** Company english helper
+*** COMMENT Company english helper
 #+begin_src emacs-lisp
   (use-package company-english-helper
       :vc (:fetcher github :repo manateelazycat/company-english-helper)
       )
 #+end_src
+** Treesit
+#+begin_src emacs-lisp
+  (setq treesit-language-source-alist
+      '((bash       . ("https://github.com/tree-sitter/tree-sitter-bash"))
+           (c          . ("https://github.com/tree-sitter/tree-sitter-c"))
+           (cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp"))
+           (css        . ("https://github.com/tree-sitter/tree-sitter-css"))
+           (cmake      . ("https://github.com/uyha/tree-sitter-cmake"))
+           (csharp     . ("https://github.com/tree-sitter/tree-sitter-c-sharp.git"))
+           (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
+           (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
+           (go         . ("https://github.com/tree-sitter/tree-sitter-go"))
+           (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod.git"))
+           (html       . ("https://github.com/tree-sitter/tree-sitter-html"))
+           (java       . ("https://github.com/tree-sitter/tree-sitter-java.git"))
+           (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
+           (json       . ("https://github.com/tree-sitter/tree-sitter-json"))
+           (lua        . ("https://github.com/Azganoth/tree-sitter-lua"))
+           (make       . ("https://github.com/alemuller/tree-sitter-make"))
+           (markdown   . ("https://github.com/MDeiml/tree-sitter-markdown" nil "tree-sitter-markdown/src"))
+           (ocaml      . ("https://github.com/tree-sitter/tree-sitter-ocaml" nil "ocaml/src"))
+           (org        . ("https://github.com/milisims/tree-sitter-org"))
+           (python     . ("https://github.com/tree-sitter/tree-sitter-python"))
+           (php        . ("https://github.com/tree-sitter/tree-sitter-php"))
+           (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "typescript/src"))
+           (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "tsx/src"))
+           (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby"))
+           (rust       . ("https://github.com/tree-sitter/tree-sitter-rust"))
+           (sql        . ("https://github.com/m-novikov/tree-sitter-sql"))
+           (vue        . ("https://github.com/merico-dev/tree-sitter-vue"))
+           (yaml       . ("https://github.com/ikatyang/tree-sitter-yaml"))
+           (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
+           (zig        . ("https://github.com/GrayJack/tree-sitter-zig"))))
+
+  (add-to-list 'major-mode-remap-alist '(sh-mode         . bash-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c-mode          . c-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c++-mode        . c++-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(c-or-c++-mode   . c-or-c++-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(css-mode        . css-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(js-mode         . js-ts-mode))
+  ;;  (add-to-list 'major-mode-remap-alist '(java-mode       . java-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(js-json-mode    . json-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(makefile-mode   . cmake-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(python-mode     . python-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(ruby-mode       . ruby-ts-mode))
+  (add-to-list 'major-mode-remap-alist '(conf-toml-mode  . toml-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\(?:Dockerfile\\(?:\\..*\\)?\\|\\.[Dd]ockerfile\\)\\'" . dockerfile-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+  (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.y[a]?ml\\'" . yaml-ts-mode))
+#+end_src
 ** Language Setup
 *** Eglot Setup
 #+begin_src emacs-lisp
   (use-package eglot
-      :hook (prog-mode . eglot-ensure))
+      :ensure nil
+      :hook (prog-mode . eglot-ensure)
+      :custom
+      (eglot-autoshutdown t)
+      (eglot-events-buffer-size 0)
+      (eglot-extend-to-xref nil)
+      (eglot-ignored-server-capabilities
+          '(:hoverProvider
+               :documentHighlightProvider
+               :documentFormattingProvider
+               :documentRangeFormattingProvider
+               :documentOnTypeFormattingProvider
+               :colorProvider
+               :foldingRangeProvider))
+      )
 #+end_src
 *** COMMENT LSP-Mode Setup
 #+begin_src emacs-lisp
@@ -1102,8 +1191,24 @@ jumping to visible text using a char-based decision tree
 ***** find the class/method in third library by keyword
 (lsp-ivy-workspace-symbol)
 *** JAVA Setup
+**** Eglot-java
 #+begin_src emacs-lisp
-  (setenv "JAVA_HOME"  ctm-java-home-path)
+  (with-eval-after-load 'eglot
+      (add-to-list 'eglot-server-programs
+          `(java-mode ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+               "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
+               "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
+               ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
+      )
+
+  (use-package jarchive
+      :ensure t
+      :after eglot
+      :config
+      (jarchive-setup))
+#+end_src
+**** COMMENT Lsp-java
+#+begin_src emacs-lisp
   (setq my-java-path (concat ctm-java-home-path "bin/java"))
   (use-package lsp-java 
       :init
@@ -1145,7 +1250,7 @@ jumping to visible text using a char-based decision tree
       (setq lsp-java-trace-server t)
       (setq lsp-java-configuration-check-project-settings-exclusions t)
       (setq lsp-java-completion-guess-method-arguments t)
-      ;;      (add-hook 'java-mode-hook 'lsp)
+
       ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
       ;; (add-hook 'java-mode-hook
       ;;     (lambda()
@@ -1165,30 +1270,9 @@ jumping to visible text using a char-based decision tree
       ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
       )
 
-  (use-package dap-java
-      :ensure nil
-      :config
-      (dap-register-debug-template
-          "localhost:5005"
-          (list :type "java"
-              :request "attach"
-              :hostName "localhost"
-              :port 5005))
-      (dap-register-debug-template
-          "lxd"
-          (list :type "java"
-              :request "attach"
-              :hostName "127.0.0.1"
-              :port 5005))
-      ;; :config
-      ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-      ;; (global-set-key (kbd "<f8>") 'dap-next)
-      ;; (global-set-key (kbd "<f9>") 'dap-continue)
-      )
+  ;; ;;==========java end==========
 
-  ;;==========java end==========
-
-  ;;========== maven pom==========
+  ;;====== maven pom==========
   ;; https://github.com/m0smith/maven-pom-mode.git
                     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
@@ -1197,13 +1281,6 @@ jumping to visible text using a char-based decision tree
                     ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;;==========maven pom end==========
 
-  (use-package mvn
-      :ensure t
-      )
-
-  (defun mvn-install ()
-      (interactive)
-      (mvn "install"))
 #+end_src
 **** Hot Deployment
 use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
@@ -1211,6 +1288,16 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
 #+begin_src emacs-lisp
   (use-package groovy-mode
       )
+#+end_src
+*** Maven Setup
+#+begin_src emacs-lisp
+  (use-package mvn
+      :ensure t
+      )
+
+  (defun mvn-install ()
+      (interactive)
+      (mvn "install"))
 #+end_src
 *** Web-Mode Setup
 #+begin_src emacs-lisp
@@ -1334,17 +1421,17 @@ git tools
 ** Nginx Setup
 #+begin_src emacs-lisp
   (use-package nginx-mode)
-  (use-package company-nginx)
+  ;;  (use-package company-nginx)
 #+end_src
 ** HttpClient Setup
 #+begin_src emacs-lisp
   (use-package restclient)
   (use-package ob-restclient)
-  (use-package company-restclient
-      :after(restclient-mode)
-      )
+  ;;  (use-package company-restclient
+  ;;      :after(restclient-mode)
+  ;;      )
 
-  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
+  ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
 ** Youdao Translate Setup
 #+begin_src emacs-lisp
