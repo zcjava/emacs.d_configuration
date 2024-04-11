@@ -49,7 +49,7 @@ This configuration file contains setup my config of emacs
 #+begin_src emacs-lisp
   (defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
   (defconst ctm-org-agenda-filename-input "inbox.org")
-  (defconst ctm-org-agenda-filename-gtd "gtd.org")
+  (defconst ctm-org-agenda-filename-task "task.org")
 #+end_src
 *** Org Roam Constant
 #+begin_src emacs-lisp
@@ -97,6 +97,7 @@ This configuration file contains setup my config of emacs
 
   (setq-default pathname-coding-system 'utf-8)
   (set-file-name-coding-system 'utf-8)
+
 #+end_src
 *** BackUp Settings
 donot backup file
@@ -126,23 +127,42 @@ donot backup file
 #+end_src
 *** Tabs Indentation Settings
 #+begin_src emacs-lisp
-  ;;  (use-package smart-tabs-mode)
   (setq tab-width 4)
   (setq-default tab-width 4)
   (setq-default indent-line-function 4)
   (setq-default lisp-indent-offset 4)
   (setq-default sgml-basic-offset 4)
-  ;;  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
   (setq c-basic-offset 4)
   ;; (setq tab-always-indent)
   (setq-default indent-tabs-mode nil)
+
+  (setq-default electric-indent-inhibit t)
+
   ;; nxml-mode
   (setq
       nxml-child-indent 4
       nxml-attribute-indent 4
       nxml-slash-auto-complete-flag t)
-#+end_src
 
+  ;; js ts indent-tab 2 spaces
+  (setq js-indent-level 2)
+
+#+end_src
+**** COMMENT Smart Tabs Settings
+#+begin_src emacs-lisp
+  (use-package! smart-tabs-mode
+      :config
+      (smart-tabs-add-language-support jsx rjsx-mode-hook
+          ((rjsx-indent-line . standard-indent)))
+      (smart-tabs-add-language-support ts typescript-mode-hook
+          ((typescript-indent-line . standard-indent)))
+      (smart-tabs-add-language-support tsx tsx-mode-hook
+          ((typescript-tsx-indent-line . standard-indent)))
+      (smart-tabs-add-language-support py python-mode-hook
+          ((python-indent-line-function . standard-indent)))
+      (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'jsx 'ts 'tsx 'py)
+      )
+#+end_src
 *** Undo Settings
 #+begin_src emacs-lisp
   (use-package undo-tree
@@ -237,7 +257,8 @@ window auto Zoom,current window Larger display
 
   (use-package doom-modeline
       :vc (:fetcher github :repo seagle0128/doom-modeline)
-      :init (doom-modeline-mode t)
+      :init
+      (doom-modeline-mode t)
       :config
       (setq doom-modeline-height 5)
       (custom-set-faces
@@ -246,7 +267,7 @@ window auto Zoom,current window Larger display
           )
       (doom-modeline-def-modeline 'ownml
           '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-          '(input-method buffer-encoding process check))
+          '(buffer-encoding process vcs check))
       ;; Add to `doom-modeline-mode-hook` or other hooks
       (defun setup-custom-doom-modeline ()
           (doom-modeline-set-modeline 'ownml 'default))
@@ -333,14 +354,20 @@ window auto Zoom,current window Larger display
 
   (use-package page-break-lines)
 #+end_src
-*** Delimiters Highlights Setup
+*** COMMENT Delimiters Highlights Setup
+:tip:
+replaced by treesit
+:END:
 #+begin_src emacs-lisp
   (use-package rainbow-delimiters
       :hook
       (prog-mode . rainbow-delimiters-mode)
       )
 #+end_src
-*** Highlight Symbol Setup
+*** COMMENT Highlight Symbol Setup
+:tip:
+replaced by treesit
+:END:
 #+begin_src emacs-lisp
   (use-package auto-highlight-symbol)
   (global-auto-highlight-symbol-mode t)
@@ -359,7 +386,6 @@ window auto Zoom,current window Larger display
       (interactive)
       (save-excursion
           (indent-region (point-min) (point-max) nil)))
-
 #+end_src
 *** Org Table Tidy Settings
 #+begin_src emacs-lisp
@@ -427,17 +453,17 @@ window auto Zoom,current window Larger display
 
   (setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
   (setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
-  (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-gtd))
+  (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-task))
   ;;  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
   (setq org-agenda-files (list ctm-org-agenda-dir))
   (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
   (setq org-agenda-include-diary t)
   (setq org-capture-templates `(
                                    ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
-                                   ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                   ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
-                                   ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
-                                   ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                   ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                   ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                   ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
+                                   ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
                                    ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
                                    ))
   (setq org-todo-keywords
@@ -662,8 +688,7 @@ easy to jump windows
 #+end_src
 ** Undo Tree Setup
 #+begin_src emacs-lisp
-  (use-package undo-tree
-      )
+  (use-package undo-tree)
   (global-undo-tree-mode t)
 #+end_src
 ** Command Completion
@@ -712,7 +737,6 @@ command completion use ivy
                ("C-."   . 'counsel-imenu)
                ("C-c o"   . 'counsel-outline)
                ("C-x C-f" . counsel-find-file)
-               ("C-c k" . counsel-ag)
                ("C-c g" . counsel-rg)
                ("C-h f" . 'counsel-describe-function)
                ("C-h v" . 'counsel-describe-variable)
@@ -742,7 +766,6 @@ text search use ivy
 #+begin_src emacs-lisp
   ;; bind-key conflict, unbind
   (define-key org-mode-map (kbd "C-'") nil)
-
   (use-package swiper
       :bind(
                ("C-s" . swiper)
@@ -1018,56 +1041,12 @@ jumping to visible text using a char-based decision tree
 #+end_src
 ** Treesit
 #+begin_src emacs-lisp
-  (setq treesit-language-source-alist
-      '((bash       . ("https://github.com/tree-sitter/tree-sitter-bash"))
-           (c          . ("https://github.com/tree-sitter/tree-sitter-c"))
-           (cpp        . ("https://github.com/tree-sitter/tree-sitter-cpp"))
-           (css        . ("https://github.com/tree-sitter/tree-sitter-css"))
-           (cmake      . ("https://github.com/uyha/tree-sitter-cmake"))
-           (csharp     . ("https://github.com/tree-sitter/tree-sitter-c-sharp.git"))
-           (dockerfile . ("https://github.com/camdencheek/tree-sitter-dockerfile"))
-           (elisp      . ("https://github.com/Wilfred/tree-sitter-elisp"))
-           (go         . ("https://github.com/tree-sitter/tree-sitter-go"))
-           (gomod      . ("https://github.com/camdencheek/tree-sitter-go-mod.git"))
-           (html       . ("https://github.com/tree-sitter/tree-sitter-html"))
-           (java       . ("https://github.com/tree-sitter/tree-sitter-java.git"))
-           (javascript . ("https://github.com/tree-sitter/tree-sitter-javascript"))
-           (json       . ("https://github.com/tree-sitter/tree-sitter-json"))
-           (lua        . ("https://github.com/Azganoth/tree-sitter-lua"))
-           (make       . ("https://github.com/alemuller/tree-sitter-make"))
-           (markdown   . ("https://github.com/MDeiml/tree-sitter-markdown" nil "tree-sitter-markdown/src"))
-           (ocaml      . ("https://github.com/tree-sitter/tree-sitter-ocaml" nil "ocaml/src"))
-           (org        . ("https://github.com/milisims/tree-sitter-org"))
-           (python     . ("https://github.com/tree-sitter/tree-sitter-python"))
-           (php        . ("https://github.com/tree-sitter/tree-sitter-php"))
-           (typescript . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "typescript/src"))
-           (tsx        . ("https://github.com/tree-sitter/tree-sitter-typescript" nil "tsx/src"))
-           (ruby       . ("https://github.com/tree-sitter/tree-sitter-ruby"))
-           (rust       . ("https://github.com/tree-sitter/tree-sitter-rust"))
-           (sql        . ("https://github.com/m-novikov/tree-sitter-sql"))
-           (vue        . ("https://github.com/merico-dev/tree-sitter-vue"))
-           (yaml       . ("https://github.com/ikatyang/tree-sitter-yaml"))
-           (toml       . ("https://github.com/tree-sitter/tree-sitter-toml"))
-           (zig        . ("https://github.com/GrayJack/tree-sitter-zig"))))
-
-  (add-to-list 'major-mode-remap-alist '(sh-mode         . bash-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(c-mode          . c-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(c++-mode        . c++-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(c-or-c++-mode   . c-or-c++-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(css-mode        . css-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(js-mode         . js-ts-mode))
-  ;;  (add-to-list 'major-mode-remap-alist '(java-mode       . java-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(js-json-mode    . json-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(makefile-mode   . cmake-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(python-mode     . python-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(ruby-mode       . ruby-ts-mode))
-  (add-to-list 'major-mode-remap-alist '(conf-toml-mode  . toml-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\(?:Dockerfile\\(?:\\..*\\)?\\|\\.[Dd]ockerfile\\)\\'" . dockerfile-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
-  (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.y[a]?ml\\'" . yaml-ts-mode))
+  (use-package treesit-auto
+      :init
+      (setq tressit-font-lock-level 4)
+      :config
+      (global-treesit-auto-mode)
+      )
 #+end_src
 ** Language Setup
 *** Eglot Setup
@@ -1195,7 +1174,7 @@ jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
   (with-eval-after-load 'eglot
       (add-to-list 'eglot-server-programs
-          `(java-mode ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+          `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
                "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
                "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
                ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
@@ -1327,8 +1306,6 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
   (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 
   ;;  (use-package js2-mode
@@ -1352,6 +1329,9 @@ react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flyc
 #+begin_src emacs-lisp
   (use-package rjsx-mode
       )
+
+  (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
+  (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
 #+end_src
 *** Javascript REPL
 **** js-comint
@@ -1433,7 +1413,16 @@ git tools
 
   ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
-** Youdao Translate Setup
+** Ediff Setup
+#+begin_src emacs-lisp
+  (use-package ediff
+      :config
+      (setq ediff-keep-variants nil)
+      (setq ediff-split-window-function 'split-window-horizontally)
+      (setq ediff-window-setup-function #'ediff-setup-windows-plain))
+#+end_src
+** COMMENT Youdao Translate Setup
+startup tip : Edebug: names-edebug-anon0
 #+begin_src emacs-lisp
   (use-package youdao-dictionary
       :init

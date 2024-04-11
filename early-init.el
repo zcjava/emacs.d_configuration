@@ -3,7 +3,7 @@
 (setq read-process-output-max (* 32 1024 1024))
 (add-hook 'emacs-startup-hook
 	  (lambda ()
-	      (setq gc-cons-threshold 800000)))
+	      (setq gc-cons-threshold (* 2 1000 1000))))
 
 ;; disable package load elpa
 (setq package-enable-at-startup nil)
