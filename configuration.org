@@ -7,194 +7,194 @@ This configuration file contains setup my config of emacs
 ** Package Manager
 *** ELPA Setup
 #+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (if (boundp 'package-archives-spec)
-      (setq package-archives package-archives-spec)
-      (setq package-archives '(
-                                  ("gnu" . "https://elpa.gnu.org/packages/")
-                                  ("melpa" . "https://melpa.org/packages/")
-                                  ("gnu-devel" . "https://elpa.gnu.org/devel/")
-                                  ;;  ("org" . "https://orgmode.org/elpa/")
-                                  ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
-                                  ))
-      )
-  (unless (bound-and-true-p package--initialized)
-      (package-initialize))
 
-  (unless package-archive-contents
-      (package-refresh-contents))
+(require 'package)
+(if (boundp 'package-archives-spec)
+    (setq package-archives package-archives-spec)
+    (setq package-archives '(
+                                ("gnu" . "https://elpa.gnu.org/packages/")
+                                ("melpa" . "https://melpa.org/packages/")
+                                ("gnu-devel" . "https://elpa.gnu.org/devel/")
+                                ;;  ("org" . "https://orgmode.org/elpa/")
+                                ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
+                                ))
+    )
+(unless (bound-and-true-p package--initialized)
+    (package-initialize))
+
+(unless package-archive-contents
+    (package-refresh-contents))
 #+END_SRC
 *** Use-Package Setup
 #+begin_src emacs-lisp
-  (unless (package-installed-p 'use-package)
-      (package-refresh-contents)
-      (package-install 'use-package))
+(unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
 
-  (setq use-package-always-ensure t)
+(setq use-package-always-ensure t)
 #+end_src
 **** vc-use-package
 #+begin_src emacs-lisp
-  (unless (package-installed-p 'vc-use-package)
-      (package-vc-install "https://github.com/slotThe/vc-use-package"))
-  (require 'vc-use-package)
+(unless (package-installed-p 'vc-use-package)
+    (package-vc-install "https://github.com/slotThe/vc-use-package"))
+(require 'vc-use-package)
 #+end_src
 ** Custom Need Constant
 *** Font Constant
 #+begin_src emacs-lisp
-  (defconst ctm-font-name-en "DejaVu Sans Mono")
-  (defconst ctm-font-name-zh "Microsoft YaHei")
-  (defconst ctm-font-size "22")
+(defconst ctm-font-name-en "DejaVu Sans Mono")
+(defconst ctm-font-name-zh "Microsoft YaHei")
+(defconst ctm-font-size "22")
 #+end_src
 *** Org Agenda Constant
 #+begin_src emacs-lisp
-  (defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
-  (defconst ctm-org-agenda-filename-input "inbox.org")
-  (defconst ctm-org-agenda-filename-task "task.org")
+(defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
+(defconst ctm-org-agenda-filename-input "inbox.org")
+(defconst ctm-org-agenda-filename-task "task.org")
 #+end_src
 *** Org Roam Constant
 #+begin_src emacs-lisp
-  (defconst ctm-org-roam-directory (file-truename "~/Desktop/note/"))
-  (defconst ctm-org-roam-dailies-directory "daily")
+(defconst ctm-org-roam-directory (file-truename "~/Desktop/note/"))
+(defconst ctm-org-roam-dailies-directory "daily")
 #+end_src
 *** Lsp Constant
 **** Groovy Constant
 #+begin_src emacs-lisp
-  (defconst ctm-lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
-  (defconst ctm-lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
+(defconst ctm-lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
+(defconst ctm-lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
 #+end_src
 **** Java Constant
 #+begin_src emacs-lisp
-  (defconst ctm-java-home-path (getenv "JAVA_HOME"))
-  (defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-  (defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
-  (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
-  (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
-  (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
+(defconst ctm-java-home-path (getenv "JAVA_HOME"))
+(defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+(defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
+(defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
+(defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
+(defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 #+end_src
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][Look at early-init.el]]
 *** Show Startup Message
 #+begin_src emacs-lisp
-  (setq inhibit-startup-message t)
+(setq inhibit-startup-message t)
 #+end_src
 *** Character Settings
 #+begin_src emacs-lisp
-  (set-language-environment "UTF-8")
-  ;; (setq locale-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
+(set-language-environment "UTF-8")
+;; (setq locale-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
 
-  (set-buffer-file-coding-system 'utf-8)
-  (set-default buffer-file-coding-system 'utf8)
-  (set-default-coding-systems 'utf-8)
+(set-buffer-file-coding-system 'utf-8)
+(set-default buffer-file-coding-system 'utf8)
+(set-default-coding-systems 'utf-8)
 
-  (set-clipboard-coding-system 'utf-8)
+(set-clipboard-coding-system 'utf-8)
 
-  (set-terminal-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-  (modify-coding-system-alist 'process "*" 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(modify-coding-system-alist 'process "*" 'utf-8)
 
-  (setq-default pathname-coding-system 'utf-8)
-  (set-file-name-coding-system 'utf-8)
+(setq-default pathname-coding-system 'utf-8)
+(set-file-name-coding-system 'utf-8)
 
 #+end_src
 *** BackUp Settings
 donot backup file
 #+begin_src emacs-lisp
-  (setq auto-save-default nil)
-  ;;(setq make-backup-files nil)
-  (setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
-  ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
+(setq auto-save-default nil)
+;;(setq make-backup-files nil)
+(setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
+;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 #+end_src
 *** Env Settings
 #+begin_src emacs-lisp
-  (use-package exec-path-from-shell 
-      :ensure t
-      ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
-      )
-  (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
-      (add-to-list 'exec-path-from-shell-variables var))
-  (when (memq window-system '(mac ns x))
-      (exec-path-from-shell-initialize))
-  (setq exec-path-from-shell-check-startup-files nil)
+(use-package exec-path-from-shell 
+    :ensure t
+    ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
+    )
+(dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
+    (add-to-list 'exec-path-from-shell-variables var))
+(when (memq window-system '(mac ns x))
+    (exec-path-from-shell-initialize))
+(setq exec-path-from-shell-check-startup-files nil)
 #+end_src
 *** Custom File Settings
 [[file:early-init.el::;; custom file][Look at early-init.el]]
 *** Yes/No Shorthand Settings
 #+begin_src emacs-lisp
-  (fset 'yes-or-no-p 'y-or-n-p)
+(fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
 *** Tabs Indentation Settings
 #+begin_src emacs-lisp
-  (setq tab-width 4)
-  (setq-default tab-width 4)
-  (setq-default indent-line-function 4)
-  (setq-default lisp-indent-offset 4)
-  (setq-default sgml-basic-offset 4)
-  (setq c-basic-offset 4)
-  ;; (setq tab-always-indent)
-  (setq-default indent-tabs-mode nil)
+(setq tab-width 4)
+(setq-default tab-width 4)
+(setq-default indent-line-function 4)
+(setq-default lisp-indent-offset 4)
+(setq-default sgml-basic-offset 4)
+(setq c-basic-offset 4)
+;; (setq tab-always-indent)
+(setq-default indent-tabs-mode nil)
 
-  (setq-default electric-indent-inhibit t)
+(setq-default electric-indent-inhibit t)
 
-  ;; nxml-mode
-  (setq
-      nxml-child-indent 4
-      nxml-attribute-indent 4
-      nxml-slash-auto-complete-flag t)
+;; nxml-mode
+(setq
+    nxml-child-indent 4
+    nxml-attribute-indent 4
+    nxml-slash-auto-complete-flag t)
 
-  ;; js ts indent-tab 2 spaces
-  (setq js-indent-level 2)
-
+;; js ts indent-tab 2 spaces
+(setq js-indent-level 2)
 #+end_src
 **** COMMENT Smart Tabs Settings
 #+begin_src emacs-lisp
-  (use-package! smart-tabs-mode
-      :config
-      (smart-tabs-add-language-support jsx rjsx-mode-hook
-          ((rjsx-indent-line . standard-indent)))
-      (smart-tabs-add-language-support ts typescript-mode-hook
-          ((typescript-indent-line . standard-indent)))
-      (smart-tabs-add-language-support tsx tsx-mode-hook
-          ((typescript-tsx-indent-line . standard-indent)))
-      (smart-tabs-add-language-support py python-mode-hook
-          ((python-indent-line-function . standard-indent)))
-      (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'jsx 'ts 'tsx 'py)
-      )
+(use-package! smart-tabs-mode
+    :config
+    (smart-tabs-add-language-support jsx rjsx-mode-hook
+        ((rjsx-indent-line . standard-indent)))
+    (smart-tabs-add-language-support ts typescript-mode-hook
+        ((typescript-indent-line . standard-indent)))
+    (smart-tabs-add-language-support tsx tsx-mode-hook
+        ((typescript-tsx-indent-line . standard-indent)))
+    (smart-tabs-add-language-support py python-mode-hook
+        ((python-indent-line-function . standard-indent)))
+    (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'jsx 'ts 'tsx 'py)
+    )
 #+end_src
 *** Undo Settings
 #+begin_src emacs-lisp
-  (use-package undo-tree
-      :init
-      (global-undo-tree-mode)
-      :ensure t
-      :init (setq undo-tree-auto-save-history nil)
-      )
+(use-package undo-tree
+    :init
+    (global-undo-tree-mode)
+    :ensure t
+    :init (setq undo-tree-auto-save-history nil)
+    )
 
 #+end_src
 *** Recentf Settings
 #+begin_src emacs-lisp
-  (setq recentf-max-menu-items 50)
-  (setq-default
-      recentf-max-saved-items 1000
-      recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
-  (recentf-mode t)
+(setq recentf-max-menu-items 50)
+(setq-default
+    recentf-max-saved-items 1000
+    recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
+(recentf-mode t)
 #+end_src
 *** Window Settings
 **** Window Maximized
 #+begin_src emacs-lisp
-  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
 **** Zoom
 window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
-  (use-package zoom
-      :ensure t
-      :init
-      (setq zoom-size '(0.718 . 0.718))
-      :bind ("C-c z" . zoom)
-      )
+(use-package zoom
+    :ensure t
+    :init
+    (setq zoom-size '(0.718 . 0.718))
+    :bind ("C-c z" . zoom)
+    )
 #+end_src
 ** UI Setup
 *** Menu-bar Hide
@@ -205,491 +205,503 @@ window auto Zoom,current window Larger display
 [[file:early-init.el::;; scroll-bar][Look at early-init-el]]
 *** Theme
 #+begin_src emacs-lisp
-  (use-package dracula-theme
-      :ensure t
-      )
-  (load-theme 'dracula t)
+(use-package dracula-theme
+    :ensure t
+    )
+(load-theme 'dracula t)
 #+end_src
 *** Cursor
 #+begin_src emacs-lisp
-  (setq-default cursor-type 'bar)
-  (set-cursor-color "green")
-  (show-paren-mode t)
-  (setq show-paren-style 'expression)
-  (set-face-background 'show-paren-match (face-background 'default))
-  (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
-  (add-hook 'minibuffer-setup-hook 'subword-mode)
+(setq-default cursor-type 'bar)
+(set-cursor-color "green")
+(show-paren-mode t)
+(setq show-paren-style 'expression)
+(set-face-background 'show-paren-match (face-background 'default))
+(set-face-attribute 'show-paren-match nil :weight 'extra-bold)
+(add-hook 'minibuffer-setup-hook 'subword-mode)
 #+end_src
 *** FillColumn
 #+begin_src emacs-lisp
-  (setq-default fill-column 150)
+(setq-default fill-column 150)
+
 #+end_src
 *** HighLight Line
 #+begin_src emacs-lisp
-  (global-hl-line-mode t)
+(global-hl-line-mode t)
 #+end_src
 *** Font
 #+begin_src emacs-lisp 
-  ;;  (set-face-attribute 'default nil :font "Microsoft Yahei-22")  
-  ;;  (set-face-attribute 'default nil :font "PingFang SC-22")
-  ;; english font use Dejavu sans mono; chinese font use microsoft yahei
-  (progn
-      (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
-      (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
-      (dolist (charset '(kana han symbol cjk-misc bopomofo))
-          (set-fontset-font (frame-parameter nil 'font)
-              charset
-              (font-spec :family ctm-font-name-zh)
-              )))
-  (global-font-lock-mode t)
-  (setq font-lock-maximum-size 5000000)
+;;  (set-face-attribute 'default nil :font "Microsoft Yahei-22")  
+;;  (set-face-attribute 'default nil :font "PingFang SC-22")
+;; english font use Dejavu sans mono; chinese font use microsoft yahei
+(progn
+    (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
+    (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
+    (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font)
+            charset
+            (font-spec :family ctm-font-name-zh)
+            )))
+(global-font-lock-mode t)
+(setq font-lock-maximum-size 5000000)
 #+end_src
 *** Mode Line
 #+begin_src emacs-lisp
-  (use-package nyan-mode
-      :ensure t
-      :init
-      (setq nyan-animate-nyancat t)
-      (setq nyan-wavy-trail t)
-      (setq nyan-minimum-window-width 80)
-      (setq nyan-bar-length 20)
-      (nyan-mode))
+(use-package nyan-mode
+    :ensure t
+    :init
+    (setq nyan-animate-nyancat t)
+    (setq nyan-wavy-trail t)
+    (setq nyan-minimum-window-width 80)
+    (setq nyan-bar-length 20)
+    (nyan-mode))
 
-  (use-package doom-modeline
-      :vc (:fetcher github :repo seagle0128/doom-modeline)
-      :init
-      (doom-modeline-mode t)
-      :config
-      (setq doom-modeline-height 5)
-      (custom-set-faces
-          `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
-          `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
-          )
-      (doom-modeline-def-modeline 'ownml
-          '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-          '(buffer-encoding process vcs check))
-      ;; Add to `doom-modeline-mode-hook` or other hooks
-      (defun setup-custom-doom-modeline ()
-          (doom-modeline-set-modeline 'ownml 'default))
-      (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
-      )
+(use-package doom-modeline
+    :vc (:fetcher github :repo seagle0128/doom-modeline)
+    :init
+    (doom-modeline-mode t)
+    :config
+    (setq doom-modeline-height 5)
+    (custom-set-faces
+        `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
+        `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
+        )
+    (doom-modeline-def-modeline 'ownml
+        '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
+        '(buffer-encoding process vcs check))
+    ;; Add to `doom-modeline-mode-hook` or other hooks
+    (defun setup-custom-doom-modeline ()
+        (doom-modeline-set-modeline 'ownml 'default))
+    (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+    )
 
 #+end_src
 *** Icons
 #+begin_src emacs-lisp
-  (use-package all-the-icons)
-  (use-package all-the-icons-dired
-      :hook (dired-mode . all-the-icons-dired-mode)
-      )
+(use-package all-the-icons)
+(use-package all-the-icons-dired
+    :hook (dired-mode . all-the-icons-dired-mode)
+    )
 #+end_src
+*** DashBoard Setup
+#+begin_src emacs-lisp
+(use-package dashboard
+    :config
+    (dashboard-setup-startup-hook)
+    (dashboard-modify-heading-icons '((recents . "file-text")
+                                         (boomarks . "book")
+                                         ))
+    (setq dashboard-banner-logo-title "Life is happy")
+    (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
+    (setq dashboard-image-banner-max-height 100)
+    (setq dashboard-center-content t)
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-set-navigator t)
+    (setq dashboard-items '((recents  . 5)
+                               (bookmarks . 5)
+                               (projects . 5)
+                               (agenda . 5)
+                               ))
+    (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
+    (setq dashboard-page-separator "\n\f\n")
+    )
 
+(use-package page-break-lines)
+#+end_src
 *** Tabs Setup
 **** Centaur-Tabs
 #+begin_src emacs-lisp
-  (use-package centaur-tabs
-      :demand
-      :hook
-      ;;  (dired-mode . centaur-tabs-local-mode)
-      (dashboard-mode . centaur-tabs-local-mode)
-      (term-mode . centaur-tabs-local-mode)
-      (calendar-mode . centaur-tabs-local-mode)
-      (org-agenda-mode . centaur-tabs-local-mode)
-      (helpful-mode . centaur-tabs-local-mode)
-      :config
-      (setq
-          centaur-tabs-style "bar"
-          centaur-tabs-height 32
-          centaur-tabs-set-icons t
-          centaur-tabs-set-bar 'under
-          x-underline-at-descent-line t
-          centaur-tabs-show-count t
-          centaur-tabs-set-close-button nil
-          centaur-tabs-set-modified-marker t
-          centaur-tabs-show-navigation-buttons t)
-      (centaur-tabs-headline-match)
-      (centaur-tabs-group-by-projectile-project)
-      (centaur-tabs-mode t)
+(use-package centaur-tabs
+    :demand
+    :hook
+    ;;  (dired-mode . centaur-tabs-local-mode)
+    (dashboard-mode . centaur-tabs-local-mode)
+    (term-mode . centaur-tabs-local-mode)
+    (calendar-mode . centaur-tabs-local-mode)
+    (org-agenda-mode . centaur-tabs-local-mode)
+    (helpful-mode . centaur-tabs-local-mode)
+    :config
+    (setq
+        centaur-tabs-style "bar"
+        centaur-tabs-height 32
+        centaur-tabs-set-icons t
+        centaur-tabs-set-bar 'under
+        x-underline-at-descent-line t
+        centaur-tabs-show-count t
+        centaur-tabs-set-close-button nil
+        centaur-tabs-set-modified-marker t
+        centaur-tabs-show-navigation-buttons t)
+    (centaur-tabs-headline-match)
+    (centaur-tabs-group-by-projectile-project)
+    (centaur-tabs-mode t)
 
-      :bind(
-               ("s-1" . centaur-tabs-select-visible-tab)
-               ("s-2" . centaur-tabs-select-visible-tab)
-               ("s-3" . centaur-tabs-select-visible-tab)
-               ("s-4" . centaur-tabs-select-visible-tab)
-               ("s-5" . centaur-tabs-select-visible-tab)
-               ("s-6" . centaur-tabs-select-visible-tab)
-               ("s-7" . centaur-tabs-select-visible-tab)
-               ("s-8" . centaur-tabs-select-visible-tab)
-               ("s-9" . centaur-tabs-select-visible-tab)
-               ("s-0" . centaur-tabs-select-visible-tab)
-               ("C-c t s" . centaur-tabs-counsel-switch-group)
-               ("C-c t p" . centaur-tabs-group-by-projectile-project)
-               ("C-c t g" . centaur-tabs-group-buffer-groups)
-               )
-      )
+    :bind(
+             ("s-1" . centaur-tabs-select-visible-tab)
+             ("s-2" . centaur-tabs-select-visible-tab)
+             ("s-3" . centaur-tabs-select-visible-tab)
+             ("s-4" . centaur-tabs-select-visible-tab)
+             ("s-5" . centaur-tabs-select-visible-tab)
+             ("s-6" . centaur-tabs-select-visible-tab)
+             ("s-7" . centaur-tabs-select-visible-tab)
+             ("s-8" . centaur-tabs-select-visible-tab)
+             ("s-9" . centaur-tabs-select-visible-tab)
+             ("s-0" . centaur-tabs-select-visible-tab)
+             ("C-c t s" . centaur-tabs-counsel-switch-group)
+             ("C-c t p" . centaur-tabs-group-by-projectile-project)
+             ("C-c t g" . centaur-tabs-group-buffer-groups)
+             )
+    )
 #+end_src
 
-*** DashBoard Setup
-#+begin_src emacs-lisp
-  (use-package dashboard
-      :config
-      (dashboard-setup-startup-hook)
-      (dashboard-modify-heading-icons '((recents . "file-text")
-                                           (boomarks . "book")
-                                           ))
-      (setq dashboard-banner-logo-title "Life is happy")
-      (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
-      (setq dashboard-image-banner-max-height 100)
-      (setq dashboard-center-content t)
-      (setq dashboard-set-heading-icons t)
-      (setq dashboard-set-file-icons t)
-      (setq dashboard-set-navigator t)
-      (setq dashboard-items '((recents  . 5)
-                                 (bookmarks . 5)
-                                 (projects . 5)
-                                 (agenda . 5)
-                                 ))
-      (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
-      (setq dashboard-page-separator "\n\f\n")
-      )
-
-  (use-package page-break-lines)
-#+end_src
-*** COMMENT Delimiters Highlights Setup
+*** Delimiters Highlights Setup
 :tip:
 replaced by treesit
 :END:
 #+begin_src emacs-lisp
-  (use-package rainbow-delimiters
-      :hook
-      (prog-mode . rainbow-delimiters-mode)
-      )
+(use-package rainbow-delimiters
+    :hook
+    (prog-mode . rainbow-delimiters-mode)
+    )
 #+end_src
 *** COMMENT Highlight Symbol Setup
 :tip:
 replaced by treesit
 :END:
 #+begin_src emacs-lisp
-  (use-package auto-highlight-symbol)
-  (global-auto-highlight-symbol-mode t)
+(use-package auto-highlight-symbol)
+(global-auto-highlight-symbol-mode t)
 #+end_src
 ** Org Setup
 *** OrgFile AutoFormat
 #+begin_src emacs-lisp
-  ;; let source code block can be `indent-region` format
-  (setq org-src-tab-acts-natively t)
-  ;; org file before save invoke indent-region
-  (add-hook 'org-mode-hook
-      (lambda()
-          (add-hook 'before-save-hook 'org-format-buffer nil t)))
+;; let source code block can be `indent-region` format
+(setq org-src-tab-acts-natively t)
+(setq org-src-fontify-natively t)
 
-  (defun org-format-buffer()
-      (interactive)
-      (save-excursion
-          (indent-region (point-min) (point-max) nil)))
+(setq org-src-preserve-indentation t)
+(setq org-src--preserve-indentation t)
+(setq org-edit-src-content-indentation 0)
+(setq org-src--content-indentation 0)
+
+;; org file before save invoke indent-region
+(add-hook 'org-mode-hook
+    (lambda()
+        (add-hook 'before-save-hook 'org-format-buffer nil t)))
+
+(defun org-format-buffer()
+    (interactive)
+    (save-excursion
+        (indent-region (point-min) (point-max) nil)))
 #+end_src
 *** Org Table Tidy Settings
 #+begin_src emacs-lisp
-  ;;org-table align  todo hook in package
-  (use-package valign
-      :init
-      (add-hook 'org-mode-hook #'valign-mode)
-      )  
+;;org-table align  todo hook in package
+(use-package valign
+    :init
+    (add-hook 'org-mode-hook #'valign-mode)
+    )  
 #+end_src
 *** org-superstar
 #+begin_src emacs-lisp
-  (use-package org-superstar
-      :ensure t
-      :after org
-      :hook ((org-mode . org-superstar-mode)
-                (org-mode . org-indent-mode))
-      :config
-      (setq org-superstar-special-todo-items t))
+(use-package org-superstar
+    :ensure t
+    :after org
+    :hook ((org-mode . org-superstar-mode)
+              (org-mode . org-indent-mode))
+    :config
+    (setq org-superstar-special-todo-items t))
 
-  (set-face-attribute 'org-block nil :background
-      (color-darken-name
-          (face-attribute 'default :background) 3))
+(set-face-attribute 'org-block nil :background
+    (color-darken-name
+        (face-attribute 'default :background) 3))
 #+end_src
 *** COMMENT Pretty
 #+begin_src emacs-lisp
-  (use-package org-bullets
-      :ensure t
-      :hook((org-mode . org-bullets-mode)
-               (org-mode . org-indent-mode))
-      )
+(use-package org-bullets
+    :ensure t
+    :hook((org-mode . org-bullets-mode)
+             (org-mode . org-indent-mode))
+    )
 #+end_src
 *** org ref
 #+begin_src emacs-lisp
-  (use-package org-ref)
+(use-package org-ref)
 #+end_src
 *** Org-babel support language
 #+begin_src emacs-lisp
-  (require 'ob-js)
-  ;; (org-babel-do-load-languages 'org-babel-load-languages
-  ;;     '((js . t)
-  ;;          (restclient . t))
-  ;;     )
-  (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
-  (defun ob-js-insert-session-header-arg (session)
-      "Insert ob-js `SESSION' header argument.
-   - `js-comint'
-   - `skewer-mode'
-   - `Indium'
-   "
-      (interactive (list (completing-read "ob-js session: "
-                             '("js-comint" "skewer-mode" "indium"))))
-      (org-babel-insert-header-arg
-          "session"
-          (pcase session
-              ("js-comint" "\"*Javascript REPL*\"")
-              ("skewer-mode" "\"*skewer-repl*\"")
-              ("indium" "\"*JS REPL*\""))))
-  (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+(require 'ob-js)
+;; (org-babel-do-load-languages 'org-babel-load-languages
+;;     '((js . t)
+;;          (restclient . t))
+;;     )
+(add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+(defun ob-js-insert-session-header-arg (session)
+    "Insert ob-js `SESSION' header argument.
+ - `js-comint'
+ - `skewer-mode'
+ - `Indium'
+ "
+    (interactive (list (completing-read "ob-js session: "
+                           '("js-comint" "skewer-mode" "indium"))))
+    (org-babel-insert-header-arg
+        "session"
+        (pcase session
+            ("js-comint" "\"*Javascript REPL*\"")
+            ("skewer-mode" "\"*skewer-repl*\"")
+            ("indium" "\"*JS REPL*\""))))
+(define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 #+end_src
 *** Org Agenda Setup
 **** Config
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
 
-  (setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
-  (setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
-  (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-task))
-  ;;  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
-  (setq org-agenda-files (list ctm-org-agenda-dir))
-  (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
-  (setq org-agenda-include-diary t)
-  (setq org-capture-templates `(
-                                   ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
-                                   ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                   ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
-                                   ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
-                                   ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
-                                   ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
-                                   ))
-  (setq org-todo-keywords
-      '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
-           (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
-           (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
-  (setq org-todo-keyword-faces
-      '(("TODO" . org-warning) ("STED" . "yellow")
-           ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
-           ("BUGT" . "red") ("FIXT" . "orange")
-           ))
-  (setq org-enforce-todo-dependencies t)
-  (setq org-modules
-      '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
+(setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
+(setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
+(setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-task))
+;;  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
+(setq org-agenda-files (list ctm-org-agenda-dir))
+(setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
+(setq org-agenda-include-diary t)
+(setq org-capture-templates `(
+                                 ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
+                                 ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                 ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                 ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
+                                 ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                 ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
+                                 ))
+(setq org-todo-keywords
+    '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
+         (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
+         (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
+(setq org-todo-keyword-faces
+    '(("TODO" . org-warning) ("STED" . "yellow")
+         ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
+         ("BUGT" . "red") ("FIXT" . "orange")
+         ))
+(setq org-enforce-todo-dependencies t)
+(setq org-modules
+    '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
 
-  (setq org-highest-priority 1) 
-  (setq org-default-priority 5)
-  (setq org-lowest-priority 9)
+(setq org-highest-priority 1) 
+(setq org-default-priority 5)
+(setq org-lowest-priority 9)
 
-  (use-package org-super-agenda
-      :ensure t
-      :after org
-      )
-  ;;  (org-super-agenda-mode t)
+(use-package org-super-agenda
+    :ensure t
+    :after org
+    )
+;;  (org-super-agenda-mode t)
 
-  (defun add-property-with-date-captured ()
-      "Add DATE_CAPTURED property to the current item."
-      (interactive)
-      (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
-      )
-  (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
+(defun add-property-with-date-captured ()
+    "Add DATE_CAPTURED property to the current item."
+    (interactive)
+    (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
+    )
+(add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
 
-  (defun process-gtd-action()
-      (interactive)
-      (find-file org-agenda-file-gtd)
-      )
-  (defun process-gtd-inbox()
-      (interactive)
-      (find-file org-agenda-file-inbox)
-      )
+(defun process-gtd-action()
+    (interactive)
+    (find-file org-agenda-file-gtd)
+    )
+(defun process-gtd-inbox()
+    (interactive)
+    (find-file org-agenda-file-inbox)
+    )
 
-  (defun process-gtd-journal()
-      (interactive)
-      (find-file org-agenda-file-journal)
-      )
+(defun process-gtd-journal()
+    (interactive)
+    (find-file org-agenda-file-journal)
+    )
 
-  (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
-  (global-set-key (kbd "C-c d a") 'process-gtd-action)
-  (global-set-key (kbd "C-c d j") 'process-gtd-journal)
+(global-set-key (kbd "C-c d p") 'process-gtd-inbox)
+(global-set-key (kbd "C-c d a") 'process-gtd-action)
+(global-set-key (kbd "C-c d j") 'process-gtd-journal)
 
-  ;; Change task state to STARTED when clocking in
-  (setq org-clock-in-switch-to-state "STED")
-  ;; Save clock data and notes in the LOGBOOK drawer
-  (setq org-clock-into-drawer t)
-  (setq org-clock-out-remove-zero-time-clocks t)
-  (use-package org-pomodoro)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-  (setq org-clock-persist 'history)
-  (org-clock-persistence-insinuate)
+;; Change task state to STARTED when clocking in
+(setq org-clock-in-switch-to-state "STED")
+;; Save clock data and notes in the LOGBOOK drawer
+(setq org-clock-into-drawer t)
+(setq org-clock-out-remove-zero-time-clocks t)
+(use-package org-pomodoro)
+(setq org-log-done 'time)
+(setq org-log-into-drawer t)
+(setq org-clock-persist 'history)
+(org-clock-persistence-insinuate)
 #+end_src
 **** Tag
 #+begin_src emacs-lisp
-  (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                           ("@study" . ?s) ("@habit" . ?b)))
+(setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
+                         ("@study" . ?s) ("@habit" . ?b)))
 #+end_src
 
 #+begin_src emacs-lisp
-  ;; automatically DONE when all children are DONE
-  (defun org-summary-todo (n-done n-not-done)
-      "Switch entry to DONE when all subentries are done, to TODO otherwise."
-      (let (org-log-done org-log-states)   ; turn off logging
-          (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-  (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
+;; automatically DONE when all children are DONE
+(defun org-summary-todo (n-done n-not-done)
+    "Switch entry to DONE when all subentries are done, to TODO otherwise."
+    (let (org-log-done org-log-states)   ; turn off logging
+        (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+(add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 #+end_src
 **** COMMENT Org-GTD
 #+begin_src emacs-lisp
-  (use-package org-gtd
-      :after org
-      :init (setq org-gtd-update-ack "3.0.0")
-      :demand t
-      :custom
-      (org-gtd-directory "~/Desktop/gtd/")
-      (org-edna-use-inheritance t)
-      (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
-      :config
+(use-package org-gtd
+    :after org
+    :init (setq org-gtd-update-ack "3.0.0")
+    :demand t
+    :custom
+    (org-gtd-directory "~/Desktop/gtd/")
+    (org-edna-use-inheritance t)
+    (org-gtd-organize-hooks '(org-gtd-set-area-of-focus org-set-tags-command))
+    :config
 
-      (org-edna-mode)
-      :bind
-      (("C-c d c" . org-gtd-capture)
-          ("C-c d e" . org-gtd-engage)
-          ("C-c d p" . org-gtd-process-inbox)
-          :map org-gtd-clarify-map
-          ("C-c c" . org-gtd-organize)))
+    (org-edna-mode)
+    :bind
+    (("C-c d c" . org-gtd-capture)
+        ("C-c d e" . org-gtd-engage)
+        ("C-c d p" . org-gtd-process-inbox)
+        :map org-gtd-clarify-map
+        ("C-c c" . org-gtd-organize)))
 #+end_src
 **** COMMENT Task Reminder
 #+begin_src emacs-lisp
-  (use-package alert)
-  (use-package org-alert
-      :init
-      (setq alert-default-style 'message
-          org-alert-notification-title "Org Reminder"
-          org-alert-interval 300
-          org-alert-notify-cutoff 5
-          org-alert-notify-after-event-cutoff 5))
+(use-package alert)
+(use-package org-alert
+    :init
+    (setq alert-default-style 'message
+        org-alert-notification-title "Org Reminder"
+        org-alert-interval 300
+        org-alert-notify-cutoff 5
+        org-alert-notify-after-event-cutoff 5))
 
-  (org-alert-enable)
-  (use-package osa)
-  (use-package org-notify)
+(org-alert-enable)
+(use-package osa)
+(use-package org-notify)
 
 #+end_src
 *** Org Roam Setup
 #+begin_src emacs-lisp
-  (use-package org-roam
-      :custom
-      (org-roam-directory ctm-org-roam-directory)
-      (org-roam-dailies-directory ctm-org-roam-dailies-directory)
-      :bind (("C-c n l" . org-roam-buffer-toggle)
-                ("C-c n f" . org-roam-node-find)
-                ("C-c n g" . org-roam-graph)
-                ("C-c n i" . org-roam-node-insert)
-                ("C-c n c" . org-roam-capture)
-                ("C-c n t" . org-roam-tag-add)
-                ("C-c M-s" . org-store-link)
-                ;; Dailies
-                ("C-c n j" . org-roam-dailies-capture-today)
-                )
-      :bind-keymap
-      ("C-c n d" . org-roam-dailies-map)
-      :config
-      ;; If you're using a vertical completion framework, you might want a more informative completion interface
-      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:20}" 'face 'org-tag)))
-      (setq org-roam-completion-everywhere t)
-      (org-roam-db-autosync-mode)
-      (require 'org-roam-dailies)
-      ;; If using org-roam-protocol
-      (require 'org-roam-protocol)
-      )
+(use-package org-roam
+    :custom
+    (org-roam-directory ctm-org-roam-directory)
+    (org-roam-dailies-directory ctm-org-roam-dailies-directory)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+              ("C-c n f" . org-roam-node-find)
+              ("C-c n g" . org-roam-graph)
+              ("C-c n i" . org-roam-node-insert)
+              ("C-c n c" . org-roam-capture)
+              ("C-c n t" . org-roam-tag-add)
+              ("C-c M-s" . org-store-link)
+              ;; Dailies
+              ("C-c n j" . org-roam-dailies-capture-today)
+              )
+    :bind-keymap
+    ("C-c n d" . org-roam-dailies-map)
+    :config
+    ;; If you're using a vertical completion framework, you might want a more informative completion interface
+    (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:20}" 'face 'org-tag)))
+    (setq org-roam-completion-everywhere t)
+    (org-roam-db-autosync-mode)
+    (require 'org-roam-dailies)
+    ;; If using org-roam-protocol
+    (require 'org-roam-protocol)
+    )
 #+end_src
 **** Org Roam UI SetUp
 #+begin_src emacs-lisp
-  (use-package org-roam-ui
-      :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
-      :after org-roam
-      :custom
-      (org-roam-ui-sync-theme nil)
-      (org-roam-ui-follow t)
-      (org-roam-ui-update-on-save t)
-      (org-roam-ui-open-on-start t)
-      )
+(use-package org-roam-ui
+    :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
+    :after org-roam
+    :custom
+    (org-roam-ui-sync-theme nil)
+    (org-roam-ui-follow t)
+    (org-roam-ui-update-on-save t)
+    (org-roam-ui-open-on-start t)
+    )
 #+end_src
 ** Which-Key Setup
 #+begin_src emacs-lisp
-  (use-package which-key
-      :ensure t
-      :init (which-key-mode)
-      :bind ("M-m" . which-key-show-top-level)
-      )
+(use-package which-key
+    :ensure t
+    :init (which-key-mode)
+    :bind ("M-m" . which-key-show-top-level)
+    )
 #+end_src
 ** Delete Setup
 *** Hungry-delete
 delete all whitespace until have character
 #+begin_src emacs-lisp
-  (use-package hungry-delete
-      :ensure t
-      :bind (
-                ("C-c DEL" . hungry-delete-backward)
-                ("C-c d d" . hungry-delete-forward))
-      )
+(use-package hungry-delete
+    :ensure t
+    :bind (
+              ("C-c DEL" . hungry-delete-backward)
+              ("C-c d d" . hungry-delete-forward))
+    )
 #+end_src
 *** Delete Slection
 #+begin_src emacs-lisp
-  (delete-selection-mode t)
+(delete-selection-mode t)
 #+end_src
 ** SmartParens
 auto Symbol of completion
 #+begin_src emacs-lisp
-  (use-package smartparens
-      :ensure t
-      :config
-      (smartparens-global-mode t)
-      (require 'smartparens-config)
-      (sp-local-pair 'elisp-mode "'" nil :actions nil)
-      (sp-local-pair 'elisp-mode "`" nil :actions nil)
-      )
+(use-package smartparens
+    :ensure t
+    :config
+    (smartparens-global-mode t)
+    (show-smartparens-global-mode t)
+    (require 'smartparens-config)
+    (sp-local-pair 'elisp-mode "'" nil :actions nil)
+    (sp-local-pair 'elisp-mode "`" nil :actions nil)
+    :bind(("C-c 9" . sp-beginning-of-sexp)
+             
+             ("C-c 0" . sp-end-of-sexp)
+             )
+    )
 #+end_src
 ** Undo-Tree Setup
 #+begin_src emacs-lisp
-  (use-package undo-tree
-      :init (global-undo-tree-mode t)
-      )
+(use-package undo-tree
+    :init (global-undo-tree-mode t)
+    )
 #+end_src
 ** Switch-Window
 easy to jump windows
 #+begin_src emacs-lisp
-  (use-package switch-window
-      :ensure t
-      :bind ("C-x o" . switch-window)
-      :config
-      (setq switch-window-shortcut-style 'qwerty)
-      )
+(use-package switch-window
+    :ensure t
+    :bind ("C-x o" . switch-window)
+    :config
+    (setq switch-window-shortcut-style 'qwerty)
+    )
 #+end_src
 ** Selected Setup
 #+begin_src emacs-lisp
-  (use-package expand-region
-      :bind (("C-=" . er/expand-region)
-                ("C--" . er/contract-region))
-      :config
-      (defun er/add-html-mode-expansions ()
-          (make-variable-buffer-local 'er/try-expand-list)
-          "Adds HTML-specific expansions for buffers in html-mode"
-          (setq er/try-expand-list (append
-                                       er/try-expand-list
-                                       '(er/mark-html-attribute
-                                            er/mark-inner-tag
-                                            er/mark-outer-tag))))
-      (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
-      (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
-      ;;:commands (er/expand-region er/enable-mode-expansions)
-      )
+(use-package expand-region
+    :bind (("C-=" . er/expand-region)
+              ("C--" . er/contract-region))
+    :config
+    (defun er/add-html-mode-expansions ()
+        (make-variable-buffer-local 'er/try-expand-list)
+        "Adds HTML-specific expansions for buffers in html-mode"
+        (setq er/try-expand-list (append
+                                     er/try-expand-list
+                                     '(er/mark-html-attribute
+                                          er/mark-inner-tag
+                                          er/mark-outer-tag))))
+    (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
+    (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
+    ;;:commands (er/expand-region er/enable-mode-expansions)
+    )
 #+end_src
 ** Undo Tree Setup
 #+begin_src emacs-lisp
-  (use-package undo-tree)
-  (global-undo-tree-mode t)
+(use-package undo-tree)
+(global-undo-tree-mode t)
 #+end_src
 ** Command Completion
 Command Interactive Completion For Minibuffer,eg : M-x
@@ -698,473 +710,502 @@ Command Interactive Completion For Minibuffer,eg : M-x
 generic completion mechanism
 ***** Ivy
 #+begin_src emacs-lisp
-  (use-package ivy
-      :ensure t
-      :config
-      (setq ivy-use-virtual-buffers t
-          enable-recursive-minibuffers t
-          )
-      :bind(
-               ("C-c C-r" . ivy-resume)
-               )
-      )
+(use-package ivy
+    :ensure t
+    :config
+    (setq ivy-use-virtual-buffers t
+        enable-recursive-minibuffers t
+        )
+    :bind(
+             ("C-c C-r" . ivy-resume)
+             )
+    )
 #+end_src
 ***** COMMENT Ivy-Rich
 display more infomation in ivy buffer
 #+begin_src emacs-lisp
-  (use-package ivy-rich
-      :init
-      (ivy-rich-mode 1))
+(use-package ivy-rich
+    :init
+    (ivy-rich-mode 1))
 #+end_src
 ***** COMMENT Ivy-PosFrame
 show ivy buffer pop up box
 #+begin_src emacs-lisp
-  (use-package ivy-posframe
-      :init
-      (setq ivy-posframe-display-functions-alist
-          '((complete-symbol . ivy-posframe-display-at-point)
-               (counsel-M-x     . ivy-posframe-display-at-frame-center)
-               (t               . ivy-posframe-display-at-frame-center)))
-      (ivy-posframe-mode 0)
-      )
+(use-package ivy-posframe
+    :init
+    (setq ivy-posframe-display-functions-alist
+        '((complete-symbol . ivy-posframe-display-at-point)
+             (counsel-M-x     . ivy-posframe-display-at-frame-center)
+             (t               . ivy-posframe-display-at-frame-center)))
+    (ivy-posframe-mode 0)
+    )
 #+end_src
 **** Counsel Setup
 command completion use ivy
 #+begin_src emacs-lisp  
-  (use-package counsel
-      :bind(
-               ("M-x" . counsel-M-x)
-               ("C-."   . 'counsel-imenu)
-               ("C-c o"   . 'counsel-outline)
-               ("C-x C-f" . counsel-find-file)
-               ("C-c g" . counsel-rg)
-               ("C-h f" . 'counsel-describe-function)
-               ("C-h v" . 'counsel-describe-variable)
-               ("C-x b" . 'counsel-switch-buffer)
-               ("C-c h" . 'counsel-recentf)
-               )
-      :hook (after-init . ivy-mode)
-      )
-  (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
+(use-package counsel
+    :bind(
+             ("M-x" . counsel-M-x)
+             ("C-."   . 'counsel-imenu)
+             ("C-c o"   . 'counsel-outline)
+             ("C-x C-f" . counsel-find-file)
+             ("C-c g" . counsel-rg)
+             ("C-h f" . 'counsel-describe-function)
+             ("C-h v" . 'counsel-describe-variable)
+             ("C-x b" . 'counsel-switch-buffer)
+             ("C-c h" . 'counsel-recentf)
+             )
+    :hook (after-init . ivy-mode)
+    )
+(define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
 
-  (use-package counsel-projectile
-      :bind
-      ("C-c p f" . 'counsel-projectile-find-file)
-      ("C-c p g" . 'counsel-projectile-rg)
-      ("C-c p p" . 'counsel-projectile-switch-project)
-      ("C-c p b" . 'counsel-projectile-switch-to-buffer)
-      )
-  ;; counsel-locate find system file quicky
+(use-package counsel-projectile
+    :bind
+    ("C-c p f" . 'counsel-projectile-find-file)
+    ("C-c p g" . 'counsel-projectile-rg)
+    ("C-c p p" . 'counsel-projectile-switch-project)
+    ("C-c p b" . 'counsel-projectile-switch-to-buffer)
+    )
+;; counsel-locate find system file quicky
 #+end_src
 ***** Show History Command in Counsel-M-x Minibuffer
 show history command need amx package
 #+begin_src emacs-lisp
-  (use-package amx)
+(use-package amx)
 #+end_src
 **** Swiper Setup
 text search use ivy
 #+begin_src emacs-lisp
-  ;; bind-key conflict, unbind
-  (define-key org-mode-map (kbd "C-'") nil)
-  (use-package swiper
-      :bind(
-               ("C-s" . swiper)
-               ("C-'" . swiper-isearch-thing-at-point)
-               )
-      )
+;; bind-key conflict, unbind
+(define-key org-mode-map (kbd "C-'") nil)
+(use-package swiper
+    :bind(
+             ("C-s" . swiper)
+             ("C-'" . swiper-isearch-thing-at-point)
+             )
+    )
 #+end_src
 *** orderless
 Unordered search  in ivy search
 #+begin_src emacs-lisp
-  ;; add disorder search
-  (use-package orderless
-      :ensure t
-      :config
-      (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-      :ensure t
-      :custom
-      (completion-styles '(orderless basic))
-      (completion-category-overrides '((file (styles basic partial-completion)))))
-  (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
+;; add disorder search
+(use-package orderless
+    :ensure t
+    :config
+    (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+    :ensure t
+    :custom
+    (completion-styles '(orderless basic))
+    (completion-category-overrides '((file (styles basic partial-completion)))))
+(add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 #+end_src
 *** Helm Setup
 #+begin_src emacs-lisp
-  (use-package helm
-      ;;  :config (helm-mode t)
-      ;;  :bind("M-x" . helm-M-x)
-      )
+(use-package helm
+    ;;  :config (helm-mode t)
+    ;;  :bind("M-x" . helm-M-x)
+    )
 #+end_src
 *** COMMENT +Smex+
 #+begin_src emacs-lisp
-  (use-package smex
-      )
+(use-package smex
+    )
 #+end_src
 ** Format Setup
 #+begin_src emacs-lisp
-  (setq +format-with-lsp nil)
-  (use-package format-all
-      :ensure t
-      :hook ((elixir-mode . format-all-mode)
-                ;;(prog-mode . format-all-mode)
-                )
-      ;;      :init
-      ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
-      :config
-      (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-      ;;        (add-hook 'before-save-hook 'format-all-buffer)
-      )
-
-  (add-hook 'prog-mode-hook
-      (lambda ()
-          (unless (derived-mode-p 'lsp-mode)
-              (add-hook 'before-save-hook 'format-all-buffer t t)
+(setq +format-with-lsp nil)
+(use-package format-all
+    :ensure t
+    :hook ((elixir-mode . format-all-mode)
+              ;;(prog-mode . format-all-mode)
               )
-          ))
+    ;;      :init
+    ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
+    :config
+    (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+    ;;        (add-hook 'before-save-hook 'format-all-buffer)
+    )
+
+(add-hook 'prog-mode-hook
+    (lambda ()
+        (unless (derived-mode-p 'lsp-mode)
+            (add-hook 'before-save-hook 'format-all-buffer t t)
+            )
+        ))
 #+end_src
 *** Format Default Formatters Setup
 #+begin_src emacs-lisp
-  (custom-set-variables
-      '(format-all-default-formatters
-           '(("Assembly" asmfmt)
-                ("ATS" atsfmt)
-                ("Bazel" buildifier)
-                ("BibTeX" emacs-bibtex)
-                ("C" clang-format)
-                ("C#" clang-format)
-                ("C++" clang-format)
-                ("Cabal Config" cabal-fmt)
-                ("Clojure" zprint)
-                ("CMake" cmake-format)
-                ("Crystal" crystal)
-                ("CSS" prettier)
-                ("Cuda" clang-format)
-                ("D" dfmt)
-                ("Dart" dart-format)
-                ("Dhall" dhall)
-                ("Dockerfile" dockfmt)
-                ("Elixir" mix-format)
-                ("Elm" elm-format)
-                ("Emacs Lisp" emacs-lisp)
-                ("Erlang" efmt)
-                ("F#" fantomas)
-                ("Fish" fish-indent)
-                ("Fortran Free Form" fprettify)
-                ("GLSL" clang-format)
-                ("Go" gofmt)
-                ("GraphQL" prettier)
-                ("Haskell" brittany)
-                ("HTML" prettier)
-                ("HTML+EEX" mix-format)
-                ("HTML+ERB" erb-format)
-                ("Java" clang-format)
-                ("JavaScript" prettier)
-                ("JSON" prettier)
-                ("JSON5" prettier)
-                ("Jsonnet" jsonnetfmt)
-                ("JSX" prettier)
-                ("Kotlin" ktlint)
-                ("LaTeX" latexindent)
-                ("Less" prettier)
-                ("Literate Haskell" brittany)
-                ("Lua" lua-fmt)
-                ("Markdown" prettier)
-                ("Nix" nixpkgs-fmt)
-                ("Objective-C" clang-format)
-                ("OCaml" ocp-indent)
-                ("Perl" perltidy)
-                ("PHP" prettier)
-                ("Protocol Buffer" clang-format)
-                ("PureScript" purty)
-                ("Python" black)
-                ("R" styler)
-                ("Reason" bsrefmt)
-                ("ReScript" rescript)
-                ("Ruby" rufo)
-                ("Rust" rustfmt)
-                ("Scala" scalafmt)
-                ("SCSS" prettier)
-                ("Shell" shfmt)
-                ("Solidity" prettier)
-                ("SQL" sqlformat)
-                ("Svelte" prettier)
-                ("Swift" swiftformat)
-                ("Terraform" terraform-fmt)
-                ("TOML" prettier)
-                ("TSX" prettier)
-                ("TypeScript" prettier)
-                ("V" v-fmt)
-                ("Verilog" istyle-verilog)
-                ("Vue" prettier)
-                ("XML" html-tidy)
-                ("YAML" prettier)
-                ("Zig" zig)
-                ("_Angular" prettier)
-                ("_Flow" prettier)
-                ("_Gleam" gleam)
-                ("_Ledger" ledger-mode)
-                ("_Nginx" nginxfmt)
-                ("_Snakemake" snakefmt)))
-      )
+(custom-set-variables
+    '(format-all-default-formatters
+         '(("Assembly" asmfmt)
+              ("ATS" atsfmt)
+              ("Bazel" buildifier)
+              ("BibTeX" emacs-bibtex)
+              ("C" clang-format)
+              ("C#" clang-format)
+              ("C++" clang-format)
+              ("Cabal Config" cabal-fmt)
+              ("Clojure" zprint)
+              ("CMake" cmake-format)
+              ("Crystal" crystal)
+              ("CSS" prettier)
+              ("Cuda" clang-format)
+              ("D" dfmt)
+              ("Dart" dart-format)
+              ("Dhall" dhall)
+              ("Dockerfile" dockfmt)
+              ("Elixir" mix-format)
+              ("Elm" elm-format)
+              ("Emacs Lisp" emacs-lisp)
+              ("Erlang" efmt)
+              ("F#" fantomas)
+              ("Fish" fish-indent)
+              ("Fortran Free Form" fprettify)
+              ("GLSL" clang-format)
+              ("Go" gofmt)
+              ("GraphQL" prettier)
+              ("Haskell" brittany)
+              ("HTML" prettier)
+              ("HTML+EEX" mix-format)
+              ("HTML+ERB" erb-format)
+              ("Java" clang-format)
+              ("JavaScript" prettier)
+              ("JSON" prettier)
+              ("JSON5" prettier)
+              ("Jsonnet" jsonnetfmt)
+              ("JSX" prettier)
+              ("Kotlin" ktlint)
+              ("LaTeX" latexindent)
+              ("Less" prettier)
+              ("Literate Haskell" brittany)
+              ("Lua" lua-fmt)
+              ("Markdown" prettier)
+              ("Nix" nixpkgs-fmt)
+              ("Objective-C" clang-format)
+              ("OCaml" ocp-indent)
+              ("Perl" perltidy)
+              ("PHP" prettier)
+              ("Protocol Buffer" clang-format)
+              ("PureScript" purty)
+              ("Python" black)
+              ("R" styler)
+              ("Reason" bsrefmt)
+              ("ReScript" rescript)
+              ("Ruby" rufo)
+              ("Rust" rustfmt)
+              ("Scala" scalafmt)
+              ("SCSS" prettier)
+              ("Shell" shfmt)
+              ("Solidity" prettier)
+              ("SQL" sqlformat)
+              ("Svelte" prettier)
+              ("Swift" swiftformat)
+              ("Terraform" terraform-fmt)
+              ("TOML" prettier)
+              ("TSX" prettier)
+              ("TypeScript" prettier)
+              ("V" v-fmt)
+              ("Verilog" istyle-verilog)
+              ("Vue" prettier)
+              ("XML" html-tidy)
+              ("YAML" prettier)
+              ("Zig" zig)
+              ("_Angular" prettier)
+              ("_Flow" prettier)
+              ("_Gleam" gleam)
+              ("_Ledger" ledger-mode)
+              ("_Nginx" nginxfmt)
+              ("_Snakemake" snakefmt)))
+    )
 #+end_src
 ** Iedit Setup
 #+begin_src emacs-lisp
-  (use-package iedit
-      :bind("C-c e" . iedit-mode)
-      )
+(use-package iedit
+    :bind("C-c e" . iedit-mode)
+    )
 #+end_src
 ** Avy SetUp
 jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
-  (use-package avy
-      :bind("C-;" . avy-goto-char)
-      )
+(use-package avy
+    :bind("C-;" . avy-goto-char)
+    )
 #+end_src
 ** Projectile Setup
 #+begin_src emacs-lisp
-  (use-package projectile
-      :init
-      (projectile-global-mode)
-      ;; :bind(
-      ;;        ("C-x p f" . projectile-find-file)
-      ;;        ("C-x p p" . projectile-switch-project)
-      ;;        )
-      :config
-      (setq
-          projectile-indexing-method 'hybrid
-          ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
-          ;;indexing default 'alien ,only load .gitignore
-          ;;indexing 'native only load .projectile
-          ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
+(use-package projectile
+    :init
+    (projectile-global-mode)
+    ;; :bind(
+    ;;        ("C-x p f" . projectile-find-file)
+    ;;        ("C-x p p" . projectile-switch-project)
+    ;;        )
+    :config
+    (setq
+        projectile-indexing-method 'hybrid
+        ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
+        ;;indexing default 'alien ,only load .gitignore
+        ;;indexing 'native only load .projectile
+        ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
 
-          ;;   projectile-sort-order 'recentf-active
-          projectile-enable-caching t)
-      (setq projectile-globally-ignored-directories
-          (append (list
-                      ".pytest_cache"
-                      "__pycache__"
-                      "build"
-                      "elpa"
-                      "node_modules"
-                      "output"
-                      "reveal.js"
-                      "semanticdb"
-                      "target"
-                      "venv"
-                      )
-              projectile-globally-ignored-directories))
-      )
+        ;;   projectile-sort-order 'recentf-active
+        projectile-enable-caching t)
+    (setq projectile-globally-ignored-directories
+        (append (list
+                    ".pytest_cache"
+                    "__pycache__"
+                    "build"
+                    "elpa"
+                    "node_modules"
+                    "output"
+                    "reveal.js"
+                    "semanticdb"
+                    "target"
+                    "venv"
+                    )
+            projectile-globally-ignored-directories))
+    )
 
-  (use-package treemacs-projectile
-      :after (treemacs projectile)
-      )
+(use-package treemacs-projectile
+    :after (treemacs projectile)
+    )
 
-  (use-package treemacs
-      :config
-      (setq
-          treemacs-deferred-git-apply-delay 0.5
-          treemacs-file-follow-delay 0.2
-          treemacs-indentation 2
-          treemacs-indentation-string " "
-          treemacs-show-hidden-files  nil
-          treemacs-hide-gitignored-files-mode t
-          treemacs-hide-dot-git-directory t
-          treemacs-follow-mode t
-          treemacs-filewatch-mode t
-          treemacs-fringe-indicator-mode 'always
-          )
-      )
+(use-package treemacs
+    :config
+    (setq
+        treemacs-deferred-git-apply-delay 0.5
+        treemacs-file-follow-delay 0.2
+        treemacs-indentation 2
+        treemacs-indentation-string " "
+        treemacs-show-hidden-files  nil
+        treemacs-hide-gitignored-files-mode t
+        treemacs-hide-dot-git-directory t
+        treemacs-follow-mode t
+        treemacs-filewatch-mode t
+        treemacs-fringe-indicator-mode 'always
+        )
+    )
 
-  (use-package treemacs-icons-dired
-      :hook (dired-mode . treemacs-icons-dired-enable-once)
-      :ensure t)
+(use-package treemacs-icons-dired
+    :hook (dired-mode . treemacs-icons-dired-enable-once)
+    :ensure t)
 
-  (use-package treemacs-magit
-      :after (treemacs magit)
-      :ensure t)
+(use-package treemacs-magit
+    :after (treemacs magit)
+    :ensure t)
 
-  (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-      :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-      :ensure t
-      :config (treemacs-set-scope-type 'Perspectives))
+(use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
+    :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+    :ensure t
+    :config (treemacs-set-scope-type 'Perspectives))
 
-  (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-      :after (treemacs)
-      :ensure t
-      :config (treemacs-set-scope-type 'Tabs))
+(use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
+    :after (treemacs)
+    :ensure t
+    :config (treemacs-set-scope-type 'Tabs))
 #+end_src
 ** Code Completion Setup
 *** Corfu
 #+begin_src emacs-lisp
-  ;; Auto completion example
-  (use-package corfu
-      :custom
-      (corfu-auto t)          ;; Enable auto completion
-      ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
-      :bind
-      ;; Another key binding can be used, such as S-SPC.
-      ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
-      :init
-      (global-corfu-mode))
+;; Auto completion example
+(use-package corfu
+    :custom
+    (corfu-auto t)          ;; Enable auto completion
+    ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+    :bind
+    ;; Another key binding can be used, such as S-SPC.
+    ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
+    :init
+    (global-corfu-mode))
+#+end_src
+*** Cape
+#+begin_src emacs-lisp
+(use-package cape
+    :init
+    ;; Add to the global default value of `completion-at-point-functions' which is
+    ;; used by `completion-at-point'.  The order of the functions matters, the
+    ;; first function returning a result wins.  Note that the list of buffer-local
+    ;; completion functions takes precedence over the global list.
+    (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+    (add-to-list 'completion-at-point-functions #'cape-file)
+    (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+    ;;(add-to-list 'completion-at-point-functions #'cape-history)
+    ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+    ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+    ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+    ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+    ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+    ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+    ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+    ;;(add-to-list 'completion-at-point-functions #'cape-line)
+    :config
+    (setq dabbrev-check-other-buffers nil
+        dabbrev-check-all-buffers nil
+        cape-dabbrev-min-length 3)
+    (cape-wrap-prefix-length #'cape-dabbrev 3)
+    )
 #+end_src
 *** Corfu English Helper
 #+begin_src emacs-lisp
-  (use-package corfu-english-helper
-      :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
-      )
+(use-package corfu-english-helper
+    :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
+    )
 #+end_src
 *** COMMENT Company
 #+begin_src emacs-lisp
-  (use-package company
-      :ensure t
-      :init
-      ;;      (global-company-mode)
-      :bind (
-                ("s-/" . company-complete)
-                :map company-active-map
-                (("C-n"   . company-select-next)
-                    ("C-p"   . company-select-previous)
-                    ("C-d"   . company-show-doc-buffer)
-                    ("<tab>" . company-complete)
-                    )
-                )
-      )
-  ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
-  ;; (use-package company-box
-  ;;   :hook (company-mode . company-box-mode))
+(use-package company
+    :ensure t
+    :init
+    ;;      (global-company-mode)
+    :bind (
+              ("s-/" . company-complete)
+              :map company-active-map
+              (("C-n"   . company-select-next)
+                  ("C-p"   . company-select-previous)
+                  ("C-d"   . company-show-doc-buffer)
+                  ("<tab>" . company-complete)
+                  )
+              )
+    )
+;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
+;; (use-package company-box
+;;   :hook (company-mode . company-box-mode))
 
 #+end_src
 *** COMMENT Company english helper
 #+begin_src emacs-lisp
-  (use-package company-english-helper
-      :vc (:fetcher github :repo manateelazycat/company-english-helper)
-      )
+(use-package company-english-helper
+    :vc (:fetcher github :repo manateelazycat/company-english-helper)
+    )
 #+end_src
 ** Treesit
 #+begin_src emacs-lisp
-  (use-package treesit-auto
-      :init
-      (setq tressit-font-lock-level 4)
-      :config
-      (global-treesit-auto-mode)
-      )
+(use-package treesit-auto
+    :init
+    (setq tressit-font-lock-level 4)
+    :config
+    (global-treesit-auto-mode)
+    )
 #+end_src
 ** Language Setup
 *** Eglot Setup
 #+begin_src emacs-lisp
-  (use-package eglot
-      :ensure nil
-      :hook (prog-mode . eglot-ensure)
-      :custom
-      (eglot-autoshutdown t)
-      (eglot-events-buffer-size 0)
-      (eglot-extend-to-xref nil)
-      (eglot-ignored-server-capabilities
-          '(:hoverProvider
-               :documentHighlightProvider
-               :documentFormattingProvider
-               :documentRangeFormattingProvider
-               :documentOnTypeFormattingProvider
-               :colorProvider
-               :foldingRangeProvider))
-      )
+(use-package eglot
+    :ensure nil
+    :hook (prog-mode . (lambda()
+                           (unless (derived-mode-p 'emacs-lisp-mode) 'eglot-ensure) 
+                           )) 
+    :custom
+    (eglot-autoshutdown t)
+    (eglot-events-buffer-size 0)
+    (eglot-extend-to-xref nil)
+    (eglot -ignored-server-capabilities
+        '(:hoverProvider
+             :documentHighlightProvider
+             :documentFormattingProvider
+             :documentRangeFormattingProvider
+             :documentOnTypeFormattingProvider
+             :colorProvider
+             :foldingRangeProvider))
+    )
 #+end_src
 *** COMMENT LSP-Mode Setup
 #+begin_src emacs-lisp
-  (use-package lsp-mode
-      :ensure t
-      :hook (
-                (lsp-mode . lsp-enable-which-key-integration)
-                (lsp-mode . lsp-lens-mode)
-                (java-mode . lsp-mode)
-                (web-mode . lsp-mode)
-                ;; (prog-mode . lsp-deferred)
-                ;; (prog-mode . (lambda()
-                ;;                  (unless (derived-mode-p 'emacs-lisp-mode) 'lsp-deferred)  ;; assign some mode in prog-mode not need lsp
-                ;;                  ))
-                )
-      :commands lsp
-      :bind
-      (:map lsp-mode-map
-          (("C-M-b" . lsp-find-implementation)
-              ("M-RET" . lsp-execute-code-action)))
-      :init (setq
-                lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-                lsp-completion-provider :capf
-                lsp-completion-show-detail t
-                lsp-completion-show-kind t
-                lsp-idle-delay 0.500
-                lsp-vetur-validation-template nil
-                ;;          lsp-vetur-dev-log-level "DEBUG"
-                lsp-vetur-format-default-formatter-css "none"
-                lsp-vetur-format-default-formatter-html "none"
-                lsp-vetur-format-default-formatter-js "none"
-                lsp-enable-symbol-highlighting t
-                lsp-lens-enable t
-                lsp-headerline-breadcrumb-enable t
-                lsp-modeline-code-actions-enable t
-                lsp-modeline-diagnostics-enable t
-                lsp-diagnostics-provider :flycheck
-                lsp-eldoc-enable-hover t
-                lsp-eldoc-enable-hover t
-                lsp-signature-auto-activate t
-                lsp-signature-render-documentation t
-                lsp-log-io nil
-                ;;        lsp-inhibit-message t
-                )
-      :config
-      (setq lsp-groovy-server-file ctm-lsp-groovy-server-file)
-      (setq lsp-groovy-classpath ctm-lsp-groovy-classpath)
-      (setq lsp-completion-enable-additional-text-edit nil)
-      (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
-      (with-eval-after-load 'lsp-intelephense
-          (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
-      (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-      ;; (add-hook 'lsp-mode-hook
-      ;;     (lambda()
-      ;;         (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
-      )
-  (add-hook 'prog-mode-hook (lambda()
-                                ;;(unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode))
-                                (when(derived-mode-p 'java-mode) (lsp-mode t))))
+(use-package lsp-mode
+    :ensure t
+    :hook (
+              (lsp-mode . lsp-enable-which-key-integration)
+              (lsp-mode . lsp-lens-mode)
+              (java-mode . lsp-mode)
+              (web-mode . lsp-mode)
+              ;; (prog-mode . lsp-deferred)
+              ;; (prog-mode . (lambda()
+              ;;                  (unless (derived-mode-p 'emacs-lisp-mode) 'lsp-deferred)  ;; assign some mode in prog-mode not need lsp
+              ;;                  ))
+              )
+    :commands lsp
+    :bind
+    (:map lsp-mode-map
+        (("C-M-b" . lsp-find-implementation)
+            ("M-RET" . lsp-execute-code-action)))
+    :init (setq
+              lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
+              lsp-completion-provider :capf
+              lsp-completion-show-detail t
+              lsp-completion-show-kind t
+              lsp-idle-delay 0.500
+              lsp-vetur-validation-template nil
+              ;;          lsp-vetur-dev-log-level "DEBUG"
+              lsp-vetur-format-default-formatter-css "none"
+              lsp-vetur-format-default-formatter-html "none"
+              lsp-vetur-format-default-formatter-js "none"
+              lsp-enable-symbol-highlighting t
+              lsp-lens-enable t
+              lsp-headerline-breadcrumb-enable t
+              lsp-modeline-code-actions-enable t
+              lsp-modeline-diagnostics-enable t
+              lsp-diagnostics-provider :flycheck
+              lsp-eldoc-enable-hover t
+              lsp-eldoc-enable-hover t
+              lsp-signature-auto-activate t
+              lsp-signature-render-documentation t
+              lsp-log-io nil
+              ;;        lsp-inhibit-message t
+              )
+    :config
+    (setq lsp-groovy-server-file ctm-lsp-groovy-server-file)
+    (setq lsp-groovy-classpath ctm-lsp-groovy-classpath)
+    (setq lsp-completion-enable-additional-text-edit nil)
+    (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
+    (with-eval-after-load 'lsp-intelephense
+        (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
+    (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+    ;; (add-hook 'lsp-mode-hook
+    ;;     (lambda()
+    ;;         (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
+    )
+(add-hook 'prog-mode-hook (lambda()
+                              ;;(unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode))
+                              (when(derived-mode-p 'java-mode) (lsp-mode t))))
 
-  (use-package lsp-ui                                   ;;
-      :commands lsp-ui-mode                               ;;
-      :config                                             ;;
-      (setq lsp-ui-doc-enable t)                          ;;
-      (setq lsp-ui-doc-header t)                          ;;
-      (setq lsp-ui-doc-include-signature t)               ;;
-      (setq lsp-ui-doc-border (face-foreground 'default)) ;;
-      (setq lsp-ui-sideline-enable nil)
-      (setq lsp-ui-sideline-show-code-actions nil)          ;;
-      (setq lsp-ui-sideline-show-diagnostics nil)         ;;
-      ;;      (setq lsp-ui-sideline-delay 0.05)                  ;;
-      (setq lsp-ui-doc-frame-parameters
-          '((left . -1)
-               (top . -1)
-               (no-accept-focus . t)
-               (min-width . 0)
-               (width . 0)
-               (min-height . 0)
-               (height . 0)
-               (internal-border-width . 0)
-               (vertical-scroll-bars)
-               (horizontal-scroll-bars)
-               (left-fringe . 0)
-               (right-fringe . 0)
-               (menu-bar-lines . 0)
-               (tool-bar-lines . 0)
-               (line-spacing . 0.1)
-               (unsplittable . t)
-               (undecorated . t)
-               (minibuffer . nil)
-               (visibility . nil)
-               (mouse-wheel-frame . nil)
-               (no-other-frame . t)
-               (cursor-type)
-               (no-special-glyphs . t)))
-      )
-  (use-package lsp-ivy
-      )
+(use-package lsp-ui                                   ;;
+    :commands lsp-ui-mode                               ;;
+    :config                                             ;;
+    (setq lsp-ui-doc-enable t)                          ;;
+    (setq lsp-ui-doc-header t)                          ;;
+    (setq lsp-ui-doc-include-signature t)               ;;
+    (setq lsp-ui-doc-border (face-foreground 'default)) ;;
+    (setq lsp-ui-sideline-enable nil)
+    (setq lsp-ui-sideline-show-code-actions nil)          ;;
+    (setq lsp-ui-sideline-show-diagnostics nil)         ;;
+    ;;      (setq lsp-ui-sideline-delay 0.05)                  ;;
+    (setq lsp-ui-doc-frame-parameters
+        '((left . -1)
+             (top . -1)
+             (no-accept-focus . t)
+             (min-width . 0)
+             (width . 0)
+             (min-height . 0)
+             (height . 0)
+             (internal-border-width . 0)
+             (vertical-scroll-bars)
+             (horizontal-scroll-bars)
+             (left-fringe . 0)
+             (right-fringe . 0)
+             (menu-bar-lines . 0)
+             (tool-bar-lines . 0)
+             (line-spacing . 0.1)
+             (unsplittable . t)
+             (undecorated . t)
+             (minibuffer . nil)
+             (visibility . nil)
+             (mouse-wheel-frame . nil)
+             (no-other-frame . t)
+             (cursor-type)
+             (no-special-glyphs . t)))
+    )
+(use-package lsp-ivy
+    )
 #+end_src
 **** NOTE
 ***** find the class/method in third library by keyword
@@ -1172,270 +1213,270 @@ jumping to visible text using a char-based decision tree
 *** JAVA Setup
 **** Eglot-java
 #+begin_src emacs-lisp
-  (with-eval-after-load 'eglot
-      (add-to-list 'eglot-server-programs
-          `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
-               "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
-               "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
-               ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
-      )
+(with-eval-after-load 'eglot
+    (add-to-list 'eglot-server-programs
+        `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+             "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
+             "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
+             ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
+    )
 
-  (use-package jarchive
-      :ensure t
-      :after eglot
-      :config
-      (jarchive-setup))
+(use-package jarchive
+    :ensure t
+    :after eglot
+    :config
+    (jarchive-setup))
 #+end_src
 **** COMMENT Lsp-java
 #+begin_src emacs-lisp
-  (setq my-java-path (concat ctm-java-home-path "bin/java"))
-  (use-package lsp-java 
-      :init
-      (setq lsp-java-server-install-dir ctm-lsp-java-server-install-dir)
-      (setq dap-java-test-runner ctm-dap-java-test-runner)
-      ;; lsp-java-jdt-download-url 
-      (setq lsp-java-java-path my-java-path)
-      (setq lombok-jar-path ctm-lombok-jar-path)
-      (setq lsp-java-vmargs
-          `("-Xmx2G"
-               "-XX:+UseG1GC"
-               "-XX:+UseStringDeduplication"
-               ,(concat "-javaagent:" lombok-jar-path)
-               ))
-      (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
-      ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
+(setq my-java-path (concat ctm-java-home-path "bin/java"))
+(use-package lsp-java 
+    :init
+    (setq lsp-java-server-install-dir ctm-lsp-java-server-install-dir)
+    (setq dap-java-test-runner ctm-dap-java-test-runner)
+    ;; lsp-java-jdt-download-url 
+    (setq lsp-java-java-path my-java-path)
+    (setq lombok-jar-path ctm-lombok-jar-path)
+    (setq lsp-java-vmargs
+        `("-Xmx2G"
+             "-XX:+UseG1GC"
+             "-XX:+UseStringDeduplication"
+             ,(concat "-javaagent:" lombok-jar-path)
+             ))
+    (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
+    ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
 
-      ;;TODO
-      ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
+    ;;TODO
+    ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
 
-      :config
-      (setq lsp-java-maven-download-sources t)
-      (setq lsp-java-import-maven-enabled t)
-      ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
-      (setq
-          lsp-java-import-gradle-enabled t
-          lsp-java-import-gradle-wrapper-enabled t
-          lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
-          ;;        lsp-java-import-gradle-version "8.4"
-          lsp-java-import-gradle-java-home ctm-java-home-path
-          ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
-          lsp-java-import-gradle-user-home ctm-lsp-java-import-gradle-user-home)
-      (setq lsp-java-implementations-code-lens-enabled t)
-      (setq lsp-java-references-code-lens-enabled t)
-      (setq lsp-java-autobuild-enabled t)
-      (setq lsp-java-format-enabled t)
-      (setq lsp-java-format-comments-enabled t)
-      (setq lsp-java-configuration-update-build-configuration t)
-      (setq lsp-java-trace-server t)
-      (setq lsp-java-configuration-check-project-settings-exclusions t)
-      (setq lsp-java-completion-guess-method-arguments t)
+    :config
+    (setq lsp-java-maven-download-sources t)
+    (setq lsp-java-import-maven-enabled t)
+    ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
+    (setq
+        lsp-java-import-gradle-enabled t
+        lsp-java-import-gradle-wrapper-enabled t
+        lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
+        ;;        lsp-java-import-gradle-version "8.4"
+        lsp-java-import-gradle-java-home ctm-java-home-path
+        ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
+        lsp-java-import-gradle-user-home ctm-lsp-java-import-gradle-user-home)
+    (setq lsp-java-implementations-code-lens-enabled t)
+    (setq lsp-java-references-code-lens-enabled t)
+    (setq lsp-java-autobuild-enabled t)
+    (setq lsp-java-format-enabled t)
+    (setq lsp-java-format-comments-enabled t)
+    (setq lsp-java-configuration-update-build-configuration t)
+    (setq lsp-java-trace-server t)
+    (setq lsp-java-configuration-check-project-settings-exclusions t)
+    (setq lsp-java-completion-guess-method-arguments t)
 
-      ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-      ;; (add-hook 'java-mode-hook
-      ;;     (lambda()
-      ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-      ;;         ))
+    ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
+    ;; (add-hook 'java-mode-hook
+    ;;     (lambda()
+    ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
+    ;;         ))
 
-      ;;     (add-hook 'java-mode-hook                                        
-      ;;                (lambda()                                              
-      ;;                  (make-local-variable 'company-minimum-prefix-length) 
-      ;;                  (setq company-minimum-prefix-length 0)               
-      ;;                    )
-      ;;         )
+    ;;     (add-hook 'java-mode-hook                                        
+    ;;                (lambda()                                              
+    ;;                  (make-local-variable 'company-minimum-prefix-length) 
+    ;;                  (setq company-minimum-prefix-length 0)               
+    ;;                    )
+    ;;         )
 
-      ;;     (require 'lsp-java-boot)
-      ;;     ;; to enable the lenses
-      ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-      ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
-      )
+    ;;     (require 'lsp-java-boot)
+    ;;     ;; to enable the lenses
+    ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
+    ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+    )
 
-  ;; ;;==========java end==========
+;; ;;==========java end==========
 
-  ;;====== maven pom==========
-  ;; https://github.com/m0smith/maven-pom-mode.git
-                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-  ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-  ;; (load "maven-pom-mode")                                                                      ;;
-                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;;==========maven pom end==========
+;;====== maven pom==========
+;; https://github.com/m0smith/maven-pom-mode.git
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
+;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
+;; (load "maven-pom-mode")                                                                      ;;
+                  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;==========maven pom end==========
 
 #+end_src
 **** Hot Deployment
 use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
 *** Groovy Setup
 #+begin_src emacs-lisp
-  (use-package groovy-mode
-      )
+(use-package groovy-mode
+    )
 #+end_src
 *** Maven Setup
 #+begin_src emacs-lisp
-  (use-package mvn
-      :ensure t
-      )
+(use-package mvn
+    :ensure t
+    )
 
-  (defun mvn-install ()
-      (interactive)
-      (mvn "install"))
+(defun mvn-install ()
+    (interactive)
+    (mvn "install"))
 #+end_src
 *** Web-Mode Setup
 #+begin_src emacs-lisp
-  (use-package web-mode
-      :config
-      (setq web-mode-markup-indent-offset 2
-          web-mode-css-indent-offset 2
-          web-mode-code-indent-offset 2
-          web-mode-comment-style 2
-          web-mode-enable-auto-pairing t
-          web-mode-enable-css-colorization t
-          web-mode-enable-current-element-highlight t
-          web-mode-enable-current-column-highlight t
-          )
-      )
+(use-package web-mode
+    :config
+    (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset 2
+        web-mode-code-indent-offset 2
+        web-mode-comment-style 2
+        web-mode-enable-auto-pairing t
+        web-mode-enable-css-colorization t
+        web-mode-enable-current-element-highlight t
+        web-mode-enable-current-column-highlight t
+        )
+    )
 
-  (defadvice web-mode-highlight-part (around tweak-jsx activate)
-      (if (equal web-mode-content-type "jsx")
-          (let ((web-mode-enable-part-face nil)) ad-do-it)
-          ad-do-it))
+(defadvice web-mode-highlight-part (around tweak-jsx activate)
+    (if (equal web-mode-content-type "jsx")
+        (let ((web-mode-enable-part-face nil)) ad-do-it)
+        ad-do-it))
 
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.[agj]sp\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.as[cp]x\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
 
-  ;;  (use-package js2-mode
-  ;;      )
-  (use-package json-mode
-      )
-  (use-package prettier-js
-      :ensure t
-      ;; :config
-      ;; (setq prettier-js-args '(
-      ;;                          "--print-width" "200"  ;;一行代码的最大字符数,默认是80
-      ;;                          "--trailing-comma" "all"  ;; 尾部逗号处理
-      ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
-      ;;                          ))
-      )
-  (add-hook 'js2-mode-hook 'prettier-js-mode)
-  (add-hook 'web-mode-hook 'prettier-js-mode)
+;;  (use-package js2-mode
+;;      )
+(use-package json-mode
+    )
+(use-package prettier-js
+    :ensure t
+    ;; :config
+    ;; (setq prettier-js-args '(
+    ;;                          "--print-width" "200"  ;;一行代码的最大字符数,默认是80
+    ;;                          "--trailing-comma" "all"  ;; 尾部逗号处理
+    ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
+    ;;                          ))
+    )
+(add-hook 'js2-mode-hook 'prettier-js-mode)
+(add-hook 'web-mode-hook 'prettier-js-mode)
 #+end_src
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
 **** React JSX
 #+begin_src emacs-lisp
-  (use-package rjsx-mode
-      )
+(use-package rjsx-mode
+    )
 
-  (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
-  (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
 #+end_src
 *** Javascript REPL
 **** js-comint
 javascript REPL
 #+begin_src emacs-lisp
-  (use-package js-comint)
+(use-package js-comint)
 #+end_src
 **** COMMENT skewer
 live web REPL ,support javascript/css/html
 #+begin_src emacs-lisp
-  (use-package simple-httpd)
-  (use-package skewer-mode)
+(use-package simple-httpd)
+(use-package skewer-mode)
 #+end_src
 **** COMMENT indium
 javascript developer environment for emacs
 #+begin_src emacs-lisp
-  (use-package indium)
+(use-package indium)
 #+end_src
 *** FlyCheck Setup
 #+begin_src emacs-lisp
-  (use-package flycheck
-      :init (global-flycheck-mode)
-      :config
-      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-      )
+(use-package flycheck
+    :init (global-flycheck-mode)
+    :config
+    (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+    )
 
-  ;; disable jshint since we prefer eslint checking
-  (setq-default flycheck-disabled-checkers
-      (append flycheck-disabled-checkers
-          '(javascript-jshint)))
-  ;; use eslint with web-mode for jsx files
-  (flycheck-add-mode 'javascript-eslint 'web-mode)
-  ;; disable json-jsonlist checking for json files
-  (setq-default flycheck-disabled-checkers
-      (append flycheck-disabled-checkers
-          '(json-jsonlist)))
+;; disable jshint since we prefer eslint checking
+(setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers
+        '(javascript-jshint)))
+;; use eslint with web-mode for jsx files
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; disable json-jsonlist checking for json files
+(setq-default flycheck-disabled-checkers
+    (append flycheck-disabled-checkers
+        '(json-jsonlist)))
 #+end_src
 *** Yasnippet Setup
 #+begin_src emacs-lisp
-  (use-package yasnippet
-      :config (yas-global-mode)
-      )
-  (use-package yasnippet-snippets
-      :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
-      )
-  ;; (use-package yasnippet-snippets :ensure t)
+(use-package yasnippet
+    :config (yas-global-mode)
+    )
+(use-package yasnippet-snippets
+    :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
+    )
+;; (use-package yasnippet-snippets :ensure t)
 #+end_src
 *** Magit Setup
 git tools
 #+begin_src emacs-lisp
-  (use-package magit)
+(use-package magit)
 #+end_src
 *** HideShow Setup
 #+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook 'hs-minor-mode)
+(add-hook 'prog-mode-hook 'hs-minor-mode)
 #+end_src
 ** MarkDown Setup
 #+begin_src emacs-lisp
-  (use-package markdown-mode
-      :ensure t
-      :mode (("\\.md\\'" . gfm-mode)
-                ("README" . gfm-mode)
-                )
-      :init (setq markdown-command "multimarkdown"))
+(use-package markdown-mode
+    :ensure t
+    :mode (("\\.md\\'" . gfm-mode)
+              ("README" . gfm-mode)
+              )
+    :init (setq markdown-command "multimarkdown"))
 #+end_src
 
 ** Nginx Setup
 #+begin_src emacs-lisp
-  (use-package nginx-mode)
-  ;;  (use-package company-nginx)
+(use-package nginx-mode)
+;;  (use-package company-nginx)
 #+end_src
 ** HttpClient Setup
 #+begin_src emacs-lisp
-  (use-package restclient)
-  (use-package ob-restclient)
-  ;;  (use-package company-restclient
-  ;;      :after(restclient-mode)
-  ;;      )
+(use-package restclient)
+(use-package ob-restclient)
+;;  (use-package company-restclient
+;;      :after(restclient-mode)
+;;      )
 
-  ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
+;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
 ** Ediff Setup
 #+begin_src emacs-lisp
-  (use-package ediff
-      :config
-      (setq ediff-keep-variants nil)
-      (setq ediff-split-window-function 'split-window-horizontally)
-      (setq ediff-window-setup-function #'ediff-setup-windows-plain))
+(use-package ediff
+    :config
+    (setq ediff-keep-variants nil)
+    (setq ediff-split-window-function 'split-window-horizontally)
+    (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 ** COMMENT Youdao Translate Setup
 startup tip : Edebug: names-edebug-anon0
 #+begin_src emacs-lisp
-  (use-package youdao-dictionary
-      :init
-      (setq url-automatic-caching t)
-      (setq youdao-dictionary-search-history-file "~/.youdaohistory")
-      )
-  (global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point+)
-  (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
-  (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
+(use-package youdao-dictionary
+    :init
+    (setq url-automatic-caching t)
+    (setq youdao-dictionary-search-history-file "~/.youdaohistory")
+    )
+(global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point+)
+(global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
+(global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 #+end_src
 ** Installation
 #+begin_src shell
-  git clone <this repo url> ~/.emacs.d
+git clone <this repo url> ~/.emacs.d
 #+end_src
 *** Customize Your Configuration
 write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup. 

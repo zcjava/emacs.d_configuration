@@ -1,103 +1,109 @@
 
 # Table of Contents
 
--   [Intro](#orgb8daade)
-    -   [Package Manager](#orgdb87018)
-        -   [ELPA Setup](#orgb83cc84)
-        -   [Use-Package Setup](#org5bb4e58)
-    -   [Custom Need Constant](#org8d1255a)
-        -   [Font Constant](#org2b9e2c0)
-        -   [Org Agenda Constant](#org2b3561f)
-        -   [Org Roam Constant](#org25b5112)
-        -   [Lsp Constant](#orgd9427b9)
-    -   [General Settings Setup](#org19cb6a8)
-        -   [GC settings](#org0f8e4c3)
-        -   [Show Startup Message](#orga9f8650)
-        -   [Character Settings](#org604c048)
-        -   [BackUp Settings](#org6aa6341)
-        -   [Env Settings](#orge525e83)
-        -   [Custom File Settings](#orga684821)
-        -   [Yes/No Shorthand Settings](#orgb869d1d)
-        -   [Tabs Indentation Settings](#org4871492)
-        -   [Undo Settings](#org97976b2)
-        -   [Recentf Settings](#org619e038)
-        -   [Window Settings](#org4c06670)
-    -   [UI Setup](#org2b323b2)
-        -   [Menu-bar Hide](#org600729b)
-        -   [Tool-bar Hide](#orgd20afeb)
-        -   [Scroll-bar Hide](#org556ee70)
-        -   [Theme](#orgb04e050)
-        -   [Cursor](#orgfc82f28)
-        -   [FillColumn](#orgca85a7f)
-        -   [HighLight Line](#org52e9604)
-        -   [Font](#org1c992e0)
-        -   [Mode Line](#orgaa3d23f)
-        -   [Icons](#orgd284264)
-        -   [Tabs Setup](#org70ea519)
-        -   [DashBoard Setup](#orgf6d5054)
-    -   [Org Setup](#orge804061)
-        -   [OrgFile AutoFormat](#org6ef1833)
-        -   [Org Table Tidy Settings](#orgd8052e5)
-        -   [org-superstar](#orgba3d3b9)
-        -   [org ref](#org7690c7f)
-        -   [Org-babel support language](#org2178a91)
-        -   [Org Agenda Setup](#orgcec0149)
-        -   [Org Roam Setup](#orgdd73537)
-    -   [Which-Key Setup](#org4e08b40)
-    -   [Delete Setup](#orgbad67e6)
-        -   [Hungry-delete](#orgc7d59f5)
-        -   [Delete Slection](#org284e21a)
-    -   [SmartParens](#orgd93b317)
-    -   [Undo-Tree Setup](#org85f55d2)
-    -   [Switch-Window](#orgc695b66)
-    -   [Selected Setup](#orgceb72cc)
-    -   [Undo Tree Setup](#org90cd19e)
-    -   [Command Completion](#org9a3d5bf)
-        -   [Ivy/Counsel/Swiper Setup](#orgb6d0b31)
-        -   [orderless](#org1eba464)
-        -   [Helm Setup](#org7aa4db7)
-    -   [Format Setup](#org51a6019)
-        -   [Format Default Formatters Setup](#orgbc08f0e)
-    -   [Iedit Setup](#org2a0cf2f)
-    -   [Avy SetUp](#org3b79855)
-    -   [Projectile Setup](#org9b3c31a)
-    -   [Company Setup](#orgbabe6c5)
-        -   [Company english helper](#org1ab865a)
-    -   [Language Setup](#org9d6fa9e)
-        -   [LSP-Mode Setup](#orgecfa17d)
-        -   [JAVA Setup](#orgd97a82d)
-        -   [Groovy Setup](#orgad121b5)
-        -   [Web-Mode Setup](#org8e17f84)
-        -   [Javascript REPL](#org9ccf950)
-        -   [FlyCheck Setup](#org204f139)
-        -   [Yasnippet Setup](#orgc467c17)
-        -   [Magit Setup](#orgd9e88a9)
-        -   [HideShow Setup](#org11c0976)
-    -   [MarkDown Setup](#org7b4660d)
-    -   [Nginx Setup](#org99b51fc)
-    -   [HttpClient Setup](#org3cf3b09)
-    -   [Youdao Translate Setup](#org2b6ecb2)
-    -   [Installation](#orgc1c92b8)
-        -   [Customize Your Configuration](#org4eef13e)
+-   [Intro](#org33abc40)
+    -   [Package Manager](#orgd2e1571)
+        -   [ELPA Setup](#orgb7b77c3)
+        -   [Use-Package Setup](#orgc6dd790)
+    -   [Custom Need Constant](#org0670b04)
+        -   [Font Constant](#org45b4711)
+        -   [Org Agenda Constant](#orgde397f9)
+        -   [Org Roam Constant](#orgc163280)
+        -   [Lsp Constant](#org45bde44)
+    -   [General Settings Setup](#orgabf36ea)
+        -   [GC settings](#orgff8fb3e)
+        -   [Show Startup Message](#org423e098)
+        -   [Character Settings](#org2f7eca6)
+        -   [BackUp Settings](#org477e018)
+        -   [Env Settings](#org08b162a)
+        -   [Custom File Settings](#org83233c7)
+        -   [Yes/No Shorthand Settings](#org8c80e94)
+        -   [Tabs Indentation Settings](#org0d4d67d)
+        -   [Undo Settings](#orgc3474e0)
+        -   [Recentf Settings](#org994dd6a)
+        -   [Window Settings](#org87e96dc)
+    -   [UI Setup](#org241adeb)
+        -   [Menu-bar Hide](#org76481bb)
+        -   [Tool-bar Hide](#org67c8aa6)
+        -   [Scroll-bar Hide](#org9b61ff0)
+        -   [Theme](#orgcdab999)
+        -   [Cursor](#orgadfd3fa)
+        -   [FillColumn](#org22aeeb7)
+        -   [HighLight Line](#org6fc6a19)
+        -   [Font](#org2cb1a9f)
+        -   [Mode Line](#org1597aa3)
+        -   [Icons](#org4e3e55e)
+        -   [DashBoard Setup](#org1b0c9ae)
+        -   [Tabs Setup](#orga706a3c)
+        -   [Delimiters Highlights Setup](#org9340a42)
+    -   [Org Setup](#org2831ee8)
+        -   [OrgFile AutoFormat](#orgd163771)
+        -   [Org Table Tidy Settings](#org731bf30)
+        -   [org-superstar](#org6832915)
+        -   [org ref](#orgb64e688)
+        -   [Org-babel support language](#org53b77b9)
+        -   [Org Agenda Setup](#org4fe5aae)
+        -   [Org Roam Setup](#org5696d45)
+    -   [Which-Key Setup](#org72197b7)
+    -   [Delete Setup](#orgc77d957)
+        -   [Hungry-delete](#org81bfb58)
+        -   [Delete Slection](#orga4dd1c2)
+    -   [SmartParens](#org298e898)
+    -   [Undo-Tree Setup](#org145133b)
+    -   [Switch-Window](#orgb59da4c)
+    -   [Selected Setup](#org435c75f)
+    -   [Undo Tree Setup](#orgf18c401)
+    -   [Command Completion](#orgeb1bf7b)
+        -   [Ivy/Counsel/Swiper Setup](#org4a268bd)
+        -   [orderless](#orgc949f4a)
+        -   [Helm Setup](#org7dcb92f)
+    -   [Format Setup](#orgc38f5b5)
+        -   [Format Default Formatters Setup](#org83c43b1)
+    -   [Iedit Setup](#orgf0b3ab4)
+    -   [Avy SetUp](#orgf5707cc)
+    -   [Projectile Setup](#orgd14a079)
+    -   [Code Completion Setup](#org781e4d3)
+        -   [Corfu](#orgb8fd946)
+        -   [Cape](#org58ab559)
+        -   [Corfu English Helper](#orgf9df84a)
+    -   [Treesit](#orgcd4e007)
+    -   [Language Setup](#org89bd60d)
+        -   [Eglot Setup](#org9264a20)
+        -   [JAVA Setup](#org8f44716)
+        -   [Groovy Setup](#org860410f)
+        -   [Maven Setup](#org9466ad7)
+        -   [Web-Mode Setup](#org216ade4)
+        -   [Javascript REPL](#org2916f9f)
+        -   [FlyCheck Setup](#org6131c86)
+        -   [Yasnippet Setup](#org1a105a4)
+        -   [Magit Setup](#orgce4c2f3)
+        -   [HideShow Setup](#orgc0f8702)
+    -   [MarkDown Setup](#org349795c)
+    -   [Nginx Setup](#org08b5772)
+    -   [HttpClient Setup](#org6ca1da3)
+    -   [Ediff Setup](#org704b0bd)
+    -   [Installation](#org7c68768)
+        -   [Customize Your Configuration](#org1a9335b)
 
 
 
-<a id="orgb8daade"></a>
+<a id="org33abc40"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="orgdb87018"></a>
+<a id="orgd2e1571"></a>
 
 ## Package Manager
 
 
-<a id="orgb83cc84"></a>
+<a id="orgb7b77c3"></a>
 
 ### ELPA Setup
 
+    
     (require 'package)
     (if (boundp 'package-archives-spec)
         (setq package-archives package-archives-spec)
@@ -116,7 +122,7 @@ This configuration file contains setup my config of emacs
         (package-refresh-contents))
 
 
-<a id="org5bb4e58"></a>
+<a id="orgc6dd790"></a>
 
 ### Use-Package Setup
 
@@ -133,12 +139,12 @@ This configuration file contains setup my config of emacs
         (require 'vc-use-package)
 
 
-<a id="org8d1255a"></a>
+<a id="org0670b04"></a>
 
 ## Custom Need Constant
 
 
-<a id="org2b9e2c0"></a>
+<a id="org45b4711"></a>
 
 ### Font Constant
 
@@ -147,16 +153,16 @@ This configuration file contains setup my config of emacs
     (defconst ctm-font-size "22")
 
 
-<a id="org2b3561f"></a>
+<a id="orgde397f9"></a>
 
 ### Org Agenda Constant
 
     (defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
     (defconst ctm-org-agenda-filename-input "inbox.org")
-    (defconst ctm-org-agenda-filename-gtd "gtd.org")
+    (defconst ctm-org-agenda-filename-task "task.org")
 
 
-<a id="org25b5112"></a>
+<a id="orgc163280"></a>
 
 ### Org Roam Constant
 
@@ -164,7 +170,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-org-roam-dailies-directory "daily")
 
 
-<a id="orgd9427b9"></a>
+<a id="org45bde44"></a>
 
 ### Lsp Constant
 
@@ -175,34 +181,34 @@ This configuration file contains setup my config of emacs
 
 -   Java Constant
 
-        (defconst ctm-java-home-path "/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/")
+        (defconst ctm-java-home-path (getenv "JAVA_HOME"))
         (defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
         (defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
-        (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.26/lombok-1.18.26.jar"))
+        (defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
         (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
         (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 
 
-<a id="org19cb6a8"></a>
+<a id="orgabf36ea"></a>
 
 ## General Settings Setup
 
 
-<a id="org0f8e4c3"></a>
+<a id="orgff8fb3e"></a>
 
 ### GC settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="orga9f8650"></a>
+<a id="org423e098"></a>
 
 ### Show Startup Message
 
     (setq inhibit-startup-message t)
 
 
-<a id="org604c048"></a>
+<a id="org2f7eca6"></a>
 
 ### Character Settings
 
@@ -225,7 +231,7 @@ This configuration file contains setup my config of emacs
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="org6aa6341"></a>
+<a id="org477e018"></a>
 
 ### BackUp Settings
 
@@ -237,7 +243,7 @@ donot backup file
     ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 
 
-<a id="orge525e83"></a>
+<a id="org08b162a"></a>
 
 ### Env Settings
 
@@ -245,47 +251,53 @@ donot backup file
         :ensure t
         ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
         )
+    (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
+        (add-to-list 'exec-path-from-shell-variables var))
     (when (memq window-system '(mac ns x))
         (exec-path-from-shell-initialize))
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="orga684821"></a>
+<a id="org83233c7"></a>
 
 ### Custom File Settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="orgb869d1d"></a>
+<a id="org8c80e94"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="org4871492"></a>
+<a id="org0d4d67d"></a>
 
 ### Tabs Indentation Settings
 
-    ;;  (use-package smart-tabs-mode)
     (setq tab-width 4)
     (setq-default tab-width 4)
     (setq-default indent-line-function 4)
     (setq-default lisp-indent-offset 4)
     (setq-default sgml-basic-offset 4)
-    ;;  (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'cperl 'python 'ruby 'nxml)
     (setq c-basic-offset 4)
     ;; (setq tab-always-indent)
     (setq-default indent-tabs-mode nil)
+    
+    (setq-default electric-indent-inhibit t)
+    
     ;; nxml-mode
     (setq
         nxml-child-indent 4
         nxml-attribute-indent 4
         nxml-slash-auto-complete-flag t)
+    
+    ;; js ts indent-tab 2 spaces
+    (setq js-indent-level 2)
 
 
-<a id="org97976b2"></a>
+<a id="orgc3474e0"></a>
 
 ### Undo Settings
 
@@ -297,7 +309,7 @@ donot backup file
         )
 
 
-<a id="org619e038"></a>
+<a id="org994dd6a"></a>
 
 ### Recentf Settings
 
@@ -308,7 +320,7 @@ donot backup file
     (recentf-mode t)
 
 
-<a id="org4c06670"></a>
+<a id="org87e96dc"></a>
 
 ### Window Settings
 
@@ -328,33 +340,33 @@ donot backup file
             )
 
 
-<a id="org2b323b2"></a>
+<a id="org241adeb"></a>
 
 ## UI Setup
 
 
-<a id="org600729b"></a>
+<a id="org76481bb"></a>
 
 ### Menu-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="orgd20afeb"></a>
+<a id="org67c8aa6"></a>
 
 ### Tool-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org556ee70"></a>
+<a id="org9b61ff0"></a>
 
 ### Scroll-bar Hide
 
 [Look at early-init-el](early-init.el)
 
 
-<a id="orgb04e050"></a>
+<a id="orgcdab999"></a>
 
 ### Theme
 
@@ -364,7 +376,7 @@ donot backup file
     (load-theme 'dracula t)
 
 
-<a id="orgfc82f28"></a>
+<a id="orgadfd3fa"></a>
 
 ### Cursor
 
@@ -377,21 +389,21 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="orgca85a7f"></a>
+<a id="org22aeeb7"></a>
 
 ### FillColumn
 
     (setq-default fill-column 150)
 
 
-<a id="org52e9604"></a>
+<a id="org6fc6a19"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="org1c992e0"></a>
+<a id="org2cb1a9f"></a>
 
 ### Font
 
@@ -410,7 +422,7 @@ donot backup file
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="orgaa3d23f"></a>
+<a id="org1597aa3"></a>
 
 ### Mode Line
 
@@ -425,7 +437,8 @@ donot backup file
     
     (use-package doom-modeline
         :vc (:fetcher github :repo seagle0128/doom-modeline)
-        :init (doom-modeline-mode t)
+        :init
+        (doom-modeline-mode t)
         :config
         (setq doom-modeline-height 5)
         (custom-set-faces
@@ -434,7 +447,7 @@ donot backup file
             )
         (doom-modeline-def-modeline 'ownml
             '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-            '(input-method buffer-encoding process vcs check))
+            '(buffer-encoding process vcs check))
         ;; Add to `doom-modeline-mode-hook` or other hooks
         (defun setup-custom-doom-modeline ()
             (doom-modeline-set-modeline 'ownml 'default))
@@ -442,7 +455,7 @@ donot backup file
         )
 
 
-<a id="orgd284264"></a>
+<a id="org4e3e55e"></a>
 
 ### Icons
 
@@ -452,7 +465,36 @@ donot backup file
         )
 
 
-<a id="org70ea519"></a>
+<a id="org1b0c9ae"></a>
+
+### DashBoard Setup
+
+    (use-package dashboard
+        :config
+        (dashboard-setup-startup-hook)
+        (dashboard-modify-heading-icons '((recents . "file-text")
+                                             (boomarks . "book")
+                                             ))
+        (setq dashboard-banner-logo-title "Life is happy")
+        (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
+        (setq dashboard-image-banner-max-height 100)
+        (setq dashboard-center-content t)
+        (setq dashboard-set-heading-icons t)
+        (setq dashboard-set-file-icons t)
+        (setq dashboard-set-navigator t)
+        (setq dashboard-items '((recents  . 5)
+                                   (bookmarks . 5)
+                                   (projects . 5)
+                                   (agenda . 5)
+                                   ))
+        (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
+        (setq dashboard-page-separator "\n\f\n")
+        )
+    
+    (use-package page-break-lines)
+
+
+<a id="orga706a3c"></a>
 
 ### Tabs Setup
 
@@ -500,46 +542,36 @@ donot backup file
             )
 
 
-<a id="orgf6d5054"></a>
+<a id="org9340a42"></a>
 
-### DashBoard Setup
+### Delimiters Highlights Setup
 
-    (use-package dashboard
-        :config
-        (dashboard-setup-startup-hook)
-        (dashboard-modify-heading-icons '((recents . "file-text")
-                                             (boomarks . "book")
-                                             ))
-        (setq dashboard-banner-logo-title "Life is happy")
-        (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
-        (setq dashboard-image-banner-max-height 100)
-        (setq dashboard-center-content t)
-        (setq dashboard-set-heading-icons t)
-        (setq dashboard-set-file-icons t)
-        (setq dashboard-set-navigator t)
-        (setq dashboard-items '((recents  . 5)
-                                   (bookmarks . 5)
-                                   (projects . 5)
-                                   (agenda . 5)
-                                   ))
-        (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
-        (setq dashboard-page-separator "\n\f\n")
+replaced by treesit
+
+    (use-package rainbow-delimiters
+        :hook
+        (prog-mode . rainbow-delimiters-mode)
         )
-    
-    (use-package page-break-lines)
 
 
-<a id="orge804061"></a>
+<a id="org2831ee8"></a>
 
 ## Org Setup
 
 
-<a id="org6ef1833"></a>
+<a id="orgd163771"></a>
 
 ### OrgFile AutoFormat
 
     ;; let source code block can be `indent-region` format
     (setq org-src-tab-acts-natively t)
+    (setq org-src-fontify-natively t)
+    
+    (setq org-src-preserve-indentation t)
+    (setq org-src--preserve-indentation t)
+    (setq org-edit-src-content-indentation 0)
+    (setq org-src--content-indentation 0)
+    
     ;; org file before save invoke indent-region
     (add-hook 'org-mode-hook
         (lambda()
@@ -551,7 +583,7 @@ donot backup file
             (indent-region (point-min) (point-max) nil)))
 
 
-<a id="orgd8052e5"></a>
+<a id="org731bf30"></a>
 
 ### Org Table Tidy Settings
 
@@ -562,7 +594,7 @@ donot backup file
         )  
 
 
-<a id="orgba3d3b9"></a>
+<a id="org6832915"></a>
 
 ### org-superstar
 
@@ -579,14 +611,14 @@ donot backup file
             (face-attribute 'default :background) 3))
 
 
-<a id="org7690c7f"></a>
+<a id="orgb64e688"></a>
 
 ### org ref
 
     (use-package org-ref)
 
 
-<a id="org2178a91"></a>
+<a id="org53b77b9"></a>
 
 ### Org-babel support language
 
@@ -613,7 +645,7 @@ donot backup file
     (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 
 
-<a id="orgcec0149"></a>
+<a id="org4fe5aae"></a>
 
 ### Org Agenda Setup
 
@@ -624,17 +656,17 @@ donot backup file
         
         (setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
         (setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
-        (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-gtd))
+        (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-task))
         ;;  (setq org-agenda-file-journal (concat org-agenda-dir "journal.org"))
         (setq org-agenda-files (list ctm-org-agenda-dir))
         (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
         (setq org-agenda-include-diary t)
         (setq org-capture-templates `(
                                          ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
-                                         ("c" "calendar [gtd]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                         ("h" "Habit [gtd]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
-                                         ("p" "Projects [gtd]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
-                                         ("I" "Incubate [gtd]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                         ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                         ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                         ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
+                                         ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
                                          ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
                                          ))
         (setq org-todo-keywords
@@ -709,7 +741,7 @@ donot backup file
         (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 
-<a id="orgdd73537"></a>
+<a id="org5696d45"></a>
 
 ### Org Roam Setup
 
@@ -752,7 +784,7 @@ donot backup file
             )
 
 
-<a id="org4e08b40"></a>
+<a id="org72197b7"></a>
 
 ## Which-Key Setup
 
@@ -763,12 +795,12 @@ donot backup file
         )
 
 
-<a id="orgbad67e6"></a>
+<a id="orgc77d957"></a>
 
 ## Delete Setup
 
 
-<a id="orgc7d59f5"></a>
+<a id="org81bfb58"></a>
 
 ### Hungry-delete
 
@@ -782,14 +814,14 @@ delete all whitespace until have character
         )
 
 
-<a id="org284e21a"></a>
+<a id="orga4dd1c2"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="orgd93b317"></a>
+<a id="org298e898"></a>
 
 ## SmartParens
 
@@ -799,13 +831,17 @@ auto Symbol of completion
         :ensure t
         :config
         (smartparens-global-mode t)
+        (show-smartparens-global-mode t)
         (require 'smartparens-config)
         (sp-local-pair 'elisp-mode "'" nil :actions nil)
         (sp-local-pair 'elisp-mode "`" nil :actions nil)
+        :bind(("C-c 9" . sp-beginning-of-sexp)
+                 ("C-c 0" . sp-end-of-sexp)
+                 )
         )
 
 
-<a id="org85f55d2"></a>
+<a id="org145133b"></a>
 
 ## Undo-Tree Setup
 
@@ -814,7 +850,7 @@ auto Symbol of completion
         )
 
 
-<a id="orgc695b66"></a>
+<a id="orgb59da4c"></a>
 
 ## Switch-Window
 
@@ -828,7 +864,7 @@ easy to jump windows
         )
 
 
-<a id="orgceb72cc"></a>
+<a id="org435c75f"></a>
 
 ## Selected Setup
 
@@ -850,23 +886,22 @@ easy to jump windows
         )
 
 
-<a id="org90cd19e"></a>
+<a id="orgf18c401"></a>
 
 ## Undo Tree Setup
 
-    (use-package undo-tree
-        )
+    (use-package undo-tree)
     (global-undo-tree-mode t)
 
 
-<a id="org9a3d5bf"></a>
+<a id="orgeb1bf7b"></a>
 
 ## Command Completion
 
 Command Interactive Completion For Minibuffer,eg : M-x
 
 
-<a id="orgb6d0b31"></a>
+<a id="org4a268bd"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -897,7 +932,6 @@ Command Interactive Completion For Minibuffer,eg : M-x
                      ("C-."   . 'counsel-imenu)
                      ("C-c o"   . 'counsel-outline)
                      ("C-x C-f" . counsel-find-file)
-                     ("C-c k" . counsel-ag)
                      ("C-c g" . counsel-rg)
                      ("C-h f" . 'counsel-describe-function)
                      ("C-h v" . 'counsel-describe-variable)
@@ -929,7 +963,6 @@ Command Interactive Completion For Minibuffer,eg : M-x
     
         ;; bind-key conflict, unbind
         (define-key org-mode-map (kbd "C-'") nil)
-        
         (use-package swiper
             :bind(
                      ("C-s" . swiper)
@@ -938,7 +971,7 @@ Command Interactive Completion For Minibuffer,eg : M-x
             )
 
 
-<a id="org1eba464"></a>
+<a id="orgc949f4a"></a>
 
 ### orderless
 
@@ -956,7 +989,7 @@ Unordered search  in ivy search
     (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 
 
-<a id="org7aa4db7"></a>
+<a id="org7dcb92f"></a>
 
 ### Helm Setup
 
@@ -966,7 +999,7 @@ Unordered search  in ivy search
         )
 
 
-<a id="org51a6019"></a>
+<a id="orgc38f5b5"></a>
 
 ## Format Setup
 
@@ -991,7 +1024,7 @@ Unordered search  in ivy search
             ))
 
 
-<a id="orgbc08f0e"></a>
+<a id="org83c43b1"></a>
 
 ### Format Default Formatters Setup
 
@@ -1079,7 +1112,7 @@ Unordered search  in ivy search
         )
 
 
-<a id="org2a0cf2f"></a>
+<a id="orgf0b3ab4"></a>
 
 ## Iedit Setup
 
@@ -1088,7 +1121,7 @@ Unordered search  in ivy search
         )
 
 
-<a id="org3b79855"></a>
+<a id="orgf5707cc"></a>
 
 ## Avy SetUp
 
@@ -1099,7 +1132,7 @@ jumping to visible text using a char-based decision tree
         )
 
 
-<a id="org9b3c31a"></a>
+<a id="orgd14a079"></a>
 
 ## Projectile Setup
 
@@ -1175,245 +1208,144 @@ jumping to visible text using a char-based decision tree
         :config (treemacs-set-scope-type 'Tabs))
 
 
-<a id="orgbabe6c5"></a>
+<a id="org781e4d3"></a>
 
-## Company Setup
+## Code Completion Setup
 
-    (use-package company
-        :ensure t
+
+<a id="orgb8fd946"></a>
+
+### Corfu
+
+    ;; Auto completion example
+    (use-package corfu
+        :custom
+        (corfu-auto t)          ;; Enable auto completion
+        ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+        :bind
+        ;; Another key binding can be used, such as S-SPC.
+        ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
         :init
-        (global-company-mode)
-        :bind (
-                  ("s-/" . company-complete)
-                  :map company-active-map
-                  (("C-n"   . company-select-next)
-                      ("C-p"   . company-select-previous)
-                      ("C-d"   . company-show-doc-buffer)
-                      ("<tab>" . company-complete)
-                      )
-                  )
+        (global-corfu-mode))
+
+
+<a id="org58ab559"></a>
+
+### Cape
+
+    (use-package cape
+        :init
+        ;; Add to the global default value of `completion-at-point-functions' which is
+        ;; used by `completion-at-point'.  The order of the functions matters, the
+        ;; first function returning a result wins.  Note that the list of buffer-local
+        ;; completion functions takes precedence over the global list.
+        (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+        (add-to-list 'completion-at-point-functions #'cape-file)
+        (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+        ;;(add-to-list 'completion-at-point-functions #'cape-history)
+        ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+        ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+        ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+        ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+        ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+        ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+        ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+        ;;(add-to-list 'completion-at-point-functions #'cape-line)
+        :config
+        (setq dabbrev-check-other-buffers nil
+            dabbrev-check-all-buffers nil
+            cape-dabbrev-min-length 3)
+        (cape-wrap-prefix-length #'cape-dabbrev 3)
         )
-    ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
-    ;; (use-package company-box
-    ;;   :hook (company-mode . company-box-mode))
 
 
-<a id="org1ab865a"></a>
+<a id="orgf9df84a"></a>
 
-### Company english helper
+### Corfu English Helper
 
-    (use-package company-english-helper
-        :vc (:fetcher github :repo manateelazycat/company-english-helper)
+    (use-package corfu-english-helper
+        :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
         )
 
 
-<a id="org9d6fa9e"></a>
+<a id="orgcd4e007"></a>
+
+## Treesit
+
+    (use-package treesit-auto
+        :init
+        (setq tressit-font-lock-level 4)
+        :config
+        (global-treesit-auto-mode)
+        )
+
+
+<a id="org89bd60d"></a>
 
 ## Language Setup
 
 
-<a id="orgecfa17d"></a>
+<a id="org9264a20"></a>
 
-### LSP-Mode Setup
+### Eglot Setup
 
-    (use-package lsp-mode
-        :ensure t
-        :hook (
-                  (lsp-mode . lsp-enable-which-key-integration)
-                  (lsp-mode . lsp-lens-mode)
-                  (java-mode . lsp-mode)
-                  (web-mode . lsp-mode)
-                  ;; (prog-mode . lsp-deferred)
-                  ;; (prog-mode . (lambda()
-                  ;;                  (unless (derived-mode-p 'emacs-lisp-mode) 'lsp-deferred)  ;; assign some mode in prog-mode not need lsp
-                  ;;                  ))
-                  )
-        :commands lsp
-        :bind
-        (:map lsp-mode-map
-            (("C-M-b" . lsp-find-implementation)
-                ("M-RET" . lsp-execute-code-action)))
-        :init (setq
-                  lsp-keymap-prefix "C-c l"              ; this is for which-key integration documentation, need to use lsp-mode-map
-                  lsp-completion-provider :capf
-                  lsp-completion-show-detail t
-                  lsp-completion-show-kind t
-                  lsp-idle-delay 0.500
-                  lsp-vetur-validation-template nil
-                  ;;          lsp-vetur-dev-log-level "DEBUG"
-                  lsp-vetur-format-default-formatter-css "none"
-                  lsp-vetur-format-default-formatter-html "none"
-                  lsp-vetur-format-default-formatter-js "none"
-                  lsp-enable-symbol-highlighting t
-                  lsp-lens-enable t
-                  lsp-headerline-breadcrumb-enable t
-                  lsp-modeline-code-actions-enable t
-                  lsp-modeline-diagnostics-enable t
-                  lsp-diagnostics-provider :flycheck
-                  lsp-eldoc-enable-hover t
-                  lsp-eldoc-enable-hover t
-                  lsp-signature-auto-activate t
-                  lsp-signature-render-documentation t
-                  lsp-log-io nil
-                  ;;        lsp-inhibit-message t
-                  )
-        :config
-        (setq lsp-groovy-server-file ctm-lsp-groovy-server-file)
-        (setq lsp-groovy-classpath ctm-lsp-groovy-classpath)
-        (setq lsp-completion-enable-additional-text-edit nil)
-        (setq lsp-intelephense-multi-root nil) ; don't scan unnecessary projects
-        (with-eval-after-load 'lsp-intelephense
-            (setf (lsp--client-multi-root (gethash 'iph lsp-clients)) nil))
-        (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
-        ;; (add-hook 'lsp-mode-hook
-        ;;     (lambda()
-        ;;         (add-hook 'before-save-hook 'lsp-format-buffer nil t)))
-        )
-    (add-hook 'prog-mode-hook (lambda()
-                                  ;;(unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode))
-                                  (when(derived-mode-p 'java-mode) (lsp-mode t))))
-    
-    (use-package lsp-ui                                   ;;
-        :commands lsp-ui-mode                               ;;
-        :config                                             ;;
-        (setq lsp-ui-doc-enable t)                          ;;
-        (setq lsp-ui-doc-header t)                          ;;
-        (setq lsp-ui-doc-include-signature t)               ;;
-        (setq lsp-ui-doc-border (face-foreground 'default)) ;;
-        (setq lsp-ui-sideline-enable nil)
-        (setq lsp-ui-sideline-show-code-actions nil)          ;;
-        (setq lsp-ui-sideline-show-diagnostics nil)         ;;
-        ;;      (setq lsp-ui-sideline-delay 0.05)                  ;;
-        (setq lsp-ui-doc-frame-parameters
-            '((left . -1)
-                 (top . -1)
-                 (no-accept-focus . t)
-                 (min-width . 0)
-                 (width . 0)
-                 (min-height . 0)
-                 (height . 0)
-                 (internal-border-width . 0)
-                 (vertical-scroll-bars)
-                 (horizontal-scroll-bars)
-                 (left-fringe . 0)
-                 (right-fringe . 0)
-                 (menu-bar-lines . 0)
-                 (tool-bar-lines . 0)
-                 (line-spacing . 0.1)
-                 (unsplittable . t)
-                 (undecorated . t)
-                 (minibuffer . nil)
-                 (visibility . nil)
-                 (mouse-wheel-frame . nil)
-                 (no-other-frame . t)
-                 (cursor-type)
-                 (no-special-glyphs . t)))
-        )
-    (use-package lsp-ivy
+    (use-package eglot
+        :ensure nil
+        :hook (prog-mode . (lambda()
+                               (unless (derived-mode-p 'emacs-lisp-mode) 'eglot-ensure) 
+                               )) 
+        :custom
+        (eglot-autoshutdown t)
+        (eglot-events-buffer-size 0)
+        (eglot-extend-to-xref nil)
+        (eglot -ignored-server-capabilities
+            '(:hoverProvider
+                 :documentHighlightProvider
+                 :documentFormattingProvider
+                 :documentRangeFormattingProvider
+                 :documentOnTypeFormattingProvider
+                 :colorProvider
+                 :foldingRangeProvider))
         )
 
--   NOTE
 
-    -   find the class/method in third library by keyword
-    
-        (lsp-ivy-workspace-symbol)
-
-
-<a id="orgd97a82d"></a>
+<a id="org8f44716"></a>
 
 ### JAVA Setup
 
-    (setenv "JAVA_HOME"  ctm-java-home-path)
-    (setq my-java-path (concat ctm-java-home-path "bin/java"))
-    (use-package lsp-java 
-        :init
-        (setq lsp-java-server-install-dir ctm-lsp-java-server-install-dir)
-        (setq dap-java-test-runner ctm-dap-java-test-runner)
-        ;; lsp-java-jdt-download-url 
-        (setq lsp-java-java-path my-java-path)
-        (setq lombok-jar-path ctm-lombok-jar-path)
-        (setq lsp-java-vmargs
-            `("-Xmx2G"
-                 "-XX:+UseG1GC"
-                 "-XX:+UseStringDeduplication"
-                 ,(concat "-javaagent:" lombok-jar-path)
-                 ))
-        (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
-        ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-        (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
-        :config
-        (setq lsp-java-maven-download-sources t)
-        (setq lsp-java-import-maven-enabled t)
-        ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
-        (setq
-            lsp-java-import-gradle-enabled t
-            lsp-java-import-gradle-wrapper-enabled t
-            lsp-java-signature-help-enabled nil  ;; ignore gradle checksum signature
-            ;;        lsp-java-import-gradle-version "8.4"
-            lsp-java-import-gradle-java-home ctm-java-home-path
-            ;;          lsp-java-import-gradle-home "/opt/homebrew/Cellar/gradle/8.4/"
-            lsp-java-import-gradle-user-home ctm-lsp-java-import-gradle-user-home)
-        (setq lsp-java-implementations-code-lens-enabled t)
-        (setq lsp-java-references-code-lens-enabled t)
-        (setq lsp-java-autobuild-enabled t)
-        (setq lsp-java-format-enabled t)
-        (setq lsp-java-format-comments-enabled t)
-        (setq lsp-java-configuration-update-build-configuration t)
-        (setq lsp-java-trace-server t)
-        (setq lsp-java-configuration-check-project-settings-exclusions t)
-        (setq lsp-java-completion-guess-method-arguments t)
-        ;;      (add-hook 'java-mode-hook 'lsp)
-        ;; 只在java-mode save的时候 调用lsp-java-origanize-imports
-        ;; (add-hook 'java-mode-hook
-        ;;     (lambda()
-        ;;         (add-hook 'before-save-hook 'lsp-java-organize-imports nil t)
-        ;;         ))
-    
-        ;;     (add-hook 'java-mode-hook                                        
-        ;;                (lambda()                                              
-        ;;                  (make-local-variable 'company-minimum-prefix-length) 
-        ;;                  (setq company-minimum-prefix-length 0)               
-        ;;                    )
-        ;;         )
-    
-        ;;     (require 'lsp-java-boot)
-        ;;     ;; to enable the lenses
-        ;;     (add-hook 'lsp-mode-hook #'lsp-lens-mode)
-        ;;     (add-hook 'java-mode-hook #'lsp-java-boot-lens-mode)
+-   Eglot-java
+
+        (with-eval-after-load 'eglot
+            (add-to-list 'eglot-server-programs
+                `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+                     "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
+                     "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
+                     ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
+            )
+        
+        (use-package jarchive
+            :ensure t
+            :after eglot
+            :config
+            (jarchive-setup))
+
+-   Hot Deployment
+
+    use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
+
+
+<a id="org860410f"></a>
+
+### Groovy Setup
+
+    (use-package groovy-mode
         )
-    
-    (use-package dap-java
-        :ensure nil
-        :config
-        (dap-register-debug-template
-            "localhost:5005"
-            (list :type "java"
-                :request "attach"
-                :hostName "localhost"
-                :port 5005))
-        (dap-register-debug-template
-            "lxd"
-            (list :type "java"
-                :request "attach"
-                :hostName "127.0.0.1"
-                :port 5005))
-        ;; :config
-        ;; (global-set-key (kbd "<f7>") 'dap-step-in)
-        ;; (global-set-key (kbd "<f8>") 'dap-next)
-        ;; (global-set-key (kbd "<f9>") 'dap-continue)
-        )
-    
-    ;;==========java end==========
-    
-    ;;========== maven pom==========
-    ;; https://github.com/m0smith/maven-pom-mode.git
-                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;; (add-to-list 'load-path  (expand-file-name "site-lisp/maven-pom-mode" user-emacs-directory)) ;;
-    ;; (add-to-list 'auto-mode-alist '("pom.xml" . maven-pom-mode))                                 ;;
-    ;; (load "maven-pom-mode")                                                                      ;;
-                    ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-    ;;==========maven pom end==========
-    
+
+
+<a id="org9466ad7"></a>
+
+### Maven Setup
+
     (use-package mvn
         :ensure t
         )
@@ -1422,20 +1354,8 @@ jumping to visible text using a char-based decision tree
         (interactive)
         (mvn "install"))
 
--   Hot Deployment
 
-    use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
-
-
-<a id="orgad121b5"></a>
-
-### Groovy Setup
-
-    (use-package groovy-mode
-        )
-
-
-<a id="org8e17f84"></a>
+<a id="org216ade4"></a>
 
 ### Web-Mode Setup
 
@@ -1465,8 +1385,6 @@ jumping to visible text using a char-based decision tree
     (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
     
     ;;  (use-package js2-mode
@@ -1491,9 +1409,12 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
 
         (use-package rjsx-mode
             )
+        
+        (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
+        (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
 
 
-<a id="org9ccf950"></a>
+<a id="org2916f9f"></a>
 
 ### Javascript REPL
 
@@ -1504,7 +1425,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
         (use-package js-comint)
 
 
-<a id="org204f139"></a>
+<a id="org6131c86"></a>
 
 ### FlyCheck Setup
 
@@ -1526,7 +1447,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
             '(json-jsonlist)))
 
 
-<a id="orgc467c17"></a>
+<a id="org1a105a4"></a>
 
 ### Yasnippet Setup
 
@@ -1539,7 +1460,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
     ;; (use-package yasnippet-snippets :ensure t)
 
 
-<a id="orgd9e88a9"></a>
+<a id="orgce4c2f3"></a>
 
 ### Magit Setup
 
@@ -1548,14 +1469,14 @@ git tools
     (use-package magit)
 
 
-<a id="org11c0976"></a>
+<a id="orgc0f8702"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="org7b4660d"></a>
+<a id="org349795c"></a>
 
 ## MarkDown Setup
 
@@ -1567,49 +1488,46 @@ git tools
         :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org99b51fc"></a>
+<a id="org08b5772"></a>
 
 ## Nginx Setup
 
     (use-package nginx-mode)
-    (use-package company-nginx)
+    ;;  (use-package company-nginx)
 
 
-<a id="org3cf3b09"></a>
+<a id="org6ca1da3"></a>
 
 ## HttpClient Setup
 
     (use-package restclient)
     (use-package ob-restclient)
-    (use-package company-restclient
-        :after(restclient-mode)
-        )
+    ;;  (use-package company-restclient
+    ;;      :after(restclient-mode)
+    ;;      )
     
-    (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
+    ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 
 
-<a id="org2b6ecb2"></a>
+<a id="org704b0bd"></a>
 
-## Youdao Translate Setup
+## Ediff Setup
 
-    (use-package youdao-dictionary
-        :init
-        (setq url-automatic-caching t)
-        (setq youdao-dictionary-search-history-file "~/.youdaohistory")
-        )
-    (global-set-key (kbd "C-c y w") 'youdao-dictionary-search-at-point+)
-    (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
-    (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
+    (use-package ediff
+        :config
+        (setq ediff-keep-variants nil)
+        (setq ediff-split-window-function 'split-window-horizontally)
+        (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 
 
-<a id="orgc1c92b8"></a>
+<a id="org7c68768"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="org4eef13e"></a>
+<a id="org1a9335b"></a>
 
 ### Customize Your Configuration
 
