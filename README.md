@@ -1,105 +1,105 @@
 
 # Table of Contents
 
--   [Intro](#org33abc40)
-    -   [Package Manager](#orgd2e1571)
-        -   [ELPA Setup](#orgb7b77c3)
-        -   [Use-Package Setup](#orgc6dd790)
-    -   [Custom Need Constant](#org0670b04)
-        -   [Font Constant](#org45b4711)
-        -   [Org Agenda Constant](#orgde397f9)
-        -   [Org Roam Constant](#orgc163280)
-        -   [Lsp Constant](#org45bde44)
-    -   [General Settings Setup](#orgabf36ea)
-        -   [GC settings](#orgff8fb3e)
-        -   [Show Startup Message](#org423e098)
-        -   [Character Settings](#org2f7eca6)
-        -   [BackUp Settings](#org477e018)
-        -   [Env Settings](#org08b162a)
-        -   [Custom File Settings](#org83233c7)
-        -   [Yes/No Shorthand Settings](#org8c80e94)
-        -   [Tabs Indentation Settings](#org0d4d67d)
-        -   [Undo Settings](#orgc3474e0)
-        -   [Recentf Settings](#org994dd6a)
-        -   [Window Settings](#org87e96dc)
-    -   [UI Setup](#org241adeb)
-        -   [Menu-bar Hide](#org76481bb)
-        -   [Tool-bar Hide](#org67c8aa6)
-        -   [Scroll-bar Hide](#org9b61ff0)
-        -   [Theme](#orgcdab999)
-        -   [Cursor](#orgadfd3fa)
-        -   [FillColumn](#org22aeeb7)
-        -   [HighLight Line](#org6fc6a19)
-        -   [Font](#org2cb1a9f)
-        -   [Mode Line](#org1597aa3)
-        -   [Icons](#org4e3e55e)
-        -   [DashBoard Setup](#org1b0c9ae)
-        -   [Tabs Setup](#orga706a3c)
-        -   [Delimiters Highlights Setup](#org9340a42)
-    -   [Org Setup](#org2831ee8)
-        -   [OrgFile AutoFormat](#orgd163771)
-        -   [Org Table Tidy Settings](#org731bf30)
-        -   [org-superstar](#org6832915)
-        -   [org ref](#orgb64e688)
-        -   [Org-babel support language](#org53b77b9)
-        -   [Org Agenda Setup](#org4fe5aae)
-        -   [Org Roam Setup](#org5696d45)
-    -   [Which-Key Setup](#org72197b7)
-    -   [Delete Setup](#orgc77d957)
-        -   [Hungry-delete](#org81bfb58)
-        -   [Delete Slection](#orga4dd1c2)
-    -   [SmartParens](#org298e898)
-    -   [Undo-Tree Setup](#org145133b)
-    -   [Switch-Window](#orgb59da4c)
-    -   [Selected Setup](#org435c75f)
-    -   [Undo Tree Setup](#orgf18c401)
-    -   [Command Completion](#orgeb1bf7b)
-        -   [Ivy/Counsel/Swiper Setup](#org4a268bd)
-        -   [orderless](#orgc949f4a)
-        -   [Helm Setup](#org7dcb92f)
-    -   [Format Setup](#orgc38f5b5)
-        -   [Format Default Formatters Setup](#org83c43b1)
-    -   [Iedit Setup](#orgf0b3ab4)
-    -   [Avy SetUp](#orgf5707cc)
-    -   [Projectile Setup](#orgd14a079)
-    -   [Code Completion Setup](#org781e4d3)
-        -   [Corfu](#orgb8fd946)
-        -   [Cape](#org58ab559)
-        -   [Corfu English Helper](#orgf9df84a)
-    -   [Treesit](#orgcd4e007)
-    -   [Language Setup](#org89bd60d)
-        -   [Eglot Setup](#org9264a20)
-        -   [JAVA Setup](#org8f44716)
-        -   [Groovy Setup](#org860410f)
-        -   [Maven Setup](#org9466ad7)
-        -   [Web-Mode Setup](#org216ade4)
-        -   [Javascript REPL](#org2916f9f)
-        -   [FlyCheck Setup](#org6131c86)
-        -   [Yasnippet Setup](#org1a105a4)
-        -   [Magit Setup](#orgce4c2f3)
-        -   [HideShow Setup](#orgc0f8702)
-    -   [MarkDown Setup](#org349795c)
-    -   [Nginx Setup](#org08b5772)
-    -   [HttpClient Setup](#org6ca1da3)
-    -   [Ediff Setup](#org704b0bd)
-    -   [Installation](#org7c68768)
-        -   [Customize Your Configuration](#org1a9335b)
+-   [Intro](#org938ef09)
+    -   [Package Manager](#orgf44d22c)
+        -   [ELPA Setup](#org359e1e2)
+        -   [Use-Package Setup](#orgd1aba05)
+    -   [Custom Need Constant](#org092dfdb)
+        -   [Font Constant](#org481c7ff)
+        -   [Org Agenda Constant](#org8f4bb25)
+        -   [Org Roam Constant](#org627f983)
+        -   [Lsp Constant](#org8e46431)
+    -   [General Settings Setup](#orgb159194)
+        -   [GC settings](#org4a29da9)
+        -   [Show Startup Message](#org526db0d)
+        -   [Character Settings](#org3b1d7d9)
+        -   [BackUp Settings](#org4f8f06b)
+        -   [Env Settings](#orgc934cd0)
+        -   [Custom File Settings](#org6d4922b)
+        -   [Yes/No Shorthand Settings](#orgbdac6b6)
+        -   [Tabs Indentation Settings](#org785fc21)
+        -   [Undo Settings](#orgc8bc6b3)
+        -   [Recentf Settings](#org87bbd72)
+        -   [Window Settings](#org6fbf7dd)
+    -   [UI Setup](#orgcdabec5)
+        -   [Menu-bar Hide](#orga1442b1)
+        -   [Tool-bar Hide](#orgba72186)
+        -   [Scroll-bar Hide](#orgb37560c)
+        -   [Theme](#orgba52f69)
+        -   [Cursor](#org4d7364a)
+        -   [FillColumn](#org6a56970)
+        -   [HighLight Line](#orgae4c92e)
+        -   [Font](#org53ea460)
+        -   [Mode Line](#org0c28cdb)
+        -   [Icons](#orga3cb7e7)
+        -   [DashBoard Setup](#orgeb9dd8e)
+        -   [Tabs Setup](#org124b284)
+        -   [Delimiters Highlights Setup](#org8279561)
+    -   [Org Setup](#org18b0766)
+        -   [OrgFile AutoFormat](#orga308f81)
+        -   [Org Table Tidy Settings](#org7243e92)
+        -   [org-superstar](#org08e6adf)
+        -   [org ref](#orgb7faf4d)
+        -   [Org-babel support language](#orgf941c39)
+        -   [Org Agenda Setup](#orgd02b935)
+        -   [Org Roam Setup](#org59dc813)
+    -   [Which-Key Setup](#org3335bd2)
+    -   [Delete Setup](#orgaa32ed1)
+        -   [Hungry-delete](#org3f27129)
+        -   [Delete Slection](#org924e2dc)
+    -   [SmartParens](#orgdeb2136)
+    -   [Undo-Tree Setup](#org3b93f27)
+    -   [Switch-Window](#org4e10639)
+    -   [Selected Setup](#org558b095)
+    -   [Undo Tree Setup](#org108ab2d)
+    -   [Command Completion](#org343d9a1)
+        -   [Ivy/Counsel/Swiper Setup](#orgf944aef)
+        -   [orderless](#org1cb5b3a)
+        -   [Helm Setup](#orgb1d7899)
+    -   [Format Setup](#org7bd6395)
+        -   [Format Default Formatters Setup](#org8a7e90e)
+    -   [Iedit Setup](#org496be91)
+    -   [Avy SetUp](#org49209e1)
+    -   [Projectile Setup](#org60c0c93)
+    -   [Code Completion Setup](#org9107bb9)
+        -   [Corfu](#org7be1c8b)
+        -   [Cape](#org5d10927)
+        -   [Corfu English Helper](#org2aa57f7)
+    -   [Treesit](#org1b44f6b)
+    -   [Language Setup](#org00cf600)
+        -   [Eglot Setup](#org558d6ef)
+        -   [JAVA Setup](#org885b974)
+        -   [Groovy Setup](#org37db99a)
+        -   [Maven Setup](#orgd924279)
+        -   [Web-Mode Setup](#orgc87133f)
+        -   [Javascript REPL](#org23e619b)
+        -   [FlyCheck Setup](#orga82397e)
+        -   [Yasnippet Setup](#org3c56e04)
+        -   [Magit Setup](#org64ee961)
+        -   [HideShow Setup](#orgb07b548)
+    -   [MarkDown Setup](#org80abe2d)
+    -   [Nginx Setup](#org9928d34)
+    -   [HttpClient Setup](#orgf5e57a4)
+    -   [Ediff Setup](#org92ac179)
+    -   [Installation](#orgb190455)
+        -   [Customize Your Configuration](#orgdda6fbe)
 
 
 
-<a id="org33abc40"></a>
+<a id="org938ef09"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="orgd2e1571"></a>
+<a id="orgf44d22c"></a>
 
 ## Package Manager
 
 
-<a id="orgb7b77c3"></a>
+<a id="org359e1e2"></a>
 
 ### ELPA Setup
 
@@ -107,44 +107,43 @@ This configuration file contains setup my config of emacs
     (require 'package)
     (if (boundp 'package-archives-spec)
         (setq package-archives package-archives-spec)
-        (setq package-archives '(
-                                    ("gnu" . "https://elpa.gnu.org/packages/")
-                                    ("melpa" . "https://melpa.org/packages/")
-                                    ("gnu-devel" . "https://elpa.gnu.org/devel/")
-                                    ;;  ("org" . "https://orgmode.org/elpa/")
-                                    ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
-                                    ))
-        )
+      (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                               ("melpa" . "https://melpa.org/packages/")
+                               ("gnu-devel" . "https://elpa.gnu.org/devel/")
+                               ;;  ("org" . "https://orgmode.org/elpa/")
+                               ;;  ("melpa-stable" . "https://stable.melpa.org/packages/")
+                               ))
+      )
     (unless (bound-and-true-p package--initialized)
-        (package-initialize))
+      (package-initialize))
     
     (unless package-archive-contents
-        (package-refresh-contents))
+      (package-refresh-contents))
 
 
-<a id="orgc6dd790"></a>
+<a id="orgd1aba05"></a>
 
 ### Use-Package Setup
 
     (unless (package-installed-p 'use-package)
-        (package-refresh-contents)
-        (package-install 'use-package))
+      (package-refresh-contents)
+      (package-install 'use-package))
     
     (setq use-package-always-ensure t)
 
 -   vc-use-package
 
         (unless (package-installed-p 'vc-use-package)
-            (package-vc-install "https://github.com/slotThe/vc-use-package"))
+          (package-vc-install "https://github.com/slotThe/vc-use-package"))
         (require 'vc-use-package)
 
 
-<a id="org0670b04"></a>
+<a id="org092dfdb"></a>
 
 ## Custom Need Constant
 
 
-<a id="org45b4711"></a>
+<a id="org481c7ff"></a>
 
 ### Font Constant
 
@@ -153,7 +152,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-font-size "22")
 
 
-<a id="orgde397f9"></a>
+<a id="org8f4bb25"></a>
 
 ### Org Agenda Constant
 
@@ -162,7 +161,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-org-agenda-filename-task "task.org")
 
 
-<a id="orgc163280"></a>
+<a id="org627f983"></a>
 
 ### Org Roam Constant
 
@@ -170,7 +169,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-org-roam-dailies-directory "daily")
 
 
-<a id="org45bde44"></a>
+<a id="org8e46431"></a>
 
 ### Lsp Constant
 
@@ -189,26 +188,26 @@ This configuration file contains setup my config of emacs
         (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 
 
-<a id="orgabf36ea"></a>
+<a id="orgb159194"></a>
 
 ## General Settings Setup
 
 
-<a id="orgff8fb3e"></a>
+<a id="org4a29da9"></a>
 
 ### GC settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org423e098"></a>
+<a id="org526db0d"></a>
 
 ### Show Startup Message
 
     (setq inhibit-startup-message t)
 
 
-<a id="org2f7eca6"></a>
+<a id="org3b1d7d9"></a>
 
 ### Character Settings
 
@@ -231,7 +230,7 @@ This configuration file contains setup my config of emacs
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="org477e018"></a>
+<a id="org4f8f06b"></a>
 
 ### BackUp Settings
 
@@ -243,43 +242,43 @@ donot backup file
     ;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 
 
-<a id="org08b162a"></a>
+<a id="orgc934cd0"></a>
 
 ### Env Settings
 
     (use-package exec-path-from-shell 
-        :ensure t
-        ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
-        )
+      :ensure t
+      ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
+      )
     (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
-        (add-to-list 'exec-path-from-shell-variables var))
+      (add-to-list 'exec-path-from-shell-variables var))
     (when (memq window-system '(mac ns x))
-        (exec-path-from-shell-initialize))
+      (exec-path-from-shell-initialize))
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="org83233c7"></a>
+<a id="org6d4922b"></a>
 
 ### Custom File Settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org8c80e94"></a>
+<a id="orgbdac6b6"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="org0d4d67d"></a>
+<a id="org785fc21"></a>
 
 ### Tabs Indentation Settings
 
     (setq tab-width 4)
     (setq-default tab-width 4)
     (setq-default indent-line-function 4)
-    (setq-default lisp-indent-offset 4)
+    ;;(setq-default lisp-indent-offset 4)
     (setq-default sgml-basic-offset 4)
     (setq c-basic-offset 4)
     ;; (setq tab-always-indent)
@@ -288,39 +287,38 @@ donot backup file
     (setq-default electric-indent-inhibit t)
     
     ;; nxml-mode
-    (setq
-        nxml-child-indent 4
-        nxml-attribute-indent 4
-        nxml-slash-auto-complete-flag t)
+    (setq nxml-child-indent 4
+          nxml-attribute-indent 4
+          nxml-slash-auto-complete-flag t)
     
     ;; js ts indent-tab 2 spaces
     (setq js-indent-level 2)
 
 
-<a id="orgc3474e0"></a>
+<a id="orgc8bc6b3"></a>
 
 ### Undo Settings
 
     (use-package undo-tree
-        :init
-        (global-undo-tree-mode)
-        :ensure t
-        :init (setq undo-tree-auto-save-history nil)
-        )
+      :init
+      (global-undo-tree-mode)
+      :ensure t
+      :init (setq undo-tree-auto-save-history nil)
+      )
 
 
-<a id="org994dd6a"></a>
+<a id="org87bbd72"></a>
 
 ### Recentf Settings
 
     (setq recentf-max-menu-items 50)
     (setq-default
-        recentf-max-saved-items 1000
-        recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
+     recentf-max-saved-items 1000
+     recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
     (recentf-mode t)
 
 
-<a id="org87e96dc"></a>
+<a id="org6fbf7dd"></a>
 
 ### Window Settings
 
@@ -333,50 +331,50 @@ donot backup file
     window auto Zoom,current window Larger display
     
         (use-package zoom
-            :ensure t
-            :init
-            (setq zoom-size '(0.718 . 0.718))
-            :bind ("C-c z" . zoom)
-            )
+          :ensure t
+          :init
+          (setq zoom-size '(0.718 . 0.718))
+          :bind ("C-c z" . zoom)
+          )
 
 
-<a id="org241adeb"></a>
+<a id="orgcdabec5"></a>
 
 ## UI Setup
 
 
-<a id="org76481bb"></a>
+<a id="orga1442b1"></a>
 
 ### Menu-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org67c8aa6"></a>
+<a id="orgba72186"></a>
 
 ### Tool-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org9b61ff0"></a>
+<a id="orgb37560c"></a>
 
 ### Scroll-bar Hide
 
 [Look at early-init-el](early-init.el)
 
 
-<a id="orgcdab999"></a>
+<a id="orgba52f69"></a>
 
 ### Theme
 
     (use-package dracula-theme
-        :ensure t
-        )
+      :ensure t
+      )
     (load-theme 'dracula t)
 
 
-<a id="orgadfd3fa"></a>
+<a id="org4d7364a"></a>
 
 ### Cursor
 
@@ -389,21 +387,21 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="org22aeeb7"></a>
+<a id="org6a56970"></a>
 
 ### FillColumn
 
     (setq-default fill-column 150)
 
 
-<a id="org6fc6a19"></a>
+<a id="orgae4c92e"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="org2cb1a9f"></a>
+<a id="org53ea460"></a>
 
 ### Font
 
@@ -411,162 +409,161 @@ donot backup file
     ;;  (set-face-attribute 'default nil :font "PingFang SC-22")
     ;; english font use Dejavu sans mono; chinese font use microsoft yahei
     (progn
-        (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
-        (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
-        (dolist (charset '(kana han symbol cjk-misc bopomofo))
-            (set-fontset-font (frame-parameter nil 'font)
-                charset
-                (font-spec :family ctm-font-name-zh)
-                )))
+      (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
+      (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
+      (dolist (charset '(kana han symbol cjk-misc bopomofo))
+        (set-fontset-font (frame-parameter nil 'font)
+                          charset
+                          (font-spec :family ctm-font-name-zh)
+                          )))
     (global-font-lock-mode t)
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="org1597aa3"></a>
+<a id="org0c28cdb"></a>
 
 ### Mode Line
 
     (use-package nyan-mode
-        :ensure t
-        :init
-        (setq nyan-animate-nyancat t)
-        (setq nyan-wavy-trail t)
-        (setq nyan-minimum-window-width 80)
-        (setq nyan-bar-length 20)
-        (nyan-mode))
+      :ensure t
+      :init
+      (setq nyan-animate-nyancat t)
+      (setq nyan-wavy-trail t)
+      (setq nyan-minimum-window-width 80)
+      (setq nyan-bar-length 20)
+      (nyan-mode))
     
     (use-package doom-modeline
-        :vc (:fetcher github :repo seagle0128/doom-modeline)
-        :init
-        (doom-modeline-mode t)
-        :config
-        (setq doom-modeline-height 5)
-        (custom-set-faces
-            `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
-            `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
-            )
-        (doom-modeline-def-modeline 'ownml
-            '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
-            '(buffer-encoding process vcs check))
-        ;; Add to `doom-modeline-mode-hook` or other hooks
-        (defun setup-custom-doom-modeline ()
-            (doom-modeline-set-modeline 'ownml 'default))
-        (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
-        )
+      :vc (:fetcher github :repo seagle0128/doom-modeline)
+      :init
+      (doom-modeline-mode t)
+      :config
+      (setq doom-modeline-height 5)
+      (custom-set-faces
+       `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
+       `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
+       )
+      (doom-modeline-def-modeline 'ownml
+        '(bar matches buffer-info remote-host buffer-position misc-info major-mode)
+        '(buffer-encoding process vcs check))
+      ;; Add to `doom-modeline-mode-hook` or other hooks
+      (defun setup-custom-doom-modeline ()
+        (doom-modeline-set-modeline 'ownml 'default))
+      (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
+      )
 
 
-<a id="org4e3e55e"></a>
+<a id="orga3cb7e7"></a>
 
 ### Icons
 
     (use-package all-the-icons)
     (use-package all-the-icons-dired
-        :hook (dired-mode . all-the-icons-dired-mode)
-        )
+      :hook (dired-mode . all-the-icons-dired-mode)
+      )
 
 
-<a id="org1b0c9ae"></a>
+<a id="orgeb9dd8e"></a>
 
 ### DashBoard Setup
 
     (use-package dashboard
-        :config
-        (dashboard-setup-startup-hook)
-        (dashboard-modify-heading-icons '((recents . "file-text")
-                                             (boomarks . "book")
-                                             ))
-        (setq dashboard-banner-logo-title "Life is happy")
-        (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
-        (setq dashboard-image-banner-max-height 100)
-        (setq dashboard-center-content t)
-        (setq dashboard-set-heading-icons t)
-        (setq dashboard-set-file-icons t)
-        (setq dashboard-set-navigator t)
-        (setq dashboard-items '((recents  . 5)
-                                   (bookmarks . 5)
-                                   (projects . 5)
-                                   (agenda . 5)
-                                   ))
-        (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
-        (setq dashboard-page-separator "\n\f\n")
-        )
+      :config
+      (dashboard-setup-startup-hook)
+      (dashboard-modify-heading-icons '((recents . "file-text")
+                                        (boomarks . "book")
+                                        ))
+      (setq dashboard-banner-logo-title "Life is happy")
+      (setq dashboard-startup-banner (expand-file-name "banner.png" user-emacs-directory))
+      (setq dashboard-image-banner-max-height 100)
+      (setq dashboard-center-content t)
+      (setq dashboard-set-heading-icons t)
+      (setq dashboard-set-file-icons t)
+      (setq dashboard-set-navigator t)
+      (setq dashboard-items '((recents  . 5)
+                              (bookmarks . 5)
+                              (projects . 5)
+                              (agenda . 5)
+                              ))
+      (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
+      (setq dashboard-page-separator "\n\f\n")
+      )
     
     (use-package page-break-lines)
 
 
-<a id="orga706a3c"></a>
+<a id="org124b284"></a>
 
 ### Tabs Setup
 
 -   Centaur-Tabs
 
         (use-package centaur-tabs
-            :demand
-            :hook
-            ;;  (dired-mode . centaur-tabs-local-mode)
-            (dashboard-mode . centaur-tabs-local-mode)
-            (term-mode . centaur-tabs-local-mode)
-            (calendar-mode . centaur-tabs-local-mode)
-            (org-agenda-mode . centaur-tabs-local-mode)
-            (helpful-mode . centaur-tabs-local-mode)
-            :config
-            (setq
-                centaur-tabs-style "bar"
-                centaur-tabs-height 32
-                centaur-tabs-set-icons t
-                centaur-tabs-set-bar 'under
-                x-underline-at-descent-line t
-                centaur-tabs-show-count t
-                centaur-tabs-set-close-button nil
-                centaur-tabs-set-modified-marker t
-                centaur-tabs-show-navigation-buttons t)
-            (centaur-tabs-headline-match)
-            (centaur-tabs-group-by-projectile-project)
-            (centaur-tabs-mode t)
+          :demand
+          :hook
+          ;;  (dired-mode . centaur-tabs-local-mode)
+          (dashboard-mode . centaur-tabs-local-mode)
+          (term-mode . centaur-tabs-local-mode)
+          (calendar-mode . centaur-tabs-local-mode)
+          (org-agenda-mode . centaur-tabs-local-mode)
+          (helpful-mode . centaur-tabs-local-mode)
+          :config
+          (setq
+           centaur-tabs-style "bar"
+           centaur-tabs-height 32
+           centaur-tabs-set-icons t
+           centaur-tabs-set-bar 'under
+           x-underline-at-descent-line t
+           centaur-tabs-show-count t
+           centaur-tabs-set-close-button nil
+           centaur-tabs-set-modified-marker t
+           centaur-tabs-show-navigation-buttons t)
+          (centaur-tabs-headline-match)
+          (centaur-tabs-group-by-projectile-project)
+          (centaur-tabs-mode t)
         
-            :bind(
-                     ("s-1" . centaur-tabs-select-visible-tab)
-                     ("s-2" . centaur-tabs-select-visible-tab)
-                     ("s-3" . centaur-tabs-select-visible-tab)
-                     ("s-4" . centaur-tabs-select-visible-tab)
-                     ("s-5" . centaur-tabs-select-visible-tab)
-                     ("s-6" . centaur-tabs-select-visible-tab)
-                     ("s-7" . centaur-tabs-select-visible-tab)
-                     ("s-8" . centaur-tabs-select-visible-tab)
-                     ("s-9" . centaur-tabs-select-visible-tab)
-                     ("s-0" . centaur-tabs-select-visible-tab)
-                     ("C-c t s" . centaur-tabs-counsel-switch-group)
-                     ("C-c t p" . centaur-tabs-group-by-projectile-project)
-                     ("C-c t g" . centaur-tabs-group-buffer-groups)
-                     )
-            )
+          :bind(
+                ("s-1" . centaur-tabs-select-visible-tab)
+                ("s-2" . centaur-tabs-select-visible-tab)
+                ("s-3" . centaur-tabs-select-visible-tab)
+                ("s-4" . centaur-tabs-select-visible-tab)
+                ("s-5" . centaur-tabs-select-visible-tab)
+                ("s-6" . centaur-tabs-select-visible-tab)
+                ("s-7" . centaur-tabs-select-visible-tab)
+                ("s-8" . centaur-tabs-select-visible-tab)
+                ("s-9" . centaur-tabs-select-visible-tab)
+                ("s-0" . centaur-tabs-select-visible-tab)
+                ("C-c t s" . centaur-tabs-counsel-switch-group)
+                ("C-c t p" . centaur-tabs-group-by-projectile-project)
+                ("C-c t g" . centaur-tabs-group-buffer-groups)
+                )
+          )
 
 
-<a id="org9340a42"></a>
+<a id="org8279561"></a>
 
 ### Delimiters Highlights Setup
 
 replaced by treesit
 
     (use-package rainbow-delimiters
-        :hook
-        (prog-mode . rainbow-delimiters-mode)
-        )
+      :hook
+      (prog-mode . rainbow-delimiters-mode)
+      )
 
 
-<a id="org2831ee8"></a>
+<a id="org18b0766"></a>
 
 ## Org Setup
 
 
-<a id="orgd163771"></a>
+<a id="orga308f81"></a>
 
 ### OrgFile AutoFormat
 
     ;; let source code block can be `indent-region` format
     (setq org-src-tab-acts-natively t)
     (setq org-src-fontify-natively t)
-    
     (setq org-src-preserve-indentation t)
     (setq org-src--preserve-indentation t)
     (setq org-edit-src-content-indentation 0)
@@ -574,51 +571,51 @@ replaced by treesit
     
     ;; org file before save invoke indent-region
     (add-hook 'org-mode-hook
-        (lambda()
-            (add-hook 'before-save-hook 'org-format-buffer nil t)))
+              (lambda()
+                (add-hook 'before-save-hook 'org-format-buffer nil t)))
     
     (defun org-format-buffer()
-        (interactive)
-        (save-excursion
-            (indent-region (point-min) (point-max) nil)))
+      (interactive)
+      (save-excursion
+        (indent-region (point-min) (point-max) nil)))
 
 
-<a id="org731bf30"></a>
+<a id="org7243e92"></a>
 
 ### Org Table Tidy Settings
 
     ;;org-table align  todo hook in package
     (use-package valign
-        :init
-        (add-hook 'org-mode-hook #'valign-mode)
-        )  
+      :init
+      (add-hook 'org-mode-hook #'valign-mode)
+      )  
 
 
-<a id="org6832915"></a>
+<a id="org08e6adf"></a>
 
 ### org-superstar
 
     (use-package org-superstar
-        :ensure t
-        :after org
-        :hook ((org-mode . org-superstar-mode)
-                  (org-mode . org-indent-mode))
-        :config
-        (setq org-superstar-special-todo-items t))
+      :ensure t
+      :after org
+      :hook ((org-mode . org-superstar-mode)
+             (org-mode . org-indent-mode))
+      :config
+      (setq org-superstar-special-todo-items t))
     
     (set-face-attribute 'org-block nil :background
-        (color-darken-name
-            (face-attribute 'default :background) 3))
+                        (color-darken-name
+                         (face-attribute 'default :background) 3))
 
 
-<a id="orgb64e688"></a>
+<a id="orgb7faf4d"></a>
 
 ### org ref
 
     (use-package org-ref)
 
 
-<a id="org53b77b9"></a>
+<a id="orgf941c39"></a>
 
 ### Org-babel support language
 
@@ -629,23 +626,23 @@ replaced by treesit
     ;;     )
     (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
     (defun ob-js-insert-session-header-arg (session)
-        "Insert ob-js `SESSION' header argument.
+      "Insert ob-js `SESSION' header argument.
      - `js-comint'
      - `skewer-mode'
      - `Indium'
      "
-        (interactive (list (completing-read "ob-js session: "
-                               '("js-comint" "skewer-mode" "indium"))))
-        (org-babel-insert-header-arg
-            "session"
-            (pcase session
-                ("js-comint" "\"*Javascript REPL*\"")
-                ("skewer-mode" "\"*skewer-repl*\"")
-                ("indium" "\"*JS REPL*\""))))
+      (interactive (list (completing-read "ob-js session: "
+                                          '("js-comint" "skewer-mode" "indium"))))
+      (org-babel-insert-header-arg
+       "session"
+       (pcase session
+         ("js-comint" "\"*Javascript REPL*\"")
+         ("skewer-mode" "\"*skewer-repl*\"")
+         ("indium" "\"*JS REPL*\""))))
     (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 
 
-<a id="org4fe5aae"></a>
+<a id="orgd02b935"></a>
 
 ### Org Agenda Setup
 
@@ -662,56 +659,56 @@ replaced by treesit
         (setq org-refile-targets '((org-agenda-files :maxlevel . 3)))
         (setq org-agenda-include-diary t)
         (setq org-capture-templates `(
-                                         ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
-                                         ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
-                                         ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
-                                         ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
-                                         ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
-                                         ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
-                                         ))
+                                      ("i" "input [inbox]" entry (file ,org-agenda-file-inbox) "* %i%?")
+                                      ("c" "calendar [task]" entry (file+headline ,org-agenda-file-gtd "Calendar") "* TODO %i%? \nSCHEDULED: %^t")
+                                      ("h" "Habit [task]" entry (file+headline ,org-agenda-file-gtd "Habits") "* HABI %i%? \nDEADLINE: %^t")
+                                      ("p" "Projects [task]" entry (file+headline ,org-agenda-file-gtd "Projects") "* %i%?")
+                                      ("I" "Incubate [task]" entry (file+headline ,org-agenda-file-gtd "Incubate") "* %i%?")
+                                      ;;("j" "Journal [journal]" entry (file+datetree ,org-agenda-file-journal) "* %i%? \n%a")
+                                      ))
         (setq org-todo-keywords
-            '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
-                 (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
-                 (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
+              '((sequence "TODO(t)" "STED(s)" "|" "DONE(d!/!)")
+                (sequence "WAIT(w@/!)" "INCU(i)" "HABI(h)" "|" "CNCL(c@/!)")
+                (sequence "BUGT(b!)" "|" "FIXT(f@/!)")))
         (setq org-todo-keyword-faces
-            '(("TODO" . org-warning) ("STED" . "yellow")
-                 ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
-                 ("BUGT" . "red") ("FIXT" . "orange")
-                 ))
+              '(("TODO" . org-warning) ("STED" . "yellow")
+                ("WAIT" . "white") ("INCU" . "blue") ("HABI" . "green") ("CNCL" . (:foreground "blue" :weight bold))
+                ("BUGT" . "red") ("FIXT" . "orange")
+                ))
         (setq org-enforce-todo-dependencies t)
         (setq org-modules
-            '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
+              '(ol-bbdb ol-bibtex ol-docview ol-doi ol-eww ol-gnus org-habit ol-info ol-irc ol-mhe ol-rmail ol-w3m))
         
         (setq org-highest-priority 1) 
         (setq org-default-priority 5)
         (setq org-lowest-priority 9)
         
         (use-package org-super-agenda
-            :ensure t
-            :after org
-            )
+          :ensure t
+          :after org
+          )
         ;;  (org-super-agenda-mode t)
         
         (defun add-property-with-date-captured ()
-            "Add DATE_CAPTURED property to the current item."
-            (interactive)
-            (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
-            )
+          "Add DATE_CAPTURED property to the current item."
+          (interactive)
+          (org-set-property "CREATE_DATE" (format-time-string "[%F %a %R]"))
+          )
         (add-hook 'org-capture-before-finalize-hook 'add-property-with-date-captured)
         
         (defun process-gtd-action()
-            (interactive)
-            (find-file org-agenda-file-gtd)
-            )
+          (interactive)
+          (find-file org-agenda-file-gtd)
+          )
         (defun process-gtd-inbox()
-            (interactive)
-            (find-file org-agenda-file-inbox)
-            )
+          (interactive)
+          (find-file org-agenda-file-inbox)
+          )
         
         (defun process-gtd-journal()
-            (interactive)
-            (find-file org-agenda-file-journal)
-            )
+          (interactive)
+          (find-file org-agenda-file-journal)
+          )
         
         (global-set-key (kbd "C-c d p") 'process-gtd-inbox)
         (global-set-key (kbd "C-c d a") 'process-gtd-action)
@@ -731,162 +728,159 @@ replaced by treesit
 -   Tag
 
         (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
-                                 ("@study" . ?s) ("@habit" . ?b)))
+                              ("@study" . ?s) ("@habit" . ?b)))
     
         ;; automatically DONE when all children are DONE
         (defun org-summary-todo (n-done n-not-done)
-            "Switch entry to DONE when all subentries are done, to TODO otherwise."
-            (let (org-log-done org-log-states)   ; turn off logging
-                (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+          "Switch entry to DONE when all subentries are done, to TODO otherwise."
+          (let (org-log-done org-log-states)   ; turn off logging
+            (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
         (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 
-<a id="org5696d45"></a>
+<a id="org59dc813"></a>
 
 ### Org Roam Setup
 
     (use-package org-roam
-        :custom
-        (org-roam-directory ctm-org-roam-directory)
-        (org-roam-dailies-directory ctm-org-roam-dailies-directory)
-        :bind (("C-c n l" . org-roam-buffer-toggle)
-                  ("C-c n f" . org-roam-node-find)
-                  ("C-c n g" . org-roam-graph)
-                  ("C-c n i" . org-roam-node-insert)
-                  ("C-c n c" . org-roam-capture)
-                  ("C-c n t" . org-roam-tag-add)
-                  ("C-c M-s" . org-store-link)
-                  ;; Dailies
-                  ("C-c n j" . org-roam-dailies-capture-today)
-                  )
-        :bind-keymap
-        ("C-c n d" . org-roam-dailies-map)
-        :config
-        ;; If you're using a vertical completion framework, you might want a more informative completion interface
-        (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:20}" 'face 'org-tag)))
-        (setq org-roam-completion-everywhere t)
-        (org-roam-db-autosync-mode)
-        (require 'org-roam-dailies)
-        ;; If using org-roam-protocol
-        (require 'org-roam-protocol)
-        )
+      :custom
+      (org-roam-directory ctm-org-roam-directory)
+      (org-roam-dailies-directory ctm-org-roam-dailies-directory)
+      :bind (("C-c n l" . org-roam-buffer-toggle)
+             ("C-c n f" . org-roam-node-find)
+             ("C-c n g" . org-roam-graph)
+             ("C-c n i" . org-roam-node-insert)
+             ("C-c n c" . org-roam-capture)
+             ("C-c n t" . org-roam-tag-add)
+             ("C-c M-s" . org-store-link)
+             ;; Dailies
+             ("C-c n j" . org-roam-dailies-capture-today)
+             )
+      :bind-keymap
+      ("C-c n d" . org-roam-dailies-map)
+      :config
+      ;; If you're using a vertical completion framework, you might want a more informative completion interface
+      (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:20}" 'face 'org-tag)))
+      (setq org-roam-completion-everywhere t)
+      (org-roam-db-autosync-mode)
+      (require 'org-roam-dailies)
+      ;; If using org-roam-protocol
+      (require 'org-roam-protocol)
+      )
 
 -   Org Roam UI SetUp
 
         (use-package org-roam-ui
-            :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
-            :after org-roam
-            :custom
-            (org-roam-ui-sync-theme nil)
-            (org-roam-ui-follow t)
-            (org-roam-ui-update-on-save t)
-            (org-roam-ui-open-on-start t)
-            )
+          :vc (:fetcher "github" :repo "org-roam/org-roam-ui")
+          :after org-roam
+          :custom
+          (org-roam-ui-sync-theme nil)
+          (org-roam-ui-follow t)
+          (org-roam-ui-update-on-save t)
+          (org-roam-ui-open-on-start t)
+          )
 
 
-<a id="org72197b7"></a>
+<a id="org3335bd2"></a>
 
 ## Which-Key Setup
 
     (use-package which-key
-        :ensure t
-        :init (which-key-mode)
-        :bind ("M-m" . which-key-show-top-level)
-        )
+      :ensure t
+      :init (which-key-mode)
+      :bind ("M-m" . which-key-show-top-level)
+      )
 
 
-<a id="orgc77d957"></a>
+<a id="orgaa32ed1"></a>
 
 ## Delete Setup
 
 
-<a id="org81bfb58"></a>
+<a id="org3f27129"></a>
 
 ### Hungry-delete
 
 delete all whitespace until have character
 
     (use-package hungry-delete
-        :ensure t
-        :bind (
-                  ("C-c DEL" . hungry-delete-backward)
-                  ("C-c d d" . hungry-delete-forward))
-        )
+      :ensure t
+      :bind (("C-c DEL" . hungry-delete-backward)
+             ("C-c d d" . hungry-delete-forward))
+      )
 
 
-<a id="orga4dd1c2"></a>
+<a id="org924e2dc"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="org298e898"></a>
+<a id="orgdeb2136"></a>
 
 ## SmartParens
 
 auto Symbol of completion
 
     (use-package smartparens
-        :ensure t
-        :config
-        (smartparens-global-mode t)
-        (show-smartparens-global-mode t)
-        (require 'smartparens-config)
-        (sp-local-pair 'elisp-mode "'" nil :actions nil)
-        (sp-local-pair 'elisp-mode "`" nil :actions nil)
-        :bind(("C-c 9" . sp-beginning-of-sexp)
-                 ("C-c 0" . sp-end-of-sexp)
-                 )
-        )
+      :ensure t
+      :config
+      (smartparens-global-mode t)
+      (require 'smartparens-config)
+      (sp-local-pair 'elisp-mode "'" nil :actions nil)
+      (sp-local-pair 'elisp-mode "`" nil :actions nil)
+      :bind(("C-c 9" . sp-beginning-of-sexp)
+            ("C-c 0" . sp-end-of-sexp))
+      )
 
 
-<a id="org145133b"></a>
+<a id="org3b93f27"></a>
 
 ## Undo-Tree Setup
 
     (use-package undo-tree
-        :init (global-undo-tree-mode t)
-        )
+      :init (global-undo-tree-mode t)
+      )
 
 
-<a id="orgb59da4c"></a>
+<a id="org4e10639"></a>
 
 ## Switch-Window
 
 easy to jump windows
 
     (use-package switch-window
-        :ensure t
-        :bind ("C-x o" . switch-window)
-        :config
-        (setq switch-window-shortcut-style 'qwerty)
-        )
+      :ensure t
+      :bind ("C-x o" . switch-window)
+      :config
+      (setq switch-window-shortcut-style 'qwerty)
+      )
 
 
-<a id="org435c75f"></a>
+<a id="org558b095"></a>
 
 ## Selected Setup
 
     (use-package expand-region
-        :bind (("C-=" . er/expand-region)
-                  ("C--" . er/contract-region))
-        :config
-        (defun er/add-html-mode-expansions ()
-            (make-variable-buffer-local 'er/try-expand-list)
-            "Adds HTML-specific expansions for buffers in html-mode"
-            (setq er/try-expand-list (append
-                                         er/try-expand-list
-                                         '(er/mark-html-attribute
-                                              er/mark-inner-tag
-                                              er/mark-outer-tag))))
-        (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
-        (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
-        ;;:commands (er/expand-region er/enable-mode-expansions)
-        )
+      :bind (("C-=" . er/expand-region)
+             ("C--" . er/contract-region))
+      :config
+      (defun er/add-html-mode-expansions ()
+        (make-variable-buffer-local 'er/try-expand-list)
+        "Adds HTML-specific expansions for buffers in html-mode"
+        (setq er/try-expand-list (append
+                                  er/try-expand-list
+                                  '(er/mark-html-attribute
+                                    er/mark-inner-tag
+                                    er/mark-outer-tag))))
+      (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
+      (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
+      ;;:commands (er/expand-region er/enable-mode-expansions)
+      )
 
 
-<a id="orgf18c401"></a>
+<a id="org108ab2d"></a>
 
 ## Undo Tree Setup
 
@@ -894,14 +888,14 @@ easy to jump windows
     (global-undo-tree-mode t)
 
 
-<a id="orgeb1bf7b"></a>
+<a id="org343d9a1"></a>
 
 ## Command Completion
 
 Command Interactive Completion For Minibuffer,eg : M-x
 
 
-<a id="org4a268bd"></a>
+<a id="orgf944aef"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -912,43 +906,40 @@ Command Interactive Completion For Minibuffer,eg : M-x
     -   Ivy
     
             (use-package ivy
-                :ensure t
-                :config
-                (setq ivy-use-virtual-buffers t
-                    enable-recursive-minibuffers t
-                    )
-                :bind(
-                         ("C-c C-r" . ivy-resume)
-                         )
-                )
+              :ensure t
+              :config
+              (setq ivy-use-virtual-buffers t
+                    enable-recursive-minibuffers t)
+              :bind(("C-c C-r" . ivy-resume))
+              )
 
 -   Counsel Setup
 
     command completion use ivy
     
         (use-package counsel
-            :bind(
-                     ("M-x" . counsel-M-x)
-                     ("C-."   . 'counsel-imenu)
-                     ("C-c o"   . 'counsel-outline)
-                     ("C-x C-f" . counsel-find-file)
-                     ("C-c g" . counsel-rg)
-                     ("C-h f" . 'counsel-describe-function)
-                     ("C-h v" . 'counsel-describe-variable)
-                     ("C-x b" . 'counsel-switch-buffer)
-                     ("C-c h" . 'counsel-recentf)
-                     )
-            :hook (after-init . ivy-mode)
-            )
+          :bind(
+                ("M-x" . counsel-M-x)
+                ("C-."   . 'counsel-imenu)
+                ("C-c o"   . 'counsel-outline)
+                ("C-x C-f" . counsel-find-file)
+                ("C-c g" . counsel-rg)
+                ("C-h f" . 'counsel-describe-function)
+                ("C-h v" . 'counsel-describe-variable)
+                ("C-x b" . 'counsel-switch-buffer)
+                ("C-c h" . 'counsel-recentf)
+                )
+          :hook (after-init . ivy-mode)
+          )
         (define-key minibuffer-local-map (kbd "C-r") 'counsel-minibuffer-history)
         
         (use-package counsel-projectile
-            :bind
-            ("C-c p f" . 'counsel-projectile-find-file)
-            ("C-c p g" . 'counsel-projectile-rg)
-            ("C-c p p" . 'counsel-projectile-switch-project)
-            ("C-c p b" . 'counsel-projectile-switch-to-buffer)
-            )
+          :bind
+          ("C-c p f" . 'counsel-projectile-find-file)
+          ("C-c p g" . 'counsel-projectile-rg)
+          ("C-c p p" . 'counsel-projectile-switch-project)
+          ("C-c p b" . 'counsel-projectile-switch-to-buffer)
+          )
         ;; counsel-locate find system file quicky
     
     -   Show History Command in Counsel-M-x Minibuffer
@@ -964,14 +955,13 @@ Command Interactive Completion For Minibuffer,eg : M-x
         ;; bind-key conflict, unbind
         (define-key org-mode-map (kbd "C-'") nil)
         (use-package swiper
-            :bind(
-                     ("C-s" . swiper)
-                     ("C-'" . swiper-isearch-thing-at-point)
-                     )
-            )
+          :bind(("C-s" . swiper)
+                ("C-'" . swiper-isearch-thing-at-point)
+                )
+          )
 
 
-<a id="orgc949f4a"></a>
+<a id="org1cb5b3a"></a>
 
 ### orderless
 
@@ -979,173 +969,172 @@ Unordered search  in ivy search
 
     ;; add disorder search
     (use-package orderless
-        :ensure t
-        :config
-        (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-        :ensure t
-        :custom
-        (completion-styles '(orderless basic))
-        (completion-category-overrides '((file (styles basic partial-completion)))))
+      :ensure t
+      :config
+      (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
+      :ensure t
+      :custom
+      (completion-styles '(orderless basic))
+      (completion-category-overrides '((file (styles basic partial-completion)))))
     (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 
 
-<a id="org7dcb92f"></a>
+<a id="orgb1d7899"></a>
 
 ### Helm Setup
 
     (use-package helm
-        ;;  :config (helm-mode t)
-        ;;  :bind("M-x" . helm-M-x)
-        )
+      ;;  :config (helm-mode t)
+      ;;  :bind("M-x" . helm-M-x)
+      )
 
 
-<a id="orgc38f5b5"></a>
+<a id="org7bd6395"></a>
 
 ## Format Setup
 
     (setq +format-with-lsp nil)
     (use-package format-all
-        :ensure t
-        :hook ((elixir-mode . format-all-mode)
-                  ;;(prog-mode . format-all-mode)
-                  )
-        ;;      :init
-        ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
-        :config
-        (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
-        ;;        (add-hook 'before-save-hook 'format-all-buffer)
-        )
+      :ensure t
+      :hook ((elixir-mode . format-all-mode)
+             ;;(prog-mode . format-all-mode)
+             )
+      ;;      :init
+      ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
+      :config
+      (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
+      ;;        (add-hook 'before-save-hook 'format-all-buffer)
+      )
     
     (add-hook 'prog-mode-hook
-        (lambda ()
-            (unless (derived-mode-p 'lsp-mode)
-                (add-hook 'before-save-hook 'format-all-buffer t t)
-                )
-            ))
+              (lambda ()
+                (unless (derived-mode-p 'lsp-mode)
+                  (add-hook 'before-save-hook 'format-all-buffer t t)
+                  )
+                ))
 
 
-<a id="org83c43b1"></a>
+<a id="org8a7e90e"></a>
 
 ### Format Default Formatters Setup
 
     (custom-set-variables
-        '(format-all-default-formatters
-             '(("Assembly" asmfmt)
-                  ("ATS" atsfmt)
-                  ("Bazel" buildifier)
-                  ("BibTeX" emacs-bibtex)
-                  ("C" clang-format)
-                  ("C#" clang-format)
-                  ("C++" clang-format)
-                  ("Cabal Config" cabal-fmt)
-                  ("Clojure" zprint)
-                  ("CMake" cmake-format)
-                  ("Crystal" crystal)
-                  ("CSS" prettier)
-                  ("Cuda" clang-format)
-                  ("D" dfmt)
-                  ("Dart" dart-format)
-                  ("Dhall" dhall)
-                  ("Dockerfile" dockfmt)
-                  ("Elixir" mix-format)
-                  ("Elm" elm-format)
-                  ("Emacs Lisp" emacs-lisp)
-                  ("Erlang" efmt)
-                  ("F#" fantomas)
-                  ("Fish" fish-indent)
-                  ("Fortran Free Form" fprettify)
-                  ("GLSL" clang-format)
-                  ("Go" gofmt)
-                  ("GraphQL" prettier)
-                  ("Haskell" brittany)
-                  ("HTML" prettier)
-                  ("HTML+EEX" mix-format)
-                  ("HTML+ERB" erb-format)
-                  ("Java" clang-format)
-                  ("JavaScript" prettier)
-                  ("JSON" prettier)
-                  ("JSON5" prettier)
-                  ("Jsonnet" jsonnetfmt)
-                  ("JSX" prettier)
-                  ("Kotlin" ktlint)
-                  ("LaTeX" latexindent)
-                  ("Less" prettier)
-                  ("Literate Haskell" brittany)
-                  ("Lua" lua-fmt)
-                  ("Markdown" prettier)
-                  ("Nix" nixpkgs-fmt)
-                  ("Objective-C" clang-format)
-                  ("OCaml" ocp-indent)
-                  ("Perl" perltidy)
-                  ("PHP" prettier)
-                  ("Protocol Buffer" clang-format)
-                  ("PureScript" purty)
-                  ("Python" black)
-                  ("R" styler)
-                  ("Reason" bsrefmt)
-                  ("ReScript" rescript)
-                  ("Ruby" rufo)
-                  ("Rust" rustfmt)
-                  ("Scala" scalafmt)
-                  ("SCSS" prettier)
-                  ("Shell" shfmt)
-                  ("Solidity" prettier)
-                  ("SQL" sqlformat)
-                  ("Svelte" prettier)
-                  ("Swift" swiftformat)
-                  ("Terraform" terraform-fmt)
-                  ("TOML" prettier)
-                  ("TSX" prettier)
-                  ("TypeScript" prettier)
-                  ("V" v-fmt)
-                  ("Verilog" istyle-verilog)
-                  ("Vue" prettier)
-                  ("XML" html-tidy)
-                  ("YAML" prettier)
-                  ("Zig" zig)
-                  ("_Angular" prettier)
-                  ("_Flow" prettier)
-                  ("_Gleam" gleam)
-                  ("_Ledger" ledger-mode)
-                  ("_Nginx" nginxfmt)
-                  ("_Snakemake" snakefmt)))
-        )
+     '(format-all-default-formatters
+       '(("Assembly" asmfmt)
+         ("ATS" atsfmt)
+         ("Bazel" buildifier)
+         ("BibTeX" emacs-bibtex)
+         ("C" clang-format)
+         ("C#" clang-format)
+         ("C++" clang-format)
+         ("Cabal Config" cabal-fmt)
+         ("Clojure" zprint)
+         ("CMake" cmake-format)
+         ("Crystal" crystal)
+         ("CSS" prettier)
+         ("Cuda" clang-format)
+         ("D" dfmt)
+         ("Dart" dart-format)
+         ("Dhall" dhall)
+         ("Dockerfile" dockfmt)
+         ("Elixir" mix-format)
+         ("Elm" elm-format)
+         ("Emacs Lisp" emacs-lisp)
+         ("Erlang" efmt)
+         ("F#" fantomas)
+         ("Fish" fish-indent)
+         ("Fortran Free Form" fprettify)
+         ("GLSL" clang-format)
+         ("Go" gofmt)
+         ("GraphQL" prettier)
+         ("Haskell" brittany)
+         ("HTML" prettier)
+         ("HTML+EEX" mix-format)
+         ("HTML+ERB" erb-format)
+         ("Java" clang-format)
+         ("JavaScript" prettier)
+         ("JSON" prettier)
+         ("JSON5" prettier)
+         ("Jsonnet" jsonnetfmt)
+         ("JSX" prettier)
+         ("Kotlin" ktlint)
+         ("LaTeX" latexindent)
+         ("Less" prettier)
+         ("Literate Haskell" brittany)
+         ("Lua" lua-fmt)
+         ("Markdown" prettier)
+         ("Nix" nixpkgs-fmt)
+         ("Objective-C" clang-format)
+         ("OCaml" ocp-indent)
+         ("Perl" perltidy)
+         ("PHP" prettier)
+         ("Protocol Buffer" clang-format)
+         ("PureScript" purty)
+         ("Python" black)
+         ("R" styler)
+         ("Reason" bsrefmt)
+         ("ReScript" rescript)
+         ("Ruby" rufo)
+         ("Rust" rustfmt)
+         ("Scala" scalafmt)
+         ("SCSS" prettier)
+         ("Shell" shfmt)
+         ("Solidity" prettier)
+         ("SQL" sqlformat)
+         ("Svelte" prettier)
+         ("Swift" swiftformat)
+         ("Terraform" terraform-fmt)
+         ("TOML" prettier)
+         ("TSX" prettier)
+         ("TypeScript" prettier)
+         ("V" v-fmt)
+         ("Verilog" istyle-verilog)
+         ("Vue" prettier)
+         ("XML" html-tidy)
+         ("YAML" prettier)
+         ("Zig" zig)
+         ("_Angular" prettier)
+         ("_Flow" prettier)
+         ("_Gleam" gleam)
+         ("_Ledger" ledger-mode)
+         ("_Nginx" nginxfmt)
+         ("_Snakemake" snakefmt)))
+     )
 
 
-<a id="orgf0b3ab4"></a>
+<a id="org496be91"></a>
 
 ## Iedit Setup
 
     (use-package iedit
-        :bind("C-c e" . iedit-mode)
-        )
+      :bind("C-c e" . iedit-mode)
+      )
 
 
-<a id="orgf5707cc"></a>
+<a id="org49209e1"></a>
 
 ## Avy SetUp
 
 jumping to visible text using a char-based decision tree
 
     (use-package avy
-        :bind("C-;" . avy-goto-char)
-        )
+      :bind("C-;" . avy-goto-char)
+      )
 
 
-<a id="orgd14a079"></a>
+<a id="org60c0c93"></a>
 
 ## Projectile Setup
 
     (use-package projectile
-        :init
-        (projectile-global-mode)
-        ;; :bind(
-        ;;        ("C-x p f" . projectile-find-file)
-        ;;        ("C-x p p" . projectile-switch-project)
-        ;;        )
-        :config
-        (setq
-            projectile-indexing-method 'hybrid
+      :init
+      (projectile-global-mode)
+      ;; :bind(
+      ;;        ("C-x p f" . projectile-find-file)
+      ;;        ("C-x p p" . projectile-switch-project)
+      ;;        )
+      :config
+      (setq projectile-indexing-method 'hybrid
             ;;hybird, load .projectile and .gitignore ignorefile,Priority load .projectile
             ;;indexing default 'alien ,only load .gitignore
             ;;indexing 'native only load .projectile
@@ -1153,30 +1142,29 @@ jumping to visible text using a char-based decision tree
     
             ;;   projectile-sort-order 'recentf-active
             projectile-enable-caching t)
-        (setq projectile-globally-ignored-directories
+      (setq projectile-globally-ignored-directories
             (append (list
-                        ".pytest_cache"
-                        "__pycache__"
-                        "build"
-                        "elpa"
-                        "node_modules"
-                        "output"
-                        "reveal.js"
-                        "semanticdb"
-                        "target"
-                        "venv"
-                        )
-                projectile-globally-ignored-directories))
-        )
+                     ".pytest_cache"
+                     "__pycache__"
+                     "build"
+                     "elpa"
+                     "node_modules"
+                     "output"
+                     "reveal.js"
+                     "semanticdb"
+                     "target"
+                     "venv"
+                     )
+                    projectile-globally-ignored-directories))
+      )
     
     (use-package treemacs-projectile
-        :after (treemacs projectile)
-        )
+      :after (treemacs projectile)
+      )
     
     (use-package treemacs
-        :config
-        (setq
-            treemacs-deferred-git-apply-delay 0.5
+      :config
+      (setq treemacs-deferred-git-apply-delay 0.5
             treemacs-file-follow-delay 0.2
             treemacs-indentation 2
             treemacs-indentation-string " "
@@ -1185,183 +1173,180 @@ jumping to visible text using a char-based decision tree
             treemacs-hide-dot-git-directory t
             treemacs-follow-mode t
             treemacs-filewatch-mode t
-            treemacs-fringe-indicator-mode 'always
-            )
-        )
+            treemacs-fringe-indicator-mode 'always)
+      )
     
     (use-package treemacs-icons-dired
-        :hook (dired-mode . treemacs-icons-dired-enable-once)
-        :ensure t)
+      :hook (dired-mode . treemacs-icons-dired-enable-once)
+      :ensure t)
     
     (use-package treemacs-magit
-        :after (treemacs magit)
-        :ensure t)
+      :after (treemacs magit)
+      :ensure t)
     
     (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
-        :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-        :ensure t
-        :config (treemacs-set-scope-type 'Perspectives))
+      :after (treemacs persp-mode) ;;or perspective vs. persp-mode
+      :ensure t
+      :config (treemacs-set-scope-type 'Perspectives))
     
     (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
-        :after (treemacs)
-        :ensure t
-        :config (treemacs-set-scope-type 'Tabs))
+      :after (treemacs)
+      :ensure t
+      :config (treemacs-set-scope-type 'Tabs))
 
 
-<a id="org781e4d3"></a>
+<a id="org9107bb9"></a>
 
 ## Code Completion Setup
 
 
-<a id="orgb8fd946"></a>
+<a id="org7be1c8b"></a>
 
 ### Corfu
 
     ;; Auto completion example
     (use-package corfu
-        :custom
-        (corfu-auto t)          ;; Enable auto completion
-        ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
-        :bind
-        ;; Another key binding can be used, such as S-SPC.
-        ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
-        :init
-        (global-corfu-mode))
+      :custom
+      (corfu-auto t)          ;; Enable auto completion
+      ;; (corfu-separator ?_) ;; Set to orderless separator, if not using space
+      :bind
+      ;; Another key binding can be used, such as S-SPC.
+      ;; (:map corfu-map ("M-SPC" . corfu-insert-separator))
+      :init
+      (global-corfu-mode))
 
 
-<a id="org58ab559"></a>
+<a id="org5d10927"></a>
 
 ### Cape
 
     (use-package cape
-        :init
-        ;; Add to the global default value of `completion-at-point-functions' which is
-        ;; used by `completion-at-point'.  The order of the functions matters, the
-        ;; first function returning a result wins.  Note that the list of buffer-local
-        ;; completion functions takes precedence over the global list.
-        (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-        (add-to-list 'completion-at-point-functions #'cape-file)
-        (add-to-list 'completion-at-point-functions #'cape-elisp-block)
-        ;;(add-to-list 'completion-at-point-functions #'cape-history)
-        ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
-        ;;(add-to-list 'completion-at-point-functions #'cape-tex)
-        ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
-        ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
-        ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
-        ;;(add-to-list 'completion-at-point-functions #'cape-dict)
-        ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
-        ;;(add-to-list 'completion-at-point-functions #'cape-line)
-        :config
-        (setq dabbrev-check-other-buffers nil
+      :init
+      ;; Add to the global default value of `completion-at-point-functions' which is
+      ;; used by `completion-at-point'.  The order of the functions matters, the
+      ;; first function returning a result wins.  Note that the list of buffer-local
+      ;; completion functions takes precedence over the global list.
+      (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+      (add-to-list 'completion-at-point-functions #'cape-file)
+      (add-to-list 'completion-at-point-functions #'cape-elisp-block)
+      ;;(add-to-list 'completion-at-point-functions #'cape-history)
+      ;;(add-to-list 'completion-at-point-functions #'cape-keyword)
+      ;;(add-to-list 'completion-at-point-functions #'cape-tex)
+      ;;(add-to-list 'completion-at-point-functions #'cape-sgml)
+      ;;(add-to-list 'completion-at-point-functions #'cape-rfc1345)
+      ;;(add-to-list 'completion-at-point-functions #'cape-abbrev)
+      ;;(add-to-list 'completion-at-point-functions #'cape-dict)
+      ;;(add-to-list 'completion-at-point-functions #'cape-elisp-symbol)
+      ;;(add-to-list 'completion-at-point-functions #'cape-line)
+      :config
+      (setq dabbrev-check-other-buffers nil
             dabbrev-check-all-buffers nil
             cape-dabbrev-min-length 3)
-        (cape-wrap-prefix-length #'cape-dabbrev 3)
-        )
+      (cape-wrap-prefix-length #'cape-dabbrev 3)
+      )
 
 
-<a id="orgf9df84a"></a>
+<a id="org2aa57f7"></a>
 
 ### Corfu English Helper
 
     (use-package corfu-english-helper
-        :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
-        )
+      :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
+      )
 
 
-<a id="orgcd4e007"></a>
+<a id="org1b44f6b"></a>
 
 ## Treesit
 
     (use-package treesit-auto
-        :init
-        (setq tressit-font-lock-level 4)
-        :config
-        (global-treesit-auto-mode)
-        )
+      :init
+      (setq tressit-font-lock-level 4)
+      :config
+      (global-treesit-auto-mode)
+      )
 
 
-<a id="org89bd60d"></a>
+<a id="org00cf600"></a>
 
 ## Language Setup
 
 
-<a id="org9264a20"></a>
+<a id="org558d6ef"></a>
 
 ### Eglot Setup
 
     (use-package eglot
-        :ensure nil
-        :hook (prog-mode . (lambda()
-                               (unless (derived-mode-p 'emacs-lisp-mode) 'eglot-ensure) 
-                               )) 
-        :custom
-        (eglot-autoshutdown t)
-        (eglot-events-buffer-size 0)
-        (eglot-extend-to-xref nil)
-        (eglot -ignored-server-capabilities
-            '(:hoverProvider
-                 :documentHighlightProvider
-                 :documentFormattingProvider
-                 :documentRangeFormattingProvider
-                 :documentOnTypeFormattingProvider
-                 :colorProvider
-                 :foldingRangeProvider))
-        )
+      :ensure nil
+      :hook (prog-mode . (lambda() (unless (derived-mode-p 'emacs-lisp-mode) (eglot-ensure)))) 
+      :custom
+      (eglot-autoshutdown t)
+      (eglot-events-buffer-size 0)
+      (eglot-extend-to-xref nil)
+      (eglot -ignored-server-capabilities
+             '(:hoverProvider
+               :documentHighlightProvider
+               :documentFormattingProvider
+               :documentRangeFormattingProvider
+               :documentOnTypeFormattingProvider
+               :colorProvider
+               :foldingRangeProvider))
+      )
 
 
-<a id="org8f44716"></a>
+<a id="org885b974"></a>
 
 ### JAVA Setup
 
 -   Eglot-java
 
         (with-eval-after-load 'eglot
-            (add-to-list 'eglot-server-programs
-                `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
-                     "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
-                     "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
-                     ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
-            )
+          (add-to-list 'eglot-server-programs
+                       `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+                         "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
+                         "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
+                         ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
+          )
         
         (use-package jarchive
-            :ensure t
-            :after eglot
-            :config
-            (jarchive-setup))
+          :ensure t
+          :after eglot
+          :config
+          (jarchive-setup))
 
 -   Hot Deployment
 
     use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
 
 
-<a id="org860410f"></a>
+<a id="org37db99a"></a>
 
 ### Groovy Setup
 
     (use-package groovy-mode
-        )
+      )
 
 
-<a id="org9466ad7"></a>
+<a id="orgd924279"></a>
 
 ### Maven Setup
 
     (use-package mvn
-        :ensure t
-        )
+      :ensure t
+      )
     
     (defun mvn-install ()
-        (interactive)
-        (mvn "install"))
+      (interactive)
+      (mvn "install"))
 
 
-<a id="org216ade4"></a>
+<a id="orgc87133f"></a>
 
 ### Web-Mode Setup
 
     (use-package web-mode
-        :config
-        (setq web-mode-markup-indent-offset 2
+      :config
+      (setq web-mode-markup-indent-offset 2
             web-mode-css-indent-offset 2
             web-mode-code-indent-offset 2
             web-mode-comment-style 2
@@ -1370,12 +1355,12 @@ jumping to visible text using a char-based decision tree
             web-mode-enable-current-element-highlight t
             web-mode-enable-current-column-highlight t
             )
-        )
+      )
     
     (defadvice web-mode-highlight-part (around tweak-jsx activate)
-        (if (equal web-mode-content-type "jsx")
-            (let ((web-mode-enable-part-face nil)) ad-do-it)
-            ad-do-it))
+      (if (equal web-mode-content-type "jsx")
+          (let ((web-mode-enable-part-face nil)) ad-do-it)
+        ad-do-it))
     
     (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
     (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
@@ -1389,17 +1374,15 @@ jumping to visible text using a char-based decision tree
     
     ;;  (use-package js2-mode
     ;;      )
-    (use-package json-mode
-        )
+    (use-package json-mode)
     (use-package prettier-js
-        :ensure t
-        ;; :config
-        ;; (setq prettier-js-args '(
-        ;;                          "--print-width" "200"  ;;一行代码的最大字符数,默认是80
-        ;;                          "--trailing-comma" "all"  ;; 尾部逗号处理
-        ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
-        ;;                          ))
-        )
+      ;; :config
+      ;; (setq prettier-js-args '(
+      ;;                          "--print-width" "200"  ;;一行代码的最大字符数,默认是80
+      ;;                          "--trailing-comma" "all"  ;; 尾部逗号处理
+      ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
+      ;;                          ))
+      )
     (add-hook 'js2-mode-hook 'prettier-js-mode)
     (add-hook 'web-mode-hook 'prettier-js-mode)
 
@@ -1407,14 +1390,13 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
 
 -   React JSX
 
-        (use-package rjsx-mode
-            )
+        (use-package rjsx-mode)
         
         (add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
         (add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
 
 
-<a id="org2916f9f"></a>
+<a id="org23e619b"></a>
 
 ### Javascript REPL
 
@@ -1425,42 +1407,42 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
         (use-package js-comint)
 
 
-<a id="org6131c86"></a>
+<a id="orga82397e"></a>
 
 ### FlyCheck Setup
 
     (use-package flycheck
-        :init (global-flycheck-mode)
-        :config
-        (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
-        )
+      :init (global-flycheck-mode)
+      :config
+      (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+      )
     
     ;; disable jshint since we prefer eslint checking
     (setq-default flycheck-disabled-checkers
-        (append flycheck-disabled-checkers
-            '(javascript-jshint)))
+                  (append flycheck-disabled-checkers
+                          '(javascript-jshint)))
     ;; use eslint with web-mode for jsx files
     (flycheck-add-mode 'javascript-eslint 'web-mode)
     ;; disable json-jsonlist checking for json files
     (setq-default flycheck-disabled-checkers
-        (append flycheck-disabled-checkers
-            '(json-jsonlist)))
+                  (append flycheck-disabled-checkers
+                          '(json-jsonlist)))
 
 
-<a id="org1a105a4"></a>
+<a id="org3c56e04"></a>
 
 ### Yasnippet Setup
 
     (use-package yasnippet
-        :config (yas-global-mode)
-        )
+      :config (yas-global-mode)
+      )
     (use-package yasnippet-snippets
-        :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
-        )
+      :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
+      )
     ;; (use-package yasnippet-snippets :ensure t)
 
 
-<a id="orgce4c2f3"></a>
+<a id="org64ee961"></a>
 
 ### Magit Setup
 
@@ -1469,26 +1451,26 @@ git tools
     (use-package magit)
 
 
-<a id="orgc0f8702"></a>
+<a id="orgb07b548"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="org349795c"></a>
+<a id="org80abe2d"></a>
 
 ## MarkDown Setup
 
     (use-package markdown-mode
-        :ensure t
-        :mode (("\\.md\\'" . gfm-mode)
-                  ("README" . gfm-mode)
-                  )
-        :init (setq markdown-command "multimarkdown"))
+      :ensure t
+      :mode (("\\.md\\'" . gfm-mode)
+             ("README" . gfm-mode)
+             )
+      :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org08b5772"></a>
+<a id="org9928d34"></a>
 
 ## Nginx Setup
 
@@ -1496,7 +1478,7 @@ git tools
     ;;  (use-package company-nginx)
 
 
-<a id="org6ca1da3"></a>
+<a id="orgf5e57a4"></a>
 
 ## HttpClient Setup
 
@@ -1509,25 +1491,25 @@ git tools
     ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 
 
-<a id="org704b0bd"></a>
+<a id="org92ac179"></a>
 
 ## Ediff Setup
 
     (use-package ediff
-        :config
-        (setq ediff-keep-variants nil)
-        (setq ediff-split-window-function 'split-window-horizontally)
-        (setq ediff-window-setup-function #'ediff-setup-windows-plain))
+      :config
+      (setq ediff-keep-variants nil)
+      (setq ediff-split-window-function 'split-window-horizontally)
+      (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 
 
-<a id="org7c68768"></a>
+<a id="orgb190455"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="org1a9335b"></a>
+<a id="orgdda6fbe"></a>
 
 ### Customize Your Configuration
 
