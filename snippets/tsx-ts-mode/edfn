@@ -1,11 +1,11 @@
 # -*- mode: snippet -*-
 # uuid: 45f3a8b4-7ed0-4d80-aa77-1cf79339b6b6
 # contributor: Jimmy Yuen Ho Wong <wyuenho@gmail.com>
-# name: exportDefaultFunction
+# name: exportDefaultFunctionName
 # key: edfn
 # --
 
-export default function $1() {
+export default function ${1:functionName}() {
   return(
   $0
   );

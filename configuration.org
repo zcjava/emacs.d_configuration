@@ -130,7 +130,7 @@ donot backup file
 (setq-default tab-width 4)
 (setq-default indent-line-function 4)
 ;;(setq-default lisp-indent-offset 4)
-(setq-default sgml-basic-offset 4)
+;;(setq-default sgml-basic-offset 2)
 (setq c-basic-offset 4)
 ;; (setq tab-always-indent)
 (setq-default indent-tabs-mode nil)
@@ -379,7 +379,6 @@ replaced by treesit
 (setq org-src--preserve-indentation t)
 (setq org-edit-src-content-indentation 0)
 (setq org-src--content-indentation 0)
-
 ;; org file before save invoke indent-region
 (add-hook 'org-mode-hook
           (lambda()
@@ -618,6 +617,10 @@ replaced by treesit
   (org-roam-ui-open-on-start t)
   )
 #+end_src
+*** Org Common Setup
+#+begin_src emacs-lisp
+(setq org-startup-folded 'show2levels)
+#+end_src
 ** Which-Key Setup
 #+begin_src emacs-lisp
 (use-package which-key
@@ -644,9 +647,9 @@ delete all whitespace until have character
 auto Symbol of completion
 #+begin_src emacs-lisp
 (use-package smartparens
-  :ensure t
+  :init
+  (smartparens-global-mode)
   :config
-  (smartparens-global-mode t)
   (require 'smartparens-config)
   (sp-local-pair 'elisp-mode "'" nil :actions nil)
   (sp-local-pair 'elisp-mode "`" nil :actions nil)
@@ -684,9 +687,10 @@ easy to jump windows
                               '(er/mark-html-attribute
                                 er/mark-inner-tag
                                 er/mark-outer-tag))))
-  (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
+  ;;  (add-hook 'web-mode-hook 'er/add-html-mode-expansions)
   (er/enable-mode-expansions 'web-mode 'er/add-html-mode-expansions)
-  ;;:commands (er/expand-region er/enable-mode-expansions)
+  (er/enable-mode-expansions 'rjsx-mode 'er/add-html-mode-expansions)
+  :commands (er/expand-region er/enable-mode-expansions)
   )
 #+end_src
 ** Undo Tree Setup
@@ -802,11 +806,8 @@ Unordered search  in ivy search
 (setq +format-with-lsp nil)
 (use-package format-all
   :ensure t
-  :hook ((elixir-mode . format-all-mode)
-         ;;(prog-mode . format-all-mode)
-         )
-  ;;      :init
-  ;;      (setq formatters '((lsp-mode . "lsp-format-buffer")))
+  :hook
+  (prog-mode . (lambda() (unless (derived-mode-p 'emacs-lisp-mode) (format-all-mode))))
   :config
   (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
   ;;        (add-hook 'before-save-hook 'format-all-buffer)
@@ -819,7 +820,7 @@ Unordered search  in ivy search
               )
             ))
 #+end_src
-*** Format Default Formatters Setup
+*** COMMENT Format Default Formatters Setup
 #+begin_src emacs-lisp
 (custom-set-variables
  '(format-all-default-formatters
@@ -1068,12 +1069,68 @@ jumping to visible text using a char-based decision tree
   (global-treesit-auto-mode)
   )
 #+end_src
+** Eldoc Setup
+#+begin_src emacs-lisp
+(use-package eldoc
+  :config
+  (setq eldoc-idle-delay 0.1)
+  (setq eldoc-echo-area-prefer-doc-buffer t)
+  (setq max-mini-window-height 1) 
+  (setq eldoc-echo-area-use-multiline-p nil)
+  (global-set-key (kbd "M-`")
+                  (
+                   lambda()
+                   (interactive)
+                   (if (get-buffer-window "*eldoc*")
+                       (delete-window (get-buffer-window "*eldoc*"))
+                     (display-buffer "*eldoc*")))))
+
+(use-package eldoc-box
+  :after
+  (eglot eldoc)
+  :bind (:map eglot-mode-map
+              ("C-M-k" . my/eldoc-box-scroll-up)
+              ("C-M-j" . my/eldoc-box-scroll-down)
+              ("M-h" . eldoc-box-eglot-help-at-point))
+  :config
+  (setq eldoc-box-max-pixel-height 600)
+  (defun my/eldoc-box-scroll-up ()
+    "Scroll up in `eldoc-box--frame'"
+    (interactive)
+    (with-current-buffer eldoc-box--buffer
+      (with-selected-frame eldoc-box--frame
+        (scroll-down 3))))
+  (defun my/eldoc-box-scroll-down ()
+    "Scroll down in `eldoc-box--frame'"
+    (interactive)
+    (with-current-buffer eldoc-box--buffer
+      (with-selected-frame eldoc-box--frame
+        (scroll-up 3))))
+  (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t)
+  )
+#+end_src
 ** Language Setup
 *** Eglot Setup
 #+begin_src emacs-lisp
 (use-package eglot
   :ensure nil
-  :hook (prog-mode . (lambda() (unless (derived-mode-p 'emacs-lisp-mode) (eglot-ensure)))) 
+  :hook
+  (prog-mode . (lambda() (unless (derived-mode-p '(emacs-lisp-mode web-mode)) (eglot-ensure))))
+  (eglot-managed-mode . my/eglot-eldoc)
+  :preface
+  (defun my/eglot-eldoc ()
+    (setq completion-category-defaults nil)
+    (setq eldoc-documentation-functions
+          (cons #'flymake-eldoc-function
+                (remove #'flymake-eldoc-function eldoc-documentation-functions)))
+    )
+  :bind
+  (:map eglot-mode-map
+        ("M-RET" . eglot-code-actions)
+        ("C-c C-d" . eldoc)
+        ("C-c C-p" . eldoc-box-help-at-point)
+        ("C-c C-f" . eglot-format-buffer)
+        ("C-c C-r" . eglot-rename))
   :custom
   (eglot-autoshutdown t)
   (eglot-events-buffer-size 0)
@@ -1207,7 +1264,7 @@ jumping to visible text using a char-based decision tree
 #+end_src
 **** COMMENT Lsp-java
 #+begin_src emacs-lisp
-(setq my-java-path (concat ctm-java-home-path "bin/java"))
+(setq my-java-path (concat ctm-java-home-path "/bin/java"))
 (use-package lsp-java 
   :init
   (setq lsp-java-server-install-dir ctm-lsp-java-server-install-dir)
@@ -1325,29 +1382,86 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.css?\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . web-mode))
+;;(add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . web-mode))
 
-;;  (use-package js2-mode
-;;      )
 (use-package json-mode)
 (use-package prettier-js
   ;; :config
   ;; (setq prettier-js-args '(
-  ;;                          "--print-width" "200"  ;;一行代码的最大字符数,默认是80
-  ;;                          "--trailing-comma" "all"  ;; 尾部逗号处理
-  ;;                          "--bracket-spacing" "false" ;; > 是否另起一行
+  ;;                          "--print-width" "200"  
+  ;;                          "--trailing-comma" "all" 
+  ;;                          "--bracket-spacing" "false"
   ;;                          ))
   )
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 #+end_src
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
-**** React JSX
+*** Css Setup
+#+begin_src emacs-lisp
+(use-package css-mode
+  :ensure nil
+  :mode (("\\.css\\'" . css-mode))
+  :init
+  (setq css-indent-offset 2)
+  )
+#+end_src
+*** React JSX
+**** jtsx
+#+begin_src emacs-lisp
+(use-package jtsx
+  :ensure t
+  :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
+         ("\\.tsx\\'" . jtsx-tsx-mode)
+         ("\\.ts\\'" . jtsx-typescript-mode))
+  :commands jtsx-install-treesit-language
+  :hook ((jtsx-jsx-mode . hs-minor-mode)
+         (jtsx-tsx-mode . hs-minor-mode)
+         (jtsx-typescript-mode . hs-minor-mode))
+  ;; :custom
+  ;; Optional customizations
+  ;; (js-indent-level 2)
+  ;; (typescript-ts-mode-indent-offset 2)
+  ;; (jtsx-switch-indent-offset 0)
+  ;; (jtsx-indent-statement-block-regarding-standalone-parent nil)
+  ;; (jtsx-jsx-element-move-allow-step-out t)
+  ;; (jtsx-enable-jsx-electric-closing-element t)
+  ;; (jtsx-enable-electric-open-newline-between-jsx-element-tags t)
+  ;; (jtsx-enable-jsx-element-tags-auto-sync nil)
+  ;; (jtsx-enable-all-syntax-highlighting-features t)
+  :config
+  (defun jtsx-bind-keys-to-mode-map (mode-map)
+    "Bind keys to MODE-MAP."
+    (define-key mode-map (kbd "C-c C-j") 'jtsx-jump-jsx-element-tag-dwim)
+    (define-key mode-map (kbd "C-c j o") 'jtsx-jump-jsx-opening-tag)
+    (define-key mode-map (kbd "C-c j c") 'jtsx-jump-jsx-closing-tag)
+    (define-key mode-map (kbd "C-c j r") 'jtsx-rename-jsx-element)
+    (define-key mode-map (kbd "C-c <down>") 'jtsx-move-jsx-element-tag-forward)
+    (define-key mode-map (kbd "C-c <up>") 'jtsx-move-jsx-element-tag-backward)
+    (define-key mode-map (kbd "C-c C-<down>") 'jtsx-move-jsx-element-forward)
+    (define-key mode-map (kbd "C-c C-<up>") 'jtsx-move-jsx-element-backward)
+    (define-key mode-map (kbd "C-c C-S-<down>") 'jtsx-move-jsx-element-step-in-forward)
+    (define-key mode-map (kbd "C-c C-S-<up>") 'jtsx-move-jsx-element-step-in-backward)
+    (define-key mode-map (kbd "C-c j w") 'jtsx-wrap-in-jsx-element)
+    (define-key mode-map (kbd "C-c j u") 'jtsx-unwrap-jsx)
+    (define-key mode-map (kbd "C-c j d") 'jtsx-delete-jsx-node))
+  
+  (defun jtsx-bind-keys-to-jtsx-jsx-mode-map ()
+    (jtsx-bind-keys-to-mode-map jtsx-jsx-mode-map))
+
+  (defun jtsx-bind-keys-to-jtsx-tsx-mode-map ()
+    (jtsx-bind-keys-to-mode-map jtsx-tsx-mode-map))
+
+  (add-hook 'jtsx-jsx-mode-hook 'jtsx-bind-keys-to-jtsx-jsx-mode-map)
+  (add-hook 'jtsx-tsx-mode-hook 'jtsx-bind-keys-to-jtsx-tsx-mode-map))
+#+end_src
+**** COMMENT rjsx-mode
 #+begin_src emacs-lisp
 (use-package rjsx-mode)
 
-(add-to-list 'auto-mode-alist '("\\.js[x]?\\'" . rjsx-mode))
-(add-to-list 'auto-mode-alist '("\\.ts[x]?\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.js[x]\\'" . rjsx-mode))
+(add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . rjsx-mode))
 #+end_src
 *** Javascript REPL
 **** js-comint
@@ -1366,7 +1480,7 @@ javascript developer environment for emacs
 #+begin_src emacs-lisp
 (use-package indium)
 #+end_src
-*** FlyCheck Setup
+*** COMMENT FlyCheck Setup
 #+begin_src emacs-lisp
 (use-package flycheck
   :init (global-flycheck-mode)
