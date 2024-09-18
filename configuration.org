@@ -426,10 +426,15 @@ replaced by treesit
 *** Org-babel support language
 #+begin_src emacs-lisp
 (require 'ob-js)
-;; (org-babel-do-load-languages 'org-babel-load-languages
-;;     '((js . t)
-;;          (restclient . t))
-;;     )
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((js         . t)
+   (emacs-lisp . t)
+   (restclient . t)
+   (python     . t)
+   (css        . t)
+   ))
+
 (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 (defun ob-js-insert-session-header-arg (session)
   "Insert ob-js `SESSION' header argument.
@@ -619,6 +624,7 @@ replaced by treesit
 #+end_src
 *** Org Common Setup
 #+begin_src emacs-lisp
+(setq org-confirm-babel-evaluate nil) ;; execute source code not tip
 (setq org-startup-folded 'show2levels)
 #+end_src
 ** Which-Key Setup
