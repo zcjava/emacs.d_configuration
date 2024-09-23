@@ -65,9 +65,10 @@ This configuration file contains setup my config of emacs
 **** Java Constant
 #+begin_src emacs-lisp
 (defconst ctm-java-home-path (getenv "JAVA_HOME"))
-(defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+;;(defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
+(defconst ctm-lsp-java-server-install-dir "/opt/homebrew/Cellar/jdtls/1.39.0/")
 (defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
-(defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
+(defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar"))
 (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
 (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 #+end_src
@@ -430,7 +431,7 @@ replaced by treesit
  'org-babel-load-languages
  '((js         . t)
    (emacs-lisp . t)
-   (restclient . t)
+   ;;   (restclient . t)
    (python     . t)
    (css        . t)
    ))
@@ -826,7 +827,7 @@ Unordered search  in ivy search
               )
             ))
 #+end_src
-*** COMMENT Format Default Formatters Setup
+*** Format Default Formatters Setup
 #+begin_src emacs-lisp
 (custom-set-variables
  '(format-all-default-formatters
@@ -861,7 +862,7 @@ Unordered search  in ivy search
      ("HTML" prettier)
      ("HTML+EEX" mix-format)
      ("HTML+ERB" erb-format)
-     ("Java" clang-format)
+     ("Java" eglot-format)
      ("JavaScript" prettier)
      ("JSON" prettier)
      ("JSON5" prettier)
@@ -1253,6 +1254,7 @@ jumping to visible text using a char-based decision tree
 (lsp-ivy-workspace-symbol)
 *** JAVA Setup
 **** Eglot-java
+need install jdtls by brew
 #+begin_src emacs-lisp
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
@@ -1293,7 +1295,6 @@ jumping to visible text using a char-based decision tree
   :config
   (setq lsp-java-maven-download-sources t)
   (setq lsp-java-import-maven-enabled t)
-  ;; gradle project use jdtls need write "id 'eclipse" in build.gradle
   (setq
    lsp-java-import-gradle-enabled t
    lsp-java-import-gradle-wrapper-enabled t
