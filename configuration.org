@@ -66,9 +66,9 @@ This configuration file contains setup my config of emacs
 #+begin_src emacs-lisp
 (defconst ctm-java-home-path (getenv "JAVA_HOME"))
 ;;(defconst ctm-lsp-java-server-install-dir (expand-file-name "lsp-server/jdtls/" user-emacs-directory))
-(defconst ctm-lsp-java-server-install-dir "/opt/homebrew/Cellar/jdtls/1.39.0/")
-(defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
-(defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.10/lombok-1.18.10.jar"))
+;;(defconst ctm-lsp-java-server-install-dir "/opt/homebrew/Cellar/jdtls/1.40.0/")
+;;(defconst ctm-dap-java-test-runner (expand-file-name "eclipse.jdt.ls/test-runner/junit-platform-console-standalone.jar" ctm-lsp-java-server-install-dir))
+(defconst ctm-lombok-jar-path (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar"))
 (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
 (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 #+end_src
@@ -1258,8 +1258,9 @@ need install jdtls by brew
 #+begin_src emacs-lisp
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
-                 "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
+               ;;               `((java-mode java-ts-mode) ,(concat ctm-lsp-java-server-install-dir "bin/jdtls")
+               `((java-mode java-ts-mode) "jdtls"
+                 ;;                 "-configuration" ,(concat ctm-lsp-java-server-install-dir "config_mac")
                  "-data" ,(expand-file-name ".cache/workspace" user-emacs-directory)
                  ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
   )
