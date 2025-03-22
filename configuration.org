@@ -255,11 +255,13 @@ window auto Zoom,current window Larger display
   (nyan-mode))
 
 (use-package doom-modeline
+  ;; executeCommand all-the-icons-install-fonts and nerd-icons-install-fonts
   :vc (:fetcher github :repo seagle0128/doom-modeline)
   :init
   (doom-modeline-mode t)
   :config
   (setq doom-modeline-height 5)
+  (setq doom-modeline-buffer-encoding t)
   (custom-set-faces
    `(mode-line ((t (:family ,ctm-font-name-en :height:50))))
    `(mode-line-inactive ((t (:family ,ctm-font-name-en :height:50))))
@@ -276,7 +278,8 @@ window auto Zoom,current window Larger display
 #+end_src
 *** Icons
 #+begin_src emacs-lisp
-(use-package all-the-icons)
+(use-package all-the-icons
+  :if (display-graphic-p))
 (use-package all-the-icons-dired
   :hook (dired-mode . all-the-icons-dired-mode)
   )
@@ -426,7 +429,6 @@ replaced by treesit
 #+end_src
 *** Org-babel support language
 #+begin_src emacs-lisp
-(require 'ob-js)
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((js         . t)
@@ -435,7 +437,10 @@ replaced by treesit
    (python     . t)
    (css        . t)
    ))
-
+#+end_src
+**** javascript
+#+begin_src emacs-lisp
+(require 'ob-js)
 (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
 (defun ob-js-insert-session-header-arg (session)
   "Insert ob-js `SESSION' header argument.
@@ -452,6 +457,10 @@ replaced by treesit
      ("skewer-mode" "\"*skewer-repl*\"")
      ("indium" "\"*JS REPL*\""))))
 (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+#+end_src
+**** python
+#+begin_src emacs-lisp
+(setq org-babel-python-command "python3")
 #+end_src
 *** Org Agenda Setup
 **** Config
@@ -1133,13 +1142,9 @@ jumping to visible text using a char-based decision tree
   (setq codeium/document/text 'my-codeium/document/text)
   (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
 #+end_src
-
-#+RESULTS:
-: t
 *** Copilot
 #+begin_src emacs-lisp
 (use-package copilot)
-(setq copilot-network-proxy '(:host "127.0.0.1" :port 7890))
 (add-hook 'prog-mode-hook 'copilot-mode)
 #+end_src
 #+begin_src emacs-lisp
