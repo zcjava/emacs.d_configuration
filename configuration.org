@@ -6,8 +6,7 @@
 This configuration file contains setup my config of emacs
 ** Package Manager
 *** ELPA Setup
-#+BEGIN_SRC emacs-lisp
-
+#+begin_src emacs-lisp
 (require 'package)
 (if (boundp 'package-archives-spec)
     (setq package-archives package-archives-spec)
@@ -20,24 +19,27 @@ This configuration file contains setup my config of emacs
   )
 (unless (bound-and-true-p package--initialized)
   (package-initialize))
-
 (unless package-archive-contents
   (package-refresh-contents))
-#+END_SRC
+#+end_src
+
 *** Use-Package Setup
 #+begin_src emacs-lisp
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
+(require 'use-package)
 (setq use-package-always-ensure t)
+(setq use-package-always-defer t)
 #+end_src
+
 **** vc-use-package
 #+begin_src emacs-lisp
 (unless (package-installed-p 'vc-use-package)
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 #+end_src
+
 ** Custom Need Constant
 *** Font Constant
 #+begin_src emacs-lisp
@@ -45,23 +47,27 @@ This configuration file contains setup my config of emacs
 (defconst ctm-font-name-zh "Microsoft YaHei")
 (defconst ctm-font-size "22")
 #+end_src
+
 *** Org Agenda Constant
 #+begin_src emacs-lisp
 (defconst ctm-org-agenda-dir (expand-file-name "~/Desktop/gtd/"))
 (defconst ctm-org-agenda-filename-input "inbox.org")
 (defconst ctm-org-agenda-filename-task "task.org")
 #+end_src
+
 *** Org Roam Constant
 #+begin_src emacs-lisp
 (defconst ctm-org-roam-directory (file-truename "~/Desktop/note/"))
 (defconst ctm-org-roam-dailies-directory "daily")
 #+end_src
+
 *** Lsp Constant
 **** Groovy Constant
 #+begin_src emacs-lisp
 (defconst ctm-lsp-groovy-server-file (expand-file-name "lsp-server/groovy-language-server/groovy-language-server-all.jar" user-emacs-directory))
 (defconst ctm-lsp-groovy-classpath "/opt/homebrew/Cellar/groovy/4.0.15/libexec/lib/")
 #+end_src
+
 **** Java Constant
 #+begin_src emacs-lisp
 (defconst ctm-java-home-path (getenv "JAVA_HOME"))
@@ -72,80 +78,71 @@ This configuration file contains setup my config of emacs
 (defconst ctm-lsp-java-configuration-maven-user-settings (expand-file-name "~/.m2/settings.xml"))
 (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 #+end_src
+
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][Look at early-init.el]]
+
 *** Show Startup Message
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
 #+end_src
+
 *** Character Settings
 #+begin_src emacs-lisp
 (set-language-environment "UTF-8")
-;; (setq locale-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-selection-coding-system 'utf-8)
-
 (set-buffer-file-coding-system 'utf-8)
 (set-default buffer-file-coding-system 'utf8)
 (set-default-coding-systems 'utf-8)
-
 (set-clipboard-coding-system 'utf-8)
-
 (set-terminal-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 (modify-coding-system-alist 'process "*" 'utf-8)
-
 (setq-default pathname-coding-system 'utf-8)
 (set-file-name-coding-system 'utf-8)
 #+end_src
+
 *** BackUp Settings
 donot backup file
 #+begin_src emacs-lisp
 (setq auto-save-default nil)
-;;(setq make-backup-files nil)
 (setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
-;;(setq backup-directory-alist (expand-file-name ".backups" user-emacs-directory))
 #+end_src
+
 *** Env Settings
 #+begin_src emacs-lisp
-(use-package exec-path-from-shell 
-  :ensure t
-  ;;  :config (setq exec-path (append exec-path '("/usr/local/bin")))
-  )
+(use-package exec-path-from-shell)
 (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
   (add-to-list 'exec-path-from-shell-variables var))
 (when (memq window-system '(mac ns x))
   (exec-path-from-shell-initialize))
 (setq exec-path-from-shell-check-startup-files nil)
 #+end_src
+
 *** Custom File Settings
 [[file:early-init.el::;; custom file][Look at early-init.el]]
+
 *** Yes/No Shorthand Settings
 #+begin_src emacs-lisp
 (fset 'yes-or-no-p 'y-or-n-p)
 #+end_src
+
 *** Tabs Indentation Settings
 #+begin_src emacs-lisp
 (setq tab-width 4)
 (setq-default tab-width 4)
 (setq-default indent-line-function 4)
-;;(setq-default lisp-indent-offset 4)
-;;(setq-default sgml-basic-offset 2)
 (setq c-basic-offset 4)
-;; (setq tab-always-indent)
 (setq-default indent-tabs-mode nil)
-
 (setq-default electric-indent-inhibit t)
-
-;; nxml-mode
 (setq nxml-child-indent 4
       nxml-attribute-indent 4
       nxml-slash-auto-complete-flag t)
-
-;; js ts indent-tab 2 spaces
 (setq js-indent-level 2)
 #+end_src
+
 **** COMMENT Smart Tabs Settings
 #+begin_src emacs-lisp
 (use-package! smart-tabs-mode
@@ -161,16 +158,16 @@ donot backup file
               (smart-tabs-insinuate 'c 'c++ 'java 'javascript 'jsx 'ts 'tsx 'py)
               )
 #+end_src
+
 *** Undo Settings
 #+begin_src emacs-lisp
 (use-package undo-tree
   :init
   (global-undo-tree-mode)
-  :ensure t
-  :init (setq undo-tree-auto-save-history nil)
+  (setq undo-tree-auto-save-history nil)
   )
-
 #+end_src
+
 *** Recentf Settings
 #+begin_src emacs-lisp
 (setq recentf-max-menu-items 50)
@@ -179,35 +176,39 @@ donot backup file
  recentf-exclude `("/tmp/" "/ssh:" ,(concat package-user-dir "/.*-autoloads\\.el\\'")))
 (recentf-mode t)
 #+end_src
+
 *** Window Settings
 **** Window Maximized
 #+begin_src emacs-lisp
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 #+end_src
+
 **** Zoom
 window auto Zoom,current window Larger display
 #+begin_src emacs-lisp
 (use-package zoom
-  :ensure t
   :init
   (setq zoom-size '(0.718 . 0.718))
   :bind ("C-c z" . zoom)
   )
 #+end_src
+
 ** UI Setup
 *** Menu-bar Hide
 [[file:early-init.el::;; Menu-bar][Look at early-init.el]]
+
 *** Tool-bar Hide
 [[file:early-init.el::tool-bar-mode -1][Look at early-init.el]]
+
 *** Scroll-bar Hide
 [[file:early-init.el::;; scroll-bar][Look at early-init-el]]
+
 *** Theme
 #+begin_src emacs-lisp
-(use-package dracula-theme
-  :ensure t
-  )
+(use-package dracula-theme)
 (load-theme 'dracula t)
 #+end_src
+
 *** Cursor
 #+begin_src emacs-lisp
 (setq-default cursor-type 'bar)
@@ -218,20 +219,20 @@ window auto Zoom,current window Larger display
 (set-face-attribute 'show-paren-match nil :weight 'extra-bold)
 (add-hook 'minibuffer-setup-hook 'subword-mode)
 #+end_src
+
 *** FillColumn
 #+begin_src emacs-lisp
 (setq-default fill-column 150)
-
 #+end_src
+
 *** HighLight Line
 #+begin_src emacs-lisp
 (global-hl-line-mode t)
 #+end_src
+
 *** Font
+english font use Dejavu sans mono; chinese font use microsoft yahei
 #+begin_src emacs-lisp 
-;;  (set-face-attribute 'default nil :font "Microsoft Yahei-22")  
-;;  (set-face-attribute 'default nil :font "PingFang SC-22")
-;; english font use Dejavu sans mono; chinese font use microsoft yahei
 (progn
   (set-face-attribute 'default nil :font (concat ctm-font-name-en "-" ctm-font-size))
   (setq face-font-rescale-alist `((,ctm-font-name-zh . 0.9)))
@@ -243,10 +244,10 @@ window auto Zoom,current window Larger display
 (global-font-lock-mode t)
 (setq font-lock-maximum-size 5000000)
 #+end_src
+
 *** Mode Line
 #+begin_src emacs-lisp
 (use-package nyan-mode
-  :ensure t
   :init
   (setq nyan-animate-nyancat t)
   (setq nyan-wavy-trail t)
@@ -274,8 +275,8 @@ window auto Zoom,current window Larger display
     (doom-modeline-set-modeline 'ownml 'default))
   (add-hook 'doom-modeline-mode-hook 'setup-custom-doom-modeline)
   )
-
 #+end_src
+
 *** Icons
 #+begin_src emacs-lisp
 (use-package all-the-icons
@@ -284,6 +285,7 @@ window auto Zoom,current window Larger display
   :hook (dired-mode . all-the-icons-dired-mode)
   )
 #+end_src
+
 *** DashBoard Setup
 #+begin_src emacs-lisp
 (use-package dashboard
@@ -307,9 +309,9 @@ window auto Zoom,current window Larger display
   (setq dashboard-projects-switch-function 'projectile-switch-project-by-name)
   (setq dashboard-page-separator "\n\f\n")
   )
-
 (use-package page-break-lines)
 #+end_src
+
 *** Tabs Setup
 **** Centaur-Tabs
 #+begin_src emacs-lisp
@@ -365,6 +367,7 @@ replaced by treesit
   (prog-mode . rainbow-delimiters-mode)
   )
 #+end_src
+
 *** COMMENT Highlight Symbol Setup
 :tip:
 replaced by treesit
@@ -373,10 +376,11 @@ replaced by treesit
 (use-package auto-highlight-symbol)
 (global-auto-highlight-symbol-mode t)
 #+end_src
+
 ** Org Setup
 *** OrgFile AutoFormat
+let source code block can be `indent-region` format
 #+begin_src emacs-lisp
-;; let source code block can be `indent-region` format
 (setq org-src-tab-acts-natively t)
 (setq org-src-fontify-natively t)
 (setq org-src-preserve-indentation t)
@@ -387,46 +391,47 @@ replaced by treesit
 (add-hook 'org-mode-hook
           (lambda()
             (add-hook 'before-save-hook 'org-format-buffer nil t)))
-
 (defun org-format-buffer()
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
 #+end_src
+
 *** Org Table Tidy Settings
+org-table align todo hook in package
 #+begin_src emacs-lisp
-;;org-table align  todo hook in package
 (use-package valign
   :init
   (add-hook 'org-mode-hook #'valign-mode)
   )  
 #+end_src
+
 *** org-superstar
 #+begin_src emacs-lisp
 (use-package org-superstar
-  :ensure t
   :after org
   :hook ((org-mode . org-superstar-mode)
          (org-mode . org-indent-mode))
   :config
   (setq org-superstar-special-todo-items t))
-
 (set-face-attribute 'org-block nil :background
                     (color-darken-name
                      (face-attribute 'default :background) 3))
 #+end_src
+
 *** COMMENT Pretty
 #+begin_src emacs-lisp
 (use-package org-bullets
-  :ensure t
   :hook((org-mode . org-bullets-mode)
         (org-mode . org-indent-mode))
   )
 #+end_src
+
 *** org ref
 #+begin_src emacs-lisp
 (use-package org-ref)
 #+end_src
+
 *** Org-babel support language
 #+begin_src emacs-lisp
 (org-babel-do-load-languages
@@ -438,6 +443,7 @@ replaced by treesit
    (css        . t)
    ))
 #+end_src
+
 **** javascript
 #+begin_src emacs-lisp
 (require 'ob-js)
@@ -458,16 +464,17 @@ replaced by treesit
      ("indium" "\"*JS REPL*\""))))
 (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 #+end_src
+
 **** python
 #+begin_src emacs-lisp
 (setq org-babel-python-command "python3")
 #+end_src
+
 *** Org Agenda Setup
 **** Config
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
-
 (setq org-default-notes-file (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
 (setq org-agenda-file-inbox (concat ctm-org-agenda-dir ctm-org-agenda-filename-input))
 (setq org-agenda-file-gtd (concat ctm-org-agenda-dir ctm-org-agenda-filename-task))
@@ -501,7 +508,6 @@ replaced by treesit
 (setq org-lowest-priority 9)
 
 (use-package org-super-agenda
-  :ensure t
   :after org
   )
 ;;  (org-super-agenda-mode t)
@@ -542,6 +548,7 @@ replaced by treesit
 (setq org-clock-persist 'history)
 (org-clock-persistence-insinuate)
 #+end_src
+
 **** Tag
 #+begin_src emacs-lisp
 (setq org-tag-alist '(("@work" . ?w) ("@home" . ?h)
@@ -555,8 +562,8 @@ replaced by treesit
   (let (org-log-done org-log-states)   ; turn off logging
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
-
 #+end_src
+
 **** COMMENT Org-GTD
 #+begin_src emacs-lisp
 (use-package org-gtd
@@ -576,6 +583,7 @@ replaced by treesit
    :map org-gtd-clarify-map
    ("C-c c" . org-gtd-organize)))
 #+end_src
+
 **** COMMENT Task Reminder
 #+begin_src emacs-lisp
 (use-package alert)
@@ -590,8 +598,8 @@ replaced by treesit
 (org-alert-enable)
 (use-package osa)
 (use-package org-notify)
-
 #+end_src
+
 *** Org Roam Setup
 #+begin_src emacs-lisp
 (use-package org-roam
@@ -620,6 +628,7 @@ replaced by treesit
   (require 'org-roam-protocol)
   )
 #+end_src
+
 **** Org Roam UI SetUp
 #+begin_src emacs-lisp
 (use-package org-roam-ui
@@ -632,33 +641,36 @@ replaced by treesit
   (org-roam-ui-open-on-start t)
   )
 #+end_src
+
 *** Org Common Setup
 #+begin_src emacs-lisp
 (setq org-confirm-babel-evaluate nil) ;; execute source code not tip
 (setq org-startup-folded 'show2levels)
 #+end_src
+
 ** Which-Key Setup
 #+begin_src emacs-lisp
 (use-package which-key
-  :ensure t
   :init (which-key-mode)
   :bind ("M-m" . which-key-show-top-level)
   )
 #+end_src
+
 ** Delete Setup
 *** Hungry-delete
 delete all whitespace until have character
 #+begin_src emacs-lisp
 (use-package hungry-delete
-  :ensure t
   :bind (("C-c DEL" . hungry-delete-backward)
          ("C-c d d" . hungry-delete-forward))
   )
 #+end_src
+
 *** Delete Slection
 #+begin_src emacs-lisp
 (delete-selection-mode t)
 #+end_src
+
 ** SmartParens
 auto Symbol of completion
 #+begin_src emacs-lisp
@@ -673,22 +685,24 @@ auto Symbol of completion
         ("C-c 0" . sp-end-of-sexp))
   )
 #+end_src
+
 ** Undo-Tree Setup
 #+begin_src emacs-lisp
 (use-package undo-tree
   :init (global-undo-tree-mode t)
   )
 #+end_src
+
 ** Switch-Window
 easy to jump windows
 #+begin_src emacs-lisp
 (use-package switch-window
-  :ensure t
   :bind ("C-x o" . switch-window)
   :config
   (setq switch-window-shortcut-style 'qwerty)
   )
 #+end_src
+
 ** Selected Setup
 #+begin_src emacs-lisp
 (use-package expand-region
@@ -709,11 +723,13 @@ easy to jump windows
   :commands (er/expand-region er/enable-mode-expansions)
   )
 #+end_src
+
 ** Undo Tree Setup
 #+begin_src emacs-lisp
 (use-package undo-tree)
 (global-undo-tree-mode t)
 #+end_src
+
 ** Command Completion
 Command Interactive Completion For Minibuffer,eg : M-x
 *** Ivy/Counsel/Swiper Setup
@@ -722,7 +738,6 @@ generic completion mechanism
 ***** Ivy
 #+begin_src emacs-lisp
 (use-package ivy
-  :ensure t
   :config
   (setq ivy-use-virtual-buffers t
         enable-recursive-minibuffers t)
@@ -748,6 +763,7 @@ show ivy buffer pop up box
   (ivy-posframe-mode 0)
   )
 #+end_src
+
 **** Counsel Setup
 command completion use ivy
 #+begin_src emacs-lisp  
@@ -781,6 +797,7 @@ show history command need amx package
 #+begin_src emacs-lisp
 (use-package amx)
 #+end_src
+
 **** Swiper Setup
 text search use ivy
 #+begin_src emacs-lisp
@@ -792,20 +809,20 @@ text search use ivy
         )
   )
 #+end_src
+
 *** orderless
 Unordered search  in ivy search
 #+begin_src emacs-lisp
 ;; add disorder search
 (use-package orderless
-  :ensure t
   :config
   (setq ivy-re-builders-alist '((t . orderless-ivy-re-builder)))
-  :ensure t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
 (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 #+end_src
+
 *** Helm Setup
 #+begin_src emacs-lisp
 (use-package helm
@@ -813,15 +830,16 @@ Unordered search  in ivy search
   ;;  :bind("M-x" . helm-M-x)
   )
 #+end_src
+
 *** COMMENT +Smex+
 #+begin_src emacs-lisp
 (use-package smex)
 #+end_src
+
 ** Format Setup
 #+begin_src emacs-lisp
 (setq +format-with-lsp nil)
 (use-package format-all
-  :ensure t
   :hook
   (prog-mode . (lambda() (unless (derived-mode-p 'emacs-lisp-mode) (format-all-mode))))
   :config
@@ -836,6 +854,7 @@ Unordered search  in ivy search
               )
             ))
 #+end_src
+
 *** Format Default Formatters Setup
 #+begin_src emacs-lisp
 (custom-set-variables
@@ -921,12 +940,14 @@ Unordered search  in ivy search
      ("_Snakemake" snakefmt)))
  )
 #+end_src
+
 ** Iedit Setup
 #+begin_src emacs-lisp
 (use-package iedit
   :bind("C-c e" . iedit-mode)
   )
 #+end_src
+
 ** Avy SetUp
 jumping to visible text using a char-based decision tree
 #+begin_src emacs-lisp
@@ -934,6 +955,7 @@ jumping to visible text using a char-based decision tree
   :bind("C-;" . avy-goto-char)
   )
 #+end_src
+
 ** Projectile Setup
 #+begin_src emacs-lisp
 (use-package projectile
@@ -988,22 +1010,21 @@ jumping to visible text using a char-based decision tree
 
 (use-package treemacs-icons-dired
   :hook (dired-mode . treemacs-icons-dired-enable-once)
-  :ensure t)
+  )
 
 (use-package treemacs-magit
   :after (treemacs magit)
-  :ensure t)
+  )
 
 (use-package treemacs-persp ;;treemacs-perspective if you use perspective.el vs. persp-mode
   :after (treemacs persp-mode) ;;or perspective vs. persp-mode
-  :ensure t
   :config (treemacs-set-scope-type 'Perspectives))
 
 (use-package treemacs-tab-bar ;;treemacs-tab-bar if you use tab-bar-mode
   :after (treemacs)
-  :ensure t
   :config (treemacs-set-scope-type 'Tabs))
 #+end_src
+
 ** Code Completion Setup
 *** Corfu
 #+begin_src emacs-lisp
@@ -1018,6 +1039,7 @@ jumping to visible text using a char-based decision tree
   :init
   (global-corfu-mode))
 #+end_src
+
 *** Cape
 #+begin_src emacs-lisp
 (use-package cape
@@ -1045,18 +1067,17 @@ jumping to visible text using a char-based decision tree
   (cape-wrap-prefix-length #'cape-dabbrev 3)
   )
 #+end_src
+
 *** Corfu English Helper
 #+begin_src emacs-lisp
 (use-package corfu-english-helper
   :vc (:fetcher github :repo manateelazycat/corfu-english-helper)
   )
 #+end_src
+
 *** COMMENT Company
 #+begin_src emacs-lisp
 (use-package company
-  :ensure t
-  :init
-  ;;      (global-company-mode)
   :bind (("s-/" . company-complete)
          :map company-active-map
          (("C-n"   . company-select-next)
@@ -1068,15 +1089,33 @@ jumping to visible text using a char-based decision tree
 ;;(add-to-list 'company-backends '(company-capf :with company-dabbrev))
 ;; (use-package company-box
 ;;   :hook (company-mode . company-box-mode))
-
 #+end_src
+
 *** COMMENT Company english helper
 #+begin_src emacs-lisp
 (use-package company-english-helper
   :vc (:fetcher github :repo manateelazycat/company-english-helper)
   )
 #+end_src
+
 ** Ai Assistant
+*** Copilot
+#+begin_src emacs-lisp
+(use-package copilot
+  :config
+  (setq copilot-max-char-warning-disabled t)
+  )
+(add-hook 'prog-mode-hook 'copilot-mode)
+#+end_src
+#+begin_src emacs-lisp
+(use-package copilot-chat
+  :bind (:map global-map
+              ("C-c C-y" . copilot-chat-yank)
+              ("C-c M-y" . copilot-chat-yank-pop)
+              ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
+  )
+#+end_src
+
 *** COMMENT Codeium
 #+begin_src emacs-lisp
 ;; we recommend using use-package to organize your init.el
@@ -1142,19 +1181,7 @@ jumping to visible text using a char-based decision tree
   (setq codeium/document/text 'my-codeium/document/text)
   (setq codeium/document/cursor_offset 'my-codeium/document/cursor_offset))
 #+end_src
-*** Copilot
-#+begin_src emacs-lisp
-(use-package copilot)
-(add-hook 'prog-mode-hook 'copilot-mode)
-#+end_src
-#+begin_src emacs-lisp
-(use-package copilot-chat
-  :bind (:map global-map
-              ("C-c C-y" . copilot-chat-yank)
-              ("C-c M-y" . copilot-chat-yank-pop)
-              ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
-  )
-#+end_src
+
 ** Treesit
 #+begin_src emacs-lisp
 (use-package treesit-auto
@@ -1164,6 +1191,7 @@ jumping to visible text using a char-based decision tree
   (global-treesit-auto-mode)
   )
 #+end_src
+
 ** Eldoc Setup
 #+begin_src emacs-lisp
 (use-package eldoc
@@ -1204,6 +1232,7 @@ jumping to visible text using a char-based decision tree
   (add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t)
   )
 #+end_src
+
 ** Language Setup
 *** Eglot Setup
 #+begin_src emacs-lisp
@@ -1240,10 +1269,10 @@ jumping to visible text using a char-based decision tree
            :foldingRangeProvider))
   )
 #+end_src
+
 *** COMMENT LSP-Mode Setup
 #+begin_src emacs-lisp
 (use-package lsp-mode
-  :ensure t
   :hook ((lsp-mode . lsp-enable-which-key-integration)
          (lsp-mode . lsp-lens-mode)
          (java-mode . lsp-mode)
@@ -1298,17 +1327,17 @@ jumping to visible text using a char-based decision tree
                             ;;(unless (derived-mode-p 'emacs-lisp-mode) (lsp-mode))
                             (when(derived-mode-p 'java-mode) (lsp-mode t))))
 
-(use-package lsp-ui                                   ;;
-  :commands lsp-ui-mode                               ;;
-  :config                                             ;;
-  (setq lsp-ui-doc-enable t)                          ;;
-  (setq lsp-ui-doc-header t)                          ;;
-  (setq lsp-ui-doc-include-signature t)               ;;
-  (setq lsp-ui-doc-border (face-foreground 'default)) ;;
+(use-package lsp-ui                                   
+  :commands lsp-ui-mode                               
+  :config                                             
+  (setq lsp-ui-doc-enable t)                          
+  (setq lsp-ui-doc-header t)                          
+  (setq lsp-ui-doc-include-signature t)               
+  (setq lsp-ui-doc-border (face-foreground 'default)) 
   (setq lsp-ui-sideline-enable nil)
-  (setq lsp-ui-sideline-show-code-actions nil)          ;;
-  (setq lsp-ui-sideline-show-diagnostics nil)         ;;
-  ;;      (setq lsp-ui-sideline-delay 0.05)                  ;;
+  (setq lsp-ui-sideline-show-code-actions nil)          
+  (setq lsp-ui-sideline-show-diagnostics nil)         
+  ;;      (setq lsp-ui-sideline-delay 0.05)                  
   (setq lsp-ui-doc-frame-parameters
         '((left . -1)
           (top . -1)
@@ -1334,9 +1363,9 @@ jumping to visible text using a char-based decision tree
           (cursor-type)
           (no-special-glyphs . t)))
   )
-(use-package lsp-ivy
-  )
+(use-package lsp-ivy)
 #+end_src
+
 **** NOTE
 ***** find the class/method in third library by keyword
 (lsp-ivy-workspace-symbol)
@@ -1353,11 +1382,11 @@ need install jdtls by brew
                  ,(concat "--jvm-arg=-javaagent:" ctm-lombok-jar-path)))
   )
 (use-package jarchive
-  :ensure t
   :after eglot
   :config
   (jarchive-setup))
 #+end_src
+
 **** COMMENT Lsp-java
 #+begin_src emacs-lisp
 (setq my-java-path (concat ctm-java-home-path "/bin/java"))
@@ -1375,11 +1404,6 @@ need install jdtls by brew
           ,(concat "-javaagent:" lombok-jar-path)
           ))
   (setq lsp-java-configuration-maven-user-settings ctm-lsp-java-configuration-maven-user-settings)
-  ;;        (Setq lsp-java-format-settings-url "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml" lsp-java-format-settings-profile "GoogleStyle")
-
-  ;;TODO
-  ;;      (setq lsp-java-format-settings-url  (lsp--path-to-uri (expand-file-name "codestyle/eclipse-java-google-style.xml" user-emacs-directory)) lsp-java-format-settings-profile "GoogleStyle")
-
   :config
   (setq lsp-java-maven-download-sources t)
   (setq lsp-java-import-maven-enabled t)
@@ -1430,25 +1454,24 @@ need install jdtls by brew
 ;; (load "maven-pom-mode")                                                                      ;;
                   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;==========maven pom end==========
-
 #+end_src
+
 **** Hot Deployment
 use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar -t` or `gradle -t classes processResources` when `gradle bootRun`;
 *** Groovy Setup
 #+begin_src emacs-lisp
-(use-package groovy-mode
-  )
+(use-package groovy-mode)
 #+end_src
+
 *** Maven Setup
 #+begin_src emacs-lisp
-(use-package mvn
-  :ensure t
-  )
+(use-package mvn)
 
 (defun mvn-install ()
   (interactive)
   (mvn "install"))
 #+end_src
+
 *** Web-Mode Setup
 #+begin_src emacs-lisp
 (use-package web-mode
@@ -1492,6 +1515,7 @@ use spring-devtools , gradle no autocompile classes, so command: `gradle bootJar
 (add-hook 'js2-mode-hook 'prettier-js-mode)
 (add-hook 'web-mode-hook 'prettier-js-mode)
 #+end_src
+
 react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx][configuration_react_jsx]]
 *** Css Setup
 #+begin_src emacs-lisp
@@ -1502,11 +1526,11 @@ react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flyc
   (setq css-indent-offset 2)
   )
 #+end_src
+
 *** React JSX
 **** jtsx
 #+begin_src emacs-lisp
 (use-package jtsx
-  :ensure t
   :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
          ("\\.tsx\\'" . jtsx-tsx-mode)
          ("\\.ts\\'" . jtsx-typescript-mode))
@@ -1551,30 +1575,34 @@ react configuration reference: [[http://codewinds.com/blog/2015-04-02-emacs-flyc
   (add-hook 'jtsx-jsx-mode-hook 'jtsx-bind-keys-to-jtsx-jsx-mode-map)
   (add-hook 'jtsx-tsx-mode-hook 'jtsx-bind-keys-to-jtsx-tsx-mode-map))
 #+end_src
+
 **** COMMENT rjsx-mode
 #+begin_src emacs-lisp
 (use-package rjsx-mode)
-
 (add-to-list 'auto-mode-alist '("\\.js[x]\\'" . rjsx-mode))
 (add-to-list 'auto-mode-alist '("\\.ts[x]\\'" . rjsx-mode))
 #+end_src
+
 *** Javascript REPL
 **** js-comint
 javascript REPL
 #+begin_src emacs-lisp
 (use-package js-comint)
 #+end_src
+
 **** COMMENT skewer
 live web REPL ,support javascript/css/html
 #+begin_src emacs-lisp
 (use-package simple-httpd)
 (use-package skewer-mode)
 #+end_src
+
 **** COMMENT indium
 javascript developer environment for emacs
 #+begin_src emacs-lisp
 (use-package indium)
 #+end_src
+
 *** COMMENT FlyCheck Setup
 #+begin_src emacs-lisp
 (use-package flycheck
@@ -1594,6 +1622,7 @@ javascript developer environment for emacs
               (append flycheck-disabled-checkers
                       '(json-jsonlist)))
 #+end_src
+
 *** Yasnippet Setup
 #+begin_src emacs-lisp
 (use-package yasnippet
@@ -1602,21 +1631,23 @@ javascript developer environment for emacs
 (use-package yasnippet-snippets
   :vc (:fetcher github :repo AndreaCrotti/yasnippet-snippets)
   )
-;; (use-package yasnippet-snippets :ensure t)
+;; (use-package yasnippet-snippets )
 #+end_src
+
 *** Magit Setup
 git tools
 #+begin_src emacs-lisp
 (use-package magit)
 #+end_src
+
 *** HideShow Setup
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 #+end_src
+
 ** MarkDown Setup
 #+begin_src emacs-lisp
 (use-package markdown-mode
-  :ensure t
   :mode (("\\.md\\'" . gfm-mode)
          ("README" . gfm-mode)
          )
@@ -1628,6 +1659,7 @@ git tools
 (use-package nginx-mode)
 ;;  (use-package company-nginx)
 #+end_src
+
 ** HttpClient Setup
 #+begin_src emacs-lisp
 (use-package restclient)
@@ -1638,6 +1670,7 @@ git tools
 
 ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 #+end_src
+
 ** Ediff Setup
 #+begin_src emacs-lisp
 (use-package ediff
@@ -1646,6 +1679,7 @@ git tools
   (setq ediff-split-window-function 'split-window-horizontally)
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
+
 ** COMMENT Youdao Translate Setup
 startup tip : Edebug: names-edebug-anon0
 #+begin_src emacs-lisp
@@ -1658,11 +1692,11 @@ startup tip : Edebug: names-edebug-anon0
 (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 #+end_src
+
 ** Installation
 #+begin_src shell
 git clone <this repo url> ~/.emacs.d
 #+end_src
+
 *** Customize Your Configuration
 write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup. 
-
-
