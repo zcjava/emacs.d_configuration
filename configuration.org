@@ -30,7 +30,6 @@ This configuration file contains setup my config of emacs
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-always-ensure t)
-(setq use-package-always-defer t)
 #+end_src
 
 **** vc-use-package
@@ -114,6 +113,7 @@ donot backup file
 *** Env Settings
 #+begin_src emacs-lisp
 (use-package exec-path-from-shell)
+(require 'exec-path-from-shell)
 (dolist (var '("JAVA_HOME" "GRADLE_USER_HOME"))
   (add-to-list 'exec-path-from-shell-variables var))
 (when (memq window-system '(mac ns x))
@@ -338,7 +338,6 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
   (centaur-tabs-headline-match)
   (centaur-tabs-group-by-projectile-project)
   (centaur-tabs-mode t)
-
   :bind(
         ("s-1" . centaur-tabs-select-visible-tab)
         ("s-2" . centaur-tabs-select-visible-tab)
@@ -441,6 +440,7 @@ org-table align todo hook in package
    ;;   (restclient . t)
    (python     . t)
    (css        . t)
+   (shell      . t)
    ))
 #+end_src
 
@@ -648,6 +648,9 @@ org-table align todo hook in package
 (setq org-startup-folded 'show2levels)
 #+end_src
 
+#+RESULTS:
+: copilot-chat-display
+
 ** Which-Key Setup
 #+begin_src emacs-lisp
 (use-package which-key
@@ -702,6 +705,9 @@ easy to jump windows
   (setq switch-window-shortcut-style 'qwerty)
   )
 #+end_src
+
+#+RESULTS:
+: switch-window
 
 ** Selected Setup
 #+begin_src emacs-lisp
@@ -941,6 +947,15 @@ Unordered search  in ivy search
  )
 #+end_src
 
+** Syntax checker
+*** Flymake-Collection
+#+begin_src emacs-lisp
+(use-package flymake-collection
+  :ensure t
+  :hook (flymake-mode . flymake-collection-hook-setup))
+(setq flymake-collection-python-flake8-executable "flake8")
+#+end_src
+
 ** Iedit Setup
 #+begin_src emacs-lisp
 (use-package iedit
@@ -971,7 +986,6 @@ jumping to visible text using a char-based decision tree
         ;;indexing default 'alien ,only load .gitignore
         ;;indexing 'native only load .projectile
         ;;.projectile rule: ignore: -/xxx ; exclude ignore: !/xxx ;
-
         ;;   projectile-sort-order 'recentf-active
         projectile-enable-caching t)
   (setq projectile-globally-ignored-directories
@@ -1102,11 +1116,18 @@ jumping to visible text using a char-based decision tree
 *** Copilot
 #+begin_src emacs-lisp
 (use-package copilot
+  ;;  :hook (prog-mode . copilot-mode)
+  :bind (:map copilot-completion-map
+              ("<tab>" . 'copilot-accept-completion)
+              ("TAB" . 'copilot-accept-completion)
+              ("C-TAB" . 'copilot-accept-completion-by-word)
+              ("C-<tab>" . 'copilot-accept-completion-by-word))
   :config
   (setq copilot-max-char-warning-disabled t)
   )
-(add-hook 'prog-mode-hook 'copilot-mode)
+(global-set-key (kbd "C-c C-;") 'copilot-chat-display)
 #+end_src
+
 #+begin_src emacs-lisp
 (use-package copilot-chat
   :bind (:map global-map
@@ -1115,6 +1136,9 @@ jumping to visible text using a char-based decision tree
               ("C-c C-M-y" . (lambda () (interactive) (copilot-chat-yank-pop -1))))
   )
 #+end_src
+
+#+RESULTS:
+: #[nil ((copilot-chat-yank-pop -1)) nil nil nil nil]
 
 *** COMMENT Codeium
 #+begin_src emacs-lisp
@@ -1267,6 +1291,17 @@ jumping to visible text using a char-based decision tree
            :documentOnTypeFormattingProvider
            :colorProvider
            :foldingRangeProvider))
+  :config
+  (setq-default eglot-workspace-configuration
+                '((:pylsp . (
+                             :plugins (
+                                       :mccabe (:enabled :json-false)
+                                       :pycodestyle (:enabled :json-false)
+                                       :pyflakes (:enabled :json-false)
+                                       :flake8 (:enabled t)
+                                       :pylint (:enable t)
+                                       :rope_autoimport (:enabled t))
+                             :configurationSources ["flake8"]))))
   )
 #+end_src
 
@@ -1680,6 +1715,18 @@ git tools
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
+** LeetCode Setup
+#+begin_src emacs-lisp
+(use-package leetcode
+  :init
+  (setq leetcode--url-base "https://leetcode.cn/")
+  (setq leetcode-prefer-language "python3")
+  (setq leetcode-prefer-sql "mysql")
+  (setq leetcode-save-solutions t)
+  (setq leetcode-directory "~/leetcode")
+  )
+#+end_src
+
 ** COMMENT Youdao Translate Setup
 startup tip : Edebug: names-edebug-anon0
 #+begin_src emacs-lisp
@@ -1692,6 +1739,24 @@ startup tip : Edebug: names-edebug-anon0
 (global-set-key (kbd "C-c y v") 'youdao-dictionary-play-voice-at-point)
 (global-set-key (kbd "C-c y s") 'youdao-dictionary-search-from-input)
 #+end_src
+
+** Need External package
+manual execute need external package
+*** FontStyle
+#+begin_src shell
+brew install font-dejavu
+#+end_src
+
+*** python 
+**** pylsp
+#+begin_src shell
+pip install "python-lsp-server[all]" --break-system-packages
+#+end_src
+
+**** COMMENT flake8
+#+BEGIN_SRC shell :results silent
+pip3 install flake8 --break-system-packages 
+#+END_SRC
 
 ** Installation
 #+begin_src shell
