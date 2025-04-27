@@ -81,20 +81,31 @@ This configuration file contains setup my config of emacs
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][Look at early-init.el]]
+*** BenchMark
+#+BEGIN_SRC emacs-lisp
+(use-package benchmark-init
+  :ensure t
+  :init (benchmark-init/activate)
+  :hook (after-init . benchmark-init/deactivate))
+#+END_SRC
+
 *** Asynchronous Processing
 #+BEGIN_SRC emacs-lisp
 (use-package async
   :init
   (dired-async-mode 1))
 #+END_SRC
+
 *** Local Cache
 #+begin_src emacs-lisp
 (setq url-cache-directory "~/.emacs.d/url-cache/")
 #+end_src
+
 *** Inhibit Startup
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
 (setq inhibit-startup-screen t)
+(setq initial-scratch-message ";; Welcome to Emacs!")
 #+end_src
 
 *** Character Settings
