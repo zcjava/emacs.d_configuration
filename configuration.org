@@ -81,10 +81,20 @@ This configuration file contains setup my config of emacs
 ** General Settings Setup
 *** GC settings
 [[file:early-init.el::;; GC settings][Look at early-init.el]]
-
-*** Show Startup Message
+*** Asynchronous Processing
+#+BEGIN_SRC emacs-lisp
+(use-package async
+  :init
+  (dired-async-mode 1))
+#+END_SRC
+*** Local Cache
+#+begin_src emacs-lisp
+(setq url-cache-directory "~/.emacs.d/url-cache/")
+#+end_src
+*** Inhibit Startup
 #+begin_src emacs-lisp
 (setq inhibit-startup-message t)
+(setq inhibit-startup-screen t)
 #+end_src
 
 *** Character Settings
@@ -107,7 +117,8 @@ This configuration file contains setup my config of emacs
 donot backup file
 #+begin_src emacs-lisp
 (setq auto-save-default nil)
-(setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
+(setq make-backup-files nil)
+;;(setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
 #+end_src
 
 *** Env Settings
