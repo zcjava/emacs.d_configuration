@@ -1780,6 +1780,8 @@ pip install "python-lsp-server[all]" --break-system-packages
 pip3 install flake8 --break-system-packages 
 #+END_SRC
 
+*** Icon
+exec the command: all-the-icons-install-fonts
 ** Installation
 #+begin_src shell
 git clone <this repo url> ~/.emacs.d
