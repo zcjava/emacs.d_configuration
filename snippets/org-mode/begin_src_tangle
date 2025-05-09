@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: begin_src_tangle
+# key: <bs
+# --
+#+begin_src $1 :tangle $0 :results output
+
+#+end_src

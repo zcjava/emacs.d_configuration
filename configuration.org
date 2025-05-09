@@ -163,6 +163,7 @@ donot backup file
       nxml-attribute-indent 4
       nxml-slash-auto-complete-flag t)
 (setq js-indent-level 2)
+(setq python-indent-offset 4)
 #+end_src
 
 **** COMMENT Smart Tabs Settings
@@ -453,7 +454,8 @@ org-table align todo hook in package
 (use-package org-ref)
 #+end_src
 
-*** Org-babel support language
+*** Org-babel
+**** Language
 #+begin_src emacs-lisp
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -465,8 +467,7 @@ org-table align todo hook in package
    (shell      . t)
    ))
 #+end_src
-
-**** javascript
+***** javascript
 #+begin_src emacs-lisp
 (require 'ob-js)
 (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
@@ -487,11 +488,15 @@ org-table align todo hook in package
 (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
 #+end_src
 
-**** python
+***** python
 #+begin_src emacs-lisp
 (setq org-babel-python-command "python3")
 #+end_src
-
+**** Header Arguments
+#+begin_src emacs-lisp
+(add-to-list 'org-babel-default-header-args
+             '(:comments . "both"))
+#+end_src
 *** Org Agenda Setup
 **** Config
 #+begin_src emacs-lisp
@@ -1300,7 +1305,9 @@ jumping to visible text using a char-based decision tree
         ("C-c C-d" . eldoc)
         ("C-c C-p" . eldoc-box-help-at-point)
         ("C-c C-f" . eglot-format-buffer)
-        ("C-c C-r" . eglot-rename))
+        ("C-c C-r" . eglot-rename)
+        ("C-c C-v t" . org-babel-detangle)
+        )
   :custom
   (eglot-autoshutdown t)
   (eglot-events-buffer-size 0)
