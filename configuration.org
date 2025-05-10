@@ -1749,7 +1749,7 @@ git tools
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
-** LeetCode Setup
+** COMMENT LeetCode Setup
 #+begin_src emacs-lisp
 (use-package leetcode
   :init

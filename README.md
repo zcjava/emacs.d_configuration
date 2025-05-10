@@ -1,120 +1,120 @@
 
 # Table of Contents
 
--   [Intro](#org6f29526)
-    -   [Package Manager](#orgdc39af4)
-        -   [ELPA Setup](#orgd8255ba)
-        -   [Use-Package Setup](#org0c7790b)
-    -   [Custom Need Constant](#orgedcd214)
-        -   [Font Constant](#org8e398cf)
-        -   [Org Agenda Constant](#orga206185)
-        -   [Org Roam Constant](#orgb9cc754)
-        -   [Lsp Constant](#org85b7fdd)
-    -   [General Settings Setup](#org3cfcb08)
-        -   [GC settings](#orgb0f2174)
-        -   [BenchMark](#orgc7560d6)
-        -   [Asynchronous Processing](#orgaf147b7)
-        -   [Local Cache](#orgfa9fd6b)
-        -   [Inhibit Startup](#orgbfca188)
-        -   [Character Settings](#org073366d)
-        -   [BackUp Settings](#org9e383b2)
-        -   [Env Settings](#orgb8a0ded)
-        -   [Custom File Settings](#orgf9a394f)
-        -   [Yes/No Shorthand Settings](#org1ef1a6a)
-        -   [Tabs Indentation Settings](#org6396932)
-        -   [Undo Settings](#orgaa73a39)
-        -   [Recentf Settings](#org4f86f90)
-        -   [Window Settings](#orge12bcc8)
-    -   [UI Setup](#org11ab8df)
-        -   [Menu-bar Hide](#orgf05d45d)
-        -   [Tool-bar Hide](#org2bbd01a)
-        -   [Scroll-bar Hide](#org5b25d69)
-        -   [Theme](#orga217cc9)
-        -   [Cursor](#org40f093b)
-        -   [FillColumn](#org80c5b9b)
-        -   [HighLight Line](#org56ec51f)
-        -   [Font](#orge6691d8)
-        -   [Mode Line](#org042ec45)
-        -   [Icons](#org65b62ce)
-        -   [DashBoard Setup](#orgfd179cb)
-        -   [Tabs Setup](#orgf2e29f4)
-        -   [Delimiters Highlights Setup](#org0c8f1e1)
-    -   [Org Setup](#orgc4890db)
-        -   [OrgFile AutoFormat](#org97d8609)
-        -   [Org Table Tidy Settings](#org2f0bfae)
-        -   [org-superstar](#org1a16902)
-        -   [org ref](#org555536f)
-        -   [Org-babel support language](#org6505822)
-        -   [Org Agenda Setup](#org5b3a788)
-        -   [Org Roam Setup](#orga3904b1)
-        -   [Org Common Setup](#org63d18b9)
-    -   [Which-Key Setup](#org42a94da)
-    -   [Delete Setup](#orgaa60923)
-        -   [Hungry-delete](#org42a0187)
-        -   [Delete Slection](#org778512c)
-    -   [SmartParens](#org26bc24e)
-    -   [Undo-Tree Setup](#orgf25dd07)
-    -   [Switch-Window](#org1494229)
-    -   [Selected Setup](#org5acea56)
-    -   [Undo Tree Setup](#org87cf749)
-    -   [Command Completion](#org6b253d1)
-        -   [Ivy/Counsel/Swiper Setup](#orgdb099ae)
-        -   [orderless](#org330659a)
-        -   [Helm Setup](#org49dd270)
-    -   [Format Setup](#org70b1940)
-        -   [Format Default Formatters Setup](#orgb8ac6e5)
-    -   [Syntax checker](#org65c1f16)
-        -   [Flymake-Collection](#org4c7902a)
-    -   [Iedit Setup](#org7b9645b)
-    -   [Avy SetUp](#org6a56c28)
-    -   [Projectile Setup](#org78bc2bb)
-    -   [Code Completion Setup](#org7a65c0f)
-        -   [Corfu](#org8632554)
-        -   [Cape](#org642d3a9)
-        -   [Corfu English Helper](#org0f9febf)
-    -   [Ai Assistant](#org4ad434e)
-        -   [Copilot](#orga9867f0)
-    -   [Treesit](#orgc30e53b)
-    -   [Eldoc Setup](#orgaedd09d)
-    -   [Language Setup](#org9221b5f)
-        -   [Eglot Setup](#orgfc77d14)
-        -   [JAVA Setup](#orgbaa14d0)
-        -   [Groovy Setup](#org988a70d)
-        -   [Maven Setup](#org46c89fb)
-        -   [Web-Mode Setup](#org30f2cf9)
-        -   [Css Setup](#orga09c20f)
-        -   [React JSX](#orgfac7802)
-        -   [Javascript REPL](#org62e96f4)
-        -   [Yasnippet Setup](#org01b9ad1)
-        -   [Magit Setup](#orgd374c81)
-        -   [HideShow Setup](#org40411f8)
-    -   [MarkDown Setup](#orgf04ac71)
-    -   [Nginx Setup](#org4bd0fc2)
-    -   [HttpClient Setup](#org7d536e7)
-    -   [Ediff Setup](#orgf18fe9a)
-    -   [LeetCode Setup](#org45ae04f)
-    -   [Need External package](#orgecae07a)
-        -   [FontStyle](#orge48da9a)
-        -   [python](#orgc9ec406)
-        -   [Icon](#org571d0e9)
-    -   [Installation](#org99d1308)
-        -   [Customize Your Configuration](#orgff1cf78)
+-   [Intro](#org5f2f9d3)
+    -   [Package Manager](#orgba6f765)
+        -   [ELPA Setup](#org9fcdec8)
+        -   [Use-Package Setup](#orgba91378)
+    -   [Custom Need Constant](#orgbc13679)
+        -   [Font Constant](#org71946ab)
+        -   [Org Agenda Constant](#org1d1d261)
+        -   [Org Roam Constant](#org9dcf8cb)
+        -   [Lsp Constant](#org29b4e43)
+    -   [General Settings Setup](#org4242aca)
+        -   [GC settings](#org699102d)
+        -   [BenchMark](#orge08db49)
+        -   [Asynchronous Processing](#org73f9b2d)
+        -   [Local Cache](#org936e008)
+        -   [Inhibit Startup](#orgd1fccb6)
+        -   [Character Settings](#org4d803f7)
+        -   [BackUp Settings](#orgdc7829a)
+        -   [Env Settings](#orge3acfb2)
+        -   [Custom File Settings](#org3e22b24)
+        -   [Yes/No Shorthand Settings](#orgeafcad7)
+        -   [Tabs Indentation Settings](#orgce82a0f)
+        -   [Undo Settings](#org27a82df)
+        -   [Recentf Settings](#orgcfa05e1)
+        -   [Window Settings](#org84ce3d6)
+    -   [UI Setup](#orgadaa091)
+        -   [Menu-bar Hide](#orgefe3036)
+        -   [Tool-bar Hide](#org5ce6dc4)
+        -   [Scroll-bar Hide](#org33a07ed)
+        -   [Theme](#orgf5216a4)
+        -   [Cursor](#orgcd4b4b1)
+        -   [FillColumn](#orgee762fb)
+        -   [HighLight Line](#org12c3fbf)
+        -   [Font](#org62f6bac)
+        -   [Mode Line](#org898a40d)
+        -   [Icons](#org6e1bb3d)
+        -   [DashBoard Setup](#orgc41ca0a)
+        -   [Tabs Setup](#orgcdcec50)
+        -   [Delimiters Highlights Setup](#org7011b14)
+    -   [Org Setup](#orgab72b38)
+        -   [OrgFile AutoFormat](#orge369451)
+        -   [Org Table Tidy Settings](#orgbfa8870)
+        -   [org-superstar](#org988847f)
+        -   [org ref](#org0fa436e)
+        -   [Org-babel](#org49d6ce7)
+        -   [Org Agenda Setup](#orgad16a54)
+        -   [Org Roam Setup](#orgd692f9c)
+        -   [Org Common Setup](#org7eced73)
+    -   [Which-Key Setup](#org94edf60)
+    -   [Delete Setup](#org6677b22)
+        -   [Hungry-delete](#org8445da0)
+        -   [Delete Slection](#orgcc43a44)
+    -   [SmartParens](#org7654802)
+    -   [Undo-Tree Setup](#org66271c5)
+    -   [Switch-Window](#orgceb2f84)
+    -   [Selected Setup](#orgdf425bd)
+    -   [Undo Tree Setup](#org4d9183f)
+    -   [Command Completion](#org17d2b08)
+        -   [Ivy/Counsel/Swiper Setup](#orgb0852ea)
+        -   [orderless](#org3ab3eaf)
+        -   [Helm Setup](#org16b9f9f)
+    -   [Format Setup](#orga377cc6)
+        -   [Format Default Formatters Setup](#org8e248fc)
+    -   [Syntax checker](#org4b08a9e)
+        -   [Flymake-Collection](#org7ce78c2)
+    -   [Iedit Setup](#orgae37ae7)
+    -   [Avy SetUp](#org507248c)
+    -   [Projectile Setup](#orgbacf15e)
+    -   [Code Completion Setup](#orgc063829)
+        -   [Corfu](#orgb2ac5e5)
+        -   [Cape](#orgfe67411)
+        -   [Corfu English Helper](#orgceaeb3b)
+    -   [Ai Assistant](#org2428c27)
+        -   [Copilot](#orge826f62)
+    -   [Treesit](#orgfe97146)
+    -   [Eldoc Setup](#org30b0591)
+    -   [Language Setup](#org6879420)
+        -   [Eglot Setup](#orga497298)
+        -   [JAVA Setup](#org31b1864)
+        -   [Groovy Setup](#orge28bfc5)
+        -   [Maven Setup](#org39060ad)
+        -   [Web-Mode Setup](#org2276f40)
+        -   [Css Setup](#org0d6ec1c)
+        -   [React JSX](#org1a919c3)
+        -   [Javascript REPL](#orgfbb725f)
+        -   [Yasnippet Setup](#org9c55627)
+        -   [Magit Setup](#orge96d538)
+        -   [HideShow Setup](#org13f047f)
+        -   [Yaml Set](#orgea1e04d)
+    -   [MarkDown Setup](#org5742433)
+    -   [Nginx Setup](#orge4fa43b)
+    -   [HttpClient Setup](#org77d5ffc)
+    -   [Ediff Setup](#org679fe7f)
+    -   [Need External package](#orgf4a6816)
+        -   [FontStyle](#orgc79d365)
+        -   [python](#org9596e1a)
+        -   [Icon](#org74aca2a)
+    -   [Installation](#org949337c)
+        -   [Customize Your Configuration](#org63dcb71)
 
 
 
-<a id="org6f29526"></a>
+<a id="org5f2f9d3"></a>
 
 # Intro
 
 This configuration file contains setup my config of emacs
 
 
-<a id="orgdc39af4"></a>
+<a id="orgba6f765"></a>
 
 ## Package Manager
 
 
-<a id="orgd8255ba"></a>
+<a id="org9fcdec8"></a>
 
 ### ELPA Setup
 
@@ -134,7 +134,7 @@ This configuration file contains setup my config of emacs
       (package-refresh-contents))
 
 
-<a id="org0c7790b"></a>
+<a id="orgba91378"></a>
 
 ### Use-Package Setup
 
@@ -151,21 +151,21 @@ This configuration file contains setup my config of emacs
         (require 'vc-use-package)
 
 
-<a id="orgedcd214"></a>
+<a id="orgbc13679"></a>
 
 ## Custom Need Constant
 
 
-<a id="org8e398cf"></a>
+<a id="org71946ab"></a>
 
 ### Font Constant
 
     (defconst ctm-font-name-en "DejaVu Sans Mono")
-    (defconst ctm-font-name-zh "Microsoft YaHei")
+    (defconst ctm-font-name-zh "PingFang SC")
     (defconst ctm-font-size "22")
 
 
-<a id="orga206185"></a>
+<a id="org1d1d261"></a>
 
 ### Org Agenda Constant
 
@@ -174,7 +174,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-org-agenda-filename-task "task.org")
 
 
-<a id="orgb9cc754"></a>
+<a id="org9dcf8cb"></a>
 
 ### Org Roam Constant
 
@@ -182,7 +182,7 @@ This configuration file contains setup my config of emacs
     (defconst ctm-org-roam-dailies-directory "daily")
 
 
-<a id="org85b7fdd"></a>
+<a id="org29b4e43"></a>
 
 ### Lsp Constant
 
@@ -202,19 +202,19 @@ This configuration file contains setup my config of emacs
         (defconst ctm-lsp-java-import-gradle-user-home "~/.m2/repository/")
 
 
-<a id="org3cfcb08"></a>
+<a id="org4242aca"></a>
 
 ## General Settings Setup
 
 
-<a id="orgb0f2174"></a>
+<a id="org699102d"></a>
 
 ### GC settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="orgc7560d6"></a>
+<a id="orge08db49"></a>
 
 ### BenchMark
 
@@ -224,7 +224,7 @@ This configuration file contains setup my config of emacs
       :hook (after-init . benchmark-init/deactivate))
 
 
-<a id="orgaf147b7"></a>
+<a id="org73f9b2d"></a>
 
 ### Asynchronous Processing
 
@@ -233,14 +233,14 @@ This configuration file contains setup my config of emacs
       (dired-async-mode 1))
 
 
-<a id="orgfa9fd6b"></a>
+<a id="org936e008"></a>
 
 ### Local Cache
 
     (setq url-cache-directory "~/.emacs.d/url-cache/")
 
 
-<a id="orgbfca188"></a>
+<a id="orgd1fccb6"></a>
 
 ### Inhibit Startup
 
@@ -249,7 +249,7 @@ This configuration file contains setup my config of emacs
     (setq initial-scratch-message ";; Welcome to Emacs!")
 
 
-<a id="org073366d"></a>
+<a id="org4d803f7"></a>
 
 ### Character Settings
 
@@ -267,7 +267,7 @@ This configuration file contains setup my config of emacs
     (set-file-name-coding-system 'utf-8)
 
 
-<a id="org9e383b2"></a>
+<a id="orgdc7829a"></a>
 
 ### BackUp Settings
 
@@ -278,7 +278,7 @@ donot backup file
     ;;(setq backup-directory-alist (quote (("." . "~/.emacs.d/.backups"))))
 
 
-<a id="orgb8a0ded"></a>
+<a id="orge3acfb2"></a>
 
 ### Env Settings
 
@@ -291,21 +291,21 @@ donot backup file
     (setq exec-path-from-shell-check-startup-files nil)
 
 
-<a id="orgf9a394f"></a>
+<a id="org3e22b24"></a>
 
 ### Custom File Settings
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org1ef1a6a"></a>
+<a id="orgeafcad7"></a>
 
 ### Yes/No Shorthand Settings
 
     (fset 'yes-or-no-p 'y-or-n-p)
 
 
-<a id="org6396932"></a>
+<a id="orgce82a0f"></a>
 
 ### Tabs Indentation Settings
 
@@ -319,9 +319,10 @@ donot backup file
           nxml-attribute-indent 4
           nxml-slash-auto-complete-flag t)
     (setq js-indent-level 2)
+    (setq python-indent-offset 4)
 
 
-<a id="orgaa73a39"></a>
+<a id="org27a82df"></a>
 
 ### Undo Settings
 
@@ -332,7 +333,7 @@ donot backup file
       )
 
 
-<a id="org4f86f90"></a>
+<a id="orgcfa05e1"></a>
 
 ### Recentf Settings
 
@@ -343,7 +344,7 @@ donot backup file
     (recentf-mode t)
 
 
-<a id="orge12bcc8"></a>
+<a id="org84ce3d6"></a>
 
 ### Window Settings
 
@@ -362,33 +363,33 @@ donot backup file
           )
 
 
-<a id="org11ab8df"></a>
+<a id="orgadaa091"></a>
 
 ## UI Setup
 
 
-<a id="orgf05d45d"></a>
+<a id="orgefe3036"></a>
 
 ### Menu-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org2bbd01a"></a>
+<a id="org5ce6dc4"></a>
 
 ### Tool-bar Hide
 
 [Look at early-init.el](early-init.el)
 
 
-<a id="org5b25d69"></a>
+<a id="org33a07ed"></a>
 
 ### Scroll-bar Hide
 
 [Look at early-init-el](early-init.el)
 
 
-<a id="orga217cc9"></a>
+<a id="orgf5216a4"></a>
 
 ### Theme
 
@@ -396,7 +397,7 @@ donot backup file
     (load-theme 'dracula t)
 
 
-<a id="org40f093b"></a>
+<a id="orgcd4b4b1"></a>
 
 ### Cursor
 
@@ -409,21 +410,21 @@ donot backup file
     (add-hook 'minibuffer-setup-hook 'subword-mode)
 
 
-<a id="org80c5b9b"></a>
+<a id="orgee762fb"></a>
 
 ### FillColumn
 
     (setq-default fill-column 150)
 
 
-<a id="org56ec51f"></a>
+<a id="org12c3fbf"></a>
 
 ### HighLight Line
 
     (global-hl-line-mode t)
 
 
-<a id="orge6691d8"></a>
+<a id="org62f6bac"></a>
 
 ### Font
 
@@ -441,7 +442,7 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
     (setq font-lock-maximum-size 5000000)
 
 
-<a id="org042ec45"></a>
+<a id="org898a40d"></a>
 
 ### Mode Line
 
@@ -475,7 +476,7 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
       )
 
 
-<a id="org65b62ce"></a>
+<a id="org6e1bb3d"></a>
 
 ### Icons
 
@@ -486,7 +487,7 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
       )
 
 
-<a id="orgfd179cb"></a>
+<a id="orgc41ca0a"></a>
 
 ### DashBoard Setup
 
@@ -514,7 +515,7 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
     (use-package page-break-lines)
 
 
-<a id="orgf2e29f4"></a>
+<a id="orgcdcec50"></a>
 
 ### Tabs Setup
 
@@ -561,7 +562,7 @@ english font use Dejavu sans mono; chinese font use microsoft yahei
           )
 
 
-<a id="org0c8f1e1"></a>
+<a id="org7011b14"></a>
 
 ### Delimiters Highlights Setup
 
@@ -573,12 +574,12 @@ replaced by treesit
       )
 
 
-<a id="orgc4890db"></a>
+<a id="orgab72b38"></a>
 
 ## Org Setup
 
 
-<a id="org97d8609"></a>
+<a id="orge369451"></a>
 
 ### OrgFile AutoFormat
 
@@ -600,7 +601,7 @@ let source code block can be \`indent-region\` format
         (indent-region (point-min) (point-max) nil)))
 
 
-<a id="org2f0bfae"></a>
+<a id="orgbfa8870"></a>
 
 ### Org Table Tidy Settings
 
@@ -612,7 +613,7 @@ org-table align todo hook in package
       )  
 
 
-<a id="org1a16902"></a>
+<a id="org988847f"></a>
 
 ### org-superstar
 
@@ -627,53 +628,60 @@ org-table align todo hook in package
                          (face-attribute 'default :background) 3))
 
 
-<a id="org555536f"></a>
+<a id="org0fa436e"></a>
 
 ### org ref
 
     (use-package org-ref)
 
 
-<a id="org6505822"></a>
+<a id="org49d6ce7"></a>
 
-### Org-babel support language
+### Org-babel
 
-    (org-babel-do-load-languages
-     'org-babel-load-languages
-     '((js         . t)
-       (emacs-lisp . t)
-       ;;   (restclient . t)
-       (python     . t)
-       (css        . t)
-       (shell      . t)
-       ))
+-   Language
 
--   javascript
+        (org-babel-do-load-languages
+         'org-babel-load-languages
+         '((js         . t)
+           (emacs-lisp . t)
+           ;;   (restclient . t)
+           (python     . t)
+           (css        . t)
+           (shell      . t)
+           ))
+    
+    -   javascript
+    
+            (require 'ob-js)
+            (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
+            (defun ob-js-insert-session-header-arg (session)
+              "Insert ob-js `SESSION' header argument.
+             - `js-comint'
+             - `skewer-mode'
+             - `Indium'
+             "
+              (interactive (list (completing-read "ob-js session: "
+                                                  '("js-comint" "skewer-mode" "indium"))))
+              (org-babel-insert-header-arg
+               "session"
+               (pcase session
+                 ("js-comint" "\"*Javascript REPL*\"")
+                 ("skewer-mode" "\"*skewer-repl*\"")
+                 ("indium" "\"*JS REPL*\""))))
+            (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+    
+    -   python
+    
+            (setq org-babel-python-command "python3")
 
-        (require 'ob-js)
-        (add-to-list 'org-babel-tangle-lang-exts '("js" . "js"))
-        (defun ob-js-insert-session-header-arg (session)
-          "Insert ob-js `SESSION' header argument.
-         - `js-comint'
-         - `skewer-mode'
-         - `Indium'
-         "
-          (interactive (list (completing-read "ob-js session: "
-                                              '("js-comint" "skewer-mode" "indium"))))
-          (org-babel-insert-header-arg
-           "session"
-           (pcase session
-             ("js-comint" "\"*Javascript REPL*\"")
-             ("skewer-mode" "\"*skewer-repl*\"")
-             ("indium" "\"*JS REPL*\""))))
-        (define-key org-babel-map (kbd "J") 'ob-js-insert-session-header-arg)
+-   Header Arguments
 
--   python
-
-        (setq org-babel-python-command "python3")
+        (add-to-list 'org-babel-default-header-args
+                     '(:comments . "both"))
 
 
-<a id="org5b3a788"></a>
+<a id="orgad16a54"></a>
 
 ### Org Agenda Setup
 
@@ -767,7 +775,7 @@ org-table align todo hook in package
         (add-hook 'org-after-todo-statistics-hook #'org-summary-todo)
 
 
-<a id="orga3904b1"></a>
+<a id="orgd692f9c"></a>
 
 ### Org Roam Setup
 
@@ -810,7 +818,7 @@ org-table align todo hook in package
           )
 
 
-<a id="org63d18b9"></a>
+<a id="org7eced73"></a>
 
 ### Org Common Setup
 
@@ -818,7 +826,7 @@ org-table align todo hook in package
     (setq org-startup-folded 'show2levels)
 
 
-<a id="org42a94da"></a>
+<a id="org94edf60"></a>
 
 ## Which-Key Setup
 
@@ -828,12 +836,12 @@ org-table align todo hook in package
       )
 
 
-<a id="orgaa60923"></a>
+<a id="org6677b22"></a>
 
 ## Delete Setup
 
 
-<a id="org42a0187"></a>
+<a id="org8445da0"></a>
 
 ### Hungry-delete
 
@@ -845,14 +853,14 @@ delete all whitespace until have character
       )
 
 
-<a id="org778512c"></a>
+<a id="orgcc43a44"></a>
 
 ### Delete Slection
 
     (delete-selection-mode t)
 
 
-<a id="org26bc24e"></a>
+<a id="org7654802"></a>
 
 ## SmartParens
 
@@ -870,7 +878,7 @@ auto Symbol of completion
       )
 
 
-<a id="orgf25dd07"></a>
+<a id="org66271c5"></a>
 
 ## Undo-Tree Setup
 
@@ -879,7 +887,7 @@ auto Symbol of completion
       )
 
 
-<a id="org1494229"></a>
+<a id="orgceb2f84"></a>
 
 ## Switch-Window
 
@@ -892,7 +900,7 @@ easy to jump windows
       )
 
 
-<a id="org5acea56"></a>
+<a id="orgdf425bd"></a>
 
 ## Selected Setup
 
@@ -915,7 +923,7 @@ easy to jump windows
       )
 
 
-<a id="org87cf749"></a>
+<a id="org4d9183f"></a>
 
 ## Undo Tree Setup
 
@@ -923,14 +931,14 @@ easy to jump windows
     (global-undo-tree-mode t)
 
 
-<a id="org6b253d1"></a>
+<a id="org17d2b08"></a>
 
 ## Command Completion
 
 Command Interactive Completion For Minibuffer,eg : M-x
 
 
-<a id="orgdb099ae"></a>
+<a id="orgb0852ea"></a>
 
 ### Ivy/Counsel/Swiper Setup
 
@@ -995,7 +1003,7 @@ Command Interactive Completion For Minibuffer,eg : M-x
           )
 
 
-<a id="org330659a"></a>
+<a id="org3ab3eaf"></a>
 
 ### orderless
 
@@ -1011,7 +1019,7 @@ Unordered search  in ivy search
     (add-to-list 'ivy-highlight-functions-alist '(orderless-ivy-re-builder . orderless-ivy-highlight))
 
 
-<a id="org49dd270"></a>
+<a id="org16b9f9f"></a>
 
 ### Helm Setup
 
@@ -1021,7 +1029,7 @@ Unordered search  in ivy search
       )
 
 
-<a id="org70b1940"></a>
+<a id="orga377cc6"></a>
 
 ## Format Setup
 
@@ -1042,7 +1050,7 @@ Unordered search  in ivy search
                 ))
 
 
-<a id="orgb8ac6e5"></a>
+<a id="org8e248fc"></a>
 
 ### Format Default Formatters Setup
 
@@ -1130,12 +1138,12 @@ Unordered search  in ivy search
      )
 
 
-<a id="org65c1f16"></a>
+<a id="org4b08a9e"></a>
 
 ## Syntax checker
 
 
-<a id="org4c7902a"></a>
+<a id="org7ce78c2"></a>
 
 ### Flymake-Collection
 
@@ -1145,7 +1153,7 @@ Unordered search  in ivy search
     (setq flymake-collection-python-flake8-executable "flake8")
 
 
-<a id="org7b9645b"></a>
+<a id="orgae37ae7"></a>
 
 ## Iedit Setup
 
@@ -1154,7 +1162,7 @@ Unordered search  in ivy search
       )
 
 
-<a id="org6a56c28"></a>
+<a id="org507248c"></a>
 
 ## Avy SetUp
 
@@ -1165,7 +1173,7 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="org78bc2bb"></a>
+<a id="orgbacf15e"></a>
 
 ## Projectile Setup
 
@@ -1235,12 +1243,12 @@ jumping to visible text using a char-based decision tree
       :config (treemacs-set-scope-type 'Tabs))
 
 
-<a id="org7a65c0f"></a>
+<a id="orgc063829"></a>
 
 ## Code Completion Setup
 
 
-<a id="org8632554"></a>
+<a id="orgb2ac5e5"></a>
 
 ### Corfu
 
@@ -1256,7 +1264,7 @@ jumping to visible text using a char-based decision tree
       (global-corfu-mode))
 
 
-<a id="org642d3a9"></a>
+<a id="orgfe67411"></a>
 
 ### Cape
 
@@ -1286,7 +1294,7 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="org0f9febf"></a>
+<a id="orgceaeb3b"></a>
 
 ### Corfu English Helper
 
@@ -1295,12 +1303,12 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="org4ad434e"></a>
+<a id="org2428c27"></a>
 
 ## Ai Assistant
 
 
-<a id="orga9867f0"></a>
+<a id="orge826f62"></a>
 
 ### Copilot
 
@@ -1324,7 +1332,7 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="orgc30e53b"></a>
+<a id="orgfe97146"></a>
 
 ## Treesit
 
@@ -1336,7 +1344,7 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="orgaedd09d"></a>
+<a id="org30b0591"></a>
 
 ## Eldoc Setup
 
@@ -1379,12 +1387,12 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="org9221b5f"></a>
+<a id="org6879420"></a>
 
 ## Language Setup
 
 
-<a id="orgfc77d14"></a>
+<a id="orga497298"></a>
 
 ### Eglot Setup
 
@@ -1406,7 +1414,9 @@ jumping to visible text using a char-based decision tree
             ("C-c C-d" . eldoc)
             ("C-c C-p" . eldoc-box-help-at-point)
             ("C-c C-f" . eglot-format-buffer)
-            ("C-c C-r" . eglot-rename))
+            ("C-c C-r" . eglot-rename)
+            ("C-c C-v t" . org-babel-detangle)
+            )
       :custom
       (eglot-autoshutdown t)
       (eglot-events-buffer-size 0)
@@ -1433,7 +1443,7 @@ jumping to visible text using a char-based decision tree
       )
 
 
-<a id="orgbaa14d0"></a>
+<a id="org31b1864"></a>
 
 ### JAVA Setup
 
@@ -1459,14 +1469,14 @@ jumping to visible text using a char-based decision tree
     use spring-devtools , gradle no autocompile classes, so command: \`gradle bootJar -t\` or \`gradle -t classes processResources\` when \`gradle bootRun\`;
 
 
-<a id="org988a70d"></a>
+<a id="orge28bfc5"></a>
 
 ### Groovy Setup
 
     (use-package groovy-mode)
 
 
-<a id="org46c89fb"></a>
+<a id="org39060ad"></a>
 
 ### Maven Setup
 
@@ -1477,7 +1487,7 @@ jumping to visible text using a char-based decision tree
       (mvn "install"))
 
 
-<a id="org30f2cf9"></a>
+<a id="org2276f40"></a>
 
 ### Web-Mode Setup
 
@@ -1525,7 +1535,7 @@ jumping to visible text using a char-based decision tree
 react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](http://codewinds.com/blog/2015-04-02-emacs-flycheck-eslint-jsx.html#emacs_configuration_for_eslint_and_jsx)
 
 
-<a id="orga09c20f"></a>
+<a id="org0d6ec1c"></a>
 
 ### Css Setup
 
@@ -1537,7 +1547,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
       )
 
 
-<a id="orgfac7802"></a>
+<a id="org1a919c3"></a>
 
 ### React JSX
 
@@ -1589,7 +1599,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
           (add-hook 'jtsx-tsx-mode-hook 'jtsx-bind-keys-to-jtsx-tsx-mode-map))
 
 
-<a id="org62e96f4"></a>
+<a id="orgfbb725f"></a>
 
 ### Javascript REPL
 
@@ -1600,7 +1610,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
         (use-package js-comint)
 
 
-<a id="org01b9ad1"></a>
+<a id="org9c55627"></a>
 
 ### Yasnippet Setup
 
@@ -1613,7 +1623,7 @@ react configuration reference: [configuration<sub>react</sub><sub>jsx</sub>](htt
     ;; (use-package yasnippet-snippets )
 
 
-<a id="orgd374c81"></a>
+<a id="orge96d538"></a>
 
 ### Magit Setup
 
@@ -1622,14 +1632,22 @@ git tools
     (use-package magit)
 
 
-<a id="org40411f8"></a>
+<a id="org13f047f"></a>
 
 ### HideShow Setup
 
     (add-hook 'prog-mode-hook 'hs-minor-mode)
 
 
-<a id="orgf04ac71"></a>
+<a id="orgea1e04d"></a>
+
+### Yaml Set
+
+    (use-package yaml)
+    (use-package yaml-mode)
+
+
+<a id="org5742433"></a>
 
 ## MarkDown Setup
 
@@ -1640,7 +1658,7 @@ git tools
       :init (setq markdown-command "multimarkdown"))
 
 
-<a id="org4bd0fc2"></a>
+<a id="orge4fa43b"></a>
 
 ## Nginx Setup
 
@@ -1648,7 +1666,7 @@ git tools
     ;;  (use-package company-nginx)
 
 
-<a id="org7d536e7"></a>
+<a id="org77d5ffc"></a>
 
 ## HttpClient Setup
 
@@ -1661,7 +1679,7 @@ git tools
     ;;  (add-to-list 'auto-mode-alist '("\\.hpct\\'" . restclient-mode))
 
 
-<a id="orgf18fe9a"></a>
+<a id="org679fe7f"></a>
 
 ## Ediff Setup
 
@@ -1672,35 +1690,21 @@ git tools
       (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 
 
-<a id="org45ae04f"></a>
-
-## LeetCode Setup
-
-    (use-package leetcode
-      :init
-      (setq leetcode--url-base "https://leetcode.cn/")
-      (setq leetcode-prefer-language "python3")
-      (setq leetcode-prefer-sql "mysql")
-      (setq leetcode-save-solutions t)
-      (setq leetcode-directory "~/leetcode")
-      )
-
-
-<a id="orgecae07a"></a>
+<a id="orgf4a6816"></a>
 
 ## Need External package
 
 manual execute need external package
 
 
-<a id="orge48da9a"></a>
+<a id="orgc79d365"></a>
 
 ### FontStyle
 
     brew install font-dejavu
 
 
-<a id="orgc9ec406"></a>
+<a id="org9596e1a"></a>
 
 ### python
 
@@ -1709,21 +1713,23 @@ manual execute need external package
         pip install "python-lsp-server[all]" --break-system-packages
 
 
-<a id="org571d0e9"></a>
+<a id="org74aca2a"></a>
 
 ### Icon
 
-exec the command: all-the-icons-install-fonts
+exec the command:
+all-the-icons-install-fonts
+nerd-icons-install-fonts
 
 
-<a id="org99d1308"></a>
+<a id="org949337c"></a>
 
 ## Installation
 
     git clone <this repo url> ~/.emacs.d
 
 
-<a id="orgff1cf78"></a>
+<a id="org63dcb71"></a>
 
 ### Customize Your Configuration
 
