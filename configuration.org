@@ -43,7 +43,7 @@ This configuration file contains setup my config of emacs
 *** Font Constant
 #+begin_src emacs-lisp
 (defconst ctm-font-name-en "DejaVu Sans Mono")
-(defconst ctm-font-name-zh "Microsoft YaHei")
+(defconst ctm-font-name-zh "PingFang SC")
 (defconst ctm-font-size "22")
 #+end_src
 
@@ -1793,11 +1793,12 @@ pip3 install flake8 --break-system-packages
 #+END_SRC
 
 *** Icon
-exec the command: all-the-icons-install-fonts
+exec the command:
+all-the-icons-install-fonts
+nerd-icons-install-fonts
 ** Installation
 #+begin_src shell
 git clone <this repo url> ~/.emacs.d
 #+end_src
-
 *** Customize Your Configuration
 write your configuration to ~/.emacs.d/configuration\_self.org , emacs autoload the file when emacs startup. 
