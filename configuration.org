@@ -1709,6 +1709,11 @@ git tools
 (add-hook 'prog-mode-hook 'hs-minor-mode)
 #+end_src
 
+*** Yaml Set
+#+begin_src emacs-lisp
+(use-package yaml)
+(use-package yaml-mode)
+#+end_src
 ** MarkDown Setup
 #+begin_src emacs-lisp
 (use-package markdown-mode
