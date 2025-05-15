@@ -675,9 +675,6 @@ org-table align todo hook in package
 (setq org-startup-folded 'show2levels)
 #+end_src
 
-#+RESULTS:
-: copilot-chat-display
-
 ** Which-Key Setup
 #+begin_src emacs-lisp
 (use-package which-key
@@ -879,6 +876,7 @@ Unordered search  in ivy search
   (add-hook 'format-all-mode-hook 'format-all-ensure-formatter)
   ;;        (add-hook 'before-save-hook 'format-all-buffer)
   )
+
 
 (add-hook 'prog-mode-hook
           (lambda ()
@@ -1167,6 +1165,17 @@ jumping to visible text using a char-based decision tree
 #+RESULTS:
 : #[nil ((copilot-chat-yank-pop -1)) nil nil nil nil]
 
+*** COMMENT Gptel
+#+begin_src emacs-lisp
+(use-package gptel
+  :init
+  (setq gptel-model   'deepseek-reasoner
+        gptel-backend (gptel-make-deepseek "DeepSeek"
+                                           :stream t
+                                           :key ""))
+  )
+#+end_src
+
 *** COMMENT Codeium
 #+begin_src emacs-lisp
 ;; we recommend using use-package to organize your init.el
@@ -1243,6 +1252,12 @@ jumping to visible text using a char-based decision tree
   )
 #+end_src
 
+*** python-ts
+#+BEGIN_SRC emacs-lisp
+;; 使用 python-ts-mode 替代默认的 python-mode
+(add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
+#+END_SRC
+
 ** Eldoc Setup
 #+begin_src emacs-lisp
 (use-package eldoc
@@ -1268,6 +1283,7 @@ jumping to visible text using a char-based decision tree
               ("M-h" . eldoc-box-eglot-help-at-point))
   :config
   (setq eldoc-box-max-pixel-height 600)
+  (setq flymake-show-diagnostic-at-point t)
   (defun my/eldoc-box-scroll-up ()
     "Scroll up in `eldoc-box--frame'"
     (interactive)
@@ -1320,17 +1336,17 @@ jumping to visible text using a char-based decision tree
            :documentOnTypeFormattingProvider
            :colorProvider
            :foldingRangeProvider))
-  :config
-  (setq-default eglot-workspace-configuration
-                '((:pylsp . (
-                             :plugins (
-                                       :mccabe (:enabled :json-false)
-                                       :pycodestyle (:enabled :json-false)
-                                       :pyflakes (:enabled :json-false)
-                                       :flake8 (:enabled t)
-                                       :pylint (:enable t)
-                                       :rope_autoimport (:enabled t))
-                             :configurationSources ["flake8"]))))
+  ;; (setq-default eglot-workspace-configuration
+  ;;               '((:pylsp . (
+  ;;                            :plugins (
+  ;;                                      :mccabe (:enabled :json-false)
+  ;;                                      :pycodestyle (:enabled :json-false)
+  ;;                                      :pyflakes (:enabled :json-false)
+  ;;                                      :flake8 (:enabled t)
+  ;;                                      :pylint (:enable t)
+  ;;                                      :rope_autoimport (:enabled t)
+  ;;                                      )
+  ;;                            :configurationSources ["flake8"]))))
   )
 #+end_src
 
@@ -1433,6 +1449,15 @@ jumping to visible text using a char-based decision tree
 **** NOTE
 ***** find the class/method in third library by keyword
 (lsp-ivy-workspace-symbol)
+
+*** Python Setup
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("pyright-langserver" "--stdio"))))
+#+end_src
+
+
 *** JAVA Setup
 **** Eglot-java
 need install jdtls by brew
@@ -1789,13 +1814,22 @@ pip install "python-lsp-server[all]" --break-system-packages
 
 **** COMMENT flake8
 #+BEGIN_SRC shell :results silent
-pip3 install flake8 --break-system-packages 
+pip install flake8 --break-system-packages 
 #+END_SRC
 
 *** Icon
 exec the command:
 all-the-icons-install-fonts
 nerd-icons-install-fonts
+
+*** Copilot-language-server
+exec the command:
+copilot-install-server
+
+*** treesit install
+exec the command:
+treesit-auto-install-all
+
 ** Installation
 #+begin_src shell
 git clone <this repo url> ~/.emacs.d
