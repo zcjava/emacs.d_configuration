@@ -1168,12 +1168,14 @@ jumping to visible text using a char-based decision tree
 *** COMMENT Gptel
 #+begin_src emacs-lisp
 (use-package gptel
-  :init
-  (setq gptel-model   'deepseek-reasoner
-        gptel-backend (gptel-make-deepseek "DeepSeek"
-                                           :stream t
-                                           :key ""))
-  )
+  :ensure t
+  :config
+  (setq
+   gptel-model 'codellama:latest
+   gptel-backend (gptel-make-ollama "Ollama"
+                   :host "localhost:11434"
+                   :stream t
+                   :models '(codellama))))
 #+end_src
 
 *** COMMENT Codeium
@@ -1739,6 +1741,19 @@ git tools
 (use-package yaml)
 (use-package yaml-mode)
 #+end_src
+
+*** DockerFile Setup
+#+BEGIN_SRC emacs-lisp
+(use-package dockerfile-mode
+  :ensure t
+  :mode ("Dockerfile\\'" . dockerfile-mode))
+(setq dockerfile-mode-command "docker")
+#+END_SRC
+#+begin_src emacs-lisp
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((dockerfile-mode) . ("docker-langserver" "--stdio"))))
+#+end_src
 ** MarkDown Setup
 #+begin_src emacs-lisp
 (use-package markdown-mode
@@ -1774,7 +1789,7 @@ git tools
   (setq ediff-window-setup-function #'ediff-setup-windows-plain))
 #+end_src
 
-** COMMENT LeetCode Setup
+** LeetCode Setup
 #+begin_src emacs-lisp
 (use-package leetcode
   :init
@@ -1829,6 +1844,11 @@ copilot-install-server
 *** treesit install
 exec the command:
 treesit-auto-install-all
+
+*** DockerFile
+#+BEGIN_SRC shell
+npm install -g dockerfile-language-server-nodejs
+#+END_SRC
 
 ** Installation
 #+begin_src shell
