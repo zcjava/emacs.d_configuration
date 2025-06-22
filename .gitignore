@@ -30,3 +30,4 @@ url
 org-roam.db
 tree-sitter
 tramp
+.mc-lists.el
