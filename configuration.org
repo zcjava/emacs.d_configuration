@@ -1173,9 +1173,9 @@ jumping to visible text using a char-based decision tree
   (setq
    gptel-model 'codellama:latest
    gptel-backend (gptel-make-ollama "Ollama"
-                   :host "localhost:11434"
-                   :stream t
-                   :models '(codellama))))
+                                    :host "localhost:11434"
+                                    :stream t
+                                    :models '(codellama))))
 #+end_src
 
 *** COMMENT Codeium
@@ -1458,7 +1458,6 @@ jumping to visible text using a char-based decision tree
   (add-to-list 'eglot-server-programs
                '(python-mode . ("pyright-langserver" "--stdio"))))
 #+end_src
-
 
 *** JAVA Setup
 **** Eglot-java
@@ -1754,11 +1753,17 @@ git tools
   (add-to-list 'eglot-server-programs
                '((dockerfile-mode) . ("docker-langserver" "--stdio"))))
 #+end_src
+
+*** Fishshell Setup
+#+begin_src emacs-lisp
+(use-package fish-mode
+  :mode ("\\.fish\\'" . fish-mode))
+#+end_src
+
 ** MarkDown Setup
 #+begin_src emacs-lisp
 (use-package markdown-mode
   :mode (("\\.md\\'" . gfm-mode)
-         ("README" . gfm-mode)
          )
   :init (setq markdown-command "multimarkdown"))
 #+end_src
