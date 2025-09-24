@@ -42,7 +42,7 @@ This configuration file contains setup my config of emacs
 ** Custom Need Constant
 *** Font Constant
 #+begin_src emacs-lisp
-(defconst ctm-font-name-en "DejaVu Sans Mono")
+(defconst ctm-font-name-en "DejaVuSansM Nerd Font Mono")
 (defconst ctm-font-name-zh "PingFang SC")
 (defconst ctm-font-size "22")
 #+end_src
